@@ -15,11 +15,13 @@ The black friday project is a simple Python / Flask project that runs against a 
       python
       exit()
 ```
-4 -  pip install flask
-
-5 - pip install blist
-
-6 - pip install cassandra-driver
+4 Install Python dependencies:
+```
+  pip install flask
+  pip install blist
+  pip install cassandra-driver
+  pip install requests
+```
 
 7 - Download and unzip [google visualization](https://google-visualization-python.googlecode.com/files/gviz_api_py-1.8.2.tar.gz)
 
