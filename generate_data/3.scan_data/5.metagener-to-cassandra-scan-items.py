@@ -32,7 +32,7 @@ def init_cassandra():
 
     # grab ip address information from application.cfg
     app = Flask(__name__)
-    app.config.from_pyfile('/cornerstone/web/datastax/cornerstone-python/Cornerstone/application.cfg')
+    app.config.from_pyfile('../../web/application.cfg')
     ip_addresses = app.config['DSE_CLUSTER'].split(',')
 
     # connect to Cassandra
@@ -427,7 +427,7 @@ def scan_items(futures, session):
 
         # write to files for potential Spark streaming use
         with open(
-                '/mnt/log/spark_streaming/retail.item_scans.txt.{'
+                'log/spark_streaming/retail.item_scans.txt.{'
                 '0:010d}'.format(
                         log_file), 'w') as f:
             f.write(spark_streaming)
