@@ -1,0 +1,30 @@
+INFO  [2015-04-18 23:20:07,437] org.eclipse.jetty.util.log: Logging initialized @918ms
+INFO  [2015-04-18 23:20:07,486] com.metawiring.webapi.common.MetagenerWebApp: Preloading generator context 'retail' from 'black-friday.metagener'
+INFO  [2015-04-18 23:20:07,486] com.metawiring.wiring.Metagener: loading from black-friday.metagener
+INFO  [2015-04-18 23:20:07,544] com.metawiring.syntax.MetagenerDSLModelBuilder: building GenContextDef
+INFO  [2015-04-18 23:20:07,570] com.metawiring.syntax.MetagenerDSLModelBuilder: built GenContextDef
+INFO  [2015-04-18 23:20:07,576] io.dropwizard.server.ServerFactory: Starting MetagenerWebApp
+INFO  [2015-04-18 23:20:07,625] org.eclipse.jetty.setuid.SetUIDListener: Opened application@7fd4acee{HTTP/1.1}{0.0.0.0:8080}
+INFO  [2015-04-18 23:20:07,625] org.eclipse.jetty.setuid.SetUIDListener: Opened admin@165b8a71{HTTP/1.1}{0.0.0.0:8081}
+INFO  [2015-04-18 23:20:07,627] org.eclipse.jetty.server.Server: jetty-9.2.z-SNAPSHOT
+INFO  [2015-04-18 23:20:08,012] io.dropwizard.jersey.DropwizardResourceConfig: The following paths were found for the configured resources:
+
+    GET     /bulksample/{contextName}/{samplername}/{count} (com.metawiring.webapi.resource.BulkSampleResource)
+    GET     /context/ (com.metawiring.webapi.resource.GenContextResource)
+    GET     /context/{contextName} (com.metawiring.webapi.resource.GenContextResource)
+    POST    /context/{contextName} (com.metawiring.webapi.resource.GenContextResource)
+    GET     /sample/{contextName}/{samplername} (com.metawiring.webapi.resource.SampleResource)
+    GET     /sample/{contextName}/{samplername}/{sampleid} (com.metawiring.webapi.resource.SampleResource)
+
+WARN  [2015-04-18 23:20:08,013] org.glassfish.jersey.internal.Errors: The following warnings have been detected: WARNING: The (sub)resource method getContextList in com.metawiring.webapi.resource.GenContextResource contains empty path annotation.
+
+INFO  [2015-04-18 23:20:08,017] org.eclipse.jetty.server.handler.ContextHandler: Started i.d.j.MutableServletContextHandler@7ec25216{/,null,AVAILABLE}
+INFO  [2015-04-18 23:20:08,018] io.dropwizard.setup.AdminEnvironment: tasks = 
+
+    POST    /tasks/log-level (io.dropwizard.servlets.tasks.LogConfigurationTask)
+    POST    /tasks/gc (io.dropwizard.servlets.tasks.GarbageCollectionTask)
+
+INFO  [2015-04-18 23:20:08,021] org.eclipse.jetty.server.handler.ContextHandler: Started i.d.j.MutableServletContextHandler@7b3315a5{/,null,AVAILABLE}
+INFO  [2015-04-18 23:20:08,027] org.eclipse.jetty.server.ServerConnector: Started application@7fd4acee{HTTP/1.1}{0.0.0.0:8080}
+INFO  [2015-04-18 23:20:08,028] org.eclipse.jetty.server.ServerConnector: Started admin@165b8a71{HTTP/1.1}{0.0.0.0:8081}
+INFO  [2015-04-18 23:20:08,028] org.eclipse.jetty.server.Server: Started @1510ms
