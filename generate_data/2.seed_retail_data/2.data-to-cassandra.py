@@ -27,7 +27,7 @@ def init_cassandra():
 
     # grab ip address information from application.cfg
     app = Flask(__name__)
-    app.config.from_pyfile('/cornerstone/web/datastax/cornerstone-python/Cornerstone/application.cfg')
+    app.config.from_pyfile('../../web/application.cfg')
     ip_addresses = app.config['DSE_CLUSTER'].split(',')
 
     # connect to Cassandra
@@ -104,7 +104,7 @@ def parse_products(futures, session):
         'INSERT INTO retail.products (product_id, title, price) '
         'VALUES (?, ?, ?)')
 
-    with gzip.open('/cache/downloads/Electronics.txt.gz') as f:
+    with gzip.open('../../cache/downloads/Electronics.txt.gz') as f:
         # compile regular expressions
         p = re.compile('^product')
         p_id = re.compile('^product/productId: (.*)')
@@ -172,7 +172,7 @@ def parse_brands(futures, session):
         'INSERT INTO retail.brands (brand) '
         'VALUES (?)')
 
-    with gzip.open('/cache/downloads/brands.txt.gz') as f:
+    with gzip.open('../../cache/downloads/brands.txt.gz') as f:
         # compile regular expressions
         p = re.compile('(\w*) (.*)')
 

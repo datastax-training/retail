@@ -27,7 +27,7 @@ def init_cassandra():
 
     # grab ip address information from application.cfg
     app = Flask(__name__)
-    app.config.from_pyfile('/cornerstone/web/datastax/cornerstone-python/Cornerstone/application.cfg')
+    app.config.from_pyfile('../../web/application.cfg')
     ip_addresses = app.config['DSE_CLUSTER'].split(',')
 
     # connect to Cassandra
@@ -109,7 +109,7 @@ def parse_zipcodes(futures, session):
             (?, ?, ?, ?, ?, ?, ?)''')
 
     # read from zipcodes from csv file
-    with open('/cornerstone/scripts/datastax/black-friday/1.seed_zipcode_data/free-zipcode-database.csv', 'rb') as csvfile:
+    with open('free-zipcode-database.csv', 'rb') as csvfile:
         csv_reader = csv.DictReader(csvfile, delimiter=',', quotechar='"')
         for row in csv_reader:
             # create insert values object
