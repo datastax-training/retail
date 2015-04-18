@@ -58,6 +58,13 @@ Testing the library:
   python 2.data-to-cassandra.py
 ```
 
+12 - Start metagener.  Open 4 tabs and run each of the following commands in a NEW terminal window.  They need to be run together in separate terminal windows.
+```
+  ./run-metagener --yaml black-friday.yaml
+  python 4.metagener-to-cassandra-stores-employees.py
+  nc -l 5005
+  python 5.metagener-to-cassandra-scan-items.py 
+```
 
 ### Project Overview ###
 
