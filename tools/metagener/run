@@ -1,0 +1,37 @@
+#!/usr/bin/env bash
+
+METAGENER_DIR=$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )
+
+#$YAML
+
+while [[ $# > 1 ]]
+do
+key="$1"
+case $key in
+    -y|--yaml)
+    YAML="$2"
+    shift
+    ;;
+    *)
+    # unknown option
+    ;;
+esac
+shift
+done
+
+if [ -z "$YAML" ]; then
+    >&2 echo "\$YAML (-y/--yaml) must be set."
+    exit 1
+fi
+
+# This syntax is an implicit "daemonize" in bash.
+# The intermediate process exits, leaving the inner
+# process to be inherited by init. It's not a proper daemon process,
+# but close enough
+
+(
+    (
+        cd $METAGENER_DIR
+        java -jar metagener-webapi-1.0-SNAPSHOT.jar server $YAML
+    ) &
+) &
