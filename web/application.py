@@ -21,4 +21,5 @@ def start():
             use_reloader=True,
             threaded=True)
 
-start()
+if __name__ == "__main__":
+    start()
