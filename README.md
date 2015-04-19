@@ -3,6 +3,7 @@ Modify techsupply.flagship.SparkTest.callSparkJob to point to your instance of D
 ```
 $ chmod +x sbt
 $ ./sbt
+> assembly
 > container:start
 ```
 
