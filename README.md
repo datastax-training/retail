@@ -1,4 +1,12 @@
-The black friday project is a simple Python / Flask project that runs against a local DSE. This expects that you have a local DSE setup and running.
+The Black Friday project contains 4 major parts.
+
+The first is in the cql directory that sets up the database schema for the entire project.
+
+The second is the data generation portion in the generate_data dir.  It does both an initial static data load with the seed scripts (1.seed_zipcode and 2.seed_retail).  It also generates sample data on a continuous basis using metagener (the scripts in 3.scan_data).
+
+The third part is the web project in the web directory that is a simple Python / Flask project that runs against a local DSE. This expects that you have a local DSE setup and running.
+
+The fourth part is what you will write.  It will be Spark Jobs that can run against both the static data set and also against the dynamic data before it flows into Cassandra.
 
 ## Mac Setup ##
 
@@ -63,7 +71,7 @@ Testing the library:
   ./run-metagener --yaml black-friday.yaml
   python 4.metagener-to-cassandra-stores-employees.py
   nc -l 5005
-  python 5.metagener-to-cassandra-scan-items.py 
+  python 5.metagener-to-cassandra-scan-items.py
 ```
 
 ### Project Overview ###
