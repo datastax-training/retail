@@ -15,6 +15,6 @@ session.row_factory = ordered_dict_factory
 
 response = session.execute('SELECT zipcode FROM retail.zipcodes')
 
-with open('../../cache/zipcodes.txt', 'w') as f:
+with open('zipcodes.txt', 'w') as f:
     for row in response:
         f.write('%s\n' % row['zipcode'])

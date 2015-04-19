@@ -1,0 +1,14 @@
+preload:
+  retail: black-friday.metagener
+logging:
+  level: INFO
+  loggers:
+    com.metawiring: INFO
+  appenders:
+    - type: file
+      currentLogFilename: metagener-webapi.log
+      threshold: ALL
+      archive: true
+      archivedLogFilenamePattern: metagener-webapi-%d.log
+      archivedFileCount: 10
+      timeZone: UTC
