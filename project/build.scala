@@ -8,7 +8,7 @@ import ScalateKeys._
 
 import AssemblyKeys._
 
-object AkkaExamplesBuild extends Build {
+object TechSupplyBuild extends Build {
   val Organization = "techsupply"
   val Name = "techsupply-flagship"
   val Version = "0.1.0-SNAPSHOT"
@@ -16,8 +16,8 @@ object AkkaExamplesBuild extends Build {
   val ScalatraVersion = "2.3.0"
   val AkkaVersion = "2.2.3"
 
-  val SparkVersion = "1.1.0"
-  val SparkCassandraVersion = "1.1.0"
+  val Spark = "1.1.0"
+  val SparkCassandra = "1.1.0"
 
   lazy val project = Project (
     "techsupply-flagship",
@@ -37,26 +37,24 @@ object AkkaExamplesBuild extends Build {
         "org.scalatra" %% "scalatra-specs2" % ScalatraVersion % "test",
         "ch.qos.logback" % "logback-classic" % "1.0.6" % "runtime",
 
-        "org.apache.spark" % "spark-core_2.10" % SparkVersion % "provided",
-        "org.apache.spark" % "spark-streaming_2.10" % SparkVersion % "provided",
-        ("com.datastax.spark" %% "spark-cassandra-connector" % SparkCassandraVersion withSources() withJavadoc()).
+        "org.apache.spark" % "spark-core_2.10" % Spark % "provided",
+        "org.apache.spark" % "spark-streaming_2.10" % Spark % "provided",
+        "org.apache.spark" % "spark-streaming-kafka_2.10" % Spark % "provided",
+        ("com.datastax.spark" %% "spark-cassandra-connector" % SparkCassandra withSources() withJavadoc()).
           exclude("com.esotericsoftware.minlog", "minlog").
           exclude("commons-beanutils","commons-beanutils").
           exclude("org.apache.spark","spark-core"),
-        ("com.datastax.spark" %% "spark-cassandra-connector-java" % SparkCassandraVersion withSources() withJavadoc()).
+        ("com.datastax.spark" %% "spark-cassandra-connector-java" % SparkCassandra withSources() withJavadoc()).
           exclude("org.apache.spark","spark-core"),
+        "net.jpountz.lz4" % "lz4" % "1.2.0",
+        "com.typesafe.play" %% "play-json" % "2.2.1",
 
-        "org.scalatra" %% "scalatra-json" % "2.2.2",
+  "org.scalatra" %% "scalatra-json" % "2.2.2",
         "org.json4s"   %% "json4s-jackson" % "3.2.6",
 
         "org.eclipse.jetty" % "jetty-webapp" % "8.1.8.v20121106" % "container",
         "org.eclipse.jetty.orbit" % "javax.servlet" % "3.0.0.v201112011016" % "container;provided;test" artifacts (Artifact("javax.servlet", "jar", "jar"))
       ),
-      libraryDependencies ~= { _ map {
-        case m if m.organization == "ch.qos.logback" =>
-          m.exclude("logback-classic", "logback-classic")
-        case m => m
-      }},
       scalateTemplateConfig in Compile <<= (sourceDirectory in Compile){ base =>
         Seq(
           TemplateConfig(
