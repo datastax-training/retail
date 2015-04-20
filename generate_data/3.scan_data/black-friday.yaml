@@ -1,14 +1,14 @@
 preload:
-  retail: $YAML_DIR/black-friday.metagener
+  retail: $CACHE_DIR/black-friday.metagener
 logging:
-  level: INFO
+  level: DEBUG
   loggers:
-    com.metawiring: INFO
+    com.metawiring: DEBUG
   appenders:
     - type: file
-      currentLogFilename: /cache/logs/metagener-webapi.log
+      currentLogFilename: $CACHE_DIR/logs/metagener-webapi.log
       threshold: ALL
       archive: true
-      archivedLogFilenamePattern: ../../cache/logs/metagener-webapi-%d.log
+      archivedLogFilenamePattern: $CACHE_DIR/logs/metagener-webapi-%d.log
       archivedFileCount: 10
       timeZone: UTC
