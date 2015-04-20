@@ -38,8 +38,8 @@ object TechSupplyBuild extends Build {
         "ch.qos.logback" % "logback-classic" % "1.0.6" % "runtime",
 
         "org.apache.spark" % "spark-core_2.10" % Spark % "provided",
-        "org.apache.spark" % "spark-streaming_2.10" % Spark % "provided",
-        "org.apache.spark" % "spark-streaming-kafka_2.10" % Spark % "provided",
+        "org.apache.spark" % "spark-streaming_2.10" % Spark ,
+        "org.apache.spark" % "spark-streaming-kafka_2.10" % Spark,
         ("com.datastax.spark" %% "spark-cassandra-connector" % SparkCassandra withSources() withJavadoc()).
           exclude("com.esotericsoftware.minlog", "minlog").
           exclude("commons-beanutils","commons-beanutils").
@@ -73,6 +73,8 @@ object TechSupplyBuild extends Build {
         case PathList("org", "apache","commons","collections", xs @ _*) => MergeStrategy.first
         case PathList("org", "apache","commons","logging", xs @ _*) => MergeStrategy.first
         case PathList("org", "slf4j","impl", xs @ _*) => MergeStrategy.first
+        case PathList("com", "esotericsoftware","minlog", xs @ _*) => MergeStrategy.first
+        case PathList("org", "apache","commons","beanutils", xs @ _*) => MergeStrategy.first
         case PathList(ps @ _*) if ps.last == "Driver.properties" => MergeStrategy.discard
         case PathList(ps @ _*) if ps.last == "plugin.properties" => MergeStrategy.discard
         case PathList(ps @ _*) if ps.last == "pom.xml" => MergeStrategy.discard

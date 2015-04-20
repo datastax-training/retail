@@ -36,10 +36,10 @@ trait CassandraCapable {
 
     withAuth = true
     var conf = new SparkConf(true)
-      .set("spark.cassandra.connection.host", "10.0.0.26")
-      .setMaster("spark://10.0.0.26:7077")
-      .setAppName("Windowed_Rapid_Transaction_Check")
-      .setJars(Array("target/scala-2.10/dse_spark_streaming_examples-assembly-0.2.0.jar"))
+      .set("spark.cassandra.connection.host", "127.0.0.1")
+      .setMaster("spark://127.0.0.1:7077")
+      .setAppName("TechSupply-Flagship")
+      .setJars(Array("target/scala-2.10/techsupply-flagship-assembly-0.1.0-SNAPSHOT.jar"))
     if (withAuth){
       conf = conf.set("spark.cassandra.auth.username", username)
       .set("spark.cassandra.auth.password", password)

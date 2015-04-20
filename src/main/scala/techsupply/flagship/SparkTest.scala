@@ -20,8 +20,8 @@ object SparkTest extends TextSocketCapable {
   def createSparkConf: SparkConf = {
     new SparkConf()
       .setAppName("techsupply")
-      .set("spark.cassandra.connection.host", "10.0.0.26")
-      .setMaster("spark://10.0.0.26:7077")
+      .set("spark.cassandra.connection.host", "127.0.0.1")
+      .setMaster("spark://127.0.0.1:7077")
       .setJars(Array("target/scala-2.10/techsupply-flagship-assembly-0.1.0-SNAPSHOT.jar"))
   }
 
