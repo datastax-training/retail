@@ -10,7 +10,10 @@ The fourth part is what you will write.  It will be Spark Jobs that can run agai
 
 ## Mac Setup ##
 
-1 - Install [brew](http://brew.sh/)   - The default mac python won't work
+1 - Install [brew](http://brew.sh/) and then brew python  - The default mac python won't work
+```
+  brew python
+```
 
 2 - install wget:
 ```
