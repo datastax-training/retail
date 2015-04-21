@@ -16,11 +16,8 @@
 
 package techsupply.flagship
 
-import com.datastax.spark.connector.CassandraRow
 import com.datastax.spark.connector.cql.CassandraConnector
-import com.datastax.spark.connector.rdd.CassandraRDD
 import org.apache.spark.streaming.StreamingContext
 
 class CassandraContext(val connector: CassandraConnector,
-                       val rdd: CassandraRDD[CassandraRow],
                        val streamingContext: StreamingContext)

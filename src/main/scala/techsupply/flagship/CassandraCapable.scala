@@ -21,45 +21,24 @@ import com.datastax.spark.connector.streaming._
 import org.apache.spark.SparkConf
 import org.apache.spark.streaming.{Milliseconds, StreamingContext}
 
-import scala.collection.JavaConversions._
-
 
 trait CassandraCapable {
 
-  val keySpaceName =  "tester"
+  val keySpaceName =  "retail"
   val fullTableName =  "streaming_demo"
-  var withAuth = false
-  val password = "cassandra"
-  val username = "cassandra"
+
+  def createSparkConf(): SparkConf = {
+    new SparkConf()
+      .setAppName("techsupply")
+      .set("spark.cassandra.connection.host", "10.200.21.236")
+      .setMaster("spark://10.200.21.236:7077")
+      .setJars(Array("target/scala-2.10/techsupply-flagship-assembly-0.1.0-SNAPSHOT.jar"))
+  }
 
   def connect(): CassandraContext = {
-
-    withAuth = true
-    var conf = new SparkConf(true)
-      .set("spark.cassandra.connection.host", "127.0.0.1")
-      .setMaster("spark://127.0.0.1:7077")
-      .setAppName("TechSupply-Flagship")
-      .setJars(Array("target/scala-2.10/techsupply-flagship-assembly-0.1.0-SNAPSHOT.jar"))
-    if (withAuth){
-      conf = conf.set("spark.cassandra.auth.username", username)
-      .set("spark.cassandra.auth.password", password)
-    }
-
+    var conf = createSparkConf()
     val connector = CassandraConnector(conf)
-    connector.withSessionDo(session => {
-      session.execute(s"create keyspace if not exists ${keySpaceName} with replication = { 'class':'SimpleStrategy', " +
-        "'replication_factor':1}")
-      session.execute(s"drop table if exists ${keySpaceName}.${fullTableName}")
-      session.execute(s"create table if not exists ${keySpaceName}.${fullTableName} " +
-        "(userId int, userName text, followers Set<text>, PRIMARY KEY(userId))")
-      val preparedStatement = session.prepare(s"INSERT INTO ${keySpaceName}.${fullTableName} (userId, userName, " +
-        s"followers) values (?,?,?)")
-      session.execute(preparedStatement.bind(0: Integer, "jsmith", setAsJavaSet(Set("jsmith", "mark", "mike"))))
-      session.execute(preparedStatement.bind(1: Integer, "mark", setAsJavaSet(Set("mark", "mike"))))
-      session.execute(preparedStatement.bind(2: Integer, "mike", setAsJavaSet(Set("jsmith", "mike"))))
-    })
-
     val ssc = new StreamingContext(conf, Milliseconds(5000))
-    new CassandraContext(connector, ssc.cassandraTable(keySpaceName, fullTableName), ssc)
+    new CassandraContext(connector, ssc)
   }
 }

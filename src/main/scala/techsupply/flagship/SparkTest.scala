@@ -6,45 +6,108 @@ import org.apache.spark.SparkContext
 import com.datastax.spark.connector._
 
 import org.apache.spark.streaming.StreamingContext._
+import org.apache.spark.SparkContext._
+
+import com.datastax.spark.connector._
+import org.json4s.{MappingException, DefaultFormats}
+import org.json4s.jackson.JsonMethods._
 
 case class Receipts(cashier_first_name: Int, cashier_id: String, cashier_last_name: String)
 
 case class Product(product_id: String, brand: String, price: BigDecimal, title: String)
 
-object SparkTest extends TextSocketCapable {
+object SparkTest extends TextSocketCapable with MetagenerCapable{
 
   def main(args: Array[String]): Unit = {
-    testSparkStream()
+    testMetagenerStream()
+
+    //testJsonParsing()
   }
 
-  def createSparkConf: SparkConf = {
-    new SparkConf()
-      .setAppName("techsupply")
-      .set("spark.cassandra.connection.host", "127.0.0.1")
-      .setMaster("spark://127.0.0.1:7077")
-      .setJars(Array("target/scala-2.10/techsupply-flagship-assembly-0.1.0-SNAPSHOT.jar"))
+  case class MG(minSampleId:Int, maxSampleId:Int, sampleValues:List[SV])
+  case class SV(sampleId:Int, fieldValues:SDS)
+  case class SDS(scan_duration_seconds:BigDecimal, scan_qty:String, product_id:String, item_discount:BigDecimal)
+  def testJsonParsing() = {
+
+    val jsonStr = """
+    {
+      "minSampleId": 16561348,
+      "maxSampleId": 16561352,
+          "sampleValues": [
+                { "sampleId": 16561348,
+                  "fieldValues": {
+                    "scan_duration_seconds": 0.48807000692069563,
+                    "scan_qty": "1",
+                    "product_id": "B0000DCTC7",
+                    "item_discount": 0.8816160100375953
+                  }
+                },
+                {"sampleId": 16561348,
+                    "fieldValues": {
+                      "scan_duration_seconds": 0.48807000692069563,
+                      "scan_qty": "1",
+                      "product_id": "B0000DCTC7",
+                      "item_discount": 0.8816160100375953
+                    }
+                }
+          ]
+    }
+                  """
+
+    println(jsonStr)
+    implicit lazy val formats = DefaultFormats
+
+    try {
+      val json = parse(jsonStr)
+      println(s"json = $json")
+      val md = json.extract[MG]
+      println(s"md = $md")
+
+    } catch {
+      case e: MappingException => println("Unable to map JSON message to MetagenerData object:" + e.msg)
+      case e: Exception => println("Unable to map JSON message to MetagenerData object")
+    }
+
   }
 
   def callSparkJob() = {
-    val sparkConf = createSparkConf
+    val sparkConf = createSparkConf()
 
     val sc = new SparkContext(sparkConf)
-
     val genericRDD = sc.cassandraTable[Product]("retail", "products")
     val products: Array[Product] = genericRDD.take(20)
-
-    sc.stop
+    sc.stop()
 
     products
   }
 
+  def testMetagenerStream() = {
 
-  def testSparkStream() = {
+    val (metagenerStreamRDD, sparkContext, connector) = connectToMetagener()
+
+    val words = metagenerStreamRDD.map(mg => mg.toString).flatMap(_.split(" "))
+    // Count each word in each batch
+    val pairs = words.map(word => (word, 1))
+    val wordCounts = pairs.reduceByKey(_ + _)
+    // Print the first ten elements of each RDD generated in this DStream to the console
+    wordCounts.print()
+
+    sparkContext.start()
+    sparkContext.awaitTermination()
+  }
+
+  case class WordCount(word: String, count: Long)
+
+  def testSparkStreamSocket() = {
     val (socketRdd, sparkContext, connector) = connectToSocket()
 
     val words = socketRdd.flatMap(_.split(" "))
-    val wordCounts = words.map(x => (x, 1)).reduceByKey(_ + _)
+    // Count each word in each batch
+    val pairs = words.map(word => (word, 1))
+    val wordCounts = pairs.reduceByKey(_ + _)
+    // Print the first ten elements of each RDD generated in this DStream to the console
     wordCounts.print()
+
     sparkContext.start()
     sparkContext.awaitTermination()
   }
