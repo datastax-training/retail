@@ -427,7 +427,7 @@ def scan_items(futures, session):
 
         # write to files for potential Spark streaming use
         with open(
-                '/mnt/log/spark_streaming/retail.item_scans.txt.{'
+                '/mnt/disk1/spark_streaming/retail.item_scans.txt.{'
                 '0:010d}'.format(
                         log_file), 'w') as f:
             f.write(spark_streaming)
