@@ -12,6 +12,8 @@ import com.datastax.spark.connector._
 import org.json4s.{MappingException, DefaultFormats}
 import org.json4s.jackson.JsonMethods._
 
+import com.datastax.spark.connector._
+
 case class Receipts(cashier_first_name: Int, cashier_id: String, cashier_last_name: String)
 
 case class Product(product_id: String, brand: String, price: BigDecimal, title: String)
@@ -19,9 +21,11 @@ case class Product(product_id: String, brand: String, price: BigDecimal, title: 
 object SparkTest extends TextSocketCapable with MetagenerCapable{
 
   def main(args: Array[String]): Unit = {
-    testMetagenerStream()
+    //testMetagenerStream()
 
     //testJsonParsing()
+
+    testSparkStreamSocket()
   }
 
   case class MG(minSampleId:Int, maxSampleId:Int, sampleValues:List[SV])
@@ -107,6 +111,22 @@ object SparkTest extends TextSocketCapable with MetagenerCapable{
     val wordCounts = pairs.reduceByKey(_ + _)
     // Print the first ten elements of each RDD generated in this DStream to the console
     wordCounts.print()
+
+      /**
+
+      CREATE TABLE wordCounts (
+        word varchar PRIMARY KEY,
+        count int
+      );
+
+    **/
+    wordCounts.foreachRDD {
+      wcRDD =>
+        if (wcRDD.count > 0) {
+          println(s"wcRDD.count() ${wcRDD.count}  = ${wcRDD.toDebugString}")
+          wcRDD.saveToCassandra("retail", "wordcounts", SomeColumns("word", "count"))
+        }
+    }
 
     sparkContext.start()
     sparkContext.awaitTermination()
