@@ -2,14 +2,20 @@ import com.datastax.spark.connector._
 import org.apache.spark.SparkContext._
 import org.apache.spark.{SparkConf, SparkContext}
 import java.util.UUID
+import org.joda.time.DateTime
 
-case class Track(artist: String,
-                 track: String,
-                 track_id: UUID,
-                 genre: String,
-                 music_file: String,
-                 starred:Option[Boolean],
-                 track_length_in_seconds: Int)
+case class Register(store_id: Int,
+                 register_id: Int,
+                 receipt_id: UUID,
+                 scan_time: DateTime,
+                 brand: String,
+                 msrp: BigDecimal,
+                 price: BigDecimal,
+                 product: String,
+                 product_id: String,
+                 quantity: BigDecimal,
+                 savings: BigDecimal,
+                 scan_duration: Int)
 
 object Example {
 
@@ -20,9 +26,12 @@ object Example {
 
     val sc = new SparkContext("spark://127.0.0.1:7077", "test", conf)
 
-    val tracks = sc.cassandraTable("playlist","track_by_artist").as(Track)
+    val sales = sc.cassandraTable("retail","registers").as(Register)
 
-    tracks.map( track => (track.artist, 1) ).reduceByKey( _+_ ).saveToCassandra("playlist","cnt_of_tracks_by_artist")
-
-  }
+    sales.map( sale => (sale.product, (1, sale.price )) )
+      .reduceByKey( (x,y) => (x._1 + y._1, x._2 + y._2)  )
+      .map( x=> (x._1, x._2._1, x._2._2) )
+      .saveToCassandra("retail","sales_by_product",
+        SomeColumns("product","quantity","amount"))
+    }
 }
