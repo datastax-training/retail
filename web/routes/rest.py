@@ -82,8 +82,8 @@ def search():
 
     keyword = request.args.get('s')
 
-    # parameters to solr are rows=30  wt (writer type)=json, and q=city:<keyword>
-    parameters = urllib.urlencode({'rows':'30', 'wt': 'json', 'q': "city:" + keyword})
+    # parameters to solr are rows=30  wt (writer type)=json, and q=city:<keyword> sort=zipcode asc
+    parameters = urllib.urlencode({'sort':'zipcode asc', 'rows':'30', 'wt': 'json', 'q': "city:" + keyword})
     url='http://localhost:8983/solr/retail.zipcodes/select?' + parameters
 
     # get the response
