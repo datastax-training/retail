@@ -22,7 +22,7 @@ object Example {
 
     val tracks = sc.cassandraTable("playlist","track_by_artist").as(Track)
 
-    tracks.map( track => (track.genre, 1) ).reduceByKey( _+_ ).saveToCassandra("playlist","cnt_of_tracks_by_artist")
+    tracks.map( track => (track.artist, 1) ).reduceByKey( _+_ ).saveToCassandra("playlist","cnt_of_tracks_by_artist")
 
   }
 }
