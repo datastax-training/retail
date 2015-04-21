@@ -19,7 +19,7 @@ case class Product(product_id: String, brand: String, price: BigDecimal, title: 
 object SparkTest extends TextSocketCapable with MetagenerCapable{
 
   def main(args: Array[String]): Unit = {
-    testSparkStreamSocket()
+    testMetagenerStream()
 
     //testJsonParsing()
   }
