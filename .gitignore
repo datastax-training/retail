@@ -2,3 +2,5 @@
 *.iml
 *.pyc
 cache/
+target/
+.history
