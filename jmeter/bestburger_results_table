@@ -547,3 +547,245 @@
 1429377771898,4,Get Registers,200,OK,Readers 1-23,text,true,769,40,40,0
 1429377772183,2,Get Registers,200,OK,Readers 1-12,text,true,769,40,40,0
 1429377774600,4,Get Registers,200,OK,Readers 1-24,text,true,769,40,40,0
+1429572499397,70,Get Registers,200,OK,Readers 1-1,text,true,768,1,2,0
+1429572501196,3,Get Registers,200,OK,Readers 1-1,text,true,768,1,1,0
+1429572502396,5,Get Registers,200,OK,Readers 1-1,text,true,768,1,1,0
+1429572503597,6,Get Registers,200,OK,Readers 1-1,text,true,768,1,1,0
+1429572504796,3,Get Registers,200,OK,Readers 1-1,text,true,767,1,1,0
+1429572505996,8,Get Registers,200,OK,Readers 1-1,text,true,768,1,1,0
+1429572507197,4,Get Registers,200,OK,Readers 1-1,text,true,768,1,1,0
+1429572508396,4,Get Registers,200,OK,Readers 1-1,text,true,768,1,1,0
+1429572509595,9,Get Registers,200,OK,Readers 1-1,text,true,768,1,1,0
+1429572510796,3,Get Registers,200,OK,Readers 1-1,text,true,768,1,1,0
+1429572511996,4,Get Registers,200,OK,Readers 1-1,text,true,768,1,1,0
+1429572513196,3,Get Registers,200,OK,Readers 1-1,text,true,768,1,1,0
+1429572514397,6,Get Registers,200,OK,Readers 1-1,text,true,768,1,1,0
+1429572515596,2,Get Registers,200,OK,Readers 1-1,text,true,768,1,1,0
+1429572516796,3,Get Registers,200,OK,Readers 1-1,text,true,768,1,1,0
+1429572517995,3,Get Registers,200,OK,Readers 1-1,text,true,768,1,1,0
+1429572519195,3,Get Registers,200,OK,Readers 1-1,text,true,768,1,1,0
+1429572520396,3,Get Registers,200,OK,Readers 1-1,text,true,767,1,1,0
+1429572599537,32,0: Get Registers ,200,OK,Readers 1-1,text,true,773,1,2,0
+1429572601308,3,0: Get Registers ,200,OK,Readers 1-1,text,true,773,1,1,0
+1429572602511,5,0: Get Registers ,200,OK,Readers 1-1,text,true,773,1,1,0
+1429572603709,4,0: Get Registers ,200,OK,Readers 1-1,text,true,772,1,1,0
+1429572604908,3,0: Get Registers ,200,OK,Readers 1-1,text,true,773,1,1,0
+1429572606108,3,0: Get Registers ,200,OK,Readers 1-1,text,true,773,1,1,0
+1429572607308,2,0: Get Registers ,200,OK,Readers 1-1,text,true,773,1,1,0
+1429572608509,3,0: Get Registers ,200,OK,Readers 1-1,text,true,773,1,1,0
+1429572609708,3,0: Get Registers ,200,OK,Readers 1-1,text,true,773,1,1,0
+1429572610908,3,0: Get Registers ,200,OK,Readers 1-1,text,true,773,1,1,0
+1429572612109,3,0: Get Registers ,200,OK,Readers 1-1,text,true,773,1,1,0
+1429572613309,3,0: Get Registers ,200,OK,Readers 1-1,text,true,773,1,1,0
+1429572614508,2,0: Get Registers ,200,OK,Readers 1-1,text,true,773,1,1,0
+1429572615709,3,0: Get Registers ,200,OK,Readers 1-1,text,true,773,1,1,0
+1429572616908,2,0: Get Registers ,200,OK,Readers 1-1,text,true,772,1,1,0
+1429572618110,3,0: Get Registers ,200,OK,Readers 1-1,text,true,772,1,1,0
+1429572619307,1,0: Get Registers ,200,OK,Readers 1-1,text,true,772,1,1,0
+1429572620510,3,0: Get Registers ,200,OK,Readers 1-1,text,true,773,1,1,0
+1429572621708,2,0: Get Registers ,200,OK,Readers 1-1,text,true,773,1,1,0
+1429572622907,2,0: Get Registers ,200,OK,Readers 1-1,text,true,773,1,1,0
+1429572624108,2,0: Get Registers ,200,OK,Readers 1-1,text,true,773,1,1,0
+1429572625309,3,0: Get Registers ,200,OK,Readers 1-1,text,true,773,1,1,0
+1429572626507,2,0: Get Registers ,200,OK,Readers 1-1,text,true,773,1,1,0
+1429572627708,3,0: Get Registers ,200,OK,Readers 1-1,text,true,772,1,1,0
+1429572628909,4,0: Get Registers ,200,OK,Readers 1-1,text,true,773,1,1,0
+1429572630109,3,0: Get Registers ,200,OK,Readers 1-1,text,true,773,1,1,0
+1429572631309,3,0: Get Registers ,200,OK,Readers 1-1,text,true,773,1,1,0
+1429572632510,4,0: Get Registers ,200,OK,Readers 1-1,text,true,773,1,1,1
+1429572633708,3,0: Get Registers ,200,OK,Readers 1-1,text,true,773,1,1,0
+1429572634909,3,0: Get Registers ,200,OK,Readers 1-1,text,true,773,1,1,0
+1429572636109,4,0: Get Registers ,200,OK,Readers 1-1,text,true,773,1,1,0
+1429572637310,4,0: Get Registers ,200,OK,Readers 1-1,text,true,773,1,1,0
+1429572638508,2,0: Get Registers ,200,OK,Readers 1-1,text,true,773,1,1,0
+1429572639708,2,0: Get Registers ,200,OK,Readers 1-1,text,true,773,1,1,0
+1429572640908,2,0: Get Registers ,200,OK,Readers 1-1,text,true,773,1,1,0
+1429572642109,4,0: Get Registers ,200,OK,Readers 1-1,text,true,773,1,1,0
+1429572643308,3,0: Get Registers ,200,OK,Readers 1-1,text,true,773,1,1,0
+1429572644509,3,0: Get Registers ,200,OK,Readers 1-1,text,true,773,1,1,0
+1429572645710,3,0: Get Registers ,200,OK,Readers 1-1,text,true,772,1,1,0
+1429572646908,3,0: Get Registers ,200,OK,Readers 1-1,text,true,773,1,1,0
+1429572648109,2,0: Get Registers ,200,OK,Readers 1-1,text,true,772,1,1,0
+1429572649310,4,0: Get Registers ,200,OK,Readers 1-1,text,true,772,1,1,0
+1429572650510,3,0: Get Registers ,200,OK,Readers 1-1,text,true,773,1,1,0
+1429572651710,3,0: Get Registers ,200,OK,Readers 1-1,text,true,772,1,1,0
+1429572652908,2,0: Get Registers ,200,OK,Readers 1-1,text,true,773,1,1,0
+1429572654110,4,0: Get Registers ,200,OK,Readers 1-1,text,true,773,1,1,0
+1429572655310,3,0: Get Registers ,200,OK,Readers 1-1,text,true,772,1,1,0
+1429572656509,3,0: Get Registers ,200,OK,Readers 1-1,text,true,772,1,1,0
+1429572657709,3,0: Get Registers ,200,OK,Readers 1-1,text,true,773,1,1,0
+1429572658909,3,0: Get Registers ,200,OK,Readers 1-1,text,true,773,1,1,0
+1429572660110,4,0: Get Registers ,200,OK,Readers 1-1,text,true,773,1,1,0
+1429572661309,3,0: Get Registers ,200,OK,Readers 1-1,text,true,773,1,1,0
+1429572662509,3,0: Get Registers ,200,OK,Readers 1-1,text,true,773,1,1,0
+1429572663708,3,0: Get Registers ,200,OK,Readers 1-1,text,true,773,1,1,0
+1429572664909,3,0: Get Registers ,200,OK,Readers 1-1,text,true,772,1,1,0
+1429572666108,2,0: Get Registers ,200,OK,Readers 1-1,text,true,773,1,1,0
+1429572667308,2,0: Get Registers ,200,OK,Readers 1-1,text,true,773,1,1,0
+1429572668509,4,0: Get Registers ,200,OK,Readers 1-1,text,true,773,1,1,0
+1429572669708,3,0: Get Registers ,200,OK,Readers 1-1,text,true,773,1,1,0
+1429572670909,3,0: Get Registers ,200,OK,Readers 1-1,text,true,773,1,1,0
+1429572672109,4,0: Get Registers ,200,OK,Readers 1-1,text,true,773,1,1,0
+1429572673309,3,0: Get Registers ,200,OK,Readers 1-1,text,true,773,1,1,0
+1429572674508,3,0: Get Registers ,200,OK,Readers 1-1,text,true,772,1,1,0
+1429572675709,4,0: Get Registers ,200,OK,Readers 1-1,text,true,772,1,1,0
+1429572676909,4,0: Get Registers ,200,OK,Readers 1-1,text,true,773,1,1,0
+1429572678108,3,0: Get Registers ,200,OK,Readers 1-1,text,true,773,1,1,0
+1429572679308,3,0: Get Registers ,200,OK,Readers 1-1,text,true,773,1,1,0
+1429572680512,7,0: Get Registers ,200,OK,Readers 1-1,text,true,773,1,1,0
+1429572681707,2,0: Get Registers ,200,OK,Readers 1-1,text,true,773,1,1,0
+1429572682908,3,0: Get Registers ,200,OK,Readers 1-1,text,true,773,1,1,0
+1429572684108,3,0: Get Registers ,200,OK,Readers 1-1,text,true,773,1,1,0
+1429572685309,3,0: Get Registers ,200,OK,Readers 1-1,text,true,773,1,1,0
+1429572686508,3,0: Get Registers ,200,OK,Readers 1-1,text,true,773,1,1,0
+1429572687709,3,0: Get Registers ,200,OK,Readers 1-1,text,true,773,1,1,0
+1429572688909,3,0: Get Registers ,200,OK,Readers 1-1,text,true,773,1,1,0
+1429572690110,4,0: Get Registers ,200,OK,Readers 1-1,text,true,773,1,1,0
+1429572691310,3,0: Get Registers ,200,OK,Readers 1-1,text,true,772,1,1,0
+1429572692507,2,0: Get Registers ,200,OK,Readers 1-1,text,true,773,1,1,0
+1429572693708,3,0: Get Registers ,200,OK,Readers 1-1,text,true,773,1,1,0
+1429572694908,3,0: Get Registers ,200,OK,Readers 1-1,text,true,773,1,1,0
+1429572696107,2,0: Get Registers ,200,OK,Readers 1-1,text,true,773,1,1,0
+1429572697309,4,0: Get Registers ,200,OK,Readers 1-1,text,true,773,1,1,0
+1429572698509,3,0: Get Registers ,200,OK,Readers 1-1,text,true,773,1,1,0
+1429572699709,3,0: Get Registers ,200,OK,Readers 1-1,text,true,773,1,1,0
+1429572700907,2,0: Get Registers ,200,OK,Readers 1-1,text,true,773,1,1,0
+1429572702109,4,0: Get Registers ,200,OK,Readers 1-1,text,true,772,1,1,0
+1429572703309,4,0: Get Registers ,200,OK,Readers 1-1,text,true,773,1,1,0
+1429572704510,4,0: Get Registers ,200,OK,Readers 1-1,text,true,773,1,1,0
+1429572705708,2,0: Get Registers ,200,OK,Readers 1-1,text,true,773,1,1,0
+1429572706908,2,0: Get Registers ,200,OK,Readers 1-1,text,true,773,1,1,0
+1429572708108,2,0: Get Registers ,200,OK,Readers 1-1,text,true,773,1,1,0
+1429572709311,5,0: Get Registers ,200,OK,Readers 1-1,text,true,772,1,1,0
+1429572710509,3,0: Get Registers ,200,OK,Readers 1-1,text,true,773,1,1,0
+1429572711708,2,0: Get Registers ,200,OK,Readers 1-1,text,true,773,1,1,0
+1429572712908,3,0: Get Registers ,200,OK,Readers 1-1,text,true,773,1,1,0
+1429572714108,2,0: Get Registers ,200,OK,Readers 1-1,text,true,773,1,1,0
+1429572715309,3,0: Get Registers ,200,OK,Readers 1-1,text,true,773,1,1,0
+1429572716509,3,0: Get Registers ,200,OK,Readers 1-1,text,true,772,1,1,0
+1429572717708,2,0: Get Registers ,200,OK,Readers 1-1,text,true,773,1,1,0
+1429572718909,3,0: Get Registers ,200,OK,Readers 1-1,text,true,772,1,1,0
+1429572945702,25,0: Get Registers ,200,OK,Readers 1-1,text,true,772,1,2,0
+1429572947481,3,0: Get Registers ,200,OK,Readers 1-1,text,true,773,1,1,0
+1429572948681,4,0: Get Registers ,200,OK,Readers 1-1,text,true,773,1,1,0
+1429572949880,3,0: Get Registers ,200,OK,Readers 1-1,text,true,773,1,1,0
+1429572951081,4,0: Get Registers ,200,OK,Readers 1-1,text,true,773,1,1,0
+1429572952281,3,0: Get Registers ,200,OK,Readers 1-1,text,true,773,1,1,0
+1429572953482,3,0: Get Registers ,200,OK,Readers 1-1,text,true,773,1,1,0
+1429572954680,3,0: Get Registers ,200,OK,Readers 1-1,text,true,773,1,1,0
+1429572955881,4,0: Get Registers ,200,OK,Readers 1-1,text,true,773,1,1,0
+1429572957080,3,0: Get Registers ,200,OK,Readers 1-1,text,true,772,1,1,0
+1429573006566,27,0: Get Registers ,200,OK,Readers 1-1,text,true,773,1,2,0
+1429573008341,2,0: Get Registers ,200,OK,Readers 1-1,text,true,773,1,1,0
+1429573009543,2,0: Get Registers ,200,OK,Readers 1-1,text,true,771,1,1,0
+1429573010742,3,0: Get Registers ,200,OK,Readers 1-1,text,true,773,1,1,0
+1429573011943,3,0: Get Registers ,200,OK,Readers 1-1,text,true,773,1,1,0
+1429573013143,3,0: Get Registers ,200,OK,Readers 1-1,text,true,773,1,1,0
+1429573014203,9,0: Get Registers ,200,OK,Readers 1-1,text,true,773,1,1,0
+1429573028278,4,0: Get Registers ,200,OK,Readers 1-1,text,true,773,1,2,0
+1429573030077,2,0: Get Registers ,200,OK,Readers 1-1,text,true,773,1,1,0
+1429573031278,3,0: Get Registers ,200,OK,Readers 1-1,text,true,773,1,1,0
+1429573032477,3,0: Get Registers ,200,OK,Readers 1-1,text,true,773,1,1,0
+1429573033676,2,0: Get Registers ,200,OK,Readers 1-1,text,true,773,1,1,0
+1429573064698,22,0: Get Registers ,200,OK,Readers 1-1,text,true,773,1,2,0
+1429573066478,2,0: Get Registers ,200,OK,Readers 1-1,text,true,773,1,1,0
+1429573067425,17,0: Get Registers ,200,OK,Readers 1-1,text,true,773,1,1,0
+1429573126150,26,0: Get Registers ,200,OK,Readers 1-1,text,true,773,1,2,0
+1429573127927,3,0: Get Registers ,200,OK,Readers 1-1,text,true,773,1,1,0
+1429573128581,16,0: Get Registers ,200,OK,Readers 1-1,text,true,773,1,1,0
+1429573217450,47,0: Get Registers ,200,OK,Readers 1-1,text,true,773,1,2,0
+1429573219207,4,0: Get Registers ,200,OK,Readers 1-1,text,true,773,1,1,0
+1429573220406,3,0: Get Registers ,200,OK,Readers 1-1,text,true,773,1,1,0
+1429573221606,3,0: Get Registers ,200,OK,Readers 1-1,text,true,772,1,1,0
+1429573222806,3,0: Get Registers ,200,OK,Readers 1-1,text,true,773,1,1,0
+1429573224008,4,0: Get Registers ,200,OK,Readers 1-1,text,true,773,1,1,0
+1429573225205,2,0: Get Registers ,200,OK,Readers 1-1,text,true,773,1,1,0
+1429573226406,3,0: Get Registers ,200,OK,Readers 1-1,text,true,773,1,1,0
+1429573227605,3,0: Get Registers ,200,OK,Readers 1-1,text,true,773,1,1,0
+1429573228804,2,0: Get Registers ,200,OK,Readers 1-1,text,true,773,1,1,0
+1429573230005,2,0: Get Registers ,200,OK,Readers 1-1,text,true,773,1,1,0
+1429573231205,3,0: Get Registers ,200,OK,Readers 1-1,text,true,773,1,1,0
+1429573232405,3,0: Get Registers ,200,OK,Readers 1-1,text,true,773,1,1,0
+1429573233606,3,0: Get Registers ,200,OK,Readers 1-1,text,true,773,1,1,0
+1429573234805,3,0: Get Registers ,200,OK,Readers 1-1,text,true,773,1,1,0
+1429573236004,2,0: Get Registers ,200,OK,Readers 1-1,text,true,773,1,1,0
+1429573237204,2,0: Get Registers ,200,OK,Readers 1-1,text,true,772,1,1,0
+1429573238406,3,0: Get Registers ,200,OK,Readers 1-1,text,true,773,1,1,1
+1429573239605,2,0: Get Registers ,200,OK,Readers 1-1,text,true,772,1,1,0
+1429573240805,2,0: Get Registers ,200,OK,Readers 1-1,text,true,773,1,1,0
+1429573242005,2,0: Get Registers ,200,OK,Readers 1-1,text,true,773,1,1,0
+1429573243205,3,0: Get Registers ,200,OK,Readers 1-1,text,true,771,1,1,0
+1429573244404,2,0: Get Registers ,200,OK,Readers 1-1,text,true,773,1,1,0
+1429573245604,2,0: Get Registers ,200,OK,Readers 1-1,text,true,773,1,1,0
+1429573246804,2,0: Get Registers ,200,OK,Readers 1-1,text,true,773,1,1,0
+1429573248005,2,0: Get Registers ,200,OK,Readers 1-1,text,true,771,1,1,0
+1429573249205,3,0: Get Registers ,200,OK,Readers 1-1,text,true,773,1,1,0
+1429573250404,2,0: Get Registers ,200,OK,Readers 1-1,text,true,773,1,1,0
+1429573251607,5,0: Get Registers ,200,OK,Readers 1-1,text,true,773,1,1,0
+1429573252805,2,0: Get Registers ,200,OK,Readers 1-1,text,true,772,1,1,0
+1429573254005,2,0: Get Registers ,200,OK,Readers 1-1,text,true,773,1,1,0
+1429573255206,3,0: Get Registers ,200,OK,Readers 1-1,text,true,773,1,1,0
+1429573256405,3,0: Get Registers ,200,OK,Readers 1-1,text,true,772,1,1,0
+1429573257607,3,0: Get Registers ,200,OK,Readers 1-1,text,true,773,1,1,0
+1429573258805,2,0: Get Registers ,200,OK,Readers 1-1,text,true,772,1,1,0
+1429573260005,2,0: Get Registers ,200,OK,Readers 1-1,text,true,772,1,1,0
+1429573261204,1,0: Get Registers ,200,OK,Readers 1-1,text,true,773,1,1,0
+1429573262407,3,0: Get Registers ,200,OK,Readers 1-1,text,true,773,1,1,0
+1429573263605,2,0: Get Registers ,200,OK,Readers 1-1,text,true,772,1,1,0
+1429573264805,2,0: Get Registers ,200,OK,Readers 1-1,text,true,773,1,1,0
+1429573266006,3,0: Get Registers ,200,OK,Readers 1-1,text,true,772,1,1,0
+1429573267204,2,0: Get Registers ,200,OK,Readers 1-1,text,true,773,1,1,0
+1429573268404,2,0: Get Registers ,200,OK,Readers 1-1,text,true,773,1,1,0
+1429573269605,2,0: Get Registers ,200,OK,Readers 1-1,text,true,773,1,1,0
+1429573270805,2,0: Get Registers ,200,OK,Readers 1-1,text,true,773,1,1,0
+1429573272006,3,0: Get Registers ,200,OK,Readers 1-1,text,true,772,1,1,0
+1429573273207,4,0: Get Registers ,200,OK,Readers 1-1,text,true,773,1,1,0
+1429573274408,4,0: Get Registers ,200,OK,Readers 1-1,text,true,773,1,1,0
+1429573275606,3,0: Get Registers ,200,OK,Readers 1-1,text,true,773,1,1,0
+1429573276820,17,0: Get Registers ,200,OK,Readers 1-1,text,true,773,1,1,0
+1429573278006,3,0: Get Registers ,200,OK,Readers 1-1,text,true,773,1,1,0
+1429573279204,2,0: Get Registers ,200,OK,Readers 1-1,text,true,773,1,1,0
+1429573280405,2,0: Get Registers ,200,OK,Readers 1-1,text,true,773,1,1,0
+1429573281605,3,0: Get Registers ,200,OK,Readers 1-1,text,true,773,1,1,0
+1429573282805,3,0: Get Registers ,200,OK,Readers 1-1,text,true,773,1,1,0
+1429573284005,3,0: Get Registers ,200,OK,Readers 1-1,text,true,773,1,1,0
+1429573285205,3,0: Get Registers ,200,OK,Readers 1-1,text,true,773,1,1,0
+1429573286404,2,0: Get Registers ,200,OK,Readers 1-1,text,true,773,1,1,0
+1429573287605,2,0: Get Registers ,200,OK,Readers 1-1,text,true,773,1,1,0
+1429573288805,3,0: Get Registers ,200,OK,Readers 1-1,text,true,773,1,1,0
+1429573290004,2,0: Get Registers ,200,OK,Readers 1-1,text,true,773,1,1,0
+1429573291205,3,0: Get Registers ,200,OK,Readers 1-1,text,true,773,1,1,0
+1429573292405,2,0: Get Registers ,200,OK,Readers 1-1,text,true,773,1,1,0
+1429573293606,2,0: Get Registers ,200,OK,Readers 1-1,text,true,773,1,1,0
+1429573294806,3,0: Get Registers ,200,OK,Readers 1-1,text,true,773,1,1,0
+1429573296007,3,0: Get Registers ,200,OK,Readers 1-1,text,true,773,1,1,1
+1429573297205,2,0: Get Registers ,200,OK,Readers 1-1,text,true,772,1,1,0
+1429573298404,2,0: Get Registers ,200,OK,Readers 1-1,text,true,773,1,1,0
+1429573299605,3,0: Get Registers ,200,OK,Readers 1-1,text,true,773,1,1,0
+1429573300805,3,0: Get Registers ,200,OK,Readers 1-1,text,true,773,1,1,0
+1429573302005,3,0: Get Registers ,200,OK,Readers 1-1,text,true,773,1,1,0
+1429573303204,2,0: Get Registers ,200,OK,Readers 1-1,text,true,773,1,1,0
+1429573304405,3,0: Get Registers ,200,OK,Readers 1-1,text,true,773,1,1,0
+1429573305605,3,0: Get Registers ,200,OK,Readers 1-1,text,true,772,1,1,0
+1429573306805,3,0: Get Registers ,200,OK,Readers 1-1,text,true,772,1,1,0
+1429573308005,2,0: Get Registers ,200,OK,Readers 1-1,text,true,773,1,1,0
+1429573309204,2,0: Get Registers ,200,OK,Readers 1-1,text,true,773,1,1,0
+1429573310404,2,0: Get Registers ,200,OK,Readers 1-1,text,true,773,1,1,0
+1429573311606,3,0: Get Registers ,200,OK,Readers 1-1,text,true,773,1,1,0
+1429573312805,3,0: Get Registers ,200,OK,Readers 1-1,text,true,773,1,1,0
+1429573319689,5,0: Get Registers ,000,java.lang.RuntimeException: number of arguments (4) and number in stmt (2) are not equal,Readers 1-1,text,false,855,1,2,0
+1429573321157,0,0: Get Registers ,000,java.lang.RuntimeException: number of arguments (4) and number in stmt (2) are not equal,Readers 1-1,text,false,855,1,1,0
+1429573396389,7,0: Get Registers ,000,java.lang.RuntimeException: number of arguments (4) and number in stmt (2) are not equal,Readers 1-1,text,false,855,1,2,0
+1429573398182,0,0: Get Registers ,000,java.lang.RuntimeException: number of arguments (4) and number in stmt (2) are not equal,Readers 1-1,text,false,855,1,1,0
+1429573399382,0,0: Get Registers ,000,java.lang.RuntimeException: number of arguments (4) and number in stmt (2) are not equal,Readers 1-1,text,false,855,1,1,0
+1429573408240,4,0: Get Registers ,000,java.lang.RuntimeException: number of arguments (4) and number in stmt (2) are not equal,Readers 1-1,text,false,855,1,2,0
+1429573410036,0,0: Get Registers ,000,java.lang.RuntimeException: number of arguments (4) and number in stmt (2) are not equal,Readers 1-1,text,false,855,1,1,0
+1429573410940,0,0: Get Registers ,000,java.lang.RuntimeException: number of arguments (4) and number in stmt (2) are not equal,Readers 1-1,text,false,855,1,1,0
+1429573551291,12,0: Get Registers ,000,java.lang.RuntimeException: number of arguments (3) and number in stmt (2) are not equal,Readers 1-1,text,false,867,1,2,0
+1429573552968,0,0: Get Registers ,000,java.lang.RuntimeException: number of arguments (3) and number in stmt (2) are not equal,Readers 1-1,text,false,867,1,1,0
+1429573606921,18,0: Get Registers ,200,OK,Readers 1-1,text,true,793,1,2,0
+1429573608707,2,0: Get Registers ,200,OK,Readers 1-1,text,true,793,1,1,0
+1429573609907,2,0: Get Registers ,200,OK,Readers 1-1,text,true,793,1,1,0
+1429573736908,20,0: Get Registers ,200,OK,Readers 1-1,text,true,808,1,2,0
+1429573738692,3,0: Get Registers ,200,OK,Readers 1-1,text,true,808,1,1,0
+1429573739893,3,0: Get Registers ,200,OK,Readers 1-1,text,true,804,1,1,0

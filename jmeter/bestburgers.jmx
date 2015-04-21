@@ -102,6 +102,24 @@
         <stringProp name="ThreadGroup.delay"></stringProp>
       </ThreadGroup>
       <hashTree>
+        <RandomVariableConfig guiclass="TestBeanGUI" testclass="RandomVariableConfig" testname="Random Register ID" enabled="true">
+          <stringProp name="maximumValue">10000</stringProp>
+          <stringProp name="minimumValue">1</stringProp>
+          <stringProp name="outputFormat"></stringProp>
+          <boolProp name="perThread">false</boolProp>
+          <stringProp name="randomSeed"></stringProp>
+          <stringProp name="variableName">register_id</stringProp>
+        </RandomVariableConfig>
+        <hashTree/>
+        <RandomVariableConfig guiclass="TestBeanGUI" testclass="RandomVariableConfig" testname="Random Store ID" enabled="true">
+          <stringProp name="variableName">store_id</stringProp>
+          <stringProp name="outputFormat"></stringProp>
+          <stringProp name="minimumValue">1</stringProp>
+          <stringProp name="maximumValue">10000</stringProp>
+          <stringProp name="randomSeed"></stringProp>
+          <boolProp name="perThread">false</boolProp>
+        </RandomVariableConfig>
+        <hashTree/>
         <DebugPostProcessor guiclass="TestBeanGUI" testclass="DebugPostProcessor" testname="Debug PostProcessor" enabled="true">
           <boolProp name="displayJMeterProperties">false</boolProp>
           <boolProp name="displayJMeterVariables">true</boolProp>
@@ -109,11 +127,11 @@
           <boolProp name="displaySystemProperties">false</boolProp>
         </DebugPostProcessor>
         <hashTree/>
-        <CassandraSampler guiclass="TestBeanGUI" testclass="CassandraSampler" testname="Get Registers" enabled="true">
+        <CassandraSampler guiclass="TestBeanGUI" testclass="CassandraSampler" testname="0: Get Registers " enabled="true">
           <stringProp name="batchSize"></stringProp>
           <stringProp name="consistencyLevel">LOCAL_ONE</stringProp>
           <stringProp name="query">select register_id from registers where store_id = ? and register_id = ? ALLOW FILTERING;</stringProp>
-          <stringProp name="queryArguments">${__Random(1,100)},${__Random(1,100)}</stringProp>
+          <stringProp name="queryArguments">${store_id},${register_id}</stringProp>
           <stringProp name="queryType">Prepared Statement</stringProp>
           <stringProp name="resultVariable"></stringProp>
           <stringProp name="sessionName">cluster</stringProp>
@@ -205,7 +223,7 @@
           <intProp name="calcMode">1</intProp>
         </ConstantThroughputTimer>
         <hashTree/>
-        <CassandraSampler guiclass="TestBeanGUI" testclass="CassandraSampler" testname="Get Products" enabled="true">
+        <CassandraSampler guiclass="TestBeanGUI" testclass="CassandraSampler" testname="1: Get Products" enabled="true">
           <stringProp name="batchSize"></stringProp>
           <stringProp name="consistencyLevel">LOCAL_ONE</stringProp>
           <stringProp name="query">select product_id, brand, price from products where product_id = ? ALLOW FILTERING;</stringProp>
@@ -234,10 +252,10 @@
       </ThreadGroup>
       <hashTree>
         <CassandraSampler guiclass="TestBeanGUI" testclass="CassandraSampler" testname="Create Employees" enabled="true">
-          <stringProp name="sessionName"></stringProp>
+          <stringProp name="sessionName">cluster</stringProp>
           <stringProp name="queryType">Prepared Statement</stringProp>
           <stringProp name="query">insert into employees (employee_id, first_name, last_initial, last_name, store_id) values (?,?,?,?,?);</stringProp>
-          <stringProp name="queryArguments">${__Random(1,10000)},${__Random(1,100)},${__RandomString(1)},${__RandomString(15)},${__Random(1,1000)}</stringProp>
+          <stringProp name="queryArguments">${__Random(1,10000)},Joe,B,Blow,${__Random(1,10000)}</stringProp>
           <stringProp name="variableNames"></stringProp>
           <stringProp name="resultVariable"></stringProp>
           <stringProp name="consistencyLevel">LOCAL_ONE</stringProp>
