@@ -23,8 +23,10 @@ import org.apache.spark.streaming.dstream.DStream
 trait TextSocketCapable extends CassandraCapable {
 
   val hostName = "localhost"
-  val port = 9999
-  def connectToSocket(): (DStream[String], StreamingContext, CassandraConnector) = {
+  //val port = 9999
+  val port = 5005
+ 
+ def connectToSocket(): (DStream[String], StreamingContext, CassandraConnector) = {
     val context = connect()
     val rdd: DStream[String] = context.streamingContext.socketTextStream(hostName,port)
     (rdd, context.streamingContext, context.connector)

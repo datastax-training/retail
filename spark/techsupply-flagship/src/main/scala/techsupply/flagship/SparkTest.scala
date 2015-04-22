@@ -105,7 +105,7 @@ object SparkTest extends TextSocketCapable with MetagenerCapable{
   def testSparkStreamSocket() = {
     val (socketRdd, sparkContext, connector) = connectToSocket()
 
-    val words = socketRdd.flatMap(_.split(" "))
+    val words = socketRdd.flatMap(_.split("::"))
     // Count each word in each batch
     val pairs = words.map(word => (word, 1))
     val wordCounts = pairs.reduceByKey(_ + _)
