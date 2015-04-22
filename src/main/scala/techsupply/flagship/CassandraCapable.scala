@@ -30,9 +30,14 @@ trait CassandraCapable {
   def createSparkConf(): SparkConf = {
     new SparkConf()
       .setAppName("techsupply")
-      .set("spark.cassandra.connection.host", "10.200.21.236")
-      .setMaster("spark://10.200.21.236:7077")
+      .set("spark.cassandra.connection.host", "172.16.131.140")
+      .set("spark.eventLog.enabled", "true")
+      .set("spark.eventLog.dir", "/Users/ryanknight/dse/logs/spark/eventLog")
+      .setMaster("spark://172.16.131.140:7077")
       .setJars(Array("target/scala-2.10/techsupply-flagship-assembly-0.1.0-SNAPSHOT.jar"))
+
+    //spark.cassandra.output.throughput_mb_per_sec
+    //.set("spark.cassandra.output.concurrent.writes", "1")
   }
 
   def connect(): CassandraContext = {

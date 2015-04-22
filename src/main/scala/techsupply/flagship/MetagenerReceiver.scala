@@ -21,15 +21,10 @@ import scala.concurrent.ExecutionContext.Implicits.global
 
 import scala.concurrent.duration._
 
-case class MetagenerData(minSampleId: Int, maxSampleId: Int, sampleValues: List[SV])
-
-case class SV(sampleId: Int, fieldValues: SDS)
-
-case class SDS(scan_duration_seconds: BigDecimal, scan_qty: String, product_id: String, item_discount: BigDecimal)
 
 trait MetagenerCapable extends CassandraCapable {
 
-  val metagenerTestUrl = "http://localhost:8080/bulksample/retail/retail.item_scans/1000"
+  val metagenerTestUrl = "http://10.200.21.236:8080/bulksample/retail/retail.item_scans/10"
 
   def connectToMetagener(): (DStream[MetagenerData], StreamingContext, CassandraConnector) = {
     val context = connect()
@@ -62,8 +57,6 @@ class MetagenerReceiverActor(metagenerUrl: String, storageLevel: StorageLevel)
 
   def fetchMetagenerData() {
     try {
-      logInfo("Connecting to MetagenerReceiver: " + url)
-
       import dispatch._
 
       logInfo(s"connectiong to metagener url $metagenerUrl")
