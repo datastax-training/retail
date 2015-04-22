@@ -2,5 +2,10 @@
 *.iml
 *.pyc
 cache/
+<<<<<<< HEAD
 bestburger_responses*
 target/
+=======
+target/
+.history
+>>>>>>> upstream/master

@@ -2,6 +2,9 @@ import blist
 import datetime
 import gviz_api
 import uuid
+import urllib2
+import urllib
+import json
 
 from decimal import Decimal
 from flask import Blueprint, jsonify, request
@@ -72,6 +75,30 @@ def base():
     f = {'status': 'OK'}
     return jsonify(**f)
 
+@rest_api.route('/search')
+def search():
+    # this will search the city field in the retail.zipcodes solr core
+    # the import parameter is 's'
+
+    keyword = request.args.get('s')
+
+    # parameters to solr are rows=30  wt (writer type)=json, and q=city:<keyword> sort=zipcode asc
+    parameters = urllib.urlencode({'sort':'zipcode asc', 'rows':'30', 'wt': 'json', 'q': "city:" + keyword})
+    url='http://localhost:8983/solr/retail.zipcodes/select?' + parameters
+
+    # get the response
+    response = urllib2.urlopen(url)
+
+    # fish out the docs from the solr response
+    parsed_response = json.loads(response.read())
+    docs = parsed_response['response']['docs']
+
+    # build a data table json response.  We use the gviz api which will format
+    # the data correctly for google charts
+    description = {'city':'string', 'zipcode':'string', 'long':'string','state':'string','lat':'string','uniqueKey':'string','population':'number'}
+    data_table = gviz_api.DataTable(description)
+    data_table.LoadData(docs)
+    return  data_table.ToJSon()
 
 @rest_api.route('/paging/<keyspace>/<table>/')
 def paging(keyspace=None, table=None):

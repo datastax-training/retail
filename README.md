@@ -17,12 +17,25 @@ The fourth part is what you will write.  It will be Spark Jobs that can run agai
   brew install wget
 ```
 
+2 - install brew's version of python:
+```
+  brew install python
+```
+
 3 - verify you can run python:  
 
 ```
       python
       exit()
 ```
+
+2 - install pip:
+```
+  brew install pip
+```
+
+## All platforms ##
+
 4 Install Python dependencies:
 ```
   pip install flask
@@ -46,32 +59,32 @@ Testing the library:
 9 - Run the primary project which starts up the Flask Web Project:
 ```
   cd black-friday/web
-  python application.py
+  ./run
 ```
 
 10 - Verify that the project is running locally by going to [http://localhost:5000/](http://localhost:5000/)  Only the top 3 API pages are currently running.
 
-11 - Setup DSE / Cassandra.  Under the cql directory is the schema for the database.  Import it using:
+11 - Setup DSE / Cassandra.  Under the cql directory is the schema for the database.  It's assumed that cqlsh is in your path.  Import it using:
 ```
   cd cql
-  ~/dse/bin/cqlsh -f retail.cql 127.0.0.1
+  cqlsh -f retail.cql
 ```
 
 11 - Import the data:
 ```
   cd generate_data/1.seed_zipcode_data
-  python 1.zipcodes-to-cassandra.py
+  ./1.zipcodes-to-cassandra.py
   cd ../2.seed_retail_data
   ./1.download-data.sh
-  python 2.data-to-cassandra.py
+  ./2.data-to-cassandra.py
 ```
 
 12 - Start metagener.  Open 4 tabs and run each of the following commands in a NEW terminal window.  They need to be run together in separate terminal windows.
 ```
-  ./run-metagener --yaml black-friday.yaml
-  python 4.metagener-to-cassandra-stores-employees.py
+  ./3.start-metagener.sh
+  ./4.metagener-to-cassandra-stores-employees.py
   nc -l 5005
-  python 5.metagener-to-cassandra-scan-items.py
+  ./5.metagener-to-cassandra-scan-items.py
 ```
 
 ### Project Overview ###
