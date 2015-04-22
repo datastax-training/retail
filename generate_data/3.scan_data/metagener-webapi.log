@@ -339,3 +339,990 @@ INFO  [2015-04-18 23:47:23,689] org.eclipse.jetty.server.handler.ContextHandler:
 INFO  [2015-04-18 23:47:23,697] org.eclipse.jetty.server.ServerConnector: Started application@545de5a4{HTTP/1.1}{0.0.0.0:8080}
 INFO  [2015-04-18 23:47:23,698] org.eclipse.jetty.server.ServerConnector: Started admin@29ef6856{HTTP/1.1}{0.0.0.0:8081}
 INFO  [2015-04-18 23:47:23,698] org.eclipse.jetty.server.Server: Started @1391ms
+INFO  [2015-04-20 23:23:52,764] org.eclipse.jetty.util.log: Logging initialized @1217ms
+INFO  [2015-04-20 23:23:52,841] com.metawiring.webapi.common.MetagenerWebApp: Preloading generator context 'retail' from 'black-friday.metagener'
+INFO  [2015-04-20 23:23:52,841] com.metawiring.wiring.Metagener: loading from black-friday.metagener
+INFO  [2015-04-20 23:23:52,898] com.metawiring.syntax.MetagenerDSLModelBuilder: building GenContextDef
+INFO  [2015-04-20 23:23:52,923] com.metawiring.syntax.MetagenerDSLModelBuilder: built GenContextDef
+INFO  [2015-04-20 23:23:52,934] io.dropwizard.server.ServerFactory: Starting MetagenerWebApp
+INFO  [2015-04-20 23:23:53,004] org.eclipse.jetty.setuid.SetUIDListener: Opened application@410ae9a3{HTTP/1.1}{0.0.0.0:8080}
+INFO  [2015-04-20 23:23:53,004] org.eclipse.jetty.setuid.SetUIDListener: Opened admin@319988b0{HTTP/1.1}{0.0.0.0:8081}
+INFO  [2015-04-20 23:23:53,008] org.eclipse.jetty.server.Server: jetty-9.2.z-SNAPSHOT
+INFO  [2015-04-20 23:23:53,459] io.dropwizard.jersey.DropwizardResourceConfig: The following paths were found for the configured resources:
+
+    GET     /sample/{contextName}/{samplername} (com.metawiring.webapi.resource.SampleResource)
+    GET     /sample/{contextName}/{samplername}/{sampleid} (com.metawiring.webapi.resource.SampleResource)
+    GET     /bulksample/{contextName}/{samplername}/{count} (com.metawiring.webapi.resource.BulkSampleResource)
+    GET     /context/ (com.metawiring.webapi.resource.GenContextResource)
+    GET     /context/{contextName} (com.metawiring.webapi.resource.GenContextResource)
+    POST    /context/{contextName} (com.metawiring.webapi.resource.GenContextResource)
+
+WARN  [2015-04-20 23:23:53,461] org.glassfish.jersey.internal.Errors: The following warnings have been detected: WARNING: The (sub)resource method getContextList in com.metawiring.webapi.resource.GenContextResource contains empty path annotation.
+
+INFO  [2015-04-20 23:23:53,465] org.eclipse.jetty.server.handler.ContextHandler: Started i.d.j.MutableServletContextHandler@6892cc6f{/,null,AVAILABLE}
+INFO  [2015-04-20 23:23:53,467] io.dropwizard.setup.AdminEnvironment: tasks = 
+
+    POST    /tasks/log-level (io.dropwizard.servlets.tasks.LogConfigurationTask)
+    POST    /tasks/gc (io.dropwizard.servlets.tasks.GarbageCollectionTask)
+
+INFO  [2015-04-20 23:23:53,470] org.eclipse.jetty.server.handler.ContextHandler: Started i.d.j.MutableServletContextHandler@232cce0{/,null,AVAILABLE}
+INFO  [2015-04-20 23:23:53,477] org.eclipse.jetty.server.ServerConnector: Started application@410ae9a3{HTTP/1.1}{0.0.0.0:8080}
+INFO  [2015-04-20 23:23:53,478] org.eclipse.jetty.server.ServerConnector: Started admin@319988b0{HTTP/1.1}{0.0.0.0:8081}
+INFO  [2015-04-20 23:23:53,478] org.eclipse.jetty.server.Server: Started @1932ms
+WARN  [2015-04-20 23:43:15,562] org.eclipse.jetty.server.ServerConnector: 
+! java.io.IOException: Thread signal failed
+! at sun.nio.ch.NativeThread.signal(Native Method) ~[na:1.8.0_45]
+! at sun.nio.ch.ServerSocketChannelImpl.implCloseSelectableChannel(ServerSocketChannelImpl.java:292) ~[na:1.8.0_45]
+! at java.nio.channels.spi.AbstractSelectableChannel.implCloseChannel(AbstractSelectableChannel.java:234) ~[na:1.8.0_45]
+! at java.nio.channels.spi.AbstractInterruptibleChannel.close(AbstractInterruptibleChannel.java:115) ~[na:1.8.0_45]
+! at org.eclipse.jetty.server.ServerConnector.close(ServerConnector.java:359) [metagener-webapi-1.0-SNAPSHOT.jar:1.0-SNAPSHOT]
+! at org.eclipse.jetty.server.AbstractNetworkConnector.shutdown(AbstractNetworkConnector.java:107) [metagener-webapi-1.0-SNAPSHOT.jar:1.0-SNAPSHOT]
+! at org.eclipse.jetty.server.ServerConnector.shutdown(ServerConnector.java:341) [metagener-webapi-1.0-SNAPSHOT.jar:1.0-SNAPSHOT]
+! at org.eclipse.jetty.server.Server.doStop(Server.java:404) [metagener-webapi-1.0-SNAPSHOT.jar:1.0-SNAPSHOT]
+! at org.eclipse.jetty.util.component.AbstractLifeCycle.stop(AbstractLifeCycle.java:89) [metagener-webapi-1.0-SNAPSHOT.jar:1.0-SNAPSHOT]
+! at org.eclipse.jetty.util.thread.ShutdownThread.run(ShutdownThread.java:138) [metagener-webapi-1.0-SNAPSHOT.jar:1.0-SNAPSHOT]
+INFO  [2015-04-20 23:43:15,565] org.eclipse.jetty.server.ServerConnector: Stopped application@410ae9a3{HTTP/1.1}{0.0.0.0:8080}
+INFO  [2015-04-20 23:43:15,565] org.eclipse.jetty.server.ServerConnector: Stopped admin@319988b0{HTTP/1.1}{0.0.0.0:8081}
+INFO  [2015-04-20 23:43:15,567] org.eclipse.jetty.server.handler.ContextHandler: Stopped i.d.j.MutableServletContextHandler@232cce0{/,null,UNAVAILABLE}
+INFO  [2015-04-20 23:43:15,569] org.eclipse.jetty.server.handler.ContextHandler: Stopped i.d.j.MutableServletContextHandler@6892cc6f{/,null,UNAVAILABLE}
+INFO  [2015-04-21 19:31:16,419] org.eclipse.jetty.util.log: Logging initialized @1200ms
+INFO  [2015-04-21 19:31:16,492] com.metawiring.webapi.common.MetagenerWebApp: Preloading generator context 'retail' from 'black-friday.metagener'
+INFO  [2015-04-21 19:31:16,493] com.metawiring.wiring.Metagener: loading from black-friday.metagener
+INFO  [2015-04-21 19:31:16,553] com.metawiring.syntax.MetagenerDSLModelBuilder: building GenContextDef
+INFO  [2015-04-21 19:31:16,581] com.metawiring.syntax.MetagenerDSLModelBuilder: built GenContextDef
+INFO  [2015-04-21 19:31:16,591] io.dropwizard.server.ServerFactory: Starting MetagenerWebApp
+INFO  [2015-04-21 19:31:16,671] org.eclipse.jetty.setuid.SetUIDListener: Opened application@410ae9a3{HTTP/1.1}{0.0.0.0:8080}
+INFO  [2015-04-21 19:31:16,671] org.eclipse.jetty.setuid.SetUIDListener: Opened admin@319988b0{HTTP/1.1}{0.0.0.0:8081}
+INFO  [2015-04-21 19:31:16,675] org.eclipse.jetty.server.Server: jetty-9.2.z-SNAPSHOT
+INFO  [2015-04-21 19:31:17,116] io.dropwizard.jersey.DropwizardResourceConfig: The following paths were found for the configured resources:
+
+    GET     /sample/{contextName}/{samplername} (com.metawiring.webapi.resource.SampleResource)
+    GET     /sample/{contextName}/{samplername}/{sampleid} (com.metawiring.webapi.resource.SampleResource)
+    GET     /bulksample/{contextName}/{samplername}/{count} (com.metawiring.webapi.resource.BulkSampleResource)
+    GET     /context/ (com.metawiring.webapi.resource.GenContextResource)
+    GET     /context/{contextName} (com.metawiring.webapi.resource.GenContextResource)
+    POST    /context/{contextName} (com.metawiring.webapi.resource.GenContextResource)
+
+WARN  [2015-04-21 19:31:17,117] org.glassfish.jersey.internal.Errors: The following warnings have been detected: WARNING: The (sub)resource method getContextList in com.metawiring.webapi.resource.GenContextResource contains empty path annotation.
+
+INFO  [2015-04-21 19:31:17,121] org.eclipse.jetty.server.handler.ContextHandler: Started i.d.j.MutableServletContextHandler@6892cc6f{/,null,AVAILABLE}
+INFO  [2015-04-21 19:31:17,123] io.dropwizard.setup.AdminEnvironment: tasks = 
+
+    POST    /tasks/log-level (io.dropwizard.servlets.tasks.LogConfigurationTask)
+    POST    /tasks/gc (io.dropwizard.servlets.tasks.GarbageCollectionTask)
+
+INFO  [2015-04-21 19:31:17,127] org.eclipse.jetty.server.handler.ContextHandler: Started i.d.j.MutableServletContextHandler@232cce0{/,null,AVAILABLE}
+INFO  [2015-04-21 19:31:17,134] org.eclipse.jetty.server.ServerConnector: Started application@410ae9a3{HTTP/1.1}{0.0.0.0:8080}
+INFO  [2015-04-21 19:31:17,134] org.eclipse.jetty.server.ServerConnector: Started admin@319988b0{HTTP/1.1}{0.0.0.0:8081}
+INFO  [2015-04-21 19:31:17,134] org.eclipse.jetty.server.Server: Started @1917ms
+INFO  [2015-04-21 19:45:53,169] org.eclipse.jetty.util.log: Logging initialized @842ms
+INFO  [2015-04-21 19:45:53,213] com.metawiring.webapi.common.MetagenerWebApp: Preloading generator context 'retail' from 'black-friday.metagener'
+INFO  [2015-04-21 19:45:53,214] com.metawiring.wiring.Metagener: loading from black-friday.metagener
+INFO  [2015-04-21 19:45:53,262] com.metawiring.syntax.MetagenerDSLModelBuilder: building GenContextDef
+INFO  [2015-04-21 19:45:53,285] com.metawiring.syntax.MetagenerDSLModelBuilder: built GenContextDef
+INFO  [2015-04-21 19:45:53,291] io.dropwizard.server.ServerFactory: Starting MetagenerWebApp
+WARN  [2015-04-21 19:45:53,336] org.eclipse.jetty.util.component.AbstractLifeCycle: FAILED org.eclipse.jetty.server.Server@2f058b8a: java.lang.RuntimeException: java.net.BindException: Address already in use
+! java.net.BindException: Address already in use
+! at sun.nio.ch.Net.bind0(Native Method) ~[na:1.8.0_45]
+! at sun.nio.ch.Net.bind(Net.java:437) ~[na:1.8.0_45]
+! at sun.nio.ch.Net.bind(Net.java:429) ~[na:1.8.0_45]
+! at sun.nio.ch.ServerSocketChannelImpl.bind(ServerSocketChannelImpl.java:223) ~[na:1.8.0_45]
+! at sun.nio.ch.ServerSocketAdaptor.bind(ServerSocketAdaptor.java:74) ~[na:1.8.0_45]
+! at org.eclipse.jetty.server.ServerConnector.open(ServerConnector.java:321) ~[metagener-webapi-1.0-SNAPSHOT.jar:1.0-SNAPSHOT]
+! at org.eclipse.jetty.setuid.SetUIDListener.lifeCycleStarting(SetUIDListener.java:200) ~[metagener-webapi-1.0-SNAPSHOT.jar:1.0-SNAPSHOT]
+! ... 8 common frames omitted
+! Causing: java.lang.RuntimeException: java.net.BindException: Address already in use
+! at org.eclipse.jetty.setuid.SetUIDListener.lifeCycleStarting(SetUIDListener.java:213) ~[metagener-webapi-1.0-SNAPSHOT.jar:1.0-SNAPSHOT]
+! at org.eclipse.jetty.util.component.AbstractLifeCycle.setStarting(AbstractLifeCycle.java:188) ~[metagener-webapi-1.0-SNAPSHOT.jar:1.0-SNAPSHOT]
+! at org.eclipse.jetty.util.component.AbstractLifeCycle.start(AbstractLifeCycle.java:67) ~[metagener-webapi-1.0-SNAPSHOT.jar:1.0-SNAPSHOT]
+! at io.dropwizard.cli.ServerCommand.run(ServerCommand.java:43) [metagener-webapi-1.0-SNAPSHOT.jar:1.0-SNAPSHOT]
+! at io.dropwizard.cli.EnvironmentCommand.run(EnvironmentCommand.java:43) [metagener-webapi-1.0-SNAPSHOT.jar:1.0-SNAPSHOT]
+! at io.dropwizard.cli.ConfiguredCommand.run(ConfiguredCommand.java:76) [metagener-webapi-1.0-SNAPSHOT.jar:1.0-SNAPSHOT]
+! at io.dropwizard.cli.Cli.run(Cli.java:70) [metagener-webapi-1.0-SNAPSHOT.jar:1.0-SNAPSHOT]
+! at io.dropwizard.Application.run(Application.java:73) [metagener-webapi-1.0-SNAPSHOT.jar:1.0-SNAPSHOT]
+! at com.metawiring.webapi.common.MetagenerWebApp.main(MetagenerWebApp.java:24) [metagener-webapi-1.0-SNAPSHOT.jar:1.0-SNAPSHOT]
+ERROR [2015-04-21 19:45:53,336] io.dropwizard.cli.ServerCommand: Unable to start server, shutting down
+! java.net.BindException: Address already in use
+! at sun.nio.ch.Net.bind0(Native Method) ~[na:1.8.0_45]
+! at sun.nio.ch.Net.bind(Net.java:437) ~[na:1.8.0_45]
+! at sun.nio.ch.Net.bind(Net.java:429) ~[na:1.8.0_45]
+! at sun.nio.ch.ServerSocketChannelImpl.bind(ServerSocketChannelImpl.java:223) ~[na:1.8.0_45]
+! at sun.nio.ch.ServerSocketAdaptor.bind(ServerSocketAdaptor.java:74) ~[na:1.8.0_45]
+! at org.eclipse.jetty.server.ServerConnector.open(ServerConnector.java:321) ~[metagener-webapi-1.0-SNAPSHOT.jar:1.0-SNAPSHOT]
+! at org.eclipse.jetty.setuid.SetUIDListener.lifeCycleStarting(SetUIDListener.java:200) ~[metagener-webapi-1.0-SNAPSHOT.jar:1.0-SNAPSHOT]
+! ... 8 common frames omitted
+! Causing: java.lang.RuntimeException: java.net.BindException: Address already in use
+! at org.eclipse.jetty.setuid.SetUIDListener.lifeCycleStarting(SetUIDListener.java:213) ~[metagener-webapi-1.0-SNAPSHOT.jar:1.0-SNAPSHOT]
+! at org.eclipse.jetty.util.component.AbstractLifeCycle.setStarting(AbstractLifeCycle.java:188) ~[metagener-webapi-1.0-SNAPSHOT.jar:1.0-SNAPSHOT]
+! at org.eclipse.jetty.util.component.AbstractLifeCycle.start(AbstractLifeCycle.java:67) ~[metagener-webapi-1.0-SNAPSHOT.jar:1.0-SNAPSHOT]
+! at io.dropwizard.cli.ServerCommand.run(ServerCommand.java:43) ~[metagener-webapi-1.0-SNAPSHOT.jar:1.0-SNAPSHOT]
+! at io.dropwizard.cli.EnvironmentCommand.run(EnvironmentCommand.java:43) [metagener-webapi-1.0-SNAPSHOT.jar:1.0-SNAPSHOT]
+! at io.dropwizard.cli.ConfiguredCommand.run(ConfiguredCommand.java:76) [metagener-webapi-1.0-SNAPSHOT.jar:1.0-SNAPSHOT]
+! at io.dropwizard.cli.Cli.run(Cli.java:70) [metagener-webapi-1.0-SNAPSHOT.jar:1.0-SNAPSHOT]
+! at io.dropwizard.Application.run(Application.java:73) [metagener-webapi-1.0-SNAPSHOT.jar:1.0-SNAPSHOT]
+! at com.metawiring.webapi.common.MetagenerWebApp.main(MetagenerWebApp.java:24) [metagener-webapi-1.0-SNAPSHOT.jar:1.0-SNAPSHOT]
+INFO  [2015-04-21 19:49:09,753] org.eclipse.jetty.server.ServerConnector: Stopped application@410ae9a3{HTTP/1.1}{0.0.0.0:8080}
+INFO  [2015-04-21 19:49:09,753] org.eclipse.jetty.server.ServerConnector: Stopped admin@319988b0{HTTP/1.1}{0.0.0.0:8081}
+INFO  [2015-04-21 19:49:09,754] org.eclipse.jetty.server.handler.ContextHandler: Stopped i.d.j.MutableServletContextHandler@232cce0{/,null,UNAVAILABLE}
+INFO  [2015-04-21 19:49:09,757] org.eclipse.jetty.server.handler.ContextHandler: Stopped i.d.j.MutableServletContextHandler@6892cc6f{/,null,UNAVAILABLE}
+INFO  [2015-04-21 19:51:02,359] org.eclipse.jetty.util.log: Logging initialized @844ms
+INFO  [2015-04-21 19:51:02,404] com.metawiring.webapi.common.MetagenerWebApp: Preloading generator context 'retail' from 'black-friday.metagener'
+INFO  [2015-04-21 19:51:02,404] com.metawiring.wiring.Metagener: loading from black-friday.metagener
+INFO  [2015-04-21 19:51:02,437] com.metawiring.syntax.MetagenerDSLModelBuilder: building GenContextDef
+INFO  [2015-04-21 19:51:02,459] com.metawiring.syntax.MetagenerDSLModelBuilder: built GenContextDef
+INFO  [2015-04-21 19:51:02,465] io.dropwizard.server.ServerFactory: Starting MetagenerWebApp
+INFO  [2015-04-21 19:51:02,509] org.eclipse.jetty.setuid.SetUIDListener: Opened application@410ae9a3{HTTP/1.1}{0.0.0.0:8080}
+INFO  [2015-04-21 19:51:02,509] org.eclipse.jetty.setuid.SetUIDListener: Opened admin@319988b0{HTTP/1.1}{0.0.0.0:8081}
+INFO  [2015-04-21 19:51:02,511] org.eclipse.jetty.server.Server: jetty-9.2.z-SNAPSHOT
+INFO  [2015-04-21 19:51:02,854] io.dropwizard.jersey.DropwizardResourceConfig: The following paths were found for the configured resources:
+
+    GET     /sample/{contextName}/{samplername} (com.metawiring.webapi.resource.SampleResource)
+    GET     /sample/{contextName}/{samplername}/{sampleid} (com.metawiring.webapi.resource.SampleResource)
+    GET     /bulksample/{contextName}/{samplername}/{count} (com.metawiring.webapi.resource.BulkSampleResource)
+    GET     /context/ (com.metawiring.webapi.resource.GenContextResource)
+    GET     /context/{contextName} (com.metawiring.webapi.resource.GenContextResource)
+    POST    /context/{contextName} (com.metawiring.webapi.resource.GenContextResource)
+
+WARN  [2015-04-21 19:51:02,855] org.glassfish.jersey.internal.Errors: The following warnings have been detected: WARNING: The (sub)resource method getContextList in com.metawiring.webapi.resource.GenContextResource contains empty path annotation.
+
+INFO  [2015-04-21 19:51:02,858] org.eclipse.jetty.server.handler.ContextHandler: Started i.d.j.MutableServletContextHandler@6892cc6f{/,null,AVAILABLE}
+INFO  [2015-04-21 19:51:02,860] io.dropwizard.setup.AdminEnvironment: tasks = 
+
+    POST    /tasks/log-level (io.dropwizard.servlets.tasks.LogConfigurationTask)
+    POST    /tasks/gc (io.dropwizard.servlets.tasks.GarbageCollectionTask)
+
+INFO  [2015-04-21 19:51:02,863] org.eclipse.jetty.server.handler.ContextHandler: Started i.d.j.MutableServletContextHandler@232cce0{/,null,AVAILABLE}
+INFO  [2015-04-21 19:51:02,869] org.eclipse.jetty.server.ServerConnector: Started application@410ae9a3{HTTP/1.1}{0.0.0.0:8080}
+INFO  [2015-04-21 19:51:02,870] org.eclipse.jetty.server.ServerConnector: Started admin@319988b0{HTTP/1.1}{0.0.0.0:8081}
+INFO  [2015-04-21 19:51:02,870] org.eclipse.jetty.server.Server: Started @1356ms
+ERROR [2015-04-21 19:55:54,798] io.dropwizard.jersey.errors.LoggingExceptionMapper: Error handling a request: bdac86861f02e059
+! java.lang.RuntimeException: Undefined samplerDef [retailnew.products]
+! at com.metawiring.wiring.GenContext.createEntitySampler(GenContext.java:50) ~[metagener-webapi-1.0-SNAPSHOT.jar:1.0-SNAPSHOT]
+! at com.metawiring.wiring.GenContext.getEntitySampleStream(GenContext.java:38) ~[metagener-webapi-1.0-SNAPSHOT.jar:1.0-SNAPSHOT]
+! at com.metawiring.webapi.resource.BulkSampleResource.getNextSampleValue(BulkSampleResource.java:38) ~[metagener-webapi-1.0-SNAPSHOT.jar:1.0-SNAPSHOT]
+! at sun.reflect.GeneratedMethodAccessor16.invoke(Unknown Source) ~[na:na]
+! at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[na:1.8.0_45]
+! at java.lang.reflect.Method.invoke(Method.java:497) ~[na:1.8.0_45]
+! at org.glassfish.jersey.server.model.internal.ResourceMethodInvocationHandlerFactory$1.invoke(ResourceMethodInvocationHandlerFactory.java:81) ~[metagener-webapi-1.0-SNAPSHOT.jar:1.0-SNAPSHOT]
+! at org.glassfish.jersey.server.model.internal.AbstractJavaResourceMethodDispatcher$1.run(AbstractJavaResourceMethodDispatcher.java:151) ~[metagener-webapi-1.0-SNAPSHOT.jar:1.0-SNAPSHOT]
+! at org.glassfish.jersey.server.model.internal.AbstractJavaResourceMethodDispatcher.invoke(AbstractJavaResourceMethodDispatcher.java:172) ~[metagener-webapi-1.0-SNAPSHOT.jar:1.0-SNAPSHOT]
+! at org.glassfish.jersey.server.model.internal.JavaResourceMethodDispatcherProvider$TypeOutInvoker.doDispatch(JavaResourceMethodDispatcherProvider.java:195) ~[metagener-webapi-1.0-SNAPSHOT.jar:1.0-SNAPSHOT]
+! at org.glassfish.jersey.server.model.internal.AbstractJavaResourceMethodDispatcher.dispatch(AbstractJavaResourceMethodDispatcher.java:104) ~[metagener-webapi-1.0-SNAPSHOT.jar:1.0-SNAPSHOT]
+! at org.glassfish.jersey.server.model.ResourceMethodInvoker.invoke(ResourceMethodInvoker.java:384) ~[metagener-webapi-1.0-SNAPSHOT.jar:1.0-SNAPSHOT]
+! at org.glassfish.jersey.server.model.ResourceMethodInvoker.apply(ResourceMethodInvoker.java:342) ~[metagener-webapi-1.0-SNAPSHOT.jar:1.0-SNAPSHOT]
+! at org.glassfish.jersey.server.model.ResourceMethodInvoker.apply(ResourceMethodInvoker.java:101) ~[metagener-webapi-1.0-SNAPSHOT.jar:1.0-SNAPSHOT]
+! at org.glassfish.jersey.server.ServerRuntime$2.run(ServerRuntime.java:303) ~[metagener-webapi-1.0-SNAPSHOT.jar:1.0-SNAPSHOT]
+! at org.glassfish.jersey.internal.Errors$1.call(Errors.java:271) [metagener-webapi-1.0-SNAPSHOT.jar:1.0-SNAPSHOT]
+! at org.glassfish.jersey.internal.Errors$1.call(Errors.java:267) [metagener-webapi-1.0-SNAPSHOT.jar:1.0-SNAPSHOT]
+! at org.glassfish.jersey.internal.Errors.process(Errors.java:315) [metagener-webapi-1.0-SNAPSHOT.jar:1.0-SNAPSHOT]
+! at org.glassfish.jersey.internal.Errors.process(Errors.java:297) [metagener-webapi-1.0-SNAPSHOT.jar:1.0-SNAPSHOT]
+! at org.glassfish.jersey.internal.Errors.process(Errors.java:267) [metagener-webapi-1.0-SNAPSHOT.jar:1.0-SNAPSHOT]
+! at org.glassfish.jersey.process.internal.RequestScope.runInScope(RequestScope.java:316) [metagener-webapi-1.0-SNAPSHOT.jar:1.0-SNAPSHOT]
+! at org.glassfish.jersey.server.ServerRuntime.process(ServerRuntime.java:286) [metagener-webapi-1.0-SNAPSHOT.jar:1.0-SNAPSHOT]
+! at org.glassfish.jersey.server.ApplicationHandler.handle(ApplicationHandler.java:1073) [metagener-webapi-1.0-SNAPSHOT.jar:1.0-SNAPSHOT]
+! at org.glassfish.jersey.servlet.WebComponent.service(WebComponent.java:377) [metagener-webapi-1.0-SNAPSHOT.jar:1.0-SNAPSHOT]
+! at org.glassfish.jersey.servlet.ServletContainer.service(ServletContainer.java:381) [metagener-webapi-1.0-SNAPSHOT.jar:1.0-SNAPSHOT]
+! at org.glassfish.jersey.servlet.ServletContainer.service(ServletContainer.java:344) [metagener-webapi-1.0-SNAPSHOT.jar:1.0-SNAPSHOT]
+! at org.glassfish.jersey.servlet.ServletContainer.service(ServletContainer.java:221) [metagener-webapi-1.0-SNAPSHOT.jar:1.0-SNAPSHOT]
+! at io.dropwizard.jetty.NonblockingServletHolder.handle(NonblockingServletHolder.java:49) [metagener-webapi-1.0-SNAPSHOT.jar:1.0-SNAPSHOT]
+! at org.eclipse.jetty.servlet.ServletHandler$CachedChain.doFilter(ServletHandler.java:1669) [metagener-webapi-1.0-SNAPSHOT.jar:1.0-SNAPSHOT]
+! at org.eclipse.jetty.servlets.UserAgentFilter.doFilter(UserAgentFilter.java:83) [metagener-webapi-1.0-SNAPSHOT.jar:1.0-SNAPSHOT]
+! at org.eclipse.jetty.servlets.GzipFilter.doFilter(GzipFilter.java:364) [metagener-webapi-1.0-SNAPSHOT.jar:1.0-SNAPSHOT]
+! at io.dropwizard.jetty.BiDiGzipFilter.doFilter(BiDiGzipFilter.java:134) [metagener-webapi-1.0-SNAPSHOT.jar:1.0-SNAPSHOT]
+! at org.eclipse.jetty.servlet.ServletHandler$CachedChain.doFilter(ServletHandler.java:1652) [metagener-webapi-1.0-SNAPSHOT.jar:1.0-SNAPSHOT]
+! at io.dropwizard.servlets.ThreadNameFilter.doFilter(ThreadNameFilter.java:29) [metagener-webapi-1.0-SNAPSHOT.jar:1.0-SNAPSHOT]
+! at org.eclipse.jetty.servlet.ServletHandler$CachedChain.doFilter(ServletHandler.java:1652) [metagener-webapi-1.0-SNAPSHOT.jar:1.0-SNAPSHOT]
+! at io.dropwizard.jersey.filter.AllowedMethodsFilter.handle(AllowedMethodsFilter.java:44) [metagener-webapi-1.0-SNAPSHOT.jar:1.0-SNAPSHOT]
+! at io.dropwizard.jersey.filter.AllowedMethodsFilter.doFilter(AllowedMethodsFilter.java:39) [metagener-webapi-1.0-SNAPSHOT.jar:1.0-SNAPSHOT]
+! at org.eclipse.jetty.servlet.ServletHandler$CachedChain.doFilter(ServletHandler.java:1652) [metagener-webapi-1.0-SNAPSHOT.jar:1.0-SNAPSHOT]
+! at org.eclipse.jetty.servlet.ServletHandler.doHandle(ServletHandler.java:585) [metagener-webapi-1.0-SNAPSHOT.jar:1.0-SNAPSHOT]
+! at org.eclipse.jetty.server.handler.ContextHandler.doHandle(ContextHandler.java:1125) [metagener-webapi-1.0-SNAPSHOT.jar:1.0-SNAPSHOT]
+! at org.eclipse.jetty.servlet.ServletHandler.doScope(ServletHandler.java:515) [metagener-webapi-1.0-SNAPSHOT.jar:1.0-SNAPSHOT]
+! at org.eclipse.jetty.server.handler.ContextHandler.doScope(ContextHandler.java:1059) [metagener-webapi-1.0-SNAPSHOT.jar:1.0-SNAPSHOT]
+! at org.eclipse.jetty.server.handler.ScopedHandler.handle(ScopedHandler.java:141) [metagener-webapi-1.0-SNAPSHOT.jar:1.0-SNAPSHOT]
+! at org.eclipse.jetty.server.handler.HandlerWrapper.handle(HandlerWrapper.java:97) [metagener-webapi-1.0-SNAPSHOT.jar:1.0-SNAPSHOT]
+! at com.codahale.metrics.jetty9.InstrumentedHandler.handle(InstrumentedHandler.java:190) [metagener-webapi-1.0-SNAPSHOT.jar:1.0-SNAPSHOT]
+! at io.dropwizard.jetty.RoutingHandler.handle(RoutingHandler.java:51) [metagener-webapi-1.0-SNAPSHOT.jar:1.0-SNAPSHOT]
+! at org.eclipse.jetty.server.handler.HandlerWrapper.handle(HandlerWrapper.java:97) [metagener-webapi-1.0-SNAPSHOT.jar:1.0-SNAPSHOT]
+! at org.eclipse.jetty.server.handler.RequestLogHandler.handle(RequestLogHandler.java:95) [metagener-webapi-1.0-SNAPSHOT.jar:1.0-SNAPSHOT]
+! at org.eclipse.jetty.server.handler.HandlerWrapper.handle(HandlerWrapper.java:97) [metagener-webapi-1.0-SNAPSHOT.jar:1.0-SNAPSHOT]
+! at org.eclipse.jetty.server.handler.StatisticsHandler.handle(StatisticsHandler.java:159) [metagener-webapi-1.0-SNAPSHOT.jar:1.0-SNAPSHOT]
+! at org.eclipse.jetty.server.handler.HandlerWrapper.handle(HandlerWrapper.java:97) [metagener-webapi-1.0-SNAPSHOT.jar:1.0-SNAPSHOT]
+! at org.eclipse.jetty.server.Server.handle(Server.java:497) [metagener-webapi-1.0-SNAPSHOT.jar:1.0-SNAPSHOT]
+! at org.eclipse.jetty.server.HttpChannel.handle(HttpChannel.java:313) [metagener-webapi-1.0-SNAPSHOT.jar:1.0-SNAPSHOT]
+! at org.eclipse.jetty.server.HttpConnection.onFillable(HttpConnection.java:248) [metagener-webapi-1.0-SNAPSHOT.jar:1.0-SNAPSHOT]
+! at org.eclipse.jetty.io.AbstractConnection$2.run(AbstractConnection.java:540) [metagener-webapi-1.0-SNAPSHOT.jar:1.0-SNAPSHOT]
+! at org.eclipse.jetty.util.thread.QueuedThreadPool.runJob(QueuedThreadPool.java:626) [metagener-webapi-1.0-SNAPSHOT.jar:1.0-SNAPSHOT]
+! at org.eclipse.jetty.util.thread.QueuedThreadPool$3.run(QueuedThreadPool.java:546) [metagener-webapi-1.0-SNAPSHOT.jar:1.0-SNAPSHOT]
+! at java.lang.Thread.run(Thread.java:745) [na:1.8.0_45]
+ERROR [2015-04-21 19:56:20,867] io.dropwizard.jersey.errors.LoggingExceptionMapper: Error handling a request: d1c17dbe1223cf98
+! java.lang.RuntimeException: Undefined samplerDef [retailnew.orders_by_store]
+! at com.metawiring.wiring.GenContext.createEntitySampler(GenContext.java:50) ~[metagener-webapi-1.0-SNAPSHOT.jar:1.0-SNAPSHOT]
+! at com.metawiring.wiring.GenContext.getEntitySampleStream(GenContext.java:38) ~[metagener-webapi-1.0-SNAPSHOT.jar:1.0-SNAPSHOT]
+! at com.metawiring.webapi.resource.BulkSampleResource.getNextSampleValue(BulkSampleResource.java:38) ~[metagener-webapi-1.0-SNAPSHOT.jar:1.0-SNAPSHOT]
+! at sun.reflect.GeneratedMethodAccessor16.invoke(Unknown Source) ~[na:na]
+! at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[na:1.8.0_45]
+! at java.lang.reflect.Method.invoke(Method.java:497) ~[na:1.8.0_45]
+! at org.glassfish.jersey.server.model.internal.ResourceMethodInvocationHandlerFactory$1.invoke(ResourceMethodInvocationHandlerFactory.java:81) ~[metagener-webapi-1.0-SNAPSHOT.jar:1.0-SNAPSHOT]
+! at org.glassfish.jersey.server.model.internal.AbstractJavaResourceMethodDispatcher$1.run(AbstractJavaResourceMethodDispatcher.java:151) ~[metagener-webapi-1.0-SNAPSHOT.jar:1.0-SNAPSHOT]
+! at org.glassfish.jersey.server.model.internal.AbstractJavaResourceMethodDispatcher.invoke(AbstractJavaResourceMethodDispatcher.java:172) ~[metagener-webapi-1.0-SNAPSHOT.jar:1.0-SNAPSHOT]
+! at org.glassfish.jersey.server.model.internal.JavaResourceMethodDispatcherProvider$TypeOutInvoker.doDispatch(JavaResourceMethodDispatcherProvider.java:195) ~[metagener-webapi-1.0-SNAPSHOT.jar:1.0-SNAPSHOT]
+! at org.glassfish.jersey.server.model.internal.AbstractJavaResourceMethodDispatcher.dispatch(AbstractJavaResourceMethodDispatcher.java:104) ~[metagener-webapi-1.0-SNAPSHOT.jar:1.0-SNAPSHOT]
+! at org.glassfish.jersey.server.model.ResourceMethodInvoker.invoke(ResourceMethodInvoker.java:384) ~[metagener-webapi-1.0-SNAPSHOT.jar:1.0-SNAPSHOT]
+! at org.glassfish.jersey.server.model.ResourceMethodInvoker.apply(ResourceMethodInvoker.java:342) ~[metagener-webapi-1.0-SNAPSHOT.jar:1.0-SNAPSHOT]
+! at org.glassfish.jersey.server.model.ResourceMethodInvoker.apply(ResourceMethodInvoker.java:101) ~[metagener-webapi-1.0-SNAPSHOT.jar:1.0-SNAPSHOT]
+! at org.glassfish.jersey.server.ServerRuntime$2.run(ServerRuntime.java:303) ~[metagener-webapi-1.0-SNAPSHOT.jar:1.0-SNAPSHOT]
+! at org.glassfish.jersey.internal.Errors$1.call(Errors.java:271) [metagener-webapi-1.0-SNAPSHOT.jar:1.0-SNAPSHOT]
+! at org.glassfish.jersey.internal.Errors$1.call(Errors.java:267) [metagener-webapi-1.0-SNAPSHOT.jar:1.0-SNAPSHOT]
+! at org.glassfish.jersey.internal.Errors.process(Errors.java:315) [metagener-webapi-1.0-SNAPSHOT.jar:1.0-SNAPSHOT]
+! at org.glassfish.jersey.internal.Errors.process(Errors.java:297) [metagener-webapi-1.0-SNAPSHOT.jar:1.0-SNAPSHOT]
+! at org.glassfish.jersey.internal.Errors.process(Errors.java:267) [metagener-webapi-1.0-SNAPSHOT.jar:1.0-SNAPSHOT]
+! at org.glassfish.jersey.process.internal.RequestScope.runInScope(RequestScope.java:316) [metagener-webapi-1.0-SNAPSHOT.jar:1.0-SNAPSHOT]
+! at org.glassfish.jersey.server.ServerRuntime.process(ServerRuntime.java:286) [metagener-webapi-1.0-SNAPSHOT.jar:1.0-SNAPSHOT]
+! at org.glassfish.jersey.server.ApplicationHandler.handle(ApplicationHandler.java:1073) [metagener-webapi-1.0-SNAPSHOT.jar:1.0-SNAPSHOT]
+! at org.glassfish.jersey.servlet.WebComponent.service(WebComponent.java:377) [metagener-webapi-1.0-SNAPSHOT.jar:1.0-SNAPSHOT]
+! at org.glassfish.jersey.servlet.ServletContainer.service(ServletContainer.java:381) [metagener-webapi-1.0-SNAPSHOT.jar:1.0-SNAPSHOT]
+! at org.glassfish.jersey.servlet.ServletContainer.service(ServletContainer.java:344) [metagener-webapi-1.0-SNAPSHOT.jar:1.0-SNAPSHOT]
+! at org.glassfish.jersey.servlet.ServletContainer.service(ServletContainer.java:221) [metagener-webapi-1.0-SNAPSHOT.jar:1.0-SNAPSHOT]
+! at io.dropwizard.jetty.NonblockingServletHolder.handle(NonblockingServletHolder.java:49) [metagener-webapi-1.0-SNAPSHOT.jar:1.0-SNAPSHOT]
+! at org.eclipse.jetty.servlet.ServletHandler$CachedChain.doFilter(ServletHandler.java:1669) [metagener-webapi-1.0-SNAPSHOT.jar:1.0-SNAPSHOT]
+! at org.eclipse.jetty.servlets.UserAgentFilter.doFilter(UserAgentFilter.java:83) [metagener-webapi-1.0-SNAPSHOT.jar:1.0-SNAPSHOT]
+! at org.eclipse.jetty.servlets.GzipFilter.doFilter(GzipFilter.java:364) [metagener-webapi-1.0-SNAPSHOT.jar:1.0-SNAPSHOT]
+! at io.dropwizard.jetty.BiDiGzipFilter.doFilter(BiDiGzipFilter.java:134) [metagener-webapi-1.0-SNAPSHOT.jar:1.0-SNAPSHOT]
+! at org.eclipse.jetty.servlet.ServletHandler$CachedChain.doFilter(ServletHandler.java:1652) [metagener-webapi-1.0-SNAPSHOT.jar:1.0-SNAPSHOT]
+! at io.dropwizard.servlets.ThreadNameFilter.doFilter(ThreadNameFilter.java:29) [metagener-webapi-1.0-SNAPSHOT.jar:1.0-SNAPSHOT]
+! at org.eclipse.jetty.servlet.ServletHandler$CachedChain.doFilter(ServletHandler.java:1652) [metagener-webapi-1.0-SNAPSHOT.jar:1.0-SNAPSHOT]
+! at io.dropwizard.jersey.filter.AllowedMethodsFilter.handle(AllowedMethodsFilter.java:44) [metagener-webapi-1.0-SNAPSHOT.jar:1.0-SNAPSHOT]
+! at io.dropwizard.jersey.filter.AllowedMethodsFilter.doFilter(AllowedMethodsFilter.java:39) [metagener-webapi-1.0-SNAPSHOT.jar:1.0-SNAPSHOT]
+! at org.eclipse.jetty.servlet.ServletHandler$CachedChain.doFilter(ServletHandler.java:1652) [metagener-webapi-1.0-SNAPSHOT.jar:1.0-SNAPSHOT]
+! at org.eclipse.jetty.servlet.ServletHandler.doHandle(ServletHandler.java:585) [metagener-webapi-1.0-SNAPSHOT.jar:1.0-SNAPSHOT]
+! at org.eclipse.jetty.server.handler.ContextHandler.doHandle(ContextHandler.java:1125) [metagener-webapi-1.0-SNAPSHOT.jar:1.0-SNAPSHOT]
+! at org.eclipse.jetty.servlet.ServletHandler.doScope(ServletHandler.java:515) [metagener-webapi-1.0-SNAPSHOT.jar:1.0-SNAPSHOT]
+! at org.eclipse.jetty.server.handler.ContextHandler.doScope(ContextHandler.java:1059) [metagener-webapi-1.0-SNAPSHOT.jar:1.0-SNAPSHOT]
+! at org.eclipse.jetty.server.handler.ScopedHandler.handle(ScopedHandler.java:141) [metagener-webapi-1.0-SNAPSHOT.jar:1.0-SNAPSHOT]
+! at org.eclipse.jetty.server.handler.HandlerWrapper.handle(HandlerWrapper.java:97) [metagener-webapi-1.0-SNAPSHOT.jar:1.0-SNAPSHOT]
+! at com.codahale.metrics.jetty9.InstrumentedHandler.handle(InstrumentedHandler.java:190) [metagener-webapi-1.0-SNAPSHOT.jar:1.0-SNAPSHOT]
+! at io.dropwizard.jetty.RoutingHandler.handle(RoutingHandler.java:51) [metagener-webapi-1.0-SNAPSHOT.jar:1.0-SNAPSHOT]
+! at org.eclipse.jetty.server.handler.HandlerWrapper.handle(HandlerWrapper.java:97) [metagener-webapi-1.0-SNAPSHOT.jar:1.0-SNAPSHOT]
+! at org.eclipse.jetty.server.handler.RequestLogHandler.handle(RequestLogHandler.java:95) [metagener-webapi-1.0-SNAPSHOT.jar:1.0-SNAPSHOT]
+! at org.eclipse.jetty.server.handler.HandlerWrapper.handle(HandlerWrapper.java:97) [metagener-webapi-1.0-SNAPSHOT.jar:1.0-SNAPSHOT]
+! at org.eclipse.jetty.server.handler.StatisticsHandler.handle(StatisticsHandler.java:159) [metagener-webapi-1.0-SNAPSHOT.jar:1.0-SNAPSHOT]
+! at org.eclipse.jetty.server.handler.HandlerWrapper.handle(HandlerWrapper.java:97) [metagener-webapi-1.0-SNAPSHOT.jar:1.0-SNAPSHOT]
+! at org.eclipse.jetty.server.Server.handle(Server.java:497) [metagener-webapi-1.0-SNAPSHOT.jar:1.0-SNAPSHOT]
+! at org.eclipse.jetty.server.HttpChannel.handle(HttpChannel.java:313) [metagener-webapi-1.0-SNAPSHOT.jar:1.0-SNAPSHOT]
+! at org.eclipse.jetty.server.HttpConnection.onFillable(HttpConnection.java:248) [metagener-webapi-1.0-SNAPSHOT.jar:1.0-SNAPSHOT]
+! at org.eclipse.jetty.io.AbstractConnection$2.run(AbstractConnection.java:540) [metagener-webapi-1.0-SNAPSHOT.jar:1.0-SNAPSHOT]
+! at org.eclipse.jetty.util.thread.QueuedThreadPool.runJob(QueuedThreadPool.java:626) [metagener-webapi-1.0-SNAPSHOT.jar:1.0-SNAPSHOT]
+! at org.eclipse.jetty.util.thread.QueuedThreadPool$3.run(QueuedThreadPool.java:546) [metagener-webapi-1.0-SNAPSHOT.jar:1.0-SNAPSHOT]
+! at java.lang.Thread.run(Thread.java:745) [na:1.8.0_45]
+INFO  [2015-04-21 20:06:51,636] org.eclipse.jetty.server.ServerConnector: Stopped application@410ae9a3{HTTP/1.1}{0.0.0.0:8080}
+INFO  [2015-04-21 20:06:51,637] org.eclipse.jetty.server.ServerConnector: Stopped admin@319988b0{HTTP/1.1}{0.0.0.0:8081}
+INFO  [2015-04-21 20:06:51,638] org.eclipse.jetty.server.handler.ContextHandler: Stopped i.d.j.MutableServletContextHandler@232cce0{/,null,UNAVAILABLE}
+INFO  [2015-04-21 20:06:51,641] org.eclipse.jetty.server.handler.ContextHandler: Stopped i.d.j.MutableServletContextHandler@6892cc6f{/,null,UNAVAILABLE}
+INFO  [2015-04-21 20:07:15,476] org.eclipse.jetty.util.log: Logging initialized @838ms
+INFO  [2015-04-21 20:07:15,521] com.metawiring.webapi.common.MetagenerWebApp: Preloading generator context 'retail' from 'black-friday.metagener'
+INFO  [2015-04-21 20:07:15,522] com.metawiring.wiring.Metagener: loading from black-friday.metagener
+INFO  [2015-04-21 20:07:15,556] com.metawiring.syntax.MetagenerDSLModelBuilder: building GenContextDef
+INFO  [2015-04-21 20:07:15,581] com.metawiring.syntax.MetagenerDSLModelBuilder: built GenContextDef
+INFO  [2015-04-21 20:07:15,587] io.dropwizard.server.ServerFactory: Starting MetagenerWebApp
+INFO  [2015-04-21 20:07:15,632] org.eclipse.jetty.setuid.SetUIDListener: Opened application@410ae9a3{HTTP/1.1}{0.0.0.0:8080}
+INFO  [2015-04-21 20:07:15,633] org.eclipse.jetty.setuid.SetUIDListener: Opened admin@319988b0{HTTP/1.1}{0.0.0.0:8081}
+INFO  [2015-04-21 20:07:15,635] org.eclipse.jetty.server.Server: jetty-9.2.z-SNAPSHOT
+INFO  [2015-04-21 20:07:15,978] io.dropwizard.jersey.DropwizardResourceConfig: The following paths were found for the configured resources:
+
+    GET     /sample/{contextName}/{samplername} (com.metawiring.webapi.resource.SampleResource)
+    GET     /sample/{contextName}/{samplername}/{sampleid} (com.metawiring.webapi.resource.SampleResource)
+    GET     /bulksample/{contextName}/{samplername}/{count} (com.metawiring.webapi.resource.BulkSampleResource)
+    GET     /context/ (com.metawiring.webapi.resource.GenContextResource)
+    GET     /context/{contextName} (com.metawiring.webapi.resource.GenContextResource)
+    POST    /context/{contextName} (com.metawiring.webapi.resource.GenContextResource)
+
+WARN  [2015-04-21 20:07:15,979] org.glassfish.jersey.internal.Errors: The following warnings have been detected: WARNING: The (sub)resource method getContextList in com.metawiring.webapi.resource.GenContextResource contains empty path annotation.
+
+INFO  [2015-04-21 20:07:15,982] org.eclipse.jetty.server.handler.ContextHandler: Started i.d.j.MutableServletContextHandler@6892cc6f{/,null,AVAILABLE}
+INFO  [2015-04-21 20:07:15,984] io.dropwizard.setup.AdminEnvironment: tasks = 
+
+    POST    /tasks/log-level (io.dropwizard.servlets.tasks.LogConfigurationTask)
+    POST    /tasks/gc (io.dropwizard.servlets.tasks.GarbageCollectionTask)
+
+INFO  [2015-04-21 20:07:15,988] org.eclipse.jetty.server.handler.ContextHandler: Started i.d.j.MutableServletContextHandler@232cce0{/,null,AVAILABLE}
+INFO  [2015-04-21 20:07:15,994] org.eclipse.jetty.server.ServerConnector: Started application@410ae9a3{HTTP/1.1}{0.0.0.0:8080}
+INFO  [2015-04-21 20:07:15,995] org.eclipse.jetty.server.ServerConnector: Started admin@319988b0{HTTP/1.1}{0.0.0.0:8081}
+INFO  [2015-04-21 20:07:15,995] org.eclipse.jetty.server.Server: Started @1358ms
+INFO  [2015-04-21 20:09:17,744] org.eclipse.jetty.server.ServerConnector: Stopped application@410ae9a3{HTTP/1.1}{0.0.0.0:8080}
+INFO  [2015-04-21 20:09:17,745] org.eclipse.jetty.server.ServerConnector: Stopped admin@319988b0{HTTP/1.1}{0.0.0.0:8081}
+INFO  [2015-04-21 20:09:17,746] org.eclipse.jetty.server.handler.ContextHandler: Stopped i.d.j.MutableServletContextHandler@232cce0{/,null,UNAVAILABLE}
+INFO  [2015-04-21 20:09:17,748] org.eclipse.jetty.server.handler.ContextHandler: Stopped i.d.j.MutableServletContextHandler@6892cc6f{/,null,UNAVAILABLE}
+INFO  [2015-04-21 20:09:35,427] org.eclipse.jetty.util.log: Logging initialized @850ms
+INFO  [2015-04-21 20:09:35,472] com.metawiring.webapi.common.MetagenerWebApp: Preloading generator context 'retail' from 'black-friday.metagener'
+INFO  [2015-04-21 20:09:35,472] com.metawiring.wiring.Metagener: loading from black-friday.metagener
+INFO  [2015-04-21 20:09:35,506] com.metawiring.syntax.MetagenerDSLModelBuilder: building GenContextDef
+INFO  [2015-04-21 20:09:35,533] com.metawiring.syntax.MetagenerDSLModelBuilder: built GenContextDef
+INFO  [2015-04-21 20:16:05,686] org.eclipse.jetty.util.log: Logging initialized @854ms
+INFO  [2015-04-21 20:16:05,731] com.metawiring.webapi.common.MetagenerWebApp: Preloading generator context 'retail' from 'black-friday.metagener'
+INFO  [2015-04-21 20:16:05,731] com.metawiring.wiring.Metagener: loading from black-friday.metagener
+INFO  [2015-04-21 20:16:05,765] com.metawiring.syntax.MetagenerDSLModelBuilder: building GenContextDef
+INFO  [2015-04-21 20:16:05,791] com.metawiring.syntax.MetagenerDSLModelBuilder: built GenContextDef
+INFO  [2015-04-21 20:16:05,797] io.dropwizard.server.ServerFactory: Starting MetagenerWebApp
+INFO  [2015-04-21 20:16:05,842] org.eclipse.jetty.setuid.SetUIDListener: Opened application@410ae9a3{HTTP/1.1}{0.0.0.0:8080}
+INFO  [2015-04-21 20:16:05,842] org.eclipse.jetty.setuid.SetUIDListener: Opened admin@319988b0{HTTP/1.1}{0.0.0.0:8081}
+INFO  [2015-04-21 20:16:05,844] org.eclipse.jetty.server.Server: jetty-9.2.z-SNAPSHOT
+INFO  [2015-04-21 20:16:06,191] io.dropwizard.jersey.DropwizardResourceConfig: The following paths were found for the configured resources:
+
+    GET     /sample/{contextName}/{samplername} (com.metawiring.webapi.resource.SampleResource)
+    GET     /sample/{contextName}/{samplername}/{sampleid} (com.metawiring.webapi.resource.SampleResource)
+    GET     /bulksample/{contextName}/{samplername}/{count} (com.metawiring.webapi.resource.BulkSampleResource)
+    GET     /context/ (com.metawiring.webapi.resource.GenContextResource)
+    GET     /context/{contextName} (com.metawiring.webapi.resource.GenContextResource)
+    POST    /context/{contextName} (com.metawiring.webapi.resource.GenContextResource)
+
+WARN  [2015-04-21 20:16:06,192] org.glassfish.jersey.internal.Errors: The following warnings have been detected: WARNING: The (sub)resource method getContextList in com.metawiring.webapi.resource.GenContextResource contains empty path annotation.
+
+INFO  [2015-04-21 20:16:06,196] org.eclipse.jetty.server.handler.ContextHandler: Started i.d.j.MutableServletContextHandler@6892cc6f{/,null,AVAILABLE}
+INFO  [2015-04-21 20:16:06,197] io.dropwizard.setup.AdminEnvironment: tasks = 
+
+    POST    /tasks/log-level (io.dropwizard.servlets.tasks.LogConfigurationTask)
+    POST    /tasks/gc (io.dropwizard.servlets.tasks.GarbageCollectionTask)
+
+INFO  [2015-04-21 20:16:06,201] org.eclipse.jetty.server.handler.ContextHandler: Started i.d.j.MutableServletContextHandler@232cce0{/,null,AVAILABLE}
+INFO  [2015-04-21 20:16:06,207] org.eclipse.jetty.server.ServerConnector: Started application@410ae9a3{HTTP/1.1}{0.0.0.0:8080}
+INFO  [2015-04-21 20:16:06,207] org.eclipse.jetty.server.ServerConnector: Started admin@319988b0{HTTP/1.1}{0.0.0.0:8081}
+INFO  [2015-04-21 20:16:06,208] org.eclipse.jetty.server.Server: Started @1377ms
+INFO  [2015-04-21 20:16:53,456] org.eclipse.jetty.server.ServerConnector: Stopped application@410ae9a3{HTTP/1.1}{0.0.0.0:8080}
+INFO  [2015-04-21 20:16:53,457] org.eclipse.jetty.server.ServerConnector: Stopped admin@319988b0{HTTP/1.1}{0.0.0.0:8081}
+INFO  [2015-04-21 20:16:53,458] org.eclipse.jetty.server.handler.ContextHandler: Stopped i.d.j.MutableServletContextHandler@232cce0{/,null,UNAVAILABLE}
+INFO  [2015-04-21 20:16:53,461] org.eclipse.jetty.server.handler.ContextHandler: Stopped i.d.j.MutableServletContextHandler@6892cc6f{/,null,UNAVAILABLE}
+INFO  [2015-04-21 20:17:56,684] org.eclipse.jetty.util.log: Logging initialized @849ms
+INFO  [2015-04-21 20:17:56,729] com.metawiring.webapi.common.MetagenerWebApp: Preloading generator context 'retail' from 'black-friday.metagener'
+INFO  [2015-04-21 20:17:56,729] com.metawiring.wiring.Metagener: loading from black-friday.metagener
+INFO  [2015-04-21 20:17:56,763] com.metawiring.syntax.MetagenerDSLModelBuilder: building GenContextDef
+INFO  [2015-04-21 20:17:56,788] com.metawiring.syntax.MetagenerDSLModelBuilder: built GenContextDef
+INFO  [2015-04-21 20:17:56,794] io.dropwizard.server.ServerFactory: Starting MetagenerWebApp
+INFO  [2015-04-21 20:17:56,840] org.eclipse.jetty.setuid.SetUIDListener: Opened application@410ae9a3{HTTP/1.1}{0.0.0.0:8080}
+INFO  [2015-04-21 20:17:56,840] org.eclipse.jetty.setuid.SetUIDListener: Opened admin@319988b0{HTTP/1.1}{0.0.0.0:8081}
+INFO  [2015-04-21 20:17:56,842] org.eclipse.jetty.server.Server: jetty-9.2.z-SNAPSHOT
+INFO  [2015-04-21 20:17:57,191] io.dropwizard.jersey.DropwizardResourceConfig: The following paths were found for the configured resources:
+
+    GET     /sample/{contextName}/{samplername} (com.metawiring.webapi.resource.SampleResource)
+    GET     /sample/{contextName}/{samplername}/{sampleid} (com.metawiring.webapi.resource.SampleResource)
+    GET     /bulksample/{contextName}/{samplername}/{count} (com.metawiring.webapi.resource.BulkSampleResource)
+    GET     /context/ (com.metawiring.webapi.resource.GenContextResource)
+    GET     /context/{contextName} (com.metawiring.webapi.resource.GenContextResource)
+    POST    /context/{contextName} (com.metawiring.webapi.resource.GenContextResource)
+
+WARN  [2015-04-21 20:17:57,192] org.glassfish.jersey.internal.Errors: The following warnings have been detected: WARNING: The (sub)resource method getContextList in com.metawiring.webapi.resource.GenContextResource contains empty path annotation.
+
+INFO  [2015-04-21 20:17:57,195] org.eclipse.jetty.server.handler.ContextHandler: Started i.d.j.MutableServletContextHandler@6892cc6f{/,null,AVAILABLE}
+INFO  [2015-04-21 20:17:57,197] io.dropwizard.setup.AdminEnvironment: tasks = 
+
+    POST    /tasks/log-level (io.dropwizard.servlets.tasks.LogConfigurationTask)
+    POST    /tasks/gc (io.dropwizard.servlets.tasks.GarbageCollectionTask)
+
+INFO  [2015-04-21 20:17:57,200] org.eclipse.jetty.server.handler.ContextHandler: Started i.d.j.MutableServletContextHandler@232cce0{/,null,AVAILABLE}
+INFO  [2015-04-21 20:17:57,206] org.eclipse.jetty.server.ServerConnector: Started application@410ae9a3{HTTP/1.1}{0.0.0.0:8080}
+INFO  [2015-04-21 20:17:57,207] org.eclipse.jetty.server.ServerConnector: Started admin@319988b0{HTTP/1.1}{0.0.0.0:8081}
+INFO  [2015-04-21 20:17:57,207] org.eclipse.jetty.server.Server: Started @1373ms
+INFO  [2015-04-21 20:30:38,160] org.eclipse.jetty.server.ServerConnector: Stopped application@410ae9a3{HTTP/1.1}{0.0.0.0:8080}
+INFO  [2015-04-21 20:30:38,161] org.eclipse.jetty.server.ServerConnector: Stopped admin@319988b0{HTTP/1.1}{0.0.0.0:8081}
+INFO  [2015-04-21 20:30:38,162] org.eclipse.jetty.server.handler.ContextHandler: Stopped i.d.j.MutableServletContextHandler@232cce0{/,null,UNAVAILABLE}
+INFO  [2015-04-21 20:30:38,165] org.eclipse.jetty.server.handler.ContextHandler: Stopped i.d.j.MutableServletContextHandler@6892cc6f{/,null,UNAVAILABLE}
+INFO  [2015-04-21 21:11:37,257] org.eclipse.jetty.util.log: Logging initialized @842ms
+INFO  [2015-04-21 21:11:37,302] com.metawiring.webapi.common.MetagenerWebApp: Preloading generator context 'retail' from 'black-friday.metagener'
+INFO  [2015-04-21 21:11:37,303] com.metawiring.wiring.Metagener: loading from black-friday.metagener
+INFO  [2015-04-21 21:11:37,336] com.metawiring.syntax.MetagenerDSLModelBuilder: building GenContextDef
+INFO  [2015-04-21 21:11:37,361] com.metawiring.syntax.MetagenerDSLModelBuilder: built GenContextDef
+INFO  [2015-04-21 21:11:37,367] io.dropwizard.server.ServerFactory: Starting MetagenerWebApp
+INFO  [2015-04-21 21:11:37,412] org.eclipse.jetty.setuid.SetUIDListener: Opened application@410ae9a3{HTTP/1.1}{0.0.0.0:8080}
+INFO  [2015-04-21 21:11:37,412] org.eclipse.jetty.setuid.SetUIDListener: Opened admin@319988b0{HTTP/1.1}{0.0.0.0:8081}
+INFO  [2015-04-21 21:11:37,414] org.eclipse.jetty.server.Server: jetty-9.2.z-SNAPSHOT
+INFO  [2015-04-21 21:11:37,759] io.dropwizard.jersey.DropwizardResourceConfig: The following paths were found for the configured resources:
+
+    GET     /sample/{contextName}/{samplername} (com.metawiring.webapi.resource.SampleResource)
+    GET     /sample/{contextName}/{samplername}/{sampleid} (com.metawiring.webapi.resource.SampleResource)
+    GET     /bulksample/{contextName}/{samplername}/{count} (com.metawiring.webapi.resource.BulkSampleResource)
+    GET     /context/ (com.metawiring.webapi.resource.GenContextResource)
+    GET     /context/{contextName} (com.metawiring.webapi.resource.GenContextResource)
+    POST    /context/{contextName} (com.metawiring.webapi.resource.GenContextResource)
+
+WARN  [2015-04-21 21:11:37,760] org.glassfish.jersey.internal.Errors: The following warnings have been detected: WARNING: The (sub)resource method getContextList in com.metawiring.webapi.resource.GenContextResource contains empty path annotation.
+
+INFO  [2015-04-21 21:11:37,763] org.eclipse.jetty.server.handler.ContextHandler: Started i.d.j.MutableServletContextHandler@6892cc6f{/,null,AVAILABLE}
+INFO  [2015-04-21 21:11:37,765] io.dropwizard.setup.AdminEnvironment: tasks = 
+
+    POST    /tasks/log-level (io.dropwizard.servlets.tasks.LogConfigurationTask)
+    POST    /tasks/gc (io.dropwizard.servlets.tasks.GarbageCollectionTask)
+
+INFO  [2015-04-21 21:11:37,768] org.eclipse.jetty.server.handler.ContextHandler: Started i.d.j.MutableServletContextHandler@232cce0{/,null,AVAILABLE}
+INFO  [2015-04-21 21:11:37,774] org.eclipse.jetty.server.ServerConnector: Started application@410ae9a3{HTTP/1.1}{0.0.0.0:8080}
+INFO  [2015-04-21 21:11:37,774] org.eclipse.jetty.server.ServerConnector: Started admin@319988b0{HTTP/1.1}{0.0.0.0:8081}
+INFO  [2015-04-21 21:11:37,774] org.eclipse.jetty.server.Server: Started @1360ms
+ERROR [2015-04-21 21:11:40,189] io.dropwizard.jersey.errors.LoggingExceptionMapper: Error handling a request: c48e27577994b925
+! java.lang.RuntimeException: Undefined samplerDef [retail.receipts]
+! at com.metawiring.wiring.GenContext.createEntitySampler(GenContext.java:50) ~[metagener-webapi-1.0-SNAPSHOT.jar:1.0-SNAPSHOT]
+! at com.metawiring.wiring.GenContext.getEntitySampleStream(GenContext.java:38) ~[metagener-webapi-1.0-SNAPSHOT.jar:1.0-SNAPSHOT]
+! at com.metawiring.webapi.resource.BulkSampleResource.getNextSampleValue(BulkSampleResource.java:38) ~[metagener-webapi-1.0-SNAPSHOT.jar:1.0-SNAPSHOT]
+! at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[na:1.8.0_45]
+! at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62) ~[na:1.8.0_45]
+! at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[na:1.8.0_45]
+! at java.lang.reflect.Method.invoke(Method.java:497) ~[na:1.8.0_45]
+! at org.glassfish.jersey.server.model.internal.ResourceMethodInvocationHandlerFactory$1.invoke(ResourceMethodInvocationHandlerFactory.java:81) ~[metagener-webapi-1.0-SNAPSHOT.jar:1.0-SNAPSHOT]
+! at org.glassfish.jersey.server.model.internal.AbstractJavaResourceMethodDispatcher$1.run(AbstractJavaResourceMethodDispatcher.java:151) ~[metagener-webapi-1.0-SNAPSHOT.jar:1.0-SNAPSHOT]
+! at org.glassfish.jersey.server.model.internal.AbstractJavaResourceMethodDispatcher.invoke(AbstractJavaResourceMethodDispatcher.java:172) ~[metagener-webapi-1.0-SNAPSHOT.jar:1.0-SNAPSHOT]
+! at org.glassfish.jersey.server.model.internal.JavaResourceMethodDispatcherProvider$TypeOutInvoker.doDispatch(JavaResourceMethodDispatcherProvider.java:195) ~[metagener-webapi-1.0-SNAPSHOT.jar:1.0-SNAPSHOT]
+! at org.glassfish.jersey.server.model.internal.AbstractJavaResourceMethodDispatcher.dispatch(AbstractJavaResourceMethodDispatcher.java:104) ~[metagener-webapi-1.0-SNAPSHOT.jar:1.0-SNAPSHOT]
+! at org.glassfish.jersey.server.model.ResourceMethodInvoker.invoke(ResourceMethodInvoker.java:384) ~[metagener-webapi-1.0-SNAPSHOT.jar:1.0-SNAPSHOT]
+! at org.glassfish.jersey.server.model.ResourceMethodInvoker.apply(ResourceMethodInvoker.java:342) ~[metagener-webapi-1.0-SNAPSHOT.jar:1.0-SNAPSHOT]
+! at org.glassfish.jersey.server.model.ResourceMethodInvoker.apply(ResourceMethodInvoker.java:101) ~[metagener-webapi-1.0-SNAPSHOT.jar:1.0-SNAPSHOT]
+! at org.glassfish.jersey.server.ServerRuntime$2.run(ServerRuntime.java:303) ~[metagener-webapi-1.0-SNAPSHOT.jar:1.0-SNAPSHOT]
+! at org.glassfish.jersey.internal.Errors$1.call(Errors.java:271) [metagener-webapi-1.0-SNAPSHOT.jar:1.0-SNAPSHOT]
+! at org.glassfish.jersey.internal.Errors$1.call(Errors.java:267) [metagener-webapi-1.0-SNAPSHOT.jar:1.0-SNAPSHOT]
+! at org.glassfish.jersey.internal.Errors.process(Errors.java:315) [metagener-webapi-1.0-SNAPSHOT.jar:1.0-SNAPSHOT]
+! at org.glassfish.jersey.internal.Errors.process(Errors.java:297) [metagener-webapi-1.0-SNAPSHOT.jar:1.0-SNAPSHOT]
+! at org.glassfish.jersey.internal.Errors.process(Errors.java:267) [metagener-webapi-1.0-SNAPSHOT.jar:1.0-SNAPSHOT]
+! at org.glassfish.jersey.process.internal.RequestScope.runInScope(RequestScope.java:316) [metagener-webapi-1.0-SNAPSHOT.jar:1.0-SNAPSHOT]
+! at org.glassfish.jersey.server.ServerRuntime.process(ServerRuntime.java:286) [metagener-webapi-1.0-SNAPSHOT.jar:1.0-SNAPSHOT]
+! at org.glassfish.jersey.server.ApplicationHandler.handle(ApplicationHandler.java:1073) [metagener-webapi-1.0-SNAPSHOT.jar:1.0-SNAPSHOT]
+! at org.glassfish.jersey.servlet.WebComponent.service(WebComponent.java:377) [metagener-webapi-1.0-SNAPSHOT.jar:1.0-SNAPSHOT]
+! at org.glassfish.jersey.servlet.ServletContainer.service(ServletContainer.java:381) [metagener-webapi-1.0-SNAPSHOT.jar:1.0-SNAPSHOT]
+! at org.glassfish.jersey.servlet.ServletContainer.service(ServletContainer.java:344) [metagener-webapi-1.0-SNAPSHOT.jar:1.0-SNAPSHOT]
+! at org.glassfish.jersey.servlet.ServletContainer.service(ServletContainer.java:221) [metagener-webapi-1.0-SNAPSHOT.jar:1.0-SNAPSHOT]
+! at io.dropwizard.jetty.NonblockingServletHolder.handle(NonblockingServletHolder.java:49) [metagener-webapi-1.0-SNAPSHOT.jar:1.0-SNAPSHOT]
+! at org.eclipse.jetty.servlet.ServletHandler$CachedChain.doFilter(ServletHandler.java:1669) [metagener-webapi-1.0-SNAPSHOT.jar:1.0-SNAPSHOT]
+! at org.eclipse.jetty.servlets.UserAgentFilter.doFilter(UserAgentFilter.java:83) [metagener-webapi-1.0-SNAPSHOT.jar:1.0-SNAPSHOT]
+! at org.eclipse.jetty.servlets.GzipFilter.doFilter(GzipFilter.java:364) [metagener-webapi-1.0-SNAPSHOT.jar:1.0-SNAPSHOT]
+! at io.dropwizard.jetty.BiDiGzipFilter.doFilter(BiDiGzipFilter.java:134) [metagener-webapi-1.0-SNAPSHOT.jar:1.0-SNAPSHOT]
+! at org.eclipse.jetty.servlet.ServletHandler$CachedChain.doFilter(ServletHandler.java:1652) [metagener-webapi-1.0-SNAPSHOT.jar:1.0-SNAPSHOT]
+! at io.dropwizard.servlets.ThreadNameFilter.doFilter(ThreadNameFilter.java:29) [metagener-webapi-1.0-SNAPSHOT.jar:1.0-SNAPSHOT]
+! at org.eclipse.jetty.servlet.ServletHandler$CachedChain.doFilter(ServletHandler.java:1652) [metagener-webapi-1.0-SNAPSHOT.jar:1.0-SNAPSHOT]
+! at io.dropwizard.jersey.filter.AllowedMethodsFilter.handle(AllowedMethodsFilter.java:44) [metagener-webapi-1.0-SNAPSHOT.jar:1.0-SNAPSHOT]
+! at io.dropwizard.jersey.filter.AllowedMethodsFilter.doFilter(AllowedMethodsFilter.java:39) [metagener-webapi-1.0-SNAPSHOT.jar:1.0-SNAPSHOT]
+! at org.eclipse.jetty.servlet.ServletHandler$CachedChain.doFilter(ServletHandler.java:1652) [metagener-webapi-1.0-SNAPSHOT.jar:1.0-SNAPSHOT]
+! at org.eclipse.jetty.servlet.ServletHandler.doHandle(ServletHandler.java:585) [metagener-webapi-1.0-SNAPSHOT.jar:1.0-SNAPSHOT]
+! at org.eclipse.jetty.server.handler.ContextHandler.doHandle(ContextHandler.java:1125) [metagener-webapi-1.0-SNAPSHOT.jar:1.0-SNAPSHOT]
+! at org.eclipse.jetty.servlet.ServletHandler.doScope(ServletHandler.java:515) [metagener-webapi-1.0-SNAPSHOT.jar:1.0-SNAPSHOT]
+! at org.eclipse.jetty.server.handler.ContextHandler.doScope(ContextHandler.java:1059) [metagener-webapi-1.0-SNAPSHOT.jar:1.0-SNAPSHOT]
+! at org.eclipse.jetty.server.handler.ScopedHandler.handle(ScopedHandler.java:141) [metagener-webapi-1.0-SNAPSHOT.jar:1.0-SNAPSHOT]
+! at org.eclipse.jetty.server.handler.HandlerWrapper.handle(HandlerWrapper.java:97) [metagener-webapi-1.0-SNAPSHOT.jar:1.0-SNAPSHOT]
+! at com.codahale.metrics.jetty9.InstrumentedHandler.handle(InstrumentedHandler.java:190) [metagener-webapi-1.0-SNAPSHOT.jar:1.0-SNAPSHOT]
+! at io.dropwizard.jetty.RoutingHandler.handle(RoutingHandler.java:51) [metagener-webapi-1.0-SNAPSHOT.jar:1.0-SNAPSHOT]
+! at org.eclipse.jetty.server.handler.HandlerWrapper.handle(HandlerWrapper.java:97) [metagener-webapi-1.0-SNAPSHOT.jar:1.0-SNAPSHOT]
+! at org.eclipse.jetty.server.handler.RequestLogHandler.handle(RequestLogHandler.java:95) [metagener-webapi-1.0-SNAPSHOT.jar:1.0-SNAPSHOT]
+! at org.eclipse.jetty.server.handler.HandlerWrapper.handle(HandlerWrapper.java:97) [metagener-webapi-1.0-SNAPSHOT.jar:1.0-SNAPSHOT]
+! at org.eclipse.jetty.server.handler.StatisticsHandler.handle(StatisticsHandler.java:159) [metagener-webapi-1.0-SNAPSHOT.jar:1.0-SNAPSHOT]
+! at org.eclipse.jetty.server.handler.HandlerWrapper.handle(HandlerWrapper.java:97) [metagener-webapi-1.0-SNAPSHOT.jar:1.0-SNAPSHOT]
+! at org.eclipse.jetty.server.Server.handle(Server.java:497) [metagener-webapi-1.0-SNAPSHOT.jar:1.0-SNAPSHOT]
+! at org.eclipse.jetty.server.HttpChannel.handle(HttpChannel.java:313) [metagener-webapi-1.0-SNAPSHOT.jar:1.0-SNAPSHOT]
+! at org.eclipse.jetty.server.HttpConnection.onFillable(HttpConnection.java:248) [metagener-webapi-1.0-SNAPSHOT.jar:1.0-SNAPSHOT]
+! at org.eclipse.jetty.io.AbstractConnection$2.run(AbstractConnection.java:540) [metagener-webapi-1.0-SNAPSHOT.jar:1.0-SNAPSHOT]
+! at org.eclipse.jetty.util.thread.QueuedThreadPool.runJob(QueuedThreadPool.java:626) [metagener-webapi-1.0-SNAPSHOT.jar:1.0-SNAPSHOT]
+! at org.eclipse.jetty.util.thread.QueuedThreadPool$3.run(QueuedThreadPool.java:546) [metagener-webapi-1.0-SNAPSHOT.jar:1.0-SNAPSHOT]
+! at java.lang.Thread.run(Thread.java:745) [na:1.8.0_45]
+ERROR [2015-04-21 21:11:43,291] io.dropwizard.jersey.errors.LoggingExceptionMapper: Error handling a request: 6d509abc26af2158
+! java.lang.RuntimeException: Undefined samplerDef [retail.receipts]
+! at com.metawiring.wiring.GenContext.createEntitySampler(GenContext.java:50) ~[metagener-webapi-1.0-SNAPSHOT.jar:1.0-SNAPSHOT]
+! at com.metawiring.wiring.GenContext.getEntitySampleStream(GenContext.java:38) ~[metagener-webapi-1.0-SNAPSHOT.jar:1.0-SNAPSHOT]
+! at com.metawiring.webapi.resource.BulkSampleResource.getNextSampleValue(BulkSampleResource.java:38) ~[metagener-webapi-1.0-SNAPSHOT.jar:1.0-SNAPSHOT]
+! at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[na:1.8.0_45]
+! at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62) ~[na:1.8.0_45]
+! at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[na:1.8.0_45]
+! at java.lang.reflect.Method.invoke(Method.java:497) ~[na:1.8.0_45]
+! at org.glassfish.jersey.server.model.internal.ResourceMethodInvocationHandlerFactory$1.invoke(ResourceMethodInvocationHandlerFactory.java:81) ~[metagener-webapi-1.0-SNAPSHOT.jar:1.0-SNAPSHOT]
+! at org.glassfish.jersey.server.model.internal.AbstractJavaResourceMethodDispatcher$1.run(AbstractJavaResourceMethodDispatcher.java:151) ~[metagener-webapi-1.0-SNAPSHOT.jar:1.0-SNAPSHOT]
+! at org.glassfish.jersey.server.model.internal.AbstractJavaResourceMethodDispatcher.invoke(AbstractJavaResourceMethodDispatcher.java:172) ~[metagener-webapi-1.0-SNAPSHOT.jar:1.0-SNAPSHOT]
+! at org.glassfish.jersey.server.model.internal.JavaResourceMethodDispatcherProvider$TypeOutInvoker.doDispatch(JavaResourceMethodDispatcherProvider.java:195) ~[metagener-webapi-1.0-SNAPSHOT.jar:1.0-SNAPSHOT]
+! at org.glassfish.jersey.server.model.internal.AbstractJavaResourceMethodDispatcher.dispatch(AbstractJavaResourceMethodDispatcher.java:104) ~[metagener-webapi-1.0-SNAPSHOT.jar:1.0-SNAPSHOT]
+! at org.glassfish.jersey.server.model.ResourceMethodInvoker.invoke(ResourceMethodInvoker.java:384) ~[metagener-webapi-1.0-SNAPSHOT.jar:1.0-SNAPSHOT]
+! at org.glassfish.jersey.server.model.ResourceMethodInvoker.apply(ResourceMethodInvoker.java:342) ~[metagener-webapi-1.0-SNAPSHOT.jar:1.0-SNAPSHOT]
+! at org.glassfish.jersey.server.model.ResourceMethodInvoker.apply(ResourceMethodInvoker.java:101) ~[metagener-webapi-1.0-SNAPSHOT.jar:1.0-SNAPSHOT]
+! at org.glassfish.jersey.server.ServerRuntime$2.run(ServerRuntime.java:303) ~[metagener-webapi-1.0-SNAPSHOT.jar:1.0-SNAPSHOT]
+! at org.glassfish.jersey.internal.Errors$1.call(Errors.java:271) [metagener-webapi-1.0-SNAPSHOT.jar:1.0-SNAPSHOT]
+! at org.glassfish.jersey.internal.Errors$1.call(Errors.java:267) [metagener-webapi-1.0-SNAPSHOT.jar:1.0-SNAPSHOT]
+! at org.glassfish.jersey.internal.Errors.process(Errors.java:315) [metagener-webapi-1.0-SNAPSHOT.jar:1.0-SNAPSHOT]
+! at org.glassfish.jersey.internal.Errors.process(Errors.java:297) [metagener-webapi-1.0-SNAPSHOT.jar:1.0-SNAPSHOT]
+! at org.glassfish.jersey.internal.Errors.process(Errors.java:267) [metagener-webapi-1.0-SNAPSHOT.jar:1.0-SNAPSHOT]
+! at org.glassfish.jersey.process.internal.RequestScope.runInScope(RequestScope.java:316) [metagener-webapi-1.0-SNAPSHOT.jar:1.0-SNAPSHOT]
+! at org.glassfish.jersey.server.ServerRuntime.process(ServerRuntime.java:286) [metagener-webapi-1.0-SNAPSHOT.jar:1.0-SNAPSHOT]
+! at org.glassfish.jersey.server.ApplicationHandler.handle(ApplicationHandler.java:1073) [metagener-webapi-1.0-SNAPSHOT.jar:1.0-SNAPSHOT]
+! at org.glassfish.jersey.servlet.WebComponent.service(WebComponent.java:377) [metagener-webapi-1.0-SNAPSHOT.jar:1.0-SNAPSHOT]
+! at org.glassfish.jersey.servlet.ServletContainer.service(ServletContainer.java:381) [metagener-webapi-1.0-SNAPSHOT.jar:1.0-SNAPSHOT]
+! at org.glassfish.jersey.servlet.ServletContainer.service(ServletContainer.java:344) [metagener-webapi-1.0-SNAPSHOT.jar:1.0-SNAPSHOT]
+! at org.glassfish.jersey.servlet.ServletContainer.service(ServletContainer.java:221) [metagener-webapi-1.0-SNAPSHOT.jar:1.0-SNAPSHOT]
+! at io.dropwizard.jetty.NonblockingServletHolder.handle(NonblockingServletHolder.java:49) [metagener-webapi-1.0-SNAPSHOT.jar:1.0-SNAPSHOT]
+! at org.eclipse.jetty.servlet.ServletHandler$CachedChain.doFilter(ServletHandler.java:1669) [metagener-webapi-1.0-SNAPSHOT.jar:1.0-SNAPSHOT]
+! at org.eclipse.jetty.servlets.UserAgentFilter.doFilter(UserAgentFilter.java:83) [metagener-webapi-1.0-SNAPSHOT.jar:1.0-SNAPSHOT]
+! at org.eclipse.jetty.servlets.GzipFilter.doFilter(GzipFilter.java:364) [metagener-webapi-1.0-SNAPSHOT.jar:1.0-SNAPSHOT]
+! at io.dropwizard.jetty.BiDiGzipFilter.doFilter(BiDiGzipFilter.java:134) [metagener-webapi-1.0-SNAPSHOT.jar:1.0-SNAPSHOT]
+! at org.eclipse.jetty.servlet.ServletHandler$CachedChain.doFilter(ServletHandler.java:1652) [metagener-webapi-1.0-SNAPSHOT.jar:1.0-SNAPSHOT]
+! at io.dropwizard.servlets.ThreadNameFilter.doFilter(ThreadNameFilter.java:29) [metagener-webapi-1.0-SNAPSHOT.jar:1.0-SNAPSHOT]
+! at org.eclipse.jetty.servlet.ServletHandler$CachedChain.doFilter(ServletHandler.java:1652) [metagener-webapi-1.0-SNAPSHOT.jar:1.0-SNAPSHOT]
+! at io.dropwizard.jersey.filter.AllowedMethodsFilter.handle(AllowedMethodsFilter.java:44) [metagener-webapi-1.0-SNAPSHOT.jar:1.0-SNAPSHOT]
+! at io.dropwizard.jersey.filter.AllowedMethodsFilter.doFilter(AllowedMethodsFilter.java:39) [metagener-webapi-1.0-SNAPSHOT.jar:1.0-SNAPSHOT]
+! at org.eclipse.jetty.servlet.ServletHandler$CachedChain.doFilter(ServletHandler.java:1652) [metagener-webapi-1.0-SNAPSHOT.jar:1.0-SNAPSHOT]
+! at org.eclipse.jetty.servlet.ServletHandler.doHandle(ServletHandler.java:585) [metagener-webapi-1.0-SNAPSHOT.jar:1.0-SNAPSHOT]
+! at org.eclipse.jetty.server.handler.ContextHandler.doHandle(ContextHandler.java:1125) [metagener-webapi-1.0-SNAPSHOT.jar:1.0-SNAPSHOT]
+! at org.eclipse.jetty.servlet.ServletHandler.doScope(ServletHandler.java:515) [metagener-webapi-1.0-SNAPSHOT.jar:1.0-SNAPSHOT]
+! at org.eclipse.jetty.server.handler.ContextHandler.doScope(ContextHandler.java:1059) [metagener-webapi-1.0-SNAPSHOT.jar:1.0-SNAPSHOT]
+! at org.eclipse.jetty.server.handler.ScopedHandler.handle(ScopedHandler.java:141) [metagener-webapi-1.0-SNAPSHOT.jar:1.0-SNAPSHOT]
+! at org.eclipse.jetty.server.handler.HandlerWrapper.handle(HandlerWrapper.java:97) [metagener-webapi-1.0-SNAPSHOT.jar:1.0-SNAPSHOT]
+! at com.codahale.metrics.jetty9.InstrumentedHandler.handle(InstrumentedHandler.java:190) [metagener-webapi-1.0-SNAPSHOT.jar:1.0-SNAPSHOT]
+! at io.dropwizard.jetty.RoutingHandler.handle(RoutingHandler.java:51) [metagener-webapi-1.0-SNAPSHOT.jar:1.0-SNAPSHOT]
+! at org.eclipse.jetty.server.handler.HandlerWrapper.handle(HandlerWrapper.java:97) [metagener-webapi-1.0-SNAPSHOT.jar:1.0-SNAPSHOT]
+! at org.eclipse.jetty.server.handler.RequestLogHandler.handle(RequestLogHandler.java:95) [metagener-webapi-1.0-SNAPSHOT.jar:1.0-SNAPSHOT]
+! at org.eclipse.jetty.server.handler.HandlerWrapper.handle(HandlerWrapper.java:97) [metagener-webapi-1.0-SNAPSHOT.jar:1.0-SNAPSHOT]
+! at org.eclipse.jetty.server.handler.StatisticsHandler.handle(StatisticsHandler.java:159) [metagener-webapi-1.0-SNAPSHOT.jar:1.0-SNAPSHOT]
+! at org.eclipse.jetty.server.handler.HandlerWrapper.handle(HandlerWrapper.java:97) [metagener-webapi-1.0-SNAPSHOT.jar:1.0-SNAPSHOT]
+! at org.eclipse.jetty.server.Server.handle(Server.java:497) [metagener-webapi-1.0-SNAPSHOT.jar:1.0-SNAPSHOT]
+! at org.eclipse.jetty.server.HttpChannel.handle(HttpChannel.java:313) [metagener-webapi-1.0-SNAPSHOT.jar:1.0-SNAPSHOT]
+! at org.eclipse.jetty.server.HttpConnection.onFillable(HttpConnection.java:248) [metagener-webapi-1.0-SNAPSHOT.jar:1.0-SNAPSHOT]
+! at org.eclipse.jetty.io.AbstractConnection$2.run(AbstractConnection.java:540) [metagener-webapi-1.0-SNAPSHOT.jar:1.0-SNAPSHOT]
+! at org.eclipse.jetty.util.thread.QueuedThreadPool.runJob(QueuedThreadPool.java:626) [metagener-webapi-1.0-SNAPSHOT.jar:1.0-SNAPSHOT]
+! at org.eclipse.jetty.util.thread.QueuedThreadPool$3.run(QueuedThreadPool.java:546) [metagener-webapi-1.0-SNAPSHOT.jar:1.0-SNAPSHOT]
+! at java.lang.Thread.run(Thread.java:745) [na:1.8.0_45]
+INFO  [2015-04-21 21:19:59,267] org.eclipse.jetty.server.ServerConnector: Stopped application@410ae9a3{HTTP/1.1}{0.0.0.0:8080}
+INFO  [2015-04-21 21:19:59,268] org.eclipse.jetty.server.ServerConnector: Stopped admin@319988b0{HTTP/1.1}{0.0.0.0:8081}
+INFO  [2015-04-21 21:19:59,269] org.eclipse.jetty.server.handler.ContextHandler: Stopped i.d.j.MutableServletContextHandler@232cce0{/,null,UNAVAILABLE}
+INFO  [2015-04-21 21:19:59,272] org.eclipse.jetty.server.handler.ContextHandler: Stopped i.d.j.MutableServletContextHandler@6892cc6f{/,null,UNAVAILABLE}
+INFO  [2015-04-21 21:20:20,094] org.eclipse.jetty.util.log: Logging initialized @842ms
+INFO  [2015-04-21 21:20:20,138] com.metawiring.webapi.common.MetagenerWebApp: Preloading generator context 'retail' from 'black-friday.metagener'
+INFO  [2015-04-21 21:20:20,138] com.metawiring.wiring.Metagener: loading from black-friday.metagener
+INFO  [2015-04-21 21:20:20,172] com.metawiring.syntax.MetagenerDSLModelBuilder: building GenContextDef
+INFO  [2015-04-21 21:20:20,198] com.metawiring.syntax.MetagenerDSLModelBuilder: built GenContextDef
+INFO  [2015-04-21 21:20:20,204] io.dropwizard.server.ServerFactory: Starting MetagenerWebApp
+INFO  [2015-04-21 21:20:20,251] org.eclipse.jetty.setuid.SetUIDListener: Opened application@410ae9a3{HTTP/1.1}{0.0.0.0:8080}
+INFO  [2015-04-21 21:20:20,251] org.eclipse.jetty.setuid.SetUIDListener: Opened admin@319988b0{HTTP/1.1}{0.0.0.0:8081}
+INFO  [2015-04-21 21:20:20,253] org.eclipse.jetty.server.Server: jetty-9.2.z-SNAPSHOT
+INFO  [2015-04-21 21:20:20,601] io.dropwizard.jersey.DropwizardResourceConfig: The following paths were found for the configured resources:
+
+    GET     /sample/{contextName}/{samplername} (com.metawiring.webapi.resource.SampleResource)
+    GET     /sample/{contextName}/{samplername}/{sampleid} (com.metawiring.webapi.resource.SampleResource)
+    GET     /bulksample/{contextName}/{samplername}/{count} (com.metawiring.webapi.resource.BulkSampleResource)
+    GET     /context/ (com.metawiring.webapi.resource.GenContextResource)
+    GET     /context/{contextName} (com.metawiring.webapi.resource.GenContextResource)
+    POST    /context/{contextName} (com.metawiring.webapi.resource.GenContextResource)
+
+WARN  [2015-04-21 21:20:20,602] org.glassfish.jersey.internal.Errors: The following warnings have been detected: WARNING: The (sub)resource method getContextList in com.metawiring.webapi.resource.GenContextResource contains empty path annotation.
+
+INFO  [2015-04-21 21:20:20,605] org.eclipse.jetty.server.handler.ContextHandler: Started i.d.j.MutableServletContextHandler@6892cc6f{/,null,AVAILABLE}
+INFO  [2015-04-21 21:20:20,607] io.dropwizard.setup.AdminEnvironment: tasks = 
+
+    POST    /tasks/log-level (io.dropwizard.servlets.tasks.LogConfigurationTask)
+    POST    /tasks/gc (io.dropwizard.servlets.tasks.GarbageCollectionTask)
+
+INFO  [2015-04-21 21:20:20,610] org.eclipse.jetty.server.handler.ContextHandler: Started i.d.j.MutableServletContextHandler@232cce0{/,null,AVAILABLE}
+INFO  [2015-04-21 21:20:20,616] org.eclipse.jetty.server.ServerConnector: Started application@410ae9a3{HTTP/1.1}{0.0.0.0:8080}
+INFO  [2015-04-21 21:20:20,616] org.eclipse.jetty.server.ServerConnector: Started admin@319988b0{HTTP/1.1}{0.0.0.0:8081}
+INFO  [2015-04-21 21:20:20,617] org.eclipse.jetty.server.Server: Started @1366ms
+INFO  [2015-04-21 23:36:00,816] org.eclipse.jetty.util.log: Logging initialized @846ms
+INFO  [2015-04-21 23:36:00,861] com.metawiring.webapi.common.MetagenerWebApp: Preloading generator context 'retail' from 'black-friday.metagener'
+INFO  [2015-04-21 23:36:00,861] com.metawiring.wiring.Metagener: loading from black-friday.metagener
+INFO  [2015-04-21 23:36:00,895] com.metawiring.syntax.MetagenerDSLModelBuilder: building GenContextDef
+INFO  [2015-04-21 23:36:00,924] com.metawiring.syntax.MetagenerDSLModelBuilder: built GenContextDef
+INFO  [2015-04-21 23:36:00,930] io.dropwizard.server.ServerFactory: Starting MetagenerWebApp
+WARN  [2015-04-21 23:36:00,978] org.eclipse.jetty.util.component.AbstractLifeCycle: FAILED org.eclipse.jetty.server.Server@2f058b8a: java.lang.RuntimeException: java.net.BindException: Address already in use
+! java.net.BindException: Address already in use
+! at sun.nio.ch.Net.bind0(Native Method) ~[na:1.8.0_45]
+! at sun.nio.ch.Net.bind(Net.java:437) ~[na:1.8.0_45]
+! at sun.nio.ch.Net.bind(Net.java:429) ~[na:1.8.0_45]
+! at sun.nio.ch.ServerSocketChannelImpl.bind(ServerSocketChannelImpl.java:223) ~[na:1.8.0_45]
+! at sun.nio.ch.ServerSocketAdaptor.bind(ServerSocketAdaptor.java:74) ~[na:1.8.0_45]
+! at org.eclipse.jetty.server.ServerConnector.open(ServerConnector.java:321) ~[metagener-webapi-1.0-SNAPSHOT.jar:1.0-SNAPSHOT]
+! at org.eclipse.jetty.setuid.SetUIDListener.lifeCycleStarting(SetUIDListener.java:200) ~[metagener-webapi-1.0-SNAPSHOT.jar:1.0-SNAPSHOT]
+! ... 8 common frames omitted
+! Causing: java.lang.RuntimeException: java.net.BindException: Address already in use
+! at org.eclipse.jetty.setuid.SetUIDListener.lifeCycleStarting(SetUIDListener.java:213) ~[metagener-webapi-1.0-SNAPSHOT.jar:1.0-SNAPSHOT]
+! at org.eclipse.jetty.util.component.AbstractLifeCycle.setStarting(AbstractLifeCycle.java:188) ~[metagener-webapi-1.0-SNAPSHOT.jar:1.0-SNAPSHOT]
+! at org.eclipse.jetty.util.component.AbstractLifeCycle.start(AbstractLifeCycle.java:67) ~[metagener-webapi-1.0-SNAPSHOT.jar:1.0-SNAPSHOT]
+! at io.dropwizard.cli.ServerCommand.run(ServerCommand.java:43) [metagener-webapi-1.0-SNAPSHOT.jar:1.0-SNAPSHOT]
+! at io.dropwizard.cli.EnvironmentCommand.run(EnvironmentCommand.java:43) [metagener-webapi-1.0-SNAPSHOT.jar:1.0-SNAPSHOT]
+! at io.dropwizard.cli.ConfiguredCommand.run(ConfiguredCommand.java:76) [metagener-webapi-1.0-SNAPSHOT.jar:1.0-SNAPSHOT]
+! at io.dropwizard.cli.Cli.run(Cli.java:70) [metagener-webapi-1.0-SNAPSHOT.jar:1.0-SNAPSHOT]
+! at io.dropwizard.Application.run(Application.java:73) [metagener-webapi-1.0-SNAPSHOT.jar:1.0-SNAPSHOT]
+! at com.metawiring.webapi.common.MetagenerWebApp.main(MetagenerWebApp.java:24) [metagener-webapi-1.0-SNAPSHOT.jar:1.0-SNAPSHOT]
+ERROR [2015-04-21 23:36:00,978] io.dropwizard.cli.ServerCommand: Unable to start server, shutting down
+! java.net.BindException: Address already in use
+! at sun.nio.ch.Net.bind0(Native Method) ~[na:1.8.0_45]
+! at sun.nio.ch.Net.bind(Net.java:437) ~[na:1.8.0_45]
+! at sun.nio.ch.Net.bind(Net.java:429) ~[na:1.8.0_45]
+! at sun.nio.ch.ServerSocketChannelImpl.bind(ServerSocketChannelImpl.java:223) ~[na:1.8.0_45]
+! at sun.nio.ch.ServerSocketAdaptor.bind(ServerSocketAdaptor.java:74) ~[na:1.8.0_45]
+! at org.eclipse.jetty.server.ServerConnector.open(ServerConnector.java:321) ~[metagener-webapi-1.0-SNAPSHOT.jar:1.0-SNAPSHOT]
+! at org.eclipse.jetty.setuid.SetUIDListener.lifeCycleStarting(SetUIDListener.java:200) ~[metagener-webapi-1.0-SNAPSHOT.jar:1.0-SNAPSHOT]
+! ... 8 common frames omitted
+! Causing: java.lang.RuntimeException: java.net.BindException: Address already in use
+! at org.eclipse.jetty.setuid.SetUIDListener.lifeCycleStarting(SetUIDListener.java:213) ~[metagener-webapi-1.0-SNAPSHOT.jar:1.0-SNAPSHOT]
+! at org.eclipse.jetty.util.component.AbstractLifeCycle.setStarting(AbstractLifeCycle.java:188) ~[metagener-webapi-1.0-SNAPSHOT.jar:1.0-SNAPSHOT]
+! at org.eclipse.jetty.util.component.AbstractLifeCycle.start(AbstractLifeCycle.java:67) ~[metagener-webapi-1.0-SNAPSHOT.jar:1.0-SNAPSHOT]
+! at io.dropwizard.cli.ServerCommand.run(ServerCommand.java:43) ~[metagener-webapi-1.0-SNAPSHOT.jar:1.0-SNAPSHOT]
+! at io.dropwizard.cli.EnvironmentCommand.run(EnvironmentCommand.java:43) [metagener-webapi-1.0-SNAPSHOT.jar:1.0-SNAPSHOT]
+! at io.dropwizard.cli.ConfiguredCommand.run(ConfiguredCommand.java:76) [metagener-webapi-1.0-SNAPSHOT.jar:1.0-SNAPSHOT]
+! at io.dropwizard.cli.Cli.run(Cli.java:70) [metagener-webapi-1.0-SNAPSHOT.jar:1.0-SNAPSHOT]
+! at io.dropwizard.Application.run(Application.java:73) [metagener-webapi-1.0-SNAPSHOT.jar:1.0-SNAPSHOT]
+! at com.metawiring.webapi.common.MetagenerWebApp.main(MetagenerWebApp.java:24) [metagener-webapi-1.0-SNAPSHOT.jar:1.0-SNAPSHOT]
+INFO  [2015-04-21 23:36:42,960] org.eclipse.jetty.util.log: Logging initialized @849ms
+INFO  [2015-04-21 23:36:43,005] com.metawiring.webapi.common.MetagenerWebApp: Preloading generator context 'retail' from 'black-friday.metagener'
+INFO  [2015-04-21 23:36:43,005] com.metawiring.wiring.Metagener: loading from black-friday.metagener
+INFO  [2015-04-21 23:36:43,039] com.metawiring.syntax.MetagenerDSLModelBuilder: building GenContextDef
+INFO  [2015-04-21 23:36:43,070] com.metawiring.syntax.MetagenerDSLModelBuilder: built GenContextDef
+INFO  [2015-04-21 23:36:43,076] io.dropwizard.server.ServerFactory: Starting MetagenerWebApp
+WARN  [2015-04-21 23:36:43,124] org.eclipse.jetty.util.component.AbstractLifeCycle: FAILED org.eclipse.jetty.server.Server@2f058b8a: java.lang.RuntimeException: java.net.BindException: Address already in use
+! java.net.BindException: Address already in use
+! at sun.nio.ch.Net.bind0(Native Method) ~[na:1.8.0_45]
+! at sun.nio.ch.Net.bind(Net.java:437) ~[na:1.8.0_45]
+! at sun.nio.ch.Net.bind(Net.java:429) ~[na:1.8.0_45]
+! at sun.nio.ch.ServerSocketChannelImpl.bind(ServerSocketChannelImpl.java:223) ~[na:1.8.0_45]
+! at sun.nio.ch.ServerSocketAdaptor.bind(ServerSocketAdaptor.java:74) ~[na:1.8.0_45]
+! at org.eclipse.jetty.server.ServerConnector.open(ServerConnector.java:321) ~[metagener-webapi-1.0-SNAPSHOT.jar:1.0-SNAPSHOT]
+! at org.eclipse.jetty.setuid.SetUIDListener.lifeCycleStarting(SetUIDListener.java:200) ~[metagener-webapi-1.0-SNAPSHOT.jar:1.0-SNAPSHOT]
+! ... 8 common frames omitted
+! Causing: java.lang.RuntimeException: java.net.BindException: Address already in use
+! at org.eclipse.jetty.setuid.SetUIDListener.lifeCycleStarting(SetUIDListener.java:213) ~[metagener-webapi-1.0-SNAPSHOT.jar:1.0-SNAPSHOT]
+! at org.eclipse.jetty.util.component.AbstractLifeCycle.setStarting(AbstractLifeCycle.java:188) ~[metagener-webapi-1.0-SNAPSHOT.jar:1.0-SNAPSHOT]
+! at org.eclipse.jetty.util.component.AbstractLifeCycle.start(AbstractLifeCycle.java:67) ~[metagener-webapi-1.0-SNAPSHOT.jar:1.0-SNAPSHOT]
+! at io.dropwizard.cli.ServerCommand.run(ServerCommand.java:43) [metagener-webapi-1.0-SNAPSHOT.jar:1.0-SNAPSHOT]
+! at io.dropwizard.cli.EnvironmentCommand.run(EnvironmentCommand.java:43) [metagener-webapi-1.0-SNAPSHOT.jar:1.0-SNAPSHOT]
+! at io.dropwizard.cli.ConfiguredCommand.run(ConfiguredCommand.java:76) [metagener-webapi-1.0-SNAPSHOT.jar:1.0-SNAPSHOT]
+! at io.dropwizard.cli.Cli.run(Cli.java:70) [metagener-webapi-1.0-SNAPSHOT.jar:1.0-SNAPSHOT]
+! at io.dropwizard.Application.run(Application.java:73) [metagener-webapi-1.0-SNAPSHOT.jar:1.0-SNAPSHOT]
+! at com.metawiring.webapi.common.MetagenerWebApp.main(MetagenerWebApp.java:24) [metagener-webapi-1.0-SNAPSHOT.jar:1.0-SNAPSHOT]
+ERROR [2015-04-21 23:36:43,124] io.dropwizard.cli.ServerCommand: Unable to start server, shutting down
+! java.net.BindException: Address already in use
+! at sun.nio.ch.Net.bind0(Native Method) ~[na:1.8.0_45]
+! at sun.nio.ch.Net.bind(Net.java:437) ~[na:1.8.0_45]
+! at sun.nio.ch.Net.bind(Net.java:429) ~[na:1.8.0_45]
+! at sun.nio.ch.ServerSocketChannelImpl.bind(ServerSocketChannelImpl.java:223) ~[na:1.8.0_45]
+! at sun.nio.ch.ServerSocketAdaptor.bind(ServerSocketAdaptor.java:74) ~[na:1.8.0_45]
+! at org.eclipse.jetty.server.ServerConnector.open(ServerConnector.java:321) ~[metagener-webapi-1.0-SNAPSHOT.jar:1.0-SNAPSHOT]
+! at org.eclipse.jetty.setuid.SetUIDListener.lifeCycleStarting(SetUIDListener.java:200) ~[metagener-webapi-1.0-SNAPSHOT.jar:1.0-SNAPSHOT]
+! ... 8 common frames omitted
+! Causing: java.lang.RuntimeException: java.net.BindException: Address already in use
+! at org.eclipse.jetty.setuid.SetUIDListener.lifeCycleStarting(SetUIDListener.java:213) ~[metagener-webapi-1.0-SNAPSHOT.jar:1.0-SNAPSHOT]
+! at org.eclipse.jetty.util.component.AbstractLifeCycle.setStarting(AbstractLifeCycle.java:188) ~[metagener-webapi-1.0-SNAPSHOT.jar:1.0-SNAPSHOT]
+! at org.eclipse.jetty.util.component.AbstractLifeCycle.start(AbstractLifeCycle.java:67) ~[metagener-webapi-1.0-SNAPSHOT.jar:1.0-SNAPSHOT]
+! at io.dropwizard.cli.ServerCommand.run(ServerCommand.java:43) ~[metagener-webapi-1.0-SNAPSHOT.jar:1.0-SNAPSHOT]
+! at io.dropwizard.cli.EnvironmentCommand.run(EnvironmentCommand.java:43) [metagener-webapi-1.0-SNAPSHOT.jar:1.0-SNAPSHOT]
+! at io.dropwizard.cli.ConfiguredCommand.run(ConfiguredCommand.java:76) [metagener-webapi-1.0-SNAPSHOT.jar:1.0-SNAPSHOT]
+! at io.dropwizard.cli.Cli.run(Cli.java:70) [metagener-webapi-1.0-SNAPSHOT.jar:1.0-SNAPSHOT]
+! at io.dropwizard.Application.run(Application.java:73) [metagener-webapi-1.0-SNAPSHOT.jar:1.0-SNAPSHOT]
+! at com.metawiring.webapi.common.MetagenerWebApp.main(MetagenerWebApp.java:24) [metagener-webapi-1.0-SNAPSHOT.jar:1.0-SNAPSHOT]
+INFO  [2015-04-21 23:47:28,009] org.eclipse.jetty.util.log: Logging initialized @868ms
+INFO  [2015-04-21 23:47:28,055] com.metawiring.webapi.common.MetagenerWebApp: Preloading generator context 'retail' from 'black-friday.metagener'
+INFO  [2015-04-21 23:47:28,055] com.metawiring.wiring.Metagener: loading from black-friday.metagener
+INFO  [2015-04-21 23:47:28,091] com.metawiring.syntax.MetagenerDSLModelBuilder: building GenContextDef
+INFO  [2015-04-21 23:47:28,117] com.metawiring.syntax.MetagenerDSLModelBuilder: built GenContextDef
+INFO  [2015-04-21 23:47:28,123] io.dropwizard.server.ServerFactory: Starting MetagenerWebApp
+WARN  [2015-04-21 23:47:28,171] org.eclipse.jetty.util.component.AbstractLifeCycle: FAILED org.eclipse.jetty.server.Server@2f058b8a: java.lang.RuntimeException: java.net.BindException: Address already in use
+! java.net.BindException: Address already in use
+! at sun.nio.ch.Net.bind0(Native Method) ~[na:1.8.0_45]
+! at sun.nio.ch.Net.bind(Net.java:437) ~[na:1.8.0_45]
+! at sun.nio.ch.Net.bind(Net.java:429) ~[na:1.8.0_45]
+! at sun.nio.ch.ServerSocketChannelImpl.bind(ServerSocketChannelImpl.java:223) ~[na:1.8.0_45]
+! at sun.nio.ch.ServerSocketAdaptor.bind(ServerSocketAdaptor.java:74) ~[na:1.8.0_45]
+! at org.eclipse.jetty.server.ServerConnector.open(ServerConnector.java:321) ~[metagener-webapi-1.0-SNAPSHOT.jar:1.0-SNAPSHOT]
+! at org.eclipse.jetty.setuid.SetUIDListener.lifeCycleStarting(SetUIDListener.java:200) ~[metagener-webapi-1.0-SNAPSHOT.jar:1.0-SNAPSHOT]
+! ... 8 common frames omitted
+! Causing: java.lang.RuntimeException: java.net.BindException: Address already in use
+! at org.eclipse.jetty.setuid.SetUIDListener.lifeCycleStarting(SetUIDListener.java:213) ~[metagener-webapi-1.0-SNAPSHOT.jar:1.0-SNAPSHOT]
+! at org.eclipse.jetty.util.component.AbstractLifeCycle.setStarting(AbstractLifeCycle.java:188) ~[metagener-webapi-1.0-SNAPSHOT.jar:1.0-SNAPSHOT]
+! at org.eclipse.jetty.util.component.AbstractLifeCycle.start(AbstractLifeCycle.java:67) ~[metagener-webapi-1.0-SNAPSHOT.jar:1.0-SNAPSHOT]
+! at io.dropwizard.cli.ServerCommand.run(ServerCommand.java:43) [metagener-webapi-1.0-SNAPSHOT.jar:1.0-SNAPSHOT]
+! at io.dropwizard.cli.EnvironmentCommand.run(EnvironmentCommand.java:43) [metagener-webapi-1.0-SNAPSHOT.jar:1.0-SNAPSHOT]
+! at io.dropwizard.cli.ConfiguredCommand.run(ConfiguredCommand.java:76) [metagener-webapi-1.0-SNAPSHOT.jar:1.0-SNAPSHOT]
+! at io.dropwizard.cli.Cli.run(Cli.java:70) [metagener-webapi-1.0-SNAPSHOT.jar:1.0-SNAPSHOT]
+! at io.dropwizard.Application.run(Application.java:73) [metagener-webapi-1.0-SNAPSHOT.jar:1.0-SNAPSHOT]
+! at com.metawiring.webapi.common.MetagenerWebApp.main(MetagenerWebApp.java:24) [metagener-webapi-1.0-SNAPSHOT.jar:1.0-SNAPSHOT]
+ERROR [2015-04-21 23:47:28,171] io.dropwizard.cli.ServerCommand: Unable to start server, shutting down
+! java.net.BindException: Address already in use
+! at sun.nio.ch.Net.bind0(Native Method) ~[na:1.8.0_45]
+! at sun.nio.ch.Net.bind(Net.java:437) ~[na:1.8.0_45]
+! at sun.nio.ch.Net.bind(Net.java:429) ~[na:1.8.0_45]
+! at sun.nio.ch.ServerSocketChannelImpl.bind(ServerSocketChannelImpl.java:223) ~[na:1.8.0_45]
+! at sun.nio.ch.ServerSocketAdaptor.bind(ServerSocketAdaptor.java:74) ~[na:1.8.0_45]
+! at org.eclipse.jetty.server.ServerConnector.open(ServerConnector.java:321) ~[metagener-webapi-1.0-SNAPSHOT.jar:1.0-SNAPSHOT]
+! at org.eclipse.jetty.setuid.SetUIDListener.lifeCycleStarting(SetUIDListener.java:200) ~[metagener-webapi-1.0-SNAPSHOT.jar:1.0-SNAPSHOT]
+! ... 8 common frames omitted
+! Causing: java.lang.RuntimeException: java.net.BindException: Address already in use
+! at org.eclipse.jetty.setuid.SetUIDListener.lifeCycleStarting(SetUIDListener.java:213) ~[metagener-webapi-1.0-SNAPSHOT.jar:1.0-SNAPSHOT]
+! at org.eclipse.jetty.util.component.AbstractLifeCycle.setStarting(AbstractLifeCycle.java:188) ~[metagener-webapi-1.0-SNAPSHOT.jar:1.0-SNAPSHOT]
+! at org.eclipse.jetty.util.component.AbstractLifeCycle.start(AbstractLifeCycle.java:67) ~[metagener-webapi-1.0-SNAPSHOT.jar:1.0-SNAPSHOT]
+! at io.dropwizard.cli.ServerCommand.run(ServerCommand.java:43) ~[metagener-webapi-1.0-SNAPSHOT.jar:1.0-SNAPSHOT]
+! at io.dropwizard.cli.EnvironmentCommand.run(EnvironmentCommand.java:43) [metagener-webapi-1.0-SNAPSHOT.jar:1.0-SNAPSHOT]
+! at io.dropwizard.cli.ConfiguredCommand.run(ConfiguredCommand.java:76) [metagener-webapi-1.0-SNAPSHOT.jar:1.0-SNAPSHOT]
+! at io.dropwizard.cli.Cli.run(Cli.java:70) [metagener-webapi-1.0-SNAPSHOT.jar:1.0-SNAPSHOT]
+! at io.dropwizard.Application.run(Application.java:73) [metagener-webapi-1.0-SNAPSHOT.jar:1.0-SNAPSHOT]
+! at com.metawiring.webapi.common.MetagenerWebApp.main(MetagenerWebApp.java:24) [metagener-webapi-1.0-SNAPSHOT.jar:1.0-SNAPSHOT]
+INFO  [2015-04-21 23:47:38,987] org.eclipse.jetty.server.ServerConnector: Stopped application@410ae9a3{HTTP/1.1}{0.0.0.0:8080}
+INFO  [2015-04-21 23:47:38,989] org.eclipse.jetty.server.ServerConnector: Stopped admin@319988b0{HTTP/1.1}{0.0.0.0:8081}
+INFO  [2015-04-21 23:47:38,990] org.eclipse.jetty.server.handler.ContextHandler: Stopped i.d.j.MutableServletContextHandler@232cce0{/,null,UNAVAILABLE}
+INFO  [2015-04-21 23:47:38,993] org.eclipse.jetty.server.handler.ContextHandler: Stopped i.d.j.MutableServletContextHandler@6892cc6f{/,null,UNAVAILABLE}
+INFO  [2015-04-21 23:47:45,471] org.eclipse.jetty.util.log: Logging initialized @892ms
+INFO  [2015-04-21 23:47:45,517] com.metawiring.webapi.common.MetagenerWebApp: Preloading generator context 'retail' from 'black-friday.metagener'
+INFO  [2015-04-21 23:47:45,517] com.metawiring.wiring.Metagener: loading from black-friday.metagener
+INFO  [2015-04-21 23:47:45,556] com.metawiring.syntax.MetagenerDSLModelBuilder: building GenContextDef
+INFO  [2015-04-21 23:47:45,583] com.metawiring.syntax.MetagenerDSLModelBuilder: built GenContextDef
+INFO  [2015-04-21 23:47:45,590] io.dropwizard.server.ServerFactory: Starting MetagenerWebApp
+INFO  [2015-04-21 23:47:45,639] org.eclipse.jetty.setuid.SetUIDListener: Opened application@410ae9a3{HTTP/1.1}{0.0.0.0:8080}
+INFO  [2015-04-21 23:47:45,639] org.eclipse.jetty.setuid.SetUIDListener: Opened admin@319988b0{HTTP/1.1}{0.0.0.0:8081}
+INFO  [2015-04-21 23:47:45,641] org.eclipse.jetty.server.Server: jetty-9.2.z-SNAPSHOT
+INFO  [2015-04-21 23:47:45,990] io.dropwizard.jersey.DropwizardResourceConfig: The following paths were found for the configured resources:
+
+    GET     /sample/{contextName}/{samplername} (com.metawiring.webapi.resource.SampleResource)
+    GET     /sample/{contextName}/{samplername}/{sampleid} (com.metawiring.webapi.resource.SampleResource)
+    GET     /bulksample/{contextName}/{samplername}/{count} (com.metawiring.webapi.resource.BulkSampleResource)
+    GET     /context/ (com.metawiring.webapi.resource.GenContextResource)
+    GET     /context/{contextName} (com.metawiring.webapi.resource.GenContextResource)
+    POST    /context/{contextName} (com.metawiring.webapi.resource.GenContextResource)
+
+WARN  [2015-04-21 23:47:45,991] org.glassfish.jersey.internal.Errors: The following warnings have been detected: WARNING: The (sub)resource method getContextList in com.metawiring.webapi.resource.GenContextResource contains empty path annotation.
+
+INFO  [2015-04-21 23:47:45,994] org.eclipse.jetty.server.handler.ContextHandler: Started i.d.j.MutableServletContextHandler@6892cc6f{/,null,AVAILABLE}
+INFO  [2015-04-21 23:47:45,996] io.dropwizard.setup.AdminEnvironment: tasks = 
+
+    POST    /tasks/log-level (io.dropwizard.servlets.tasks.LogConfigurationTask)
+    POST    /tasks/gc (io.dropwizard.servlets.tasks.GarbageCollectionTask)
+
+INFO  [2015-04-21 23:47:45,999] org.eclipse.jetty.server.handler.ContextHandler: Started i.d.j.MutableServletContextHandler@232cce0{/,null,AVAILABLE}
+INFO  [2015-04-21 23:47:46,005] org.eclipse.jetty.server.ServerConnector: Started application@410ae9a3{HTTP/1.1}{0.0.0.0:8080}
+INFO  [2015-04-21 23:47:46,005] org.eclipse.jetty.server.ServerConnector: Started admin@319988b0{HTTP/1.1}{0.0.0.0:8081}
+INFO  [2015-04-21 23:47:46,005] org.eclipse.jetty.server.Server: Started @1427ms
+INFO  [2015-04-21 23:49:10,165] org.eclipse.jetty.server.ServerConnector: Stopped application@410ae9a3{HTTP/1.1}{0.0.0.0:8080}
+INFO  [2015-04-21 23:49:10,166] org.eclipse.jetty.server.ServerConnector: Stopped admin@319988b0{HTTP/1.1}{0.0.0.0:8081}
+INFO  [2015-04-21 23:49:10,167] org.eclipse.jetty.server.handler.ContextHandler: Stopped i.d.j.MutableServletContextHandler@232cce0{/,null,UNAVAILABLE}
+INFO  [2015-04-21 23:49:10,170] org.eclipse.jetty.server.handler.ContextHandler: Stopped i.d.j.MutableServletContextHandler@6892cc6f{/,null,UNAVAILABLE}
+INFO  [2015-04-21 23:49:24,243] org.eclipse.jetty.util.log: Logging initialized @869ms
+INFO  [2015-04-21 23:49:24,288] com.metawiring.webapi.common.MetagenerWebApp: Preloading generator context 'retail' from 'black-friday.metagener'
+INFO  [2015-04-21 23:49:24,288] com.metawiring.wiring.Metagener: loading from black-friday.metagener
+INFO  [2015-04-21 23:49:24,322] com.metawiring.syntax.MetagenerDSLModelBuilder: building GenContextDef
+INFO  [2015-04-21 23:49:24,349] com.metawiring.syntax.MetagenerDSLModelBuilder: built GenContextDef
+INFO  [2015-04-21 23:49:24,356] io.dropwizard.server.ServerFactory: Starting MetagenerWebApp
+INFO  [2015-04-21 23:49:24,403] org.eclipse.jetty.setuid.SetUIDListener: Opened application@410ae9a3{HTTP/1.1}{0.0.0.0:8080}
+INFO  [2015-04-21 23:49:24,403] org.eclipse.jetty.setuid.SetUIDListener: Opened admin@319988b0{HTTP/1.1}{0.0.0.0:8081}
+INFO  [2015-04-21 23:49:24,405] org.eclipse.jetty.server.Server: jetty-9.2.z-SNAPSHOT
+INFO  [2015-04-21 23:49:24,747] io.dropwizard.jersey.DropwizardResourceConfig: The following paths were found for the configured resources:
+
+    GET     /sample/{contextName}/{samplername} (com.metawiring.webapi.resource.SampleResource)
+    GET     /sample/{contextName}/{samplername}/{sampleid} (com.metawiring.webapi.resource.SampleResource)
+    GET     /bulksample/{contextName}/{samplername}/{count} (com.metawiring.webapi.resource.BulkSampleResource)
+    GET     /context/ (com.metawiring.webapi.resource.GenContextResource)
+    GET     /context/{contextName} (com.metawiring.webapi.resource.GenContextResource)
+    POST    /context/{contextName} (com.metawiring.webapi.resource.GenContextResource)
+
+WARN  [2015-04-21 23:49:24,748] org.glassfish.jersey.internal.Errors: The following warnings have been detected: WARNING: The (sub)resource method getContextList in com.metawiring.webapi.resource.GenContextResource contains empty path annotation.
+
+INFO  [2015-04-21 23:49:24,752] org.eclipse.jetty.server.handler.ContextHandler: Started i.d.j.MutableServletContextHandler@6892cc6f{/,null,AVAILABLE}
+INFO  [2015-04-21 23:49:24,755] io.dropwizard.setup.AdminEnvironment: tasks = 
+
+    POST    /tasks/log-level (io.dropwizard.servlets.tasks.LogConfigurationTask)
+    POST    /tasks/gc (io.dropwizard.servlets.tasks.GarbageCollectionTask)
+
+INFO  [2015-04-21 23:49:24,758] org.eclipse.jetty.server.handler.ContextHandler: Started i.d.j.MutableServletContextHandler@232cce0{/,null,AVAILABLE}
+INFO  [2015-04-21 23:49:24,764] org.eclipse.jetty.server.ServerConnector: Started application@410ae9a3{HTTP/1.1}{0.0.0.0:8080}
+INFO  [2015-04-21 23:49:24,765] org.eclipse.jetty.server.ServerConnector: Started admin@319988b0{HTTP/1.1}{0.0.0.0:8081}
+INFO  [2015-04-21 23:49:24,765] org.eclipse.jetty.server.Server: Started @1393ms
+INFO  [2015-04-21 23:49:51,665] org.eclipse.jetty.server.ServerConnector: Stopped application@410ae9a3{HTTP/1.1}{0.0.0.0:8080}
+INFO  [2015-04-21 23:49:51,666] org.eclipse.jetty.server.ServerConnector: Stopped admin@319988b0{HTTP/1.1}{0.0.0.0:8081}
+INFO  [2015-04-21 23:49:51,667] org.eclipse.jetty.server.handler.ContextHandler: Stopped i.d.j.MutableServletContextHandler@232cce0{/,null,UNAVAILABLE}
+INFO  [2015-04-21 23:49:51,671] org.eclipse.jetty.server.handler.ContextHandler: Stopped i.d.j.MutableServletContextHandler@6892cc6f{/,null,UNAVAILABLE}
+INFO  [2015-04-21 23:50:42,090] org.eclipse.jetty.util.log: Logging initialized @869ms
+INFO  [2015-04-21 23:50:42,135] com.metawiring.webapi.common.MetagenerWebApp: Preloading generator context 'retail' from 'black-friday.metagener'
+INFO  [2015-04-21 23:50:42,136] com.metawiring.wiring.Metagener: loading from black-friday.metagener
+INFO  [2015-04-21 23:50:42,170] com.metawiring.syntax.MetagenerDSLModelBuilder: building GenContextDef
+INFO  [2015-04-21 23:50:42,198] com.metawiring.syntax.MetagenerDSLModelBuilder: built GenContextDef
+INFO  [2015-04-21 23:50:42,204] io.dropwizard.server.ServerFactory: Starting MetagenerWebApp
+INFO  [2015-04-21 23:50:42,252] org.eclipse.jetty.setuid.SetUIDListener: Opened application@410ae9a3{HTTP/1.1}{0.0.0.0:8080}
+INFO  [2015-04-21 23:50:42,252] org.eclipse.jetty.setuid.SetUIDListener: Opened admin@319988b0{HTTP/1.1}{0.0.0.0:8081}
+INFO  [2015-04-21 23:50:42,254] org.eclipse.jetty.server.Server: jetty-9.2.z-SNAPSHOT
+INFO  [2015-04-21 23:50:42,609] io.dropwizard.jersey.DropwizardResourceConfig: The following paths were found for the configured resources:
+
+    GET     /sample/{contextName}/{samplername} (com.metawiring.webapi.resource.SampleResource)
+    GET     /sample/{contextName}/{samplername}/{sampleid} (com.metawiring.webapi.resource.SampleResource)
+    GET     /bulksample/{contextName}/{samplername}/{count} (com.metawiring.webapi.resource.BulkSampleResource)
+    GET     /context/ (com.metawiring.webapi.resource.GenContextResource)
+    GET     /context/{contextName} (com.metawiring.webapi.resource.GenContextResource)
+    POST    /context/{contextName} (com.metawiring.webapi.resource.GenContextResource)
+
+WARN  [2015-04-21 23:50:42,610] org.glassfish.jersey.internal.Errors: The following warnings have been detected: WARNING: The (sub)resource method getContextList in com.metawiring.webapi.resource.GenContextResource contains empty path annotation.
+
+INFO  [2015-04-21 23:50:42,613] org.eclipse.jetty.server.handler.ContextHandler: Started i.d.j.MutableServletContextHandler@6892cc6f{/,null,AVAILABLE}
+INFO  [2015-04-21 23:50:42,617] io.dropwizard.setup.AdminEnvironment: tasks = 
+
+    POST    /tasks/log-level (io.dropwizard.servlets.tasks.LogConfigurationTask)
+    POST    /tasks/gc (io.dropwizard.servlets.tasks.GarbageCollectionTask)
+
+INFO  [2015-04-21 23:50:42,620] org.eclipse.jetty.server.handler.ContextHandler: Started i.d.j.MutableServletContextHandler@232cce0{/,null,AVAILABLE}
+INFO  [2015-04-21 23:50:42,627] org.eclipse.jetty.server.ServerConnector: Started application@410ae9a3{HTTP/1.1}{0.0.0.0:8080}
+INFO  [2015-04-21 23:50:42,628] org.eclipse.jetty.server.ServerConnector: Started admin@319988b0{HTTP/1.1}{0.0.0.0:8081}
+INFO  [2015-04-21 23:50:42,628] org.eclipse.jetty.server.Server: Started @1407ms
+INFO  [2015-04-21 23:52:00,368] org.eclipse.jetty.server.ServerConnector: Stopped application@410ae9a3{HTTP/1.1}{0.0.0.0:8080}
+INFO  [2015-04-21 23:52:00,369] org.eclipse.jetty.server.ServerConnector: Stopped admin@319988b0{HTTP/1.1}{0.0.0.0:8081}
+INFO  [2015-04-21 23:52:00,370] org.eclipse.jetty.server.handler.ContextHandler: Stopped i.d.j.MutableServletContextHandler@232cce0{/,null,UNAVAILABLE}
+INFO  [2015-04-21 23:52:00,373] org.eclipse.jetty.server.handler.ContextHandler: Stopped i.d.j.MutableServletContextHandler@6892cc6f{/,null,UNAVAILABLE}
+INFO  [2015-04-21 23:53:05,831] org.eclipse.jetty.util.log: Logging initialized @878ms
+INFO  [2015-04-21 23:53:05,879] com.metawiring.webapi.common.MetagenerWebApp: Preloading generator context 'retail' from 'black-friday.metagener'
+INFO  [2015-04-21 23:53:05,879] com.metawiring.wiring.Metagener: loading from black-friday.metagener
+INFO  [2015-04-21 23:53:05,916] com.metawiring.syntax.MetagenerDSLModelBuilder: building GenContextDef
+INFO  [2015-04-21 23:53:05,944] com.metawiring.syntax.MetagenerDSLModelBuilder: built GenContextDef
+INFO  [2015-04-21 23:53:05,951] io.dropwizard.server.ServerFactory: Starting MetagenerWebApp
+INFO  [2015-04-21 23:53:05,999] org.eclipse.jetty.setuid.SetUIDListener: Opened application@410ae9a3{HTTP/1.1}{0.0.0.0:8080}
+INFO  [2015-04-21 23:53:05,999] org.eclipse.jetty.setuid.SetUIDListener: Opened admin@319988b0{HTTP/1.1}{0.0.0.0:8081}
+INFO  [2015-04-21 23:53:06,001] org.eclipse.jetty.server.Server: jetty-9.2.z-SNAPSHOT
+INFO  [2015-04-21 23:53:06,366] io.dropwizard.jersey.DropwizardResourceConfig: The following paths were found for the configured resources:
+
+    GET     /sample/{contextName}/{samplername} (com.metawiring.webapi.resource.SampleResource)
+    GET     /sample/{contextName}/{samplername}/{sampleid} (com.metawiring.webapi.resource.SampleResource)
+    GET     /bulksample/{contextName}/{samplername}/{count} (com.metawiring.webapi.resource.BulkSampleResource)
+    GET     /context/ (com.metawiring.webapi.resource.GenContextResource)
+    GET     /context/{contextName} (com.metawiring.webapi.resource.GenContextResource)
+    POST    /context/{contextName} (com.metawiring.webapi.resource.GenContextResource)
+
+WARN  [2015-04-21 23:53:06,367] org.glassfish.jersey.internal.Errors: The following warnings have been detected: WARNING: The (sub)resource method getContextList in com.metawiring.webapi.resource.GenContextResource contains empty path annotation.
+
+INFO  [2015-04-21 23:53:06,371] org.eclipse.jetty.server.handler.ContextHandler: Started i.d.j.MutableServletContextHandler@6892cc6f{/,null,AVAILABLE}
+INFO  [2015-04-21 23:53:06,372] io.dropwizard.setup.AdminEnvironment: tasks = 
+
+    POST    /tasks/log-level (io.dropwizard.servlets.tasks.LogConfigurationTask)
+    POST    /tasks/gc (io.dropwizard.servlets.tasks.GarbageCollectionTask)
+
+INFO  [2015-04-21 23:53:06,375] org.eclipse.jetty.server.handler.ContextHandler: Started i.d.j.MutableServletContextHandler@232cce0{/,null,AVAILABLE}
+INFO  [2015-04-21 23:53:06,382] org.eclipse.jetty.server.ServerConnector: Started application@410ae9a3{HTTP/1.1}{0.0.0.0:8080}
+INFO  [2015-04-21 23:53:06,382] org.eclipse.jetty.server.ServerConnector: Started admin@319988b0{HTTP/1.1}{0.0.0.0:8081}
+INFO  [2015-04-21 23:53:06,382] org.eclipse.jetty.server.Server: Started @1430ms
+INFO  [2015-04-21 23:53:56,211] org.eclipse.jetty.server.ServerConnector: Stopped application@410ae9a3{HTTP/1.1}{0.0.0.0:8080}
+INFO  [2015-04-21 23:53:56,212] org.eclipse.jetty.server.ServerConnector: Stopped admin@319988b0{HTTP/1.1}{0.0.0.0:8081}
+INFO  [2015-04-21 23:53:56,213] org.eclipse.jetty.server.handler.ContextHandler: Stopped i.d.j.MutableServletContextHandler@232cce0{/,null,UNAVAILABLE}
+INFO  [2015-04-21 23:53:56,216] org.eclipse.jetty.server.handler.ContextHandler: Stopped i.d.j.MutableServletContextHandler@6892cc6f{/,null,UNAVAILABLE}
+INFO  [2015-04-21 23:54:02,857] org.eclipse.jetty.util.log: Logging initialized @885ms
+INFO  [2015-04-21 23:54:02,910] com.metawiring.webapi.common.MetagenerWebApp: Preloading generator context 'retail' from 'black-friday.metagener'
+INFO  [2015-04-21 23:54:02,910] com.metawiring.wiring.Metagener: loading from black-friday.metagener
+INFO  [2015-04-21 23:54:02,946] com.metawiring.syntax.MetagenerDSLModelBuilder: building GenContextDef
+INFO  [2015-04-21 23:54:02,979] com.metawiring.syntax.MetagenerDSLModelBuilder: built GenContextDef
+INFO  [2015-04-21 23:54:02,985] io.dropwizard.server.ServerFactory: Starting MetagenerWebApp
+INFO  [2015-04-21 23:54:03,039] org.eclipse.jetty.setuid.SetUIDListener: Opened application@410ae9a3{HTTP/1.1}{0.0.0.0:8080}
+INFO  [2015-04-21 23:54:03,039] org.eclipse.jetty.setuid.SetUIDListener: Opened admin@319988b0{HTTP/1.1}{0.0.0.0:8081}
+INFO  [2015-04-21 23:54:03,041] org.eclipse.jetty.server.Server: jetty-9.2.z-SNAPSHOT
+INFO  [2015-04-21 23:54:03,390] io.dropwizard.jersey.DropwizardResourceConfig: The following paths were found for the configured resources:
+
+    GET     /sample/{contextName}/{samplername} (com.metawiring.webapi.resource.SampleResource)
+    GET     /sample/{contextName}/{samplername}/{sampleid} (com.metawiring.webapi.resource.SampleResource)
+    GET     /bulksample/{contextName}/{samplername}/{count} (com.metawiring.webapi.resource.BulkSampleResource)
+    GET     /context/ (com.metawiring.webapi.resource.GenContextResource)
+    GET     /context/{contextName} (com.metawiring.webapi.resource.GenContextResource)
+    POST    /context/{contextName} (com.metawiring.webapi.resource.GenContextResource)
+
+WARN  [2015-04-21 23:54:03,391] org.glassfish.jersey.internal.Errors: The following warnings have been detected: WARNING: The (sub)resource method getContextList in com.metawiring.webapi.resource.GenContextResource contains empty path annotation.
+
+INFO  [2015-04-21 23:54:03,394] org.eclipse.jetty.server.handler.ContextHandler: Started i.d.j.MutableServletContextHandler@6892cc6f{/,null,AVAILABLE}
+INFO  [2015-04-21 23:54:03,396] io.dropwizard.setup.AdminEnvironment: tasks = 
+
+    POST    /tasks/log-level (io.dropwizard.servlets.tasks.LogConfigurationTask)
+    POST    /tasks/gc (io.dropwizard.servlets.tasks.GarbageCollectionTask)
+
+INFO  [2015-04-21 23:54:03,399] org.eclipse.jetty.server.handler.ContextHandler: Started i.d.j.MutableServletContextHandler@232cce0{/,null,AVAILABLE}
+INFO  [2015-04-21 23:54:03,405] org.eclipse.jetty.server.ServerConnector: Started application@410ae9a3{HTTP/1.1}{0.0.0.0:8080}
+INFO  [2015-04-21 23:54:03,405] org.eclipse.jetty.server.ServerConnector: Started admin@319988b0{HTTP/1.1}{0.0.0.0:8081}
+INFO  [2015-04-21 23:54:03,405] org.eclipse.jetty.server.Server: Started @1433ms
+INFO  [2015-04-21 23:55:30,532] org.eclipse.jetty.server.ServerConnector: Stopped application@410ae9a3{HTTP/1.1}{0.0.0.0:8080}
+INFO  [2015-04-21 23:55:30,533] org.eclipse.jetty.server.ServerConnector: Stopped admin@319988b0{HTTP/1.1}{0.0.0.0:8081}
+INFO  [2015-04-21 23:55:30,534] org.eclipse.jetty.server.handler.ContextHandler: Stopped i.d.j.MutableServletContextHandler@232cce0{/,null,UNAVAILABLE}
+INFO  [2015-04-21 23:55:30,536] org.eclipse.jetty.server.handler.ContextHandler: Stopped i.d.j.MutableServletContextHandler@6892cc6f{/,null,UNAVAILABLE}
+INFO  [2015-04-21 23:55:35,763] org.eclipse.jetty.util.log: Logging initialized @877ms
+INFO  [2015-04-21 23:55:35,808] com.metawiring.webapi.common.MetagenerWebApp: Preloading generator context 'retail' from 'black-friday.metagener'
+INFO  [2015-04-21 23:55:35,808] com.metawiring.wiring.Metagener: loading from black-friday.metagener
+INFO  [2015-04-21 23:55:35,844] com.metawiring.syntax.MetagenerDSLModelBuilder: building GenContextDef
+INFO  [2015-04-21 23:55:35,873] com.metawiring.syntax.MetagenerDSLModelBuilder: built GenContextDef
+INFO  [2015-04-21 23:55:35,879] io.dropwizard.server.ServerFactory: Starting MetagenerWebApp
+INFO  [2015-04-21 23:55:35,926] org.eclipse.jetty.setuid.SetUIDListener: Opened application@410ae9a3{HTTP/1.1}{0.0.0.0:8080}
+INFO  [2015-04-21 23:55:35,926] org.eclipse.jetty.setuid.SetUIDListener: Opened admin@319988b0{HTTP/1.1}{0.0.0.0:8081}
+INFO  [2015-04-21 23:55:35,928] org.eclipse.jetty.server.Server: jetty-9.2.z-SNAPSHOT
+INFO  [2015-04-21 23:55:36,276] io.dropwizard.jersey.DropwizardResourceConfig: The following paths were found for the configured resources:
+
+    GET     /sample/{contextName}/{samplername} (com.metawiring.webapi.resource.SampleResource)
+    GET     /sample/{contextName}/{samplername}/{sampleid} (com.metawiring.webapi.resource.SampleResource)
+    GET     /bulksample/{contextName}/{samplername}/{count} (com.metawiring.webapi.resource.BulkSampleResource)
+    GET     /context/ (com.metawiring.webapi.resource.GenContextResource)
+    GET     /context/{contextName} (com.metawiring.webapi.resource.GenContextResource)
+    POST    /context/{contextName} (com.metawiring.webapi.resource.GenContextResource)
+
+WARN  [2015-04-21 23:55:36,277] org.glassfish.jersey.internal.Errors: The following warnings have been detected: WARNING: The (sub)resource method getContextList in com.metawiring.webapi.resource.GenContextResource contains empty path annotation.
+
+INFO  [2015-04-21 23:55:36,280] org.eclipse.jetty.server.handler.ContextHandler: Started i.d.j.MutableServletContextHandler@6892cc6f{/,null,AVAILABLE}
+INFO  [2015-04-21 23:55:36,282] io.dropwizard.setup.AdminEnvironment: tasks = 
+
+    POST    /tasks/log-level (io.dropwizard.servlets.tasks.LogConfigurationTask)
+    POST    /tasks/gc (io.dropwizard.servlets.tasks.GarbageCollectionTask)
+
+INFO  [2015-04-21 23:55:36,286] org.eclipse.jetty.server.handler.ContextHandler: Started i.d.j.MutableServletContextHandler@232cce0{/,null,AVAILABLE}
+INFO  [2015-04-21 23:55:36,293] org.eclipse.jetty.server.ServerConnector: Started application@410ae9a3{HTTP/1.1}{0.0.0.0:8080}
+INFO  [2015-04-21 23:55:36,293] org.eclipse.jetty.server.ServerConnector: Started admin@319988b0{HTTP/1.1}{0.0.0.0:8081}
+INFO  [2015-04-21 23:55:36,294] org.eclipse.jetty.server.Server: Started @1408ms
+INFO  [2015-04-21 23:58:24,951] org.eclipse.jetty.server.ServerConnector: Stopped application@410ae9a3{HTTP/1.1}{0.0.0.0:8080}
+INFO  [2015-04-21 23:58:24,952] org.eclipse.jetty.server.ServerConnector: Stopped admin@319988b0{HTTP/1.1}{0.0.0.0:8081}
+INFO  [2015-04-21 23:58:24,953] org.eclipse.jetty.server.handler.ContextHandler: Stopped i.d.j.MutableServletContextHandler@232cce0{/,null,UNAVAILABLE}
+INFO  [2015-04-21 23:58:24,956] org.eclipse.jetty.server.handler.ContextHandler: Stopped i.d.j.MutableServletContextHandler@6892cc6f{/,null,UNAVAILABLE}
+INFO  [2015-04-21 23:58:33,913] org.eclipse.jetty.util.log: Logging initialized @851ms
+INFO  [2015-04-21 23:58:33,958] com.metawiring.webapi.common.MetagenerWebApp: Preloading generator context 'retail' from 'black-friday.metagener'
+INFO  [2015-04-21 23:58:33,959] com.metawiring.wiring.Metagener: loading from black-friday.metagener
+INFO  [2015-04-21 23:58:33,993] com.metawiring.syntax.MetagenerDSLModelBuilder: building GenContextDef
+INFO  [2015-04-21 23:58:34,021] com.metawiring.syntax.MetagenerDSLModelBuilder: built GenContextDef
+INFO  [2015-04-21 23:58:34,028] io.dropwizard.server.ServerFactory: Starting MetagenerWebApp
+INFO  [2015-04-21 23:58:34,075] org.eclipse.jetty.setuid.SetUIDListener: Opened application@410ae9a3{HTTP/1.1}{0.0.0.0:8080}
+INFO  [2015-04-21 23:58:34,075] org.eclipse.jetty.setuid.SetUIDListener: Opened admin@319988b0{HTTP/1.1}{0.0.0.0:8081}
+INFO  [2015-04-21 23:58:34,077] org.eclipse.jetty.server.Server: jetty-9.2.z-SNAPSHOT
+INFO  [2015-04-21 23:58:34,420] io.dropwizard.jersey.DropwizardResourceConfig: The following paths were found for the configured resources:
+
+    GET     /sample/{contextName}/{samplername} (com.metawiring.webapi.resource.SampleResource)
+    GET     /sample/{contextName}/{samplername}/{sampleid} (com.metawiring.webapi.resource.SampleResource)
+    GET     /bulksample/{contextName}/{samplername}/{count} (com.metawiring.webapi.resource.BulkSampleResource)
+    GET     /context/ (com.metawiring.webapi.resource.GenContextResource)
+    GET     /context/{contextName} (com.metawiring.webapi.resource.GenContextResource)
+    POST    /context/{contextName} (com.metawiring.webapi.resource.GenContextResource)
+
+WARN  [2015-04-21 23:58:34,421] org.glassfish.jersey.internal.Errors: The following warnings have been detected: WARNING: The (sub)resource method getContextList in com.metawiring.webapi.resource.GenContextResource contains empty path annotation.
+
+INFO  [2015-04-21 23:58:34,425] org.eclipse.jetty.server.handler.ContextHandler: Started i.d.j.MutableServletContextHandler@6892cc6f{/,null,AVAILABLE}
+INFO  [2015-04-21 23:58:34,427] io.dropwizard.setup.AdminEnvironment: tasks = 
+
+    POST    /tasks/log-level (io.dropwizard.servlets.tasks.LogConfigurationTask)
+    POST    /tasks/gc (io.dropwizard.servlets.tasks.GarbageCollectionTask)
+
+INFO  [2015-04-21 23:58:34,430] org.eclipse.jetty.server.handler.ContextHandler: Started i.d.j.MutableServletContextHandler@232cce0{/,null,AVAILABLE}
+INFO  [2015-04-21 23:58:34,436] org.eclipse.jetty.server.ServerConnector: Started application@410ae9a3{HTTP/1.1}{0.0.0.0:8080}
+INFO  [2015-04-21 23:58:34,437] org.eclipse.jetty.server.ServerConnector: Started admin@319988b0{HTTP/1.1}{0.0.0.0:8081}
+INFO  [2015-04-21 23:58:34,437] org.eclipse.jetty.server.Server: Started @1377ms
+INFO  [2015-04-22 01:05:54,232] org.eclipse.jetty.server.ServerConnector: Stopped application@410ae9a3{HTTP/1.1}{0.0.0.0:8080}
+INFO  [2015-04-22 01:05:54,233] org.eclipse.jetty.server.ServerConnector: Stopped admin@319988b0{HTTP/1.1}{0.0.0.0:8081}
+INFO  [2015-04-22 01:05:54,234] org.eclipse.jetty.server.handler.ContextHandler: Stopped i.d.j.MutableServletContextHandler@232cce0{/,null,UNAVAILABLE}
+INFO  [2015-04-22 01:05:54,237] org.eclipse.jetty.server.handler.ContextHandler: Stopped i.d.j.MutableServletContextHandler@6892cc6f{/,null,UNAVAILABLE}
+INFO  [2015-04-22 01:06:00,217] org.eclipse.jetty.util.log: Logging initialized @873ms
+INFO  [2015-04-22 01:06:00,261] com.metawiring.webapi.common.MetagenerWebApp: Preloading generator context 'retail' from 'black-friday.metagener'
+INFO  [2015-04-22 01:06:00,262] com.metawiring.wiring.Metagener: loading from black-friday.metagener
+INFO  [2015-04-22 01:06:00,296] com.metawiring.syntax.MetagenerDSLModelBuilder: building GenContextDef
+INFO  [2015-04-22 01:06:00,326] com.metawiring.syntax.MetagenerDSLModelBuilder: built GenContextDef
+INFO  [2015-04-22 01:06:00,332] io.dropwizard.server.ServerFactory: Starting MetagenerWebApp
+INFO  [2015-04-22 01:06:00,380] org.eclipse.jetty.setuid.SetUIDListener: Opened application@410ae9a3{HTTP/1.1}{0.0.0.0:8080}
+INFO  [2015-04-22 01:06:00,381] org.eclipse.jetty.setuid.SetUIDListener: Opened admin@319988b0{HTTP/1.1}{0.0.0.0:8081}
+INFO  [2015-04-22 01:06:00,382] org.eclipse.jetty.server.Server: jetty-9.2.z-SNAPSHOT
+INFO  [2015-04-22 01:06:00,718] io.dropwizard.jersey.DropwizardResourceConfig: The following paths were found for the configured resources:
+
+    GET     /sample/{contextName}/{samplername} (com.metawiring.webapi.resource.SampleResource)
+    GET     /sample/{contextName}/{samplername}/{sampleid} (com.metawiring.webapi.resource.SampleResource)
+    GET     /bulksample/{contextName}/{samplername}/{count} (com.metawiring.webapi.resource.BulkSampleResource)
+    GET     /context/ (com.metawiring.webapi.resource.GenContextResource)
+    GET     /context/{contextName} (com.metawiring.webapi.resource.GenContextResource)
+    POST    /context/{contextName} (com.metawiring.webapi.resource.GenContextResource)
+
+WARN  [2015-04-22 01:06:00,719] org.glassfish.jersey.internal.Errors: The following warnings have been detected: WARNING: The (sub)resource method getContextList in com.metawiring.webapi.resource.GenContextResource contains empty path annotation.
+
+INFO  [2015-04-22 01:06:00,723] org.eclipse.jetty.server.handler.ContextHandler: Started i.d.j.MutableServletContextHandler@6892cc6f{/,null,AVAILABLE}
+INFO  [2015-04-22 01:06:00,725] io.dropwizard.setup.AdminEnvironment: tasks = 
+
+    POST    /tasks/log-level (io.dropwizard.servlets.tasks.LogConfigurationTask)
+    POST    /tasks/gc (io.dropwizard.servlets.tasks.GarbageCollectionTask)
+
+INFO  [2015-04-22 01:06:00,728] org.eclipse.jetty.server.handler.ContextHandler: Started i.d.j.MutableServletContextHandler@232cce0{/,null,AVAILABLE}
+INFO  [2015-04-22 01:06:00,734] org.eclipse.jetty.server.ServerConnector: Started application@410ae9a3{HTTP/1.1}{0.0.0.0:8080}
+INFO  [2015-04-22 01:06:00,734] org.eclipse.jetty.server.ServerConnector: Started admin@319988b0{HTTP/1.1}{0.0.0.0:8081}
+INFO  [2015-04-22 01:06:00,734] org.eclipse.jetty.server.Server: Started @1391ms
+INFO  [2015-04-22 01:57:05,485] org.eclipse.jetty.server.ServerConnector: Stopped application@410ae9a3{HTTP/1.1}{0.0.0.0:8080}
+INFO  [2015-04-22 01:57:05,487] org.eclipse.jetty.server.ServerConnector: Stopped admin@319988b0{HTTP/1.1}{0.0.0.0:8081}
+INFO  [2015-04-22 01:57:05,488] org.eclipse.jetty.server.handler.ContextHandler: Stopped i.d.j.MutableServletContextHandler@232cce0{/,null,UNAVAILABLE}
+INFO  [2015-04-22 01:57:05,491] org.eclipse.jetty.server.handler.ContextHandler: Stopped i.d.j.MutableServletContextHandler@6892cc6f{/,null,UNAVAILABLE}

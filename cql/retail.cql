@@ -1,3 +1,75 @@
+CREATE KEYSPACE IF NOT EXISTS retailnew
+WITH REPLICATION = { 'class' : 'SimpleStrategy', 'replication_factor' : 3 };
+
+--aggregated orders by hour table
+CREATE TABLE IF NOT EXISTS retailnew.orders_by_hour_agr (
+    store_id int,
+    yearMonthDay int,
+    hourOfDay int,
+    orders_cnt int,
+    unique_products int,
+    revenue_sum int,
+    PRIMARY KEY ((store_id, yearMonthDay), hourOfDay)
+) WITH CLUSTERING ORDER BY (hourOfDay DESC);
+
+
+--This can support queries per store and also queries per hour
+CREATE TABLE IF NOT EXISTS retailnew.orders_by_store (
+    store_id int,
+    product_id list<int>,
+    trans_date timestamp,
+    trans_id int,
+    total_sale decimal,
+    PRIMARY KEY (store_id, trans_date, trans_id)
+) WITH CLUSTERING ORDER BY (trans_date DESC, trans_id ASC);
+
+
+CREATE TABLE IF NOT EXISTS retailnew.products (
+    product_id text,
+    title text,
+    brand text,
+    model text,
+    sku text,
+    descr text,
+    price decimal,
+    on_sale boolean,
+    PRIMARY KEY ((product_id))
+);
+
+INSERT INTO retailnew.products (product_id, title, brand, model, sku, descr, price, on_sale)
+VALUES
+(  '1',
+  'Insignia™ - 32" Class \(31-1/2" Diag.\) - LED - 720p - HDTV - Black',
+  'Insignia',
+  'NS-32D312NA15',
+  '6080010',
+  '720p resolution
+  60Hz refresh rate
+  ENERGY STAR Certified',
+  169.99,
+  false);
+
+  INSERT INTO retailnew.products (product_id, title, brand, model, sku, descr, price, on_sale)
+  VALUES
+  (  '2',
+    'Samsung - 40 Class \(40" Diag.\) - LED - 1080p - Smart - HDTV - Black',
+    'Samsung',
+    'UN40H5203AFXZA',
+    '5674002',
+    '1080p resolution
+    Clear Motion Rate 120
+    Smart TV
+    ENERGY STAR Certified',
+    219.99,
+    false) ;
+
+
+
+
+
+
+
+
 CREATE KEYSPACE IF NOT EXISTS retail
 WITH REPLICATION = { 'class' : 'SimpleStrategy', 'replication_factor' : 1 };
 
@@ -176,6 +248,10 @@ CREATE TABLE IF NOT EXISTS retail.registers (
 --     approval_no: 548411
 --     reference_no: 670271
 -- }
+
+
+CREATE INDEX receipts_by_store_idx ON retail.receipts (store_id);
+
 CREATE TABLE IF NOT EXISTS retail.receipts (
     receipt_id timeuuid,
 

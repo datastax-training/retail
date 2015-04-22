@@ -32,3 +32,27 @@ entity retail.payments
     field last_name:text       <- filesample(last_names.txt,uniform);
     field month:int            <- rangedrandom(1,12);
     field year:int             <- rangedrandom(15,20);
+
+sampler retailnew.orders_by_store <- murmur3();
+entity retailnew.orders_by_store
+    field store_id:int    <- rangedrandom(1,250);
+    field product_id:int <- rangedrandom(25,999);
+    field trans_date:timestamp <- select('2015-04-21');
+    field trans_id:int    <- rangedrandom(999,999999);
+    field total_sale:double <- cdist(pareto,99.99,999.99);
+
+sampler retail.receipts <- murmur3();
+entity retail.receipts pop=1000000000
+    field store_id:int    <- rangedrandom(1,250);
+    field receipt_id:timeuuid    <- rangedrandom(999,999999);
+    field total:double <- cdist(pareto,99.99,999.99);
+    field cashier_first_name:text <- filesample(first_names.txt);
+    field cashier_id:int <- rangedrandom(100,9999999);
+    field cashier_last_initial:text <- index(ABCDEFGHIJKLMNOPQRSTUVWXYZ);
+    field cashier_last_name:text <- filesample(last_names.txt);
+    field close_drawer:timestamp <- select('2015-04-21');
+    field payment:text <- select('CreditCard');
+    field register_id:int <- rangedrandom(9,999);
+    field savings:decimal  <- cdist(pareto,99.99,999.99);
+    field subtotal:decimal <- cdist(pareto,99.99,999.99);
+    field tax_rate:text <- select('.06');

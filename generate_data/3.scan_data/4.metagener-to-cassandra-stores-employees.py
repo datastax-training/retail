@@ -193,6 +193,48 @@ def populate_employees(futures, session):
             async_write_full_pipeline(futures, session, insert_employee, values)
 
 
+def populate_receipts(futures, session):
+    """
+    Read from Metagener REST API and save data to Cassandra
+    :param futures: queue.Queue
+    :param session: Cassandra session()
+    :return: None
+    """
+
+    insert_receipts = session.prepare('''
+        INSERT INTO retail.receipts
+            (store_id, receipt_id, total, cashier_first_name, cashier_id, cashier_last_initial, cashier_last_name, close_drawer, payment, register_id, savings, subtotal, tax_rate)
+        VALUES
+            (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)''')
+
+    rest_api = 'http://localhost:8080/bulksample/retail/retail.receipts/'
+    batch_size = 10000
+    endpoint = '%s%s' % (rest_api, batch_size)
+
+    for i in range(60):
+        response = requests.get(endpoint).json()
+        for sample in response['sampleValues']:
+            field_values = sample['fieldValues']
+
+            values = {
+                'store_id': int(field_values['store_id']),
+                'receipt_id': field_values['receipt_id'],
+                'total': field_values['total'],
+                'cashier_first_name': field_values['cashier_first_name'],
+                'cashier_id': int(field_values['cashier_id']),
+                'cashier_last_initial': field_values['cashier_last_initial'],
+                'cashier_last_name': field_values['cashier_last_name'],
+                'close_drawer': field_values['close_drawer'],
+                'payment': field_values['payment'],
+                'register_id': int(field_values['register_id']),
+                'savings': field_values['savings'],
+                'subtotal': field_values['subtotal'],
+                'tax_rate': field_values['tax_rate']
+            }
+
+            async_write_full_pipeline(futures, session, insert_receipts, values)
+
+
 def main():
     # set Cassandra futures queue size
     futures = queue.Queue(maxsize=31)
@@ -200,7 +242,8 @@ def main():
     # create Cassandra connections
     cluster, session = init_cassandra()
 
-    populate_stores(futures, session)
+    populate_receipts(futures, session)
+    #populate_stores(futures, session)
     populate_employees(futures, session)
 
     # cleanup final requests
