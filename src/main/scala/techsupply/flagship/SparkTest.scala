@@ -11,11 +11,6 @@ import org.json4s.jackson.JsonMethods._
 import com.datastax.spark.connector._
 import techsupply.flagship.WebActor.NextMG
 
-case class Receipts(cashier_first_name: Int, cashier_id: String, cashier_last_name: String)
-
-case class Product(product_id: String, brand: String, price: BigDecimal, title: String)
-
-
 class WebActor extends Actor {
   def receive = {
     case NextMG(mg) => {
@@ -44,10 +39,10 @@ object SparkTest extends TextSocketCapable with MetagenerCapable with Logging {
 
     val system = ActorSystem("SPARKTESTSYSTEM")
     val webActorRef = system.actorOf(WebActor.props())
-    val numData = system.settings.config.getString("NUM_DATA")
-    println(s"numData = $numData")
+    val DSE_HOST = system.settings.config.getString("dse_host")
+    println(s"DSE_HOST = $DSE_HOST")
 
-    testMetagenerStream(webActorRef)
+    testMetagenerStream(webActorRef, DSE_HOST)
   }
 
   def testJsonParsing() = {
@@ -93,22 +88,12 @@ object SparkTest extends TextSocketCapable with MetagenerCapable with Logging {
 
   }
 
-  def callSparkJob() = {
-    val sparkConf = createSparkConf()
 
-    val sc = new SparkContext(sparkConf)
-    val genericRDD = sc.cassandraTable[Product]("retail", "products")
-    val products: Array[Product] = genericRDD.take(20)
-    sc.stop()
-
-    products
-  }
-
-  def testMetagenerStream(webActorRef:ActorRef) = {
+  def testMetagenerStream(webActorRef:ActorRef, DSE_HOST:String) = {
     println(s"webActorRef  = $webActorRef  = ${webActorRef.path}}")
     setStreamingLogLevels()
 
-    val (metagenerStreamRDD, sparkContext, connector) = connectToMetagener()
+    val (metagenerStreamRDD, sparkContext, connector) = connectToMetagener(DSE_HOST)
 
     metagenerStreamRDD.foreachRDD {
       metaRDD => {
@@ -143,11 +128,11 @@ object SparkTest extends TextSocketCapable with MetagenerCapable with Logging {
 
   case class WordCount(word: String, count: Long)
 
-  def testSparkStreamSocket() = {
+  def testSparkStreamSocket(DSE_HOST:String) = {
 
     setStreamingLogLevels()
 
-    val (socketRdd, sparkContext, connector) = connectToSocket()
+    val (socketRdd, sparkContext, connector) = connectToSocket(DSE_HOST)
 
     val words = socketRdd.flatMap(_.split(" "))
     // Count each word in each batch

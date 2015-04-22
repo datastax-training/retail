@@ -26,8 +26,8 @@ trait MetagenerCapable extends CassandraCapable {
 
   val metagenerTestUrl = "http://10.200.21.236:8080/bulksample/retail/retail.item_scans/10"
 
-  def connectToMetagener(): (DStream[MetagenerData], StreamingContext, CassandraConnector) = {
-    val context = connect()
+  def connectToMetagener(DSE_HOST:String): (DStream[MetagenerData], StreamingContext, CassandraConnector) = {
+    val context = connect(DSE_HOST)
     //val metagenerStreamRDD = context.streamingContext.receiverStream[MetagenerData](new MetagenerReceiverActor(metagenerTestUrl, StorageLevel.MEMORY_ONLY_SER))
     val metagenerStreamRDD = context.streamingContext.actorStream[MetagenerData](MetagenerReceiverActor.props(metagenerTestUrl,
           StorageLevel.MEMORY_ONLY_SER), "MetagenerReceiverActor")

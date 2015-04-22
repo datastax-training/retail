@@ -27,21 +27,21 @@ trait CassandraCapable {
   val keySpaceName =  "retail"
   val fullTableName =  "streaming_demo"
 
-  def createSparkConf(): SparkConf = {
+  def createSparkConf(DSE_HOST:String): SparkConf = {
     new SparkConf()
       .setAppName("techsupply")
-      .set("spark.cassandra.connection.host", "172.16.131.140")
+      .set("spark.cassandra.connection.host",DSE_HOST)
       .set("spark.eventLog.enabled", "true")
       .set("spark.eventLog.dir", "/Users/ryanknight/dse/logs/spark/eventLog")
-      .setMaster("spark://172.16.131.140:7077")
+      .setMaster(s"spark://${DSE_HOST}:7077")
       .setJars(Array("target/scala-2.10/techsupply-flagship-assembly-0.1.0-SNAPSHOT.jar"))
 
     //spark.cassandra.output.throughput_mb_per_sec
     //.set("spark.cassandra.output.concurrent.writes", "1")
   }
 
-  def connect(): CassandraContext = {
-    var conf = createSparkConf()
+  def connect(DSE_HOST:String): CassandraContext = {
+    var conf = createSparkConf(DSE_HOST)
     val connector = CassandraConnector(conf)
     val ssc = new StreamingContext(conf, Milliseconds(5000))
     new CassandraContext(connector, ssc)

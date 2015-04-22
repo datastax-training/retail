@@ -8,6 +8,9 @@ import ScalateKeys._
 
 import AssemblyKeys._
 
+import com.earldouglas.xsbtwebplugin.PluginKeys._
+import com.earldouglas.xsbtwebplugin.WebPlugin._
+
 object TechSupplyBuild extends Build {
   val Organization = "techsupply"
   val Name = "techsupply-flagship"
@@ -81,7 +84,8 @@ object TechSupplyBuild extends Build {
           val oldStrategy = (mergeStrategy in assembly).value
           oldStrategy(x)
       },
-      mainClass in assembly := Some("techsupply.flagship.SparkTest")
+      mainClass in assembly := Some("techsupply.flagship.SparkTest"),
+      port in container.Configuration := 7071
     )
   )
 }

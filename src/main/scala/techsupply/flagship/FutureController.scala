@@ -2,18 +2,21 @@ package techsupply.flagship
 
 import akka.actor.ActorSystem
 import dispatch._
+import org.apache.spark.SparkContext
 import org.scalatra._
 
 import scala.concurrent.{ExecutionContext, Future, Promise}
 import scala.util.{Failure, Success, Try}
 
 // JSON-related libraries
+
 import org.json4s.{DefaultFormats, Formats}
 
 // JSON handling support from Scalatra
-import org.scalatra.json._
 
-class FutureController(system: ActorSystem) extends ScalatraServlet with FutureSupport {
+import org.scalatra.json._
+import com.datastax.spark.connector._
+class FutureController(system: ActorSystem, DSE_HOST:String) extends ScalatraServlet with FutureSupport with CassandraCapable {
 
   // Sets up automatic case class to JSON output serialization, required by
   // the JValueResult trait.
@@ -22,9 +25,11 @@ class FutureController(system: ActorSystem) extends ScalatraServlet with FutureS
 
   protected implicit def executor: ExecutionContext = system.dispatcher
 
+ // val DSE_HOST = system.settings.config.getString("DSE_HOST")
+
   get("/") {
 
-    val products: Array[Product] = SparkTest.callSparkJob()
+    val products: Array[Product] = callSparkJob()
 
     products foreach println
     println(s"products size: ${products.size}")
@@ -34,8 +39,10 @@ class FutureController(system: ActorSystem) extends ScalatraServlet with FutureS
     <html>
       <body>
         <h1>Hello, world!</h1>
-        Say <a href="hello-scalate">hello to Scalate</a>.
-        {products map (p => p.toString) }
+        Say
+        <a href="hello-scalate">hello to Scalate</a>
+        .
+        {products map (p => p.toString)}
       </body>
     </html>
 
@@ -46,6 +53,17 @@ class FutureController(system: ActorSystem) extends ScalatraServlet with FutureS
     new AsyncResult {
       val is = HttpClient.retrievePage()
     }
+  }
+
+  def callSparkJob() = {
+    val sparkConf = createSparkConf(DSE_HOST)
+
+    val sc = new SparkContext(sparkConf)
+    val genericRDD = sc.cassandraTable[Product]("retail", "products")
+    val products: Array[Product] = genericRDD.take(20)
+    sc.stop()
+
+    products
   }
 
 }

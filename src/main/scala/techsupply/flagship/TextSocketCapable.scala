@@ -24,8 +24,9 @@ trait TextSocketCapable extends CassandraCapable {
 
   val hostName = "localhost"
   val port = 9999
-  def connectToSocket(): (DStream[String], StreamingContext, CassandraConnector) = {
-    val context = connect()
+
+  def connectToSocket(DSE_HOST:String): (DStream[String], StreamingContext, CassandraConnector) = {
+    val context = connect(DSE_HOST)
     val rdd: DStream[String] = context.streamingContext.socketTextStream(hostName,port)
     (rdd, context.streamingContext, context.connector)
   }
