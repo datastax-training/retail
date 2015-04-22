@@ -3,4 +3,4 @@
 *.pyc
 cache/
 bestburger_responses*
-target/*
+target/
