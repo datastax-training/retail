@@ -64,13 +64,15 @@ CREATE TABLE IF NOT EXISTS retail.receipts (
        credit_card_number bigint static,
        store_id int static,
        register_id int static,
+       receipt_date timestamp static,
+       receipt_total decimal static,
        receipt_id bigint,
        scan_id timeuuid,
        product_id text,
        product_name text,
        quantity int,
-       unit_price float,
-       total float,
+       unit_price decimal,
+       total decimal,
        PRIMARY KEY (receipt_id, scan_id));
 
 -- static data

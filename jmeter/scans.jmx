@@ -54,6 +54,39 @@
         <stringProp name="filename"></stringProp>
       </ResultCollector>
       <hashTree/>
+      <ResultCollector guiclass="SummaryReport" testclass="ResultCollector" testname="Summary Report" enabled="true">
+        <boolProp name="ResultCollector.error_logging">false</boolProp>
+        <objProp>
+          <name>saveConfig</name>
+          <value class="SampleSaveConfiguration">
+            <time>true</time>
+            <latency>true</latency>
+            <timestamp>true</timestamp>
+            <success>true</success>
+            <label>true</label>
+            <code>true</code>
+            <message>true</message>
+            <threadName>true</threadName>
+            <dataType>true</dataType>
+            <encoding>false</encoding>
+            <assertions>true</assertions>
+            <subresults>true</subresults>
+            <responseData>false</responseData>
+            <samplerData>false</samplerData>
+            <xml>false</xml>
+            <fieldNames>false</fieldNames>
+            <responseHeaders>false</responseHeaders>
+            <requestHeaders>false</requestHeaders>
+            <responseDataOnError>false</responseDataOnError>
+            <saveAssertionResultsFailureMessage>false</saveAssertionResultsFailureMessage>
+            <assertionsResultsToSave>0</assertionsResultsToSave>
+            <bytes>true</bytes>
+            <threadCounts>true</threadCounts>
+          </value>
+        </objProp>
+        <stringProp name="filename"></stringProp>
+      </ResultCollector>
+      <hashTree/>
       <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="Thread Group" enabled="true">
         <stringProp name="ThreadGroup.on_sample_error">continue</stringProp>
         <elementProp name="ThreadGroup.main_controller" elementType="LoopController" guiclass="LoopControlPanel" testclass="LoopController" testname="Loop Controller" enabled="true">
@@ -69,116 +102,159 @@
         <stringProp name="ThreadGroup.delay"></stringProp>
       </ThreadGroup>
       <hashTree>
-        <RandomVariableConfig guiclass="TestBeanGUI" testclass="RandomVariableConfig" testname="Random Register" enabled="true">
-          <stringProp name="variableName">register_id</stringProp>
-          <stringProp name="outputFormat"></stringProp>
-          <stringProp name="minimumValue">1</stringProp>
-          <stringProp name="maximumValue">30</stringProp>
-          <stringProp name="randomSeed"></stringProp>
-          <boolProp name="perThread">true</boolProp>
-        </RandomVariableConfig>
-        <hashTree/>
-        <CSVDataSet guiclass="TestBeanGUI" testclass="CSVDataSet" testname="CSV Credit Card" enabled="true">
-          <stringProp name="filename">../cql/credit_cards.csv</stringProp>
+        <CSVDataSet guiclass="TestBeanGUI" testclass="CSVDataSet" testname="CSV Date" enabled="true">
+          <stringProp name="filename">../cql/dates.csv</stringProp>
           <stringProp name="fileEncoding"></stringProp>
-          <stringProp name="variableNames">credit_card_type,credit_card_number</stringProp>
-          <stringProp name="delimiter">|</stringProp>
+          <stringProp name="variableNames">receipt_date</stringProp>
+          <stringProp name="delimiter">,</stringProp>
           <boolProp name="quotedData">false</boolProp>
           <boolProp name="recycle">true</boolProp>
           <boolProp name="stopThread">false</boolProp>
           <stringProp name="shareMode">shareMode.all</stringProp>
         </CSVDataSet>
         <hashTree/>
-        <RandomVariableConfig guiclass="TestBeanGUI" testclass="RandomVariableConfig" testname="Random Store" enabled="true">
-          <stringProp name="variableName">store_id</stringProp>
-          <stringProp name="outputFormat"></stringProp>
-          <stringProp name="minimumValue">1</stringProp>
-          <stringProp name="maximumValue">400</stringProp>
-          <stringProp name="randomSeed"></stringProp>
-          <boolProp name="perThread">false</boolProp>
-        </RandomVariableConfig>
-        <hashTree/>
-        <UserParameters guiclass="UserParametersGui" testclass="UserParameters" testname="User Parameters" enabled="true">
-          <collectionProp name="UserParameters.names">
-            <stringProp name="204158082">receipt_id</stringProp>
-          </collectionProp>
-          <collectionProp name="UserParameters.thread_values">
-            <collectionProp name="24456513">
-              <stringProp name="217092793">${__time}</stringProp>
-            </collectionProp>
-          </collectionProp>
-          <boolProp name="UserParameters.per_iteration">true</boolProp>
-        </UserParameters>
-        <hashTree/>
-        <CassandraSampler guiclass="TestBeanGUI" testclass="CassandraSampler" testname="Insert Receipt" enabled="true">
-          <stringProp name="batchSize"></stringProp>
-          <stringProp name="consistencyLevel">ONE</stringProp>
-          <stringProp name="query">insert into receipts (credit_card_type, credit_card_number, store_id, register_id, receipt_id) values (?,?,?,?,?)</stringProp>
-          <stringProp name="queryArguments">${credit_card_type},${credit_card_number},${store_id},${register_id},${receipt_id}</stringProp>
-          <stringProp name="queryType">Prepared Statement</stringProp>
-          <stringProp name="resultVariable"></stringProp>
-          <stringProp name="sessionName">cc</stringProp>
-          <stringProp name="variableNames"></stringProp>
-        </CassandraSampler>
-        <hashTree/>
-        <LoopController guiclass="LoopControlPanel" testclass="LoopController" testname="Loop Controller" enabled="true">
+        <LoopController guiclass="LoopControlPanel" testclass="LoopController" testname="Random number of receipts on this day" enabled="true">
           <boolProp name="LoopController.continue_forever">true</boolProp>
-          <stringProp name="LoopController.loops">${__Random(1,25)}</stringProp>
+          <stringProp name="LoopController.loops">${__Random(3000, 8000)}</stringProp>
         </LoopController>
         <hashTree>
-          <CSVDataSet guiclass="TestBeanGUI" testclass="CSVDataSet" testname="CSV Product IDs" enabled="true">
-            <stringProp name="delimiter">|</stringProp>
+          <RandomVariableConfig guiclass="TestBeanGUI" testclass="RandomVariableConfig" testname="Random Register" enabled="true">
+            <stringProp name="variableName">register_id</stringProp>
+            <stringProp name="outputFormat"></stringProp>
+            <stringProp name="minimumValue">1</stringProp>
+            <stringProp name="maximumValue">30</stringProp>
+            <stringProp name="randomSeed"></stringProp>
+            <boolProp name="perThread">true</boolProp>
+          </RandomVariableConfig>
+          <hashTree/>
+          <CSVDataSet guiclass="TestBeanGUI" testclass="CSVDataSet" testname="CSV Credit Card" enabled="true">
+            <stringProp name="filename">../cql/credit_cards.csv</stringProp>
             <stringProp name="fileEncoding"></stringProp>
-            <stringProp name="filename">../cql/product_ids.csv</stringProp>
+            <stringProp name="variableNames">credit_card_type,credit_card_number</stringProp>
+            <stringProp name="delimiter">|</stringProp>
             <boolProp name="quotedData">false</boolProp>
             <boolProp name="recycle">true</boolProp>
-            <stringProp name="shareMode">shareMode.all</stringProp>
             <boolProp name="stopThread">false</boolProp>
-            <stringProp name="variableNames">product_id</stringProp>
+            <stringProp name="shareMode">shareMode.all</stringProp>
+          </CSVDataSet>
+          <hashTree/>
+          <RandomVariableConfig guiclass="TestBeanGUI" testclass="RandomVariableConfig" testname="Random Store" enabled="true">
+            <stringProp name="variableName">store_id</stringProp>
+            <stringProp name="outputFormat"></stringProp>
+            <stringProp name="minimumValue">1</stringProp>
+            <stringProp name="maximumValue">400</stringProp>
+            <stringProp name="randomSeed"></stringProp>
+            <boolProp name="perThread">false</boolProp>
+          </RandomVariableConfig>
+          <hashTree/>
+          <CSVDataSet guiclass="TestBeanGUI" testclass="CSVDataSet" testname="CSV Time" enabled="true">
+            <stringProp name="filename">../cql/times.csv</stringProp>
+            <stringProp name="fileEncoding"></stringProp>
+            <stringProp name="variableNames">receipt_time</stringProp>
+            <stringProp name="delimiter">,</stringProp>
+            <boolProp name="quotedData">false</boolProp>
+            <boolProp name="recycle">true</boolProp>
+            <boolProp name="stopThread">false</boolProp>
+            <stringProp name="shareMode">shareMode.all</stringProp>
           </CSVDataSet>
           <hashTree/>
           <UserParameters guiclass="UserParametersGui" testclass="UserParameters" testname="User Parameters" enabled="true">
             <collectionProp name="UserParameters.names">
-              <stringProp name="112310">qty</stringProp>
-              <stringProp name="106934601">price</stringProp>
+              <stringProp name="204158082">receipt_id</stringProp>
+              <stringProp name="410330749">receipt_total</stringProp>
             </collectionProp>
             <collectionProp name="UserParameters.thread_values">
-              <collectionProp name="51564259">
-                <stringProp name="-1198111973">${__Random(1,20)}</stringProp>
-                <stringProp name="492831171">${__Random(20,120)}</stringProp>
+              <collectionProp name="758236940">
+                <stringProp name="217092793">${__time}</stringProp>
+                <stringProp name="48">0</stringProp>
               </collectionProp>
             </collectionProp>
-            <boolProp name="UserParameters.per_iteration">false</boolProp>
+            <boolProp name="UserParameters.per_iteration">true</boolProp>
           </UserParameters>
           <hashTree/>
-          <CassandraSampler guiclass="TestBeanGUI" testclass="CassandraSampler" testname="Lookup Product" enabled="true">
+          <CassandraSampler guiclass="TestBeanGUI" testclass="CassandraSampler" testname="Insert Receipt" enabled="true">
             <stringProp name="batchSize"></stringProp>
             <stringProp name="consistencyLevel">ONE</stringProp>
-            <stringProp name="query">select title from products_by_id where product_id = ?</stringProp>
-            <stringProp name="queryArguments">${product_id}</stringProp>
-            <stringProp name="queryType">Prepared Statement</stringProp>
-            <stringProp name="resultVariable"></stringProp>
-            <stringProp name="sessionName">cc</stringProp>
-            <stringProp name="variableNames">o_product_name</stringProp>
-          </CassandraSampler>
-          <hashTree/>
-          <CassandraSampler guiclass="TestBeanGUI" testclass="CassandraSampler" testname="Insert Scan" enabled="true">
-            <stringProp name="batchSize"></stringProp>
-            <stringProp name="consistencyLevel">ONE</stringProp>
-            <stringProp name="query">insert into receipts (receipt_id, scan_id, product_id, product_name, quantity, unit_price, total) values (?,now(),?,?,?,?,?)</stringProp>
-            <stringProp name="queryArguments">${receipt_id},${product_id},${o_product_name_1},${qty},${price},${__jexl(${price}*${qty})}</stringProp>
+            <stringProp name="query">insert into receipts (credit_card_type, credit_card_number, receipt_date, store_id, register_id, receipt_id) values (?,?,?,?,?,?)</stringProp>
+            <stringProp name="queryArguments">${credit_card_type},${credit_card_number},${receipt_date} ${receipt_time}-0700,${store_id},${register_id},${receipt_id}</stringProp>
             <stringProp name="queryType">Prepared Statement</stringProp>
             <stringProp name="resultVariable"></stringProp>
             <stringProp name="sessionName">cc</stringProp>
             <stringProp name="variableNames"></stringProp>
           </CassandraSampler>
           <hashTree/>
-          <DebugPostProcessor guiclass="TestBeanGUI" testclass="DebugPostProcessor" testname="Debug PostProcessor" enabled="false">
-            <boolProp name="displayJMeterProperties">false</boolProp>
-            <boolProp name="displayJMeterVariables">true</boolProp>
-            <boolProp name="displaySamplerProperties">true</boolProp>
-            <boolProp name="displaySystemProperties">false</boolProp>
-          </DebugPostProcessor>
+          <LoopController guiclass="LoopControlPanel" testclass="LoopController" testname="Loop Controller" enabled="true">
+            <boolProp name="LoopController.continue_forever">true</boolProp>
+            <stringProp name="LoopController.loops">${__Random(1,25)}</stringProp>
+          </LoopController>
+          <hashTree>
+            <CSVDataSet guiclass="TestBeanGUI" testclass="CSVDataSet" testname="CSV Product IDs" enabled="true">
+              <stringProp name="delimiter">|</stringProp>
+              <stringProp name="fileEncoding"></stringProp>
+              <stringProp name="filename">../cql/product_ids.csv</stringProp>
+              <boolProp name="quotedData">false</boolProp>
+              <boolProp name="recycle">true</boolProp>
+              <stringProp name="shareMode">shareMode.all</stringProp>
+              <boolProp name="stopThread">false</boolProp>
+              <stringProp name="variableNames">product_id</stringProp>
+            </CSVDataSet>
+            <hashTree/>
+            <UserParameters guiclass="UserParametersGui" testclass="UserParameters" testname="User Parameters" enabled="true">
+              <collectionProp name="UserParameters.names">
+                <stringProp name="112310">qty</stringProp>
+                <stringProp name="106934601">price</stringProp>
+                <stringProp name="410330749">receipt_total</stringProp>
+              </collectionProp>
+              <collectionProp name="UserParameters.thread_values">
+                <collectionProp name="1640181160">
+                  <stringProp name="-1198111973">${__Random(1,20)}</stringProp>
+                  <stringProp name="492831171">${__Random(20,120)}</stringProp>
+                  <stringProp name="1273565563">${__jexl(${price}*${qty}+${receipt_total})}</stringProp>
+                </collectionProp>
+              </collectionProp>
+              <boolProp name="UserParameters.per_iteration">true</boolProp>
+            </UserParameters>
+            <hashTree/>
+            <CassandraSampler guiclass="TestBeanGUI" testclass="CassandraSampler" testname="Lookup Product" enabled="true">
+              <stringProp name="batchSize"></stringProp>
+              <stringProp name="consistencyLevel">ONE</stringProp>
+              <stringProp name="query">select title from products_by_id where product_id = ?</stringProp>
+              <stringProp name="queryArguments">${product_id}</stringProp>
+              <stringProp name="queryType">Prepared Statement</stringProp>
+              <stringProp name="resultVariable"></stringProp>
+              <stringProp name="sessionName">cc</stringProp>
+              <stringProp name="variableNames">o_product_name</stringProp>
+            </CassandraSampler>
+            <hashTree/>
+            <CassandraSampler guiclass="TestBeanGUI" testclass="CassandraSampler" testname="Insert Scan" enabled="true">
+              <stringProp name="batchSize"></stringProp>
+              <stringProp name="consistencyLevel">ONE</stringProp>
+              <stringProp name="query">insert into receipts (receipt_id, scan_id, product_id, product_name, quantity, unit_price, total) values (?,now(),?,?,?,?,?)</stringProp>
+              <stringProp name="queryArguments">${receipt_id},${product_id},${o_product_name_1},${qty},${price},${__jexl(${price}*${qty})}</stringProp>
+              <stringProp name="queryType">Prepared Statement</stringProp>
+              <stringProp name="resultVariable"></stringProp>
+              <stringProp name="sessionName">cc</stringProp>
+              <stringProp name="variableNames"></stringProp>
+            </CassandraSampler>
+            <hashTree/>
+            <DebugPostProcessor guiclass="TestBeanGUI" testclass="DebugPostProcessor" testname="Debug PostProcessor" enabled="true">
+              <boolProp name="displayJMeterProperties">false</boolProp>
+              <boolProp name="displayJMeterVariables">true</boolProp>
+              <boolProp name="displaySamplerProperties">true</boolProp>
+              <boolProp name="displaySystemProperties">false</boolProp>
+            </DebugPostProcessor>
+            <hashTree/>
+          </hashTree>
+          <CassandraSampler guiclass="TestBeanGUI" testclass="CassandraSampler" testname="Insert Receipt Total" enabled="true">
+            <stringProp name="batchSize"></stringProp>
+            <stringProp name="consistencyLevel">ONE</stringProp>
+            <stringProp name="query">insert into receipts (receipt_id, receipt_total) values (?,?)</stringProp>
+            <stringProp name="queryArguments">${receipt_id},${receipt_total}</stringProp>
+            <stringProp name="queryType">Prepared Statement</stringProp>
+            <stringProp name="resultVariable"></stringProp>
+            <stringProp name="sessionName">cc</stringProp>
+            <stringProp name="variableNames"></stringProp>
+          </CassandraSampler>
           <hashTree/>
         </hashTree>
       </hashTree>

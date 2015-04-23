@@ -4,3 +4,4 @@
 cache/
 target/
 .history
+*.log
