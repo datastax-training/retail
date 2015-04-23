@@ -28,6 +28,7 @@
   <fieldType name="uuid" class="solr.UUIDField"/>
   <fieldType name="decimal" class="com.datastax.bdp.search.solr.core.types.DecimalStrField"/>
   <fieldType name="long" class="solr.SortableLongField"/>
+  <fieldType name="float" class="solr.SortableFloatField"/>
  </types>
  <fields>
     <!-- 
@@ -52,8 +53,8 @@ CREATE TABLE zipcodes2(
     <field name="city"  type="text" indexed="true"  stored="true"/>
     <field name="state"  type="text" indexed="true"  stored="true"/>
     <field name="population"  type="long" indexed="true"  stored="true"/>
-    <field name="long"  type="decimal" indexed="true"  stored="true"/>
-    <field name="lat"  type="decimal" indexed="true"  stored="true"/>
+    <field name="long"  type="float" indexed="true"  stored="true"/>
+    <field name="lat"  type="float" indexed="true"  stored="true"/>
  </fields>
 
 <defaultSearchField>zipcode</defaultSearchField>

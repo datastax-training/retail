@@ -95,7 +95,7 @@ def search():
 
     # build a data table json response.  We use the gviz api which will format
     # the data correctly for google charts
-    description = {'city':'string', 'zipcode':'string', 'long':'string','state':'string','lat':'string','uniqueKey':'string','population':'number'}
+    description = {'city':'string', 'zipcode':'string', 'long':'number','state':'string','lat':'number','population':'number'}
     data_table = gviz_api.DataTable(description)
     data_table.LoadData(docs)
     return  data_table.ToJSon()

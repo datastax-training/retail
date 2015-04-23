@@ -20,16 +20,58 @@ CREATE TABLE IF NOT EXISTS retail.brands (
 -- brand: null
 -- title: Plantronics Headband with Tripod for CS50
 -- price: 9.73
-CREATE TABLE IF NOT EXISTS retail.products (
-    product_id text,
-    brand text,
-    title text,
-    price decimal,
 
-    PRIMARY KEY (
-        product_id
-    )
+CREATE TABLE IF NOT EXISTS retail.suppliers (
+   supplier_id int,
+   supplier_name text,
+   PRIMARY KEY (supplier_id)
 );
+
+CREATE TABLE IF NOT EXISTS retail.products_by_id (
+   supplier_name text,
+   supplier_id int,
+   title text,
+   product_id text,
+   release_date timestamp,
+   category_name text,
+   category_id int,
+   long_description text,
+   short_description text,
+   url text,
+   features map<text,text>,
+   price decimal,
+   PRIMARY KEY (product_id)
+);
+
+CREATE TABLE IF NOT EXISTS retail.products_by_supplier (
+   supplier_name text,
+   supplier_id int,
+   title text,
+   product_id text,
+   release_date timestamp,
+   category_name text,
+   category_id int,
+   long_description text,
+   short_description text,
+   url text,
+   features map<text,text>,
+   price decimal,
+   PRIMARY KEY (supplier_id, title, product_id)
+);
+
+CREATE TABLE IF NOT EXISTS retail.receipts (
+       credit_card_type text static,
+       credit_card_number bigint static,
+       store_id int static,
+       register_id int static,
+       receipt_id bigint,
+       scan_id timeuuid,
+       product_id text,
+       product_name text,
+       quantity int,
+       unit_price float,
+       total float,
+       PRIMARY KEY (receipt_id, scan_id));
 
 -- static data
 
@@ -40,8 +82,8 @@ CREATE TABLE IF NOT EXISTS retail.zipcodes (
     city text,
 
     state text,
-    lat decimal,
-    long decimal,
+    lat float,
+    long float,
     population bigint,
     wages bigint,
 

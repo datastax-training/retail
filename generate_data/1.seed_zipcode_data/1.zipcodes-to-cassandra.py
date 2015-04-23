@@ -118,8 +118,8 @@ def parse_zipcodes(futures, session):
                 'zipcode': row['Zipcode'],
                 'city': city if city else row['City'],
                 'state': row['State'],
-                'lat': Decimal(row['Lat']) if row['Lat'] else None,
-                'long': Decimal(row['Long']) if row['Long'] else None,
+                'lat': float(row['Lat']) if row['Lat'] else None,
+                'long': float(row['Long']) if row['Long'] else None,
                 'population': int(row['EstimatedPopulation']) if row[
                     'EstimatedPopulation'] else None,
                 'wages': int(row['TotalWages']) if row['TotalWages'] else None
