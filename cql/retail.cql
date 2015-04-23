@@ -54,7 +54,7 @@ CREATE TABLE IF NOT EXISTS retail.receipts (
        credit_card_number bigint static,
        store_id int static,
        register_id int static,
-       receipt_date timestamp static,
+       receipt_timestamp timestamp static,
        receipt_total decimal static,
        receipt_id bigint,
        scan_id timeuuid,
