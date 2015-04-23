@@ -21,7 +21,7 @@
         <stringProp name="username"></stringProp>
       </CassandraConnection>
       <hashTree/>
-      <ResultCollector guiclass="ViewResultsFullVisualizer" testclass="ResultCollector" testname="View Results Tree" enabled="true">
+      <ResultCollector guiclass="ViewResultsFullVisualizer" testclass="ResultCollector" testname="View Results Tree" enabled="false">
         <boolProp name="ResultCollector.error_logging">false</boolProp>
         <objProp>
           <name>saveConfig</name>
@@ -93,8 +93,8 @@
           <boolProp name="LoopController.continue_forever">false</boolProp>
           <intProp name="LoopController.loops">-1</intProp>
         </elementProp>
-        <stringProp name="ThreadGroup.num_threads">20</stringProp>
-        <stringProp name="ThreadGroup.ramp_time">1</stringProp>
+        <stringProp name="ThreadGroup.num_threads">30</stringProp>
+        <stringProp name="ThreadGroup.ramp_time">20</stringProp>
         <longProp name="ThreadGroup.start_time">1429674733000</longProp>
         <longProp name="ThreadGroup.end_time">1429674733000</longProp>
         <boolProp name="ThreadGroup.scheduler">false</boolProp>
@@ -110,12 +110,12 @@
           <boolProp name="quotedData">false</boolProp>
           <boolProp name="recycle">true</boolProp>
           <boolProp name="stopThread">false</boolProp>
-          <stringProp name="shareMode">shareMode.all</stringProp>
+          <stringProp name="shareMode">shareMode.thread</stringProp>
         </CSVDataSet>
         <hashTree/>
         <LoopController guiclass="LoopControlPanel" testclass="LoopController" testname="Random number of receipts on this day" enabled="true">
           <boolProp name="LoopController.continue_forever">true</boolProp>
-          <stringProp name="LoopController.loops">${__Random(3000, 8000)}</stringProp>
+          <stringProp name="LoopController.loops">${__Random(200, 1000)}</stringProp>
         </LoopController>
         <hashTree>
           <RandomVariableConfig guiclass="TestBeanGUI" testclass="RandomVariableConfig" testname="Random Register" enabled="true">
@@ -172,17 +172,6 @@
             <boolProp name="UserParameters.per_iteration">true</boolProp>
           </UserParameters>
           <hashTree/>
-          <CassandraSampler guiclass="TestBeanGUI" testclass="CassandraSampler" testname="Insert Receipt" enabled="true">
-            <stringProp name="batchSize"></stringProp>
-            <stringProp name="consistencyLevel">ONE</stringProp>
-            <stringProp name="query">insert into receipts (credit_card_type, credit_card_number, receipt_date, store_id, register_id, receipt_id) values (?,?,?,?,?,?)</stringProp>
-            <stringProp name="queryArguments">${credit_card_type},${credit_card_number},${receipt_date} ${receipt_time}-0700,${store_id},${register_id},${receipt_id}</stringProp>
-            <stringProp name="queryType">Prepared Statement</stringProp>
-            <stringProp name="resultVariable"></stringProp>
-            <stringProp name="sessionName">cc</stringProp>
-            <stringProp name="variableNames"></stringProp>
-          </CassandraSampler>
-          <hashTree/>
           <LoopController guiclass="LoopControlPanel" testclass="LoopController" testname="Loop Controller" enabled="true">
             <boolProp name="LoopController.continue_forever">true</boolProp>
             <stringProp name="LoopController.loops">${__Random(1,25)}</stringProp>
@@ -237,19 +226,53 @@
               <stringProp name="variableNames"></stringProp>
             </CassandraSampler>
             <hashTree/>
-            <DebugPostProcessor guiclass="TestBeanGUI" testclass="DebugPostProcessor" testname="Debug PostProcessor" enabled="true">
+            <CassandraSampler guiclass="TestBeanGUI" testclass="CassandraSampler" testname="Update Inventory" enabled="true">
+              <stringProp name="batchSize"></stringProp>
+              <stringProp name="consistencyLevel">ONE</stringProp>
+              <stringProp name="query">update inventory_per_store set inventory = inventory - ? where store_date = ? and store_id = ? and product_id = ?</stringProp>
+              <stringProp name="queryArguments">${qty},${receipt_date} 00:00:00+0000,${store_id},${product_id}</stringProp>
+              <stringProp name="queryType">Prepared Statement</stringProp>
+              <stringProp name="resultVariable"></stringProp>
+              <stringProp name="sessionName">cc</stringProp>
+              <stringProp name="variableNames"></stringProp>
+            </CassandraSampler>
+            <hashTree/>
+            <DebugPostProcessor guiclass="TestBeanGUI" testclass="DebugPostProcessor" testname="Debug PostProcessor" enabled="false">
               <boolProp name="displayJMeterProperties">false</boolProp>
               <boolProp name="displayJMeterVariables">true</boolProp>
               <boolProp name="displaySamplerProperties">true</boolProp>
               <boolProp name="displaySystemProperties">false</boolProp>
             </DebugPostProcessor>
             <hashTree/>
+            <TCPSampler guiclass="TCPSamplerGui" testclass="TCPSampler" testname="TCP Sampler" enabled="true">
+              <stringProp name="TCPSampler.server">localhost</stringProp>
+              <boolProp name="TCPSampler.reUseConnection">true</boolProp>
+              <stringProp name="TCPSampler.port">5002</stringProp>
+              <boolProp name="TCPSampler.nodelay">false</boolProp>
+              <stringProp name="TCPSampler.timeout"></stringProp>
+              <stringProp name="TCPSampler.request">Sold ${product_id}  Qty:${qty} Price: ${price}</stringProp>
+              <boolProp name="TCPSampler.closeConnection">false</boolProp>
+              <stringProp name="ConfigTestElement.username"></stringProp>
+              <stringProp name="ConfigTestElement.password"></stringProp>
+            </TCPSampler>
+            <hashTree/>
           </hashTree>
-          <CassandraSampler guiclass="TestBeanGUI" testclass="CassandraSampler" testname="Insert Receipt Total" enabled="true">
+          <CassandraSampler guiclass="TestBeanGUI" testclass="CassandraSampler" testname="Insert Receipt" enabled="true">
             <stringProp name="batchSize"></stringProp>
             <stringProp name="consistencyLevel">ONE</stringProp>
-            <stringProp name="query">insert into receipts (receipt_id, receipt_total) values (?,?)</stringProp>
-            <stringProp name="queryArguments">${receipt_id},${receipt_total}</stringProp>
+            <stringProp name="query">insert into receipts (credit_card_type, credit_card_number, receipt_timestamp, store_id, register_id, receipt_id, receipt_total) values (?,?,?,?,?,?,?)</stringProp>
+            <stringProp name="queryArguments">${credit_card_type},${credit_card_number},${receipt_date} ${receipt_time}-0700,${store_id},${register_id},${receipt_id},${receipt_total}</stringProp>
+            <stringProp name="queryType">Prepared Statement</stringProp>
+            <stringProp name="resultVariable"></stringProp>
+            <stringProp name="sessionName">cc</stringProp>
+            <stringProp name="variableNames"></stringProp>
+          </CassandraSampler>
+          <hashTree/>
+          <CassandraSampler guiclass="TestBeanGUI" testclass="CassandraSampler" testname="Insert Receipt Total Store" enabled="true">
+            <stringProp name="batchSize"></stringProp>
+            <stringProp name="consistencyLevel">ONE</stringProp>
+            <stringProp name="query">insert into receipts_by_store_date (store_id, receipt_date, register_id, receipt_timestamp, receipt_id, receipt_total) values (?,?,?,?,?,?)</stringProp>
+            <stringProp name="queryArguments">${store_id},${receipt_date} 00:00:00+0000,${register_id},${receipt_date} ${receipt_time}-0700,${receipt_id},${receipt_total}</stringProp>
             <stringProp name="queryType">Prepared Statement</stringProp>
             <stringProp name="resultVariable"></stringProp>
             <stringProp name="sessionName">cc</stringProp>

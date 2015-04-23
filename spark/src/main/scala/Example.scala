@@ -17,6 +17,16 @@ case class Register(store_id: Int,
                  savings: BigDecimal,
                  scan_duration: Int)
 
+case class Store(
+                  store_id: Int,
+                  address: String,
+                  address_2: String,
+                  address_3: String,
+                  city: String,
+                  state: String,
+                  zip: Long,
+                  size_in_sf: Int)
+
 object Example {
 
   def main(args: Array[String]) {
@@ -26,12 +36,22 @@ object Example {
 
     val sc = new SparkContext("spark://127.0.0.1:7077", "test", conf)
 
-    val sales = sc.cassandraTable("retail","registers").as(Register)
+    val stores = sc.cassandraTable("retail","stores").select("store_id","address",
+      "address_2","address_3","city","state","zip","size_in_sf"
+    ).as(Store)
 
-    sales.map( sale => (sale.product, (1, sale.price )) )
-      .reduceByKey( (x,y) => (x._1 + y._1, x._2 + y._2)  )
-      .map( x=> (x._1, x._2._1, x._2._2) )
-      .saveToCassandra("retail","sales_by_product",
-        SomeColumns("product","quantity","amount"))
-    }
+    val receipts = sc.cassandraTable("retail","receipts_by_store_date")
+    receipts.cache()
+
+    val store_state = stores.map(s => (s.store_id, s.state))
+    val total_receipts_by_store = receipts.map(r => (r.getInt("store_id"), r.getDecimal("receipt_total") )  ).reduceByKey(_+_)
+
+    total_receipts_by_store.join(store_state).map(r => (r._2._2, r._2._1)).reduceByKey(_+_).saveToCassandra("retail","sales_by_state")
+
+    val receipts_by_date = receipts.map(r => (r.getDate("receipt_date"), r.getDecimal("receipt_total")))
+
+    receipts_by_date.reduceByKey(_+_).saveToCassandra("retail","sales_by_date")
+
+
+  }
 }

@@ -1,0 +1,9 @@
+
+To Build:
+
+sbt package
+
+To Execute:
+
+dse spark-submit --class Example target/scala-2.10/spark-demo_2.10-1.0.jar
+
