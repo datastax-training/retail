@@ -19,7 +19,6 @@ def init():
     get_receipt_by_id_stmt = rest.session.prepare("SELECT * from retail.receipts WHERE receipt_id = ?")
     get_receipt_by_cc = rest.session.prepare("SELECT * from retail.receipts_by_credit_card WHERE credit_card_number = ?")
 
-
 @web_api.route('/')
 def index():
     return render_template('index.jinja2')

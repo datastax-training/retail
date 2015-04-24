@@ -2,7 +2,6 @@ CREATE KEYSPACE IF NOT EXISTS retail
 WITH REPLICATION = { 'class' : 'SimpleStrategy', 'replication_factor' : 1 };
 
 
-
 -- static data
 
 -- Sample Data:
@@ -65,8 +64,6 @@ CREATE TABLE IF NOT EXISTS retail.products_by_category_name (
    PRIMARY KEY (category_name, supplier_name, title, product_id)
 );
 
-
-
 CREATE TABLE IF NOT EXISTS retail.receipts (
        credit_card_type text static,
        credit_card_number bigint static,
@@ -81,7 +78,8 @@ CREATE TABLE IF NOT EXISTS retail.receipts (
        quantity int,
        unit_price decimal,
        total decimal,
-       PRIMARY KEY (receipt_id, scan_id));
+       PRIMARY KEY (receipt_id, scan_id)
+);
 
 CREATE TABLE IF NOT EXISTS retail.receipts_by_store_date (
      store_id int,
@@ -91,17 +89,18 @@ CREATE TABLE IF NOT EXISTS retail.receipts_by_store_date (
      receipt_id bigint,
      receipt_total decimal,
      PRIMARY KEY ((store_id, receipt_date), register_id, receipt_timestamp, receipt_id)
-     );
+);
 
-     CREATE TABLE receipts_by_credit_card (
+CREATE TABLE IF NOT EXISTS receipts_by_credit_card (
        credit_card_number bigint,
        receipt_timestamp timestamp,
        receipt_id bigint,
        credit_card_type text static,
        receipt_total decimal,
        store_id int,
-       PRIMARY KEY ((credit_card_number), receipt_timestamp, receipt_id)
-     ) WITH CLUSTERING ORDER BY (receipt_timestamp DESC, receipt_id DESC)
+       PRIMARY KEY ((credit_card_number), receipt_timestamp, receipt_id))
+       WITH CLUSTERING ORDER BY (receipt_timestamp DESC, receipt_id DESC)
+;
 
 CREATE TABLE IF NOT EXISTS retail.inventory_per_store (
      store_date timestamp,
@@ -131,15 +130,25 @@ CREATE TABLE IF NOT EXISTS retail.stores (
 CREATE TABLE IF NOT EXISTS retail.zipcodes (
     zipcode text,
     city text,
-
     state text,
     lat float,
     long float,
     population bigint,
     wages bigint,
-
-    PRIMARY KEY (
-        zipcode,
-        city
-    )
+    PRIMARY KEY (zipcode, city)
 );
+
+CREATE TABLE IF NOT EXISTS retail.sales_by_date (
+    sales_date timestamp,
+    receipts_total decimal, 
+    PRIMARY KEY (sales_date)
+); 
+
+CREATE TABLE IF NOT EXISTS retail.sales_by_state (
+    state text,
+    receipts_total decimal,
+    PRIMARY KEY (state)
+);
+
+
+
