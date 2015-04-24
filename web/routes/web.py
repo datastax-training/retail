@@ -10,6 +10,10 @@ get_product_by_brand_cc = None
 get_product_by_category_cc = None
 get_receipt_by_cc = None
 
+@web_api.route('/')
+def index():
+    return render_template('index.jinja2')
+
 @web_api.route('/brand')
 def find_products_by_brand():
 
