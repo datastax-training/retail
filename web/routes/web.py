@@ -2,13 +2,23 @@ from flask import Blueprint, jsonify, request, render_template
 # from rest import session
 import rest
 
-web_api = Blueprint('receipts_api', __name__)
+web_api = Blueprint('web_api', __name__)
 
-get_receipt_by_id_stmt = None
-get_product_by_id_stmt = None
-get_product_by_brand_cc = None
-get_product_by_category_cc = None
-get_receipt_by_cc = None
+
+
+def init():
+    global get_receipt_by_id_stmt
+    global get_product_by_id_stmt
+    global get_product_by_brand_cc
+    global get_product_by_category_cc
+    global get_receipt_by_cc
+
+    get_product_by_brand_cc = rest.session.prepare("SELECT * from retail.products_by_supplier WHERE supplier_id = ?")
+    get_product_by_category_cc = rest.session.prepare("SELECT * from retail.products_by_category_name WHERE category_name = ?")
+    get_product_by_id_stmt = rest.session.prepare("SELECT * from retail.products_by_id WHERE product_id = ?")
+    get_receipt_by_id_stmt = rest.session.prepare("SELECT * from retail.receipts WHERE receipt_id = ?")
+    get_receipt_by_cc = rest.session.prepare("SELECT * from retail.receipts_by_credit_card WHERE credit_card_number = ?")
+
 
 @web_api.route('/')
 def index():
@@ -25,13 +35,9 @@ def find_products_by_brand():
     category_name = request.args.get('category_name')
 
     if brand_id:
-        if get_product_by_brand_cc is None:
-            get_product_by_brand_cc = rest.session.prepare("SELECT * from retail.products_by_supplier WHERE supplier_id = ?")
         results = rest.session.execute(get_product_by_brand_cc,[long(brand_id)])
 
     if category_name:
-        if get_product_by_category_cc is None:
-            get_product_by_category_cc = rest.session.prepare("SELECT * from retail.products_by_category_name WHERE category_name = ?")
         results = rest.session.execute(get_product_by_category_cc,[category_name])
 
     return render_template('brand_search.jinja2', products = results)
@@ -46,9 +52,6 @@ def find_product_by_id():
     product_id = request.args.get('product_id')
 
     if product_id is not None:
-        if get_product_by_id_stmt is None:
-           get_product_by_id_stmt = rest.session.prepare("SELECT * from retail.products_by_id WHERE product_id = ?")
-
         results = rest.session.execute(get_product_by_id_stmt,[product_id])
 
         if results is not None:
@@ -69,9 +72,6 @@ def find_receipt_by_id():
     receipt_id = request.args.get('receipt_id')
 
     if receipt_id is not None:
-        if get_receipt_by_id_stmt is None:
-           get_receipt_by_id_stmt = rest.session.prepare("SELECT * from retail.receipts WHERE receipt_id = ?")
-
         results = rest.session.execute(get_receipt_by_id_stmt,[long(receipt_id)])
 
     return render_template('receipt_search.jinja2', scans = results)
@@ -85,9 +85,6 @@ def find_receipt_by_credit_card():
     cc_no = request.args.get('cc_no')
 
     if cc_no is not None:
-        if get_receipt_by_cc is None:
-           get_receipt_by_cc = rest.session.prepare("SELECT * from retail.receipts_by_credit_card WHERE credit_card_number = ?")
-
         results = rest.session.execute(get_receipt_by_cc,[long(cc_no)])
 
     return render_template('credit_card_search.jinja2', receipts = results)
