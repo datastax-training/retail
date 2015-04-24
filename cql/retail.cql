@@ -49,6 +49,24 @@ CREATE TABLE IF NOT EXISTS retail.products_by_supplier (
    PRIMARY KEY (supplier_id, title, product_id)
 );
 
+CREATE TABLE IF NOT EXISTS retail.products_by_category_name (
+   supplier_name text,
+   supplier_id int,
+   title text,
+   product_id text,
+   release_date timestamp,
+   category_name text,
+   category_id int,
+   long_description text,
+   short_description text,
+   url text,
+   features map<text,text>,
+   price decimal,
+   PRIMARY KEY (category_name, supplier_name, title, product_id)
+);
+
+
+
 CREATE TABLE IF NOT EXISTS retail.receipts (
        credit_card_type text static,
        credit_card_number bigint static,

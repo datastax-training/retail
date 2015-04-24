@@ -19,14 +19,14 @@
         <th>Amount</th>
         <th>Details</th>
         {% if receipts %}
-        {% for receipt in receipts %}
-            <tr>
-            <td>{{ receipt.receipt_timestamp }}</td>
-            <td>{{ receipt.store_id }}</td>
-            <td>${{ receipt.receipt_total }}</td>
-            <td><a href="/web/receipt?receipt_id={{ receipt.receipt_id }}">details</a></td>
-            </tr>
-        {% endfor %}
+            {% for receipt in receipts %}
+                <tr>
+                <td>{{ receipt.receipt_timestamp }}</td>
+                <td>{{ receipt.store_id }}</td>
+                <td>${{ receipt.receipt_total }}</td>
+                <td><a href="/web/receipt?receipt_id={{ receipt.receipt_id }}">details</a></td>
+                </tr>
+            {% endfor %}
         {% endif %}
         </table>
 </div>
