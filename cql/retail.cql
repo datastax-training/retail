@@ -75,6 +75,16 @@ CREATE TABLE IF NOT EXISTS retail.receipts_by_store_date (
      PRIMARY KEY ((store_id, receipt_date), register_id, receipt_timestamp, receipt_id)
      );
 
+     CREATE TABLE receipts_by_credit_card (
+       credit_card_number bigint,
+       receipt_timestamp timestamp,
+       receipt_id bigint,
+       credit_card_type text static,
+       receipt_total decimal,
+       store_id int,
+       PRIMARY KEY ((credit_card_number), receipt_timestamp, receipt_id)
+     ) WITH CLUSTERING ORDER BY (receipt_timestamp DESC, receipt_id DESC)
+
 CREATE TABLE IF NOT EXISTS retail.inventory_per_store (
      store_date timestamp,
      store_id   int,

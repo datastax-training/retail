@@ -1,0 +1,41 @@
+{% extends "base.jinja2" %}
+
+{% block head %}
+{% endblock %}
+
+{% block body %}
+    <div id="search_div">
+    <form action="">
+      Receipt ID: <input type="text" name="receipt_id">
+      <input type="submit" value="Search">
+    </form>
+</div>
+<br>
+    <div id="chart_div">
+    {% if scans %}
+        <table>
+        <tr><td>Receipt_ID:</td><td>{{ scans[0].receipt_id }}</td></tr>
+        <tr><td>Total:</td><td>${{ scans[0].receipt_total }}</td></tr>
+        <tr><td>Card Type:</td><td>{{ scans[0].credit_card_type }}</td></tr>
+        </table>
+        <br>
+        <table border="1" width="1000">
+        <th>Quantity</th>
+        <th>Item</th>
+        <th>Price</th>
+        <th>Amount</th>
+        {% for scan in scans %}
+            <tr>
+            <td>{{ scan.quantity }}</td>
+            <td>{{ scan.product_name }}</td>
+            <td>${{ scan.unit_price }}</td>
+            <td>${{ scan.total }}</td>
+            </tr>
+        {% endfor %}
+        </table>
+    {% endif %}
+</div>
+{% endblock %}
+
+{% block tail %}
+{% endblock %}

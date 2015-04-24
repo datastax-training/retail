@@ -41,7 +41,6 @@ object Example {
     ).as(Store)
 
     val receipts = sc.cassandraTable("retail","receipts_by_store_date")
-    receipts.cache()
 
     val store_state = stores.map(s => (s.store_id, s.state))
     val total_receipts_by_store = receipts.map(r => (r.getInt("store_id"), r.getDecimal("receipt_total") )  ).reduceByKey(_+_)

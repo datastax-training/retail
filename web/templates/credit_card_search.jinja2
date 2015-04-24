@@ -1,0 +1,36 @@
+{% extends "base.jinja2" %}
+
+{% block head %}
+{% endblock %}
+
+{% block body %}
+    <div id="search_div">
+    <form action="">
+      Credit Card Number: <input type="text" name="cc_no">
+      <input type="submit" value="Search">
+    </form>
+</div>
+<br>
+    <div id="chart_div">
+        <br>
+        <table border="1" width="1000">
+        <th>Date</th>
+        <th>Store ID</th>
+        <th>Amount</th>
+        <th>Details</th>
+        {% if receipts %}
+        {% for receipt in receipts %}
+            <tr>
+            <td>{{ receipt.receipt_timestamp }}</td>
+            <td>{{ receipt.store_id }}</td>
+            <td>${{ receipt.receipt_total }}</td>
+            <td><a href="/web/receipt?receipt_id={{ receipt.receipt_id }}">details</a></td>
+            </tr>
+        {% endfor %}
+        {% endif %}
+        </table>
+</div>
+{% endblock %}
+
+{% block tail %}
+{% endblock %}

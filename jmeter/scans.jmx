@@ -174,7 +174,7 @@
           <hashTree/>
           <LoopController guiclass="LoopControlPanel" testclass="LoopController" testname="Loop Controller" enabled="true">
             <boolProp name="LoopController.continue_forever">true</boolProp>
-            <stringProp name="LoopController.loops">${__Random(1,25)}</stringProp>
+            <stringProp name="LoopController.loops">${__Random(1,15)}</stringProp>
           </LoopController>
           <hashTree>
             <CSVDataSet guiclass="TestBeanGUI" testclass="CSVDataSet" testname="CSV Product IDs" enabled="true">
@@ -195,8 +195,8 @@
                 <stringProp name="410330749">receipt_total</stringProp>
               </collectionProp>
               <collectionProp name="UserParameters.thread_values">
-                <collectionProp name="1640181160">
-                  <stringProp name="-1198111973">${__Random(1,20)}</stringProp>
+                <collectionProp name="-398481258">
+                  <stringProp name="-731381727">${__Random(1,6)}</stringProp>
                   <stringProp name="492831171">${__Random(20,120)}</stringProp>
                   <stringProp name="1273565563">${__jexl(${price}*${qty}+${receipt_total})}</stringProp>
                 </collectionProp>
@@ -250,6 +250,17 @@
             <stringProp name="consistencyLevel">ONE</stringProp>
             <stringProp name="query">insert into receipts (credit_card_type, credit_card_number, receipt_timestamp, store_id, register_id, receipt_id, receipt_total) values (?,?,?,?,?,?,?)</stringProp>
             <stringProp name="queryArguments">${credit_card_type},${credit_card_number},${receipt_date} ${receipt_time}-0700,${store_id},${register_id},${receipt_id},${receipt_total}</stringProp>
+            <stringProp name="queryType">Prepared Statement</stringProp>
+            <stringProp name="resultVariable"></stringProp>
+            <stringProp name="sessionName">cc</stringProp>
+            <stringProp name="variableNames"></stringProp>
+          </CassandraSampler>
+          <hashTree/>
+          <CassandraSampler guiclass="TestBeanGUI" testclass="CassandraSampler" testname="Insert Receipt By Credit Card" enabled="true">
+            <stringProp name="batchSize"></stringProp>
+            <stringProp name="consistencyLevel">ONE</stringProp>
+            <stringProp name="query">insert into receipts_by_credit_card (credit_card_type, credit_card_number, receipt_timestamp, store_id, receipt_id, receipt_total) values (?,?,?,?,?,?)</stringProp>
+            <stringProp name="queryArguments">${credit_card_type},${credit_card_number},${receipt_date} ${receipt_time}-0700,${store_id},${receipt_id},${receipt_total}</stringProp>
             <stringProp name="queryType">Prepared Statement</stringProp>
             <stringProp name="resultVariable"></stringProp>
             <stringProp name="sessionName">cc</stringProp>
