@@ -27,7 +27,7 @@
         {% for scan in scans %}
             <tr>
             <td>{{ scan.quantity }}</td>
-            <td>{{ scan.product_name }}</td>
+            <td><a href="/web/product?product_id={{ scan.product_id }}">{{ scan.product_name }}</a></td>
             <td>${{ scan.unit_price }}</td>
             <td>${{ scan.total }}</td>
             </tr>
