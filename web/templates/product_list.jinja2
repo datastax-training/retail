@@ -5,7 +5,7 @@
 
 {% block body %}
     Regular Search:<br>
-    <div id="search_div" style="border: solid; padding: 25px; width: 30%">
+    <div id="search_div">
     <form action="/web/product_search">
       Brand ID: <input type="text" name="brand_id">
       <br>
@@ -13,47 +13,7 @@
       <input type="submit" value="Search">
     </form>
     </div>
-    <br>
-      Solr Search:<br>
-        <div id="solr_div" style="border: solid; padding: 25px; width: 30%">
-
-    <form action="/web/search">
-      <input type="text" name="s">
-      <input type="submit" value="Search">
-    </form>
-    </div>
-<br>
-    <section>
-    <div id="facet" style="float:left;width:20%">
-    Narrow Results By:<br><br>
-{% if categories %}
-  <b>Category:</b><br>
-
-  {% for category in categories %}
-  {% set new_filter_by = 'category_name:"' + category + '"' %}
-  {% if filter_by %}
-    {%   set new_filter_by = filter_by + " AND " + new_filter_by %}
-  {% endif %}
-
-  <a href="/web/search?{{ urlencode( [('s',search_term), ('filter_by',new_filter_by)] ) }}">{{ category }}:</a>&nbsp;{{ categories[category]}}<br>
-  {% endfor %}
-  <br>
-{% endif %}
-{% if suppliers %}
-  <b>Supplier:</b><br>
-
-  {% for supplier in suppliers %}
-  {% set new_filter_by = 'supplier_name:"' + supplier + '"' %}
-  {% if filter_by %}
-    {%   set new_filter_by = filter_by + " AND " + new_filter_by %}
-  {% endif %}
-
-  <a href="/web/search?{{ urlencode( [('s',search_term), ('filter_by',new_filter_by)] ) }}">{{ supplier }}:</a>&nbsp;{{ suppliers[supplier]}}<br>
-  {% endfor %}
-{% endif %}
-
-    </div>
-    <div id="list_div" style="float:right;width:80%">
+    <div id="list_div">
         <br>
         {{ products.brand_name }}
         <table border="1">
@@ -73,7 +33,6 @@
         {% endif %}
         </table>
 </div>
-</section>
 {% endblock %}
 
 {% block tail %}

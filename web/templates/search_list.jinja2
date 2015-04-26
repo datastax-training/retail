@@ -1,0 +1,70 @@
+{% extends "base.jinja2" %}
+
+{% block head %}
+{% endblock %}
+
+{% block body %}
+      Solr Search:<br>
+     <div id="solr_div">
+
+    <form action="/web/search">
+      <input type="text" name="s">
+      <input type="submit" value="Search">
+    </form>
+    </div>
+<br>
+    <section>
+    <div id="facet" style="float:left;width:20%">
+    Narrow Results By:<br><br>
+{% if categories %}
+  <b>Category:</b><br>
+
+  {% for category in categories %}
+  {% set new_filter_by = 'category_name:"' + category + '"' %}
+  {% if filter_by %}
+    {%   set new_filter_by = filter_by + " AND " + new_filter_by %}
+  {% endif %}
+
+  <a href="/web/search?{{ urlencode( [('s',search_term), ('filter_by',new_filter_by)] ) }}">{{ category }}:</a>&nbsp;{{ categories[category]}}<br>
+  {% endfor %}
+  <br>
+{% endif %}
+{% if suppliers %}
+  <b>Supplier:</b><br>
+
+  {% for supplier in suppliers %}
+  {% set new_filter_by = 'supplier_name:"' + supplier + '"' %}
+  {% if filter_by %}
+    {%   set new_filter_by = filter_by + " AND " + new_filter_by %}
+  {% endif %}
+
+  <a href="/web/search?{{ urlencode( [('s',search_term), ('filter_by',new_filter_by)] ) }}">{{ supplier }}:</a>&nbsp;{{ suppliers[supplier]}}<br>
+  {% endfor %}
+{% endif %}
+
+    </div>
+    <div id="list_div" style="float:right;width:80%">
+        <br>
+        {{ products.brand_name }}
+        <table border="1">
+        <th>Category</th>
+        <th>Brand</th>
+        <th>Title</th>
+        <th>Details</th>
+        {% if products %}
+            {% for product in products %}
+                <tr>
+                <td><a href="/web/product_search?category_name={{ product.category_name }}">{{ product.category_name }}</a></td>
+                <td><a href="/web/product_search?brand_id={{ product.supplier_id }}">{{ product.supplier_name }}</a></td>
+                <td>{{ product.title }}</td>
+                <td><a href="/web/product?product_id={{ product.product_id }}">details</a></td>
+                </tr>
+            {% endfor %}
+        {% endif %}
+        </table>
+</div>
+</section>
+{% endblock %}
+
+{% block tail %}
+{% endblock %}

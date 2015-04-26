@@ -96,11 +96,12 @@ def search():
 
 
     search_term = request.args.get('s')
-    filter_by = request.args.get('filter_by')
 
-    filtered_search_term = search_term
-    if filter_by:
-        filtered_search_term = filtered_search_term + " AND " + filter_by
+    if not search_term:
+        return render_template('search_list.jinja2',
+                               products = None)
+
+    filter_by = request.args.get('filter_by')
 
     # parameters to solr are rows=30  wt (writer type)=json, and q=city:<keyword> sort=zipcode asc
     parameters = [('rows','300'),
@@ -125,7 +126,12 @@ def search():
     category_facets = process_facets(parsed_response['facet_counts']['facet_fields']['category_name'])
     supplier_facets = process_facets(parsed_response['facet_counts']['facet_fields']['supplier_name'])
 
-    return render_template('product_list.jinja2', search_term = search_term, products = docs, categories = category_facets, suppliers = supplier_facets, filter_by = filter_by)
+    return render_template('search_list.jinja2',
+                           search_term = search_term,
+                           products = docs,
+                           categories = category_facets,
+                           suppliers = supplier_facets,
+                           filter_by = filter_by)
 
 
 #
