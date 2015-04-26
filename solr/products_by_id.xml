@@ -58,8 +58,6 @@ CREATE TABLE zipcodes2(
     <field name="supplier_id"  type="int" indexed="true"  stored="true"/>
     <field name="short_description"  type="text" indexed="true"  stored="true"/>
     <field name="release_date" type="date" indexed="true" stored="true"/>
-    <dynamicField indexed="true" multiValued="false" name="features*" stored="true" type="text"/>
-
  </fields>
 
 <defaultSearchField>title</defaultSearchField>

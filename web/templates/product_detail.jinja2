@@ -16,8 +16,8 @@
         <table>
         <tr><td>Title:</td><td>{{ product.title }}</td></tr>
         <tr><td>URL:</td><td><a href="{{ product.url }}">{{ product.url }}</a></td></tr>
-        <tr><td>Brand:</td><td><a href="/web/brand?brand_id={{ product.supplier_id }}">{{ product.supplier_name }}</a></td></tr>
-        <tr><td>Category:</td><td><a href="/web/brand?category_name={{ product.category_name }}">{{ product.category_name }}</a></td></tr>
+        <tr><td>Brand:</td><td><a href="/web/product_search?brand_id={{ product.supplier_id }}">{{ product.supplier_name }}</a></td></tr>
+        <tr><td>Category:</td><td><a href="/web/product_search?category_name={{ product.category_name }}">{{ product.category_name }}</a></td></tr>
         <tr><td>Release Date:</td><td>{{ product.release_date }}</td></tr>
         <tr><td>Description:</td><td>{{ product.short_description }}</td></tr>
         <tr><td>Details:</td><td>{{ product.long_description }}</td></tr>

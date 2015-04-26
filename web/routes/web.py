@@ -1,5 +1,6 @@
 from flask import Blueprint, jsonify, request, render_template
-import urllib
+from urllib import urlencode
+from collections import OrderedDict
 import urllib2
 import json
 
@@ -15,8 +16,8 @@ def init():
     global get_product_by_category_cc
     global get_receipt_by_cc
 
-    get_product_by_brand_cc = rest.session.prepare("SELECT * from retail.products_by_supplier WHERE supplier_id = ?")
-    get_product_by_category_cc = rest.session.prepare("SELECT * from retail.products_by_category_name WHERE category_name = ?")
+    get_product_by_brand_cc = rest.session.prepare("SELECT * from retail.products_by_supplier WHERE supplier_id = ? limit 300")
+    get_product_by_category_cc = rest.session.prepare("SELECT * from retail.products_by_category_name WHERE category_name = ? limit 300")
     get_product_by_id_stmt = rest.session.prepare("SELECT * from retail.products_by_id WHERE product_id = ?")
     get_receipt_by_id_stmt = rest.session.prepare("SELECT * from retail.receipts WHERE receipt_id = ?")
     get_receipt_by_cc = rest.session.prepare("SELECT * from retail.receipts_by_credit_card WHERE credit_card_number = ?")
@@ -25,8 +26,8 @@ def init():
 def index():
     return render_template('index.jinja2')
 
-@web_api.route('/brand')
-def find_products_by_brand():
+@web_api.route('/product_search')
+def search_for_products():
 
     global get_product_by_brand_cc
     global get_product_by_category_cc
@@ -93,12 +94,26 @@ def search():
     # this will search the city field in the retail.zipcodes solr core
     # the import parameter is 's'
 
-    keyword = request.args.get('s')
-    facet = request.args.get('facet')
+
+    search_term = request.args.get('s')
+    filter_by = request.args.get('filter_by')
+
+    filtered_search_term = search_term
+    if filter_by:
+        filtered_search_term = filtered_search_term + " AND " + filter_by
 
     # parameters to solr are rows=30  wt (writer type)=json, and q=city:<keyword> sort=zipcode asc
-    parameters = urllib.urlencode({'rows':'300', 'wt': 'json', 'q': "title:" + keyword})
-    url='http://localhost:8983/solr/retail.products_by_id/select?' + parameters
+    parameters = [('rows','300'),
+                  ('wt','json'),
+                  ('facet','true'),
+                  ('facet.field','supplier_name'),
+                  ('facet.field','category_name'),
+                  ('q',"title:" + search_term) ]
+
+    if filter_by:
+        parameters.append(('fq',filter_by))
+
+    url='http://localhost:8983/solr/retail.products_by_id/select?' + urlencode(parameters)
 
     # get the response
     response = urllib2.urlopen(url)
@@ -107,6 +122,25 @@ def search():
     parsed_response = json.loads(response.read())
     docs = parsed_response['response']['docs']
 
-    return render_template('product_list.jinja2', products = docs)
+    category_facets = process_facets(parsed_response['facet_counts']['facet_fields']['category_name'])
+    supplier_facets = process_facets(parsed_response['facet_counts']['facet_fields']['supplier_name'])
+
+    return render_template('product_list.jinja2', search_term = search_term, products = docs, categories = category_facets, suppliers = supplier_facets, filter_by = filter_by)
 
 
+#
+# The facets come in a list [ 'value1', 10, 'value2' 5, ...] with numbers in descending order
+# We convert it to a map of {'value1':10, 'value2':5, ... ]
+#
+
+def process_facets(raw_facets):
+
+    facet_list = OrderedDict()
+
+    for i in range(0,raw_facets.__len__(),2):
+        if raw_facets[i+1] == 0:
+            break
+
+        facet_list[raw_facets[i]] = raw_facets[i+1]
+
+    return facet_list
