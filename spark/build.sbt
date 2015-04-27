@@ -1,16 +1,7 @@
-import AssemblyKeys._
-
-//seq(assemblySettings: _*)
 
 name := "spark-demo"
 
 version := "1.0"
-
-// organization := "com.datastax"
-
-//scalaVersion := "2.10.4"
-
-//libraryDependencies += "org.apache.spark" %% "spark-core" % "1.1.0" % "provided"
 
 libraryDependencies += "com.datastax.spark" %% "spark-cassandra-connector" % "1.1.0" % "provided"
 
