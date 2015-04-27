@@ -18,6 +18,7 @@ rest_api = Blueprint('rest_api', __name__)
 
 session = None
 p = None
+solr_url_base = None
 
 
 class PreparedStatements:
@@ -69,6 +70,10 @@ def init_cassandra(ip_addresses):
 
     p = PreparedStatements(session)
 
+def init_solr(url_base):
+    global solr_url_base
+
+    solr_url_base = url_base
 
 @rest_api.route('/')
 def base():

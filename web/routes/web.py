@@ -94,6 +94,7 @@ def search():
     # this will search the city field in the retail.zipcodes solr core
     # the import parameter is 's'
 
+    url = rest.solr_url_base + "/" + "retail.products_by_id"  + "/select?"
 
     search_term = request.args.get('s')
 
@@ -114,10 +115,8 @@ def search():
     if filter_by:
         parameters.append(('fq',filter_by))
 
-    url='http://localhost:8983/solr/retail.products_by_id/select?' + urlencode(parameters)
-
     # get the response
-    response = urllib2.urlopen(url)
+    response = urllib2.urlopen(url + urlencode(parameters))
 
     # fish out the docs from the solr response
     parsed_response = json.loads(response.read())
