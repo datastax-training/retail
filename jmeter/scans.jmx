@@ -12,10 +12,10 @@
     </TestPlan>
     <hashTree>
       <CassandraConnection guiclass="TestBeanGUI" testclass="CassandraConnection" testname="Cassandra Connection" enabled="true">
-        <stringProp name="contactPoints">localhost</stringProp>
+        <stringProp name="contactPoints">${__P(hostname,127.0.0.1)}</stringProp>
         <stringProp name="keyspace">retail</stringProp>
         <stringProp name="loadBalancer">Default</stringProp>
-        <stringProp name="localDataCenter"></stringProp>
+        <stringProp name="localDataCenter">DC1</stringProp>
         <stringProp name="password"></stringProp>
         <stringProp name="sessionName">cc</stringProp>
         <stringProp name="username"></stringProp>
@@ -103,7 +103,7 @@
       </ThreadGroup>
       <hashTree>
         <CSVDataSet guiclass="TestBeanGUI" testclass="CSVDataSet" testname="CSV Date" enabled="true">
-          <stringProp name="filename">../cql/dates.csv</stringProp>
+          <stringProp name="filename">../csv/dates.csv</stringProp>
           <stringProp name="fileEncoding"></stringProp>
           <stringProp name="variableNames">receipt_date</stringProp>
           <stringProp name="delimiter">,</stringProp>
@@ -128,7 +128,7 @@
           </RandomVariableConfig>
           <hashTree/>
           <CSVDataSet guiclass="TestBeanGUI" testclass="CSVDataSet" testname="CSV Credit Card" enabled="true">
-            <stringProp name="filename">../cql/credit_cards.csv</stringProp>
+            <stringProp name="filename">../csv/credit_cards.csv</stringProp>
             <stringProp name="fileEncoding"></stringProp>
             <stringProp name="variableNames">credit_card_type,credit_card_number</stringProp>
             <stringProp name="delimiter">|</stringProp>
@@ -148,7 +148,7 @@
           </RandomVariableConfig>
           <hashTree/>
           <CSVDataSet guiclass="TestBeanGUI" testclass="CSVDataSet" testname="CSV Time" enabled="true">
-            <stringProp name="filename">../cql/times.csv</stringProp>
+            <stringProp name="filename">../csv/times.csv</stringProp>
             <stringProp name="fileEncoding"></stringProp>
             <stringProp name="variableNames">receipt_time</stringProp>
             <stringProp name="delimiter">,</stringProp>
@@ -180,7 +180,7 @@
             <CSVDataSet guiclass="TestBeanGUI" testclass="CSVDataSet" testname="CSV Product IDs" enabled="true">
               <stringProp name="delimiter">|</stringProp>
               <stringProp name="fileEncoding"></stringProp>
-              <stringProp name="filename">../cql/product_ids.csv</stringProp>
+              <stringProp name="filename">../csv/product_ids.csv</stringProp>
               <boolProp name="quotedData">false</boolProp>
               <boolProp name="recycle">true</boolProp>
               <stringProp name="shareMode">shareMode.all</stringProp>
@@ -206,7 +206,7 @@
             <hashTree/>
             <CassandraSampler guiclass="TestBeanGUI" testclass="CassandraSampler" testname="Lookup Product" enabled="true">
               <stringProp name="batchSize"></stringProp>
-              <stringProp name="consistencyLevel">ONE</stringProp>
+              <stringProp name="consistencyLevel">LOCAL_ONE</stringProp>
               <stringProp name="query">select title from products_by_id where product_id = ?</stringProp>
               <stringProp name="queryArguments">${product_id}</stringProp>
               <stringProp name="queryType">Prepared Statement</stringProp>
@@ -217,7 +217,7 @@
             <hashTree/>
             <CassandraSampler guiclass="TestBeanGUI" testclass="CassandraSampler" testname="Insert Scan" enabled="true">
               <stringProp name="batchSize"></stringProp>
-              <stringProp name="consistencyLevel">ONE</stringProp>
+              <stringProp name="consistencyLevel">LOCAL_ONE</stringProp>
               <stringProp name="query">insert into receipts (receipt_id, scan_id, product_id, product_name, quantity, unit_price, total) values (?,now(),?,?,?,?,?)</stringProp>
               <stringProp name="queryArguments">${receipt_id},${product_id},${o_product_name_1},${qty},${price},${__jexl(${price}*${qty})}</stringProp>
               <stringProp name="queryType">Prepared Statement</stringProp>
@@ -228,7 +228,7 @@
             <hashTree/>
             <CassandraSampler guiclass="TestBeanGUI" testclass="CassandraSampler" testname="Update Inventory" enabled="true">
               <stringProp name="batchSize"></stringProp>
-              <stringProp name="consistencyLevel">ONE</stringProp>
+              <stringProp name="consistencyLevel">LOCAL_ONE</stringProp>
               <stringProp name="query">update inventory_per_store set inventory = inventory - ? where store_date = ? and store_id = ? and product_id = ?</stringProp>
               <stringProp name="queryArguments">${qty},${receipt_date} 00:00:00+0000,${store_id},${product_id}</stringProp>
               <stringProp name="queryType">Prepared Statement</stringProp>
@@ -247,7 +247,7 @@
           </hashTree>
           <CassandraSampler guiclass="TestBeanGUI" testclass="CassandraSampler" testname="Insert Receipt" enabled="true">
             <stringProp name="batchSize"></stringProp>
-            <stringProp name="consistencyLevel">ONE</stringProp>
+            <stringProp name="consistencyLevel">LOCAL_ONE</stringProp>
             <stringProp name="query">insert into receipts (credit_card_type, credit_card_number, receipt_timestamp, store_id, register_id, receipt_id, receipt_total) values (?,?,?,?,?,?,?)</stringProp>
             <stringProp name="queryArguments">${credit_card_type},${credit_card_number},${receipt_date} ${receipt_time}-0700,${store_id},${register_id},${receipt_id},${receipt_total}</stringProp>
             <stringProp name="queryType">Prepared Statement</stringProp>
@@ -258,7 +258,7 @@
           <hashTree/>
           <CassandraSampler guiclass="TestBeanGUI" testclass="CassandraSampler" testname="Insert Receipt By Credit Card" enabled="true">
             <stringProp name="batchSize"></stringProp>
-            <stringProp name="consistencyLevel">ONE</stringProp>
+            <stringProp name="consistencyLevel">LOCAL_ONE</stringProp>
             <stringProp name="query">insert into receipts_by_credit_card (credit_card_type, credit_card_number, receipt_timestamp, store_id, receipt_id, receipt_total) values (?,?,?,?,?,?)</stringProp>
             <stringProp name="queryArguments">${credit_card_type},${credit_card_number},${receipt_date} ${receipt_time}-0700,${store_id},${receipt_id},${receipt_total}</stringProp>
             <stringProp name="queryType">Prepared Statement</stringProp>
@@ -269,7 +269,7 @@
           <hashTree/>
           <CassandraSampler guiclass="TestBeanGUI" testclass="CassandraSampler" testname="Insert Receipt Total Store" enabled="true">
             <stringProp name="batchSize"></stringProp>
-            <stringProp name="consistencyLevel">ONE</stringProp>
+            <stringProp name="consistencyLevel">LOCAL_ONE</stringProp>
             <stringProp name="query">insert into receipts_by_store_date (store_id, receipt_date, register_id, receipt_timestamp, receipt_id, receipt_total) values (?,?,?,?,?,?)</stringProp>
             <stringProp name="queryArguments">${store_id},${receipt_date} 00:00:00+0000,${register_id},${receipt_date} ${receipt_time}-0700,${receipt_id},${receipt_total}</stringProp>
             <stringProp name="queryType">Prepared Statement</stringProp>

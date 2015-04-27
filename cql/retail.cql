@@ -91,7 +91,7 @@ CREATE TABLE IF NOT EXISTS retail.receipts_by_store_date (
      PRIMARY KEY ((store_id, receipt_date), register_id, receipt_timestamp, receipt_id)
 );
 
-CREATE TABLE IF NOT EXISTS receipts_by_credit_card (
+CREATE TABLE IF NOT EXISTS retail.receipts_by_credit_card (
        credit_card_number bigint,
        receipt_timestamp timestamp,
        receipt_id bigint,
