@@ -2,11 +2,13 @@ The Black Friday project contains 4 major parts.
 
 The first is in the cql directory that sets up the database schema for the entire project.
 
-The second is the data generation portion in the generate_data dir.  It does both an initial static data load with the seed scripts (1.seed_zipcode and 2.seed_retail).  It also generates sample data on a continuous basis using metagener (the scripts in 3.scan_data).
+The second part is a sample Spark job
 
-The third part is the web project in the web directory that is a simple Python / Flask project that runs against a local DSE. This expects that you have a local DSE setup and running.
+The third  part is a sample Solr schema with a script to post it
 
-The fourth part is what you will write.  It will be Spark Jobs that can run against both the static data set and also against the dynamic data before it flows into Cassandra.
+The fourth part is the web project in the web directory that is a simple Python / Flask project that runs against a local DSE. This expects that you have a local DSE setup and running.
+
+The fifth is a cash-register simulator implemented with JMeter
 
 ## Mac Setup ##
 
@@ -34,14 +36,15 @@ The fourth part is what you will write.  It will be Spark Jobs that can run agai
   brew install pip
 ```
 
-## All platforms ##
+## All platforms - for manual setup ##
 
 4 Install Python dependencies:
+
 ```
-  pip install flask
-  pip install blist
-  pip install cassandra-driver
-  pip install requests
+pip install flask
+pip install blist
+pip install cassandra-driver
+pip install requests
 ```
 
 7 - Download and unzip [google visualization](https://google-visualization-python.googlecode.com/files/gviz_api_py-1.8.2.tar.gz)
@@ -56,13 +59,42 @@ Testing the library:
   python ./setup.py test
 ```
 
-9 - Run the primary project which starts up the Flask Web Project:
+## Start here with the VM
+
+11 - Import the seed data:
 ```
-  cd black-friday/web
-  ./run
+  cd cql
+  cqlsh -f retail.cql
+  cqlsh -f import.cql
 ```
 
-10 - Verify that the project is running locally by going to [http://localhost:5000/](http://localhost:5000/)  Only the top 3 API pages are currently running.
+10 - Import the sample solr index
+```
+   cd solr
+   ./add-schema.sh products_by_id
+```
+   
+9 - Run the primary project which starts up the Flask Web Project:
+```
+  cd web
+  ./run &
+```
+11 - Verify that the project is running locally by going to [http://localhost:5001/](http://localhost:5001/)
+
+Try out the solr search and the product lookup. Some of the other pages are blank, as
+they are populated in the following steps. You may need to peek in the database to find 
+valid product ids.
+
+10 - Simulate the cash registers
+```
+   cd jmeter
+   jmeter -n -t scan.jmx
+```
+You can also start jmeter without the -n option to run it in the foreground
+This will insert a significant amount of data, so run it sparingly.
+
+12 - Rollup the data by submitting the 
+```
 
 11 - Setup DSE / Cassandra.  Under the cql directory is the schema for the database.  It's assumed that cqlsh is in your path.  Import it using:
 ```
@@ -70,22 +102,6 @@ Testing the library:
   cqlsh -f retail.cql
 ```
 
-11 - Import the data:
-```
-  cd generate_data/1.seed_zipcode_data
-  ./1.zipcodes-to-cassandra.py
-  cd ../2.seed_retail_data
-  ./1.download-data.sh
-  ./2.data-to-cassandra.py
-```
-
-12 - Start metagener.  Open 4 tabs and run each of the following commands in a NEW terminal window.  They need to be run together in separate terminal windows.
-```
-  ./3.start-metagener.sh
-  ./4.metagener-to-cassandra-stores-employees.py
-  nc -l 5005
-  ./5.metagener-to-cassandra-scan-items.py
-```
 
 ### Project Overview ###
 
