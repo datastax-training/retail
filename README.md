@@ -59,7 +59,7 @@ Testing the library:
   python ./setup.py test
 ```
 
-## Start here with the VM
+## Start here with the VM ##
 
 11 - Import the seed data:
 ```
@@ -109,7 +109,7 @@ The directory web/routes has the basic files for the web project.  It uses the f
 
 route.py - This defines the basic index for the root URL of the project.  It simply generates the html in that method.
 ```
-  @black_friday_api.route('/')
+  @web_api.route('/')
 ```
 
 rest.py - This defines the rest endpoints for the project.  As one example navigate to [http://localhost:5000/api/paging/system/compaction_history/](http://localhost:5000/api/paging/system/compaction_history/).  This calls the following route in rest.py:
