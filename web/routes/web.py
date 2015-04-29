@@ -110,7 +110,7 @@ def search():
                   ('facet','true'),
                   ('facet.field','supplier_name'),
                   ('facet.field','category_name'),
-                  ('q',"title:" + search_term) ]
+                  ('q',"title:" + search_term.encode('utf-8')) ]
 
     if filter_by:
         parameters.append(('fq',filter_by.encode('utf-8')))
