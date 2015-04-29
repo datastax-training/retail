@@ -188,16 +188,16 @@
               <stringProp name="variableNames">product_id</stringProp>
             </CSVDataSet>
             <hashTree/>
-            <UserParameters guiclass="UserParametersGui" testclass="UserParameters" testname="User Parameters" enabled="true">
+            <UserParameters guiclass="UserParametersGui" testclass="UserParameters" testname="Calculate Prices" enabled="true">
               <collectionProp name="UserParameters.names">
                 <stringProp name="112310">qty</stringProp>
                 <stringProp name="106934601">price</stringProp>
                 <stringProp name="410330749">receipt_total</stringProp>
               </collectionProp>
               <collectionProp name="UserParameters.thread_values">
-                <collectionProp name="-398481258">
+                <collectionProp name="1199632118">
                   <stringProp name="-731381727">${__Random(1,6)}</stringProp>
-                  <stringProp name="492831171">${__Random(20,120)}</stringProp>
+                  <stringProp name="-1497224810">${__Random(0,14)}9.99</stringProp>
                   <stringProp name="1273565563">${__jexl(${price}*${qty}+${receipt_total})}</stringProp>
                 </collectionProp>
               </collectionProp>

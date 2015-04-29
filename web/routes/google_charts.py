@@ -9,7 +9,7 @@ def compose_ajax_source():
     :return: ajax ready url
     """
     # grab url parameter, if available
-    url = request.args.get('url', '/api/paging/system/compaction_history')
+    url = request.args.get('url')
 
     # pass all other parameters to ajax url
     ajax_source = '%s?' % url
