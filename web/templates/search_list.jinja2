@@ -19,26 +19,26 @@
 {% if categories %}
   <b>Category:</b><br>
 
-  {% for category in categories %}
-  {% set new_filter_by = 'category_name:"' + category + '"' %}
+  {% for category, amount in categories %}
+  {% set new_filter_by = 'category_name:"%s"' % category %}
   {% if filter_by %}
-    {%   set new_filter_by = filter_by + " AND " + new_filter_by %}
+    {% set new_filter_by = "%s AND %s" % (filter_by,new_filter_by) %}
   {% endif %}
 
-  <a href="/web/search?{{ urlencode( [('s',search_term), ('filter_by',new_filter_by)] ) }}">{{ category }}:</a>&nbsp;{{ categories[category]}}<br>
+  <a href="/web/search?{{ urlencode( [('s',search_term), ('filter_by',new_filter_by.encode('utf-8'))] ) }}">{{ category }}:</a>&nbsp;{{ amount}}<br>
   {% endfor %}
   <br>
 {% endif %}
 {% if suppliers %}
   <b>Supplier:</b><br>
 
-  {% for supplier in suppliers %}
-  {% set new_filter_by = 'supplier_name:"' + supplier + '"' %}
+  {% for supplier, amount in suppliers %}
+  {% set new_filter_by = 'supplier_name:"%s"' % supplier %}
   {% if filter_by %}
-    {%   set new_filter_by = filter_by + " AND " + new_filter_by %}
+    {%   set new_filter_by = "%s AND %s" % (filter_by, new_filter_by) %}
   {% endif %}
 
-  <a href="/web/search?{{ urlencode( [('s',search_term), ('filter_by',new_filter_by)] ) }}">{{ supplier }}:</a>&nbsp;{{ suppliers[supplier]}}<br>
+  <a href="/web/search?{{ urlencode( [('s',search_term), ('filter_by',new_filter_by.encode('utf-8'))] ) }}">{{ supplier }}:</a>&nbsp;{{ amount }}<br>
   {% endfor %}
 {% endif %}
 

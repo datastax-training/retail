@@ -84,7 +84,7 @@ def find_receipt_by_credit_card():
 
     cc_no = request.args.get('cc_no')
 
-    if cc_no is not None:
+    if cc_no:
         results = rest.session.execute(get_receipt_by_cc,[long(cc_no)])
 
     return render_template('credit_card_search.jinja2', receipts = results)
@@ -113,13 +113,15 @@ def search():
                   ('q',"title:" + search_term) ]
 
     if filter_by:
-        parameters.append(('fq',filter_by))
+        parameters.append(('fq',filter_by.encode('utf-8')))
 
     # get the response
     response = urllib2.urlopen(url + urlencode(parameters))
 
     # fish out the docs from the solr response
-    parsed_response = json.loads(response.read())
+    read = response.read()
+    readDecoded = read.decode("UTF-8")
+    parsed_response = json.loads(read)
     docs = parsed_response['response']['docs']
 
     category_facets = process_facets(parsed_response['facet_counts']['facet_fields']['category_name'])
@@ -135,17 +137,12 @@ def search():
 
 #
 # The facets come in a list [ 'value1', 10, 'value2' 5, ...] with numbers in descending order
-# We convert it to a map of {'value1':10, 'value2':5, ... ]
+# We convert it to a list of [('value1',10), ('value2',5) ... ]
 #
 
 def process_facets(raw_facets):
 
-    facet_list = OrderedDict()
+    new_list = [ (raw_facets[i],raw_facets[i+1]) for i in range(0,len(raw_facets),2)]
 
-    for i in range(0,raw_facets.__len__(),2):
-        if raw_facets[i+1] == 0:
-            break
-
-        facet_list[raw_facets[i]] = raw_facets[i+1]
-
-    return facet_list
+    # keep only the facets that have > 0 items
+    return filter(lambda e: e[1] > 0, new_list)
