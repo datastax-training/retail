@@ -1,5 +1,5 @@
 
-name := "spark-demo"
+name := "spark-retail"
 
 version := "1.0"
 
