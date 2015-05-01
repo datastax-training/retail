@@ -195,7 +195,7 @@
                 <stringProp name="410330749">receipt_total</stringProp>
               </collectionProp>
               <collectionProp name="UserParameters.thread_values">
-                <collectionProp name="1199632118">
+                <collectionProp name="111828440">
                   <stringProp name="-731381727">${__Random(1,6)}</stringProp>
                   <stringProp name="-1497224810">${__Random(0,14)}9.99</stringProp>
                   <stringProp name="1273565563">${__jexl(${price}*${qty}+${receipt_total})}</stringProp>
@@ -207,12 +207,12 @@
             <CassandraSampler guiclass="TestBeanGUI" testclass="CassandraSampler" testname="Lookup Product" enabled="true">
               <stringProp name="batchSize"></stringProp>
               <stringProp name="consistencyLevel">LOCAL_ONE</stringProp>
-              <stringProp name="query">select title from products_by_id where product_id = ?</stringProp>
+              <stringProp name="query">select title, category_name from products_by_id where product_id = ?</stringProp>
               <stringProp name="queryArguments">${product_id}</stringProp>
               <stringProp name="queryType">Prepared Statement</stringProp>
               <stringProp name="resultVariable"></stringProp>
               <stringProp name="sessionName">cc</stringProp>
-              <stringProp name="variableNames">o_product_name</stringProp>
+              <stringProp name="variableNames">o_product_name,o_category_name</stringProp>
             </CassandraSampler>
             <hashTree/>
             <CassandraSampler guiclass="TestBeanGUI" testclass="CassandraSampler" testname="Insert Scan" enabled="true">
@@ -244,6 +244,34 @@
               <boolProp name="displaySystemProperties">false</boolProp>
             </DebugPostProcessor>
             <hashTree/>
+            <IfController guiclass="IfControllerPanel" testclass="IfController" testname="If Controller" enabled="true">
+              <stringProp name="IfController.condition">&apos;${o_category_name_1}&apos; == &apos;mobile phone cases&apos;  || &apos;${o_category_name_1}&apos; == &apos;LED TVs&apos;</stringProp>
+              <boolProp name="IfController.evaluateAll">false</boolProp>
+            </IfController>
+            <hashTree>
+              <PublisherSampler guiclass="JMSPublisherGui" testclass="PublisherSampler" testname="JMS Publisher" enabled="true">
+                <stringProp name="jms.jndi_properties">false</stringProp>
+                <stringProp name="jms.initial_context_factory">org.apache.activemq.jndi.ActiveMQInitialContextFactory</stringProp>
+                <stringProp name="jms.provider_url">tcp://localhost:61616</stringProp>
+                <stringProp name="jms.connection_factory">ConnectionFactory</stringProp>
+                <stringProp name="jms.topic">dynamicTopics/HotProducts</stringProp>
+                <stringProp name="jms.expiration">12000</stringProp>
+                <stringProp name="jms.priority">0</stringProp>
+                <stringProp name="jms.security_principle"></stringProp>
+                <stringProp name="jms.security_credentials"></stringProp>
+                <stringProp name="jms.text_message">${o_category_name_1}|${qty}</stringProp>
+                <stringProp name="jms.input_file"></stringProp>
+                <stringProp name="jms.random_path"></stringProp>
+                <stringProp name="jms.config_choice">jms_use_text</stringProp>
+                <stringProp name="jms.config_msg_type">jms_text_message</stringProp>
+                <stringProp name="jms.iterations">1</stringProp>
+                <boolProp name="jms.authenticate">false</boolProp>
+                <elementProp name="jms.jmsProperties" elementType="JMSProperties">
+                  <collectionProp name="JMSProperties.properties"/>
+                </elementProp>
+              </PublisherSampler>
+              <hashTree/>
+            </hashTree>
           </hashTree>
           <CassandraSampler guiclass="TestBeanGUI" testclass="CassandraSampler" testname="Insert Receipt" enabled="true">
             <stringProp name="batchSize"></stringProp>
@@ -271,7 +299,7 @@
             <stringProp name="batchSize"></stringProp>
             <stringProp name="consistencyLevel">LOCAL_ONE</stringProp>
             <stringProp name="query">insert into receipts_by_store_date (store_id, receipt_date, register_id, receipt_timestamp, receipt_id, receipt_total) values (?,?,?,?,?,?)</stringProp>
-            <stringProp name="queryArguments">${store_id},${receipt_date} 00:00:00+0000,${register_id},${receipt_date} ${receipt_time}-0700,${receipt_id},${receipt_total}</stringProp>
+            <stringProp name="queryArguments">${store_id},${receipt_date} 00:00:00+0000,${register_id},${receipt_date} ${receipt_time}-0700,${register_id},${receipt_id}${receipt_total}</stringProp>
             <stringProp name="queryType">Prepared Statement</stringProp>
             <stringProp name="resultVariable"></stringProp>
             <stringProp name="sessionName">cc</stringProp>

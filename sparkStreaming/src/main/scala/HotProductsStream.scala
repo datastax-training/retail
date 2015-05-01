@@ -1,11 +1,12 @@
 import java.util.UUID
+import com.datastax.spark.connector.SomeColumns
 import org.joda.time.DateTime
-
+import com.datastax.spark.connector.streaming._
 import org.apache.spark._
 import org.apache.spark.streaming._
-//import org.apache.spark.streaming.StreamingContext._
+import org.apache.spark.streaming.StreamingContext._
 import com.datastax.spark.connector.streaming._
-
+import com.datastax.spark.connector.cql.CassandraConnector
 
 case class Register(store_id: Int,
                  register_id: Int,
@@ -30,7 +31,7 @@ case class Store(
                   zip: Long,
                   size_in_sf: Int)
 
-object GiftCardStream {
+object HotProductsStream {
 
   def main(args: Array[String]) {
 
@@ -38,14 +39,25 @@ object GiftCardStream {
 
 
     val conf = new SparkConf(true)
-      .set("spark.cassandra.connection.host", "127.0.0.1")
+         .setAppName("HotProductsStream")
 
-    val ssc = new StreamingContext(conf, Seconds(1))
+    val ssc = new StreamingContext(conf, Seconds(10))
 
-    val lines = ssc.socketTextStream("localhost", 5002)
+//    val lines = ssc.socketTextStream("localhost", 5002)
+    val lines = ssc.receiverStream(new JMSReceiver("HotProducts","tcp://localhost:61616"))
+          lines.map(line => line.split('|'))
+            .map(arr => (arr(0), arr(1).toInt))    // create (product, amount)
+            .reduceByKeyAndWindow( (acc,sale) => acc + sale , Seconds(10))
+            .map{ case (k,v) => (k, new DateTime(),v)}
+          .saveToCassandra("retail","hot_products",SomeColumns("product","timewindow","sales"))
 
-    lines.saveToCassandra("retail","sales_by_date")
 
+//    lines.map(line => line.split('|') ).
+
+
+    ssc.start()
+
+    ssc.awaitTermination()
 
   }
 }
