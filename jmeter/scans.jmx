@@ -244,7 +244,7 @@
               <boolProp name="displaySystemProperties">false</boolProp>
             </DebugPostProcessor>
             <hashTree/>
-            <IfController guiclass="IfControllerPanel" testclass="IfController" testname="If Controller" enabled="true">
+            <IfController guiclass="IfControllerPanel" testclass="IfController" testname="If it is a hot product" enabled="true">
               <stringProp name="IfController.condition">&apos;${o_category_name_1}&apos; == &apos;mobile phone cases&apos;  || &apos;${o_category_name_1}&apos; == &apos;LED TVs&apos;</stringProp>
               <boolProp name="IfController.evaluateAll">false</boolProp>
             </IfController>
@@ -255,7 +255,7 @@
                 <stringProp name="jms.provider_url">tcp://localhost:61616</stringProp>
                 <stringProp name="jms.connection_factory">ConnectionFactory</stringProp>
                 <stringProp name="jms.topic">dynamicTopics/HotProducts</stringProp>
-                <stringProp name="jms.expiration">12000</stringProp>
+                <stringProp name="jms.expiration">10000</stringProp>
                 <stringProp name="jms.priority">0</stringProp>
                 <stringProp name="jms.security_principle"></stringProp>
                 <stringProp name="jms.security_credentials"></stringProp>
