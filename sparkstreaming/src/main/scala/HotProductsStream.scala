@@ -1,12 +1,12 @@
 import java.util.UUID
-import com.datastax.spark.connector.SomeColumns
 import org.joda.time.DateTime
-import com.datastax.spark.connector.streaming._
 import org.apache.spark._
 import org.apache.spark.streaming._
 import org.apache.spark.streaming.StreamingContext._
 import com.datastax.spark.connector.streaming._
 import com.datastax.spark.connector.cql.CassandraConnector
+import com.datastax.spark.connector.SomeColumns
+
 
 case class Register(store_id: Int,
                  register_id: Int,
