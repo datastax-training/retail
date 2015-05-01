@@ -150,5 +150,11 @@ CREATE TABLE IF NOT EXISTS retail.sales_by_state (
     PRIMARY KEY (state)
 );
 
+CREATE TABLE IF NOT EXISTS retail.hot_products (
+  product text,
+  timewindow timestamp,
+  sales int,
+  PRIMARY KEY ((product), timewindow)
+);
 
 
