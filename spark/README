@@ -1,9 +1,9 @@
 
 To Build:
 
-sbt package
+sbt assembly
 
 To Execute:
 
-dse spark-submit --class RollupRetail target/scala-2.10/spark-demo_2.10-1.0.jar
+dse spark-submit --class RollupRetail target/scala-2.10/spark-retail-assembly-1.0.jar
 

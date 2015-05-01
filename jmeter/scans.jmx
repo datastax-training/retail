@@ -253,7 +253,7 @@
               <boolProp name="displaySystemProperties">false</boolProp>
             </DebugPostProcessor>
             <hashTree/>
-            <IfController guiclass="IfControllerPanel" testclass="IfController" testname="If it is a hot product" enabled="true">
+            <IfController guiclass="IfControllerPanel" testclass="IfController" testname="If it is a hot product (mobile phone case or LED TV)" enabled="true">
               <stringProp name="IfController.condition">&apos;${o_category_name_1}&apos; == &apos;mobile phone cases&apos;  || &apos;${o_category_name_1}&apos; == &apos;LED TVs&apos;</stringProp>
               <boolProp name="IfController.evaluateAll">false</boolProp>
             </IfController>
