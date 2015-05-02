@@ -223,24 +223,23 @@ def timeslice(keyspace=None, table=None, start_time_str=None, end_time_str=None)
 
     ps = session.prepare(statement)
 
-    description = [('timewindow', 'datetime'), ('dummy', 'number')]
-    data_table = None
     results = session.execute(ps, [start_time, end_time] + buckets_we_need)
 
     if results:
-        # extract reference row
+        # extract the map of product quantities
         products_map = results[0]['quantities']
 
         # Convert the map column to look like a series of regular columns to google
         # Create the schema [ ('timewindow', 'datetime'), ('some product', 'number'), ... ]
-        description = [('timewindow','datetime')] + map(lambda product: (product, 'number'), products_map.keys())
+        description = [('timewindow', 'datetime')] + map(lambda product: (product, 'number'), products_map.keys())
 
         data_table = [ [row['timewindow']] + [row['quantities'].get(item_name) for item_name in products_map] for row in results]
-
-    google_table = gviz_api.DataTable(description)
-
-    if results:
+        google_table = gviz_api.DataTable(description)
         google_table.LoadData(data_table)
+    else:
+        # create an empty (yet valid) one
+        description = [('timewindow', 'datetime'), ('No Products', 'number')]
+        google_table = gviz_api.DataTable(description)
 
     return google_table.ToJSon(order_by="timewindow")
 
