@@ -61,6 +61,7 @@ CREATE TABLE IF NOT EXISTS retail.products_by_category_name (
    url text,
    features map<text,text>,
    price decimal,
+   is_hot boolean static,
    PRIMARY KEY (category_name, supplier_name, title, product_id)
 );
 
