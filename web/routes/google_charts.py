@@ -99,3 +99,14 @@ def table():
                                        'jsonData.gcharts[1])',
                            chart_type='visualization.Table',
                            options='options')
+
+@gcharts_api.route('/stevechart/')
+def stevebarchart():
+    ajax_source = compose_ajax_source()
+
+    return render_template('steve-charts.jinja2',
+                           ajax_source=ajax_source,
+                           gcharts_version=1.1,
+                           packages='bar',
+                           chart_type='charts.Bar',
+                           options='google.charts.Bar.convertOptions(options)')

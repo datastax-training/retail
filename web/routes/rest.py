@@ -4,6 +4,7 @@ import gviz_api
 import uuid
 import urllib2
 import urllib
+import pytz
 import json
 
 from decimal import Decimal
@@ -13,6 +14,8 @@ from json import loads, dumps
 from cassandra.cluster import Cluster
 from cassandra.query import ordered_dict_factory
 from cassandra.util import OrderedMap
+
+CASSANDRA_TIME_FORMAT = "%Y-%m-%dT%H:%M:%S"
 
 rest_api = Blueprint('rest_api', __name__)
 
@@ -224,3 +227,41 @@ def paging(keyspace=None, table=None):
         f['gcharts'][1] = charts_table
 
     return jsonify(f)
+
+@rest_api.route('/timeslice/<keyspace>/<table>/')
+def timeslice(keyspace=None, table=None, start_time_str=None, end_time_str=None):
+    end_time = datetime.datetime.utcnow()
+    start_time = end_time + datetime.timedelta(minutes=-5)
+    hours = int ((end_time - start_time).total_seconds() // 3600)
+
+    start_time_bucket = start_time.replace(minute=0,second=0,microsecond=0)
+    buckets_we_need = [ start_time_bucket + datetime.timedelta(hours=x) for x in range(0,hours + 1) ]
+
+    statement = "SELECT timewindow, quantities FROM retail.hot_products" \
+                " WHERE timewindow >= ?" \
+                " AND   timewindow <= ?" \
+                " AND   timebucket IN (%s) ORDER BY timewindow ASC LIMIT 60" \
+                % (", ".join(["?"] * (hours + 1)))
+
+    ps = session.prepare(statement)
+    results = session.execute(ps, [start_time, end_time] + buckets_we_need)
+
+    # extract reference row
+    quantities_map = results[0]['quantities']
+
+    # map(lambda product: ,quantities_map.items())
+
+    description = [('timewindow', 'datetime'), ('LED TVs','number'), ('mobile phone cases','number')]
+
+    # new_list = [ [('timewindow', row['timewindow']) ] + row['quantities'].items() for row in results]
+    new_list = [ [row['timewindow']] + [row['quantities'][item_name] for item_name in quantities_map] for row in results]
+
+    data_table = gviz_api.DataTable(description)
+    data_table.LoadData(new_list)
+
+    return data_table.ToJSon()
+
+
+
+
+

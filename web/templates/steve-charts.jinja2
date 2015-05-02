@@ -1,0 +1,38 @@
+{% extends "base.jinja2" %}
+
+{% block head %}
+{% endblock %}
+
+{% block body %}
+    <div id="chart_div"></div>
+    <script type="text/javascript">
+
+        google.load("visualization", "{{ gcharts_version }}", {packages:["{{ packages }}"]});
+        google.setOnLoadCallback(drawChart);
+
+        function drawChart() {
+
+            var jsonData = $.ajax({
+                url: "{{ ajax_source }}",
+                dataType: "json",
+                async: false
+            }).responseJSON;
+
+            var chartOptions = {
+            animation:{
+                    duration: 1000,
+                    easing: 'linear'
+                  }
+            }
+
+            var chart = new google.{{ chart_type }}(document.getElementById('chart_div'));
+            var data = new google.visualization.DataTable(jsonData);
+            chart.draw(data, chartOptions);
+        }
+        var intervalId = setInterval(drawChart, 10000)
+
+    </script>
+{% endblock %}
+
+{% block tail %}
+{% endblock %}

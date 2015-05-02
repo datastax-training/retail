@@ -45,15 +45,18 @@ object HotProductsStream {
 
 //    val lines = ssc.socketTextStream("localhost", 5002)
     val lines = ssc.receiverStream(new JMSReceiver("HotProducts","tcp://localhost:61616"))
-          lines.map(line => line.split('|'))
-            .map(arr => (arr(0), arr(1).toInt))    // create (product, amount)
-            .reduceByKeyAndWindow( (acc,sale) => acc + sale , Seconds(10))
-            .map{ case (k,v) => (k, new DateTime(),v)}
-          .saveToCassandra("retail","hot_products",SomeColumns("product","timewindow","sales"))
 
+          // note that we use def here so it gets evaluated in the map
+          def current_time = new DateTime()
+          def current_time_bucket = current_time.hourOfDay().roundFloorCopy()
 
-//    lines.map(line => line.split('|') ).
-
+          lines.map(line => line.split('|'))       // we have a list of arrays - not too useful
+            .map(arr => (arr(0), arr(1).toInt))    // convert to list of tuples (product, amount)
+            .reduceByKeyAndWindow( (total_sales,current_sale) => total_sales + current_sale , Seconds(10))  // same thing, but 1 row per product
+            .map{ case (product, amount) => Map(product -> amount)}
+            .reduce( (current_map, new_element) => current_map + new_element.head )  // Make a map of {product -> amount, ...}
+            .map( qty_map => (current_time_bucket , current_time, qty_map))          // fill in the row keys
+            .saveToCassandra("retail","hot_products",SomeColumns("timebucket","timewindow","quantities"))
 
     ssc.start()
 
