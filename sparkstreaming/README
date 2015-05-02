@@ -1,0 +1,9 @@
+
+To build a fat jar
+
+sbt assembly
+
+To run it
+
+dse spark-submit --class HotProductsStream target/scala-2.10/spark-retail-assembly-1.0.jar
+
