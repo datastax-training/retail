@@ -223,7 +223,7 @@ def timeslice(keyspace=None, table=None, start_time_str=None, end_time_str=None)
 
     ps = session.prepare(statement)
 
-    description = [('timewindow', 'datetime'), ('dummy', 'string')]
+    description = [('timewindow', 'datetime'), ('dummy', 'number')]
     data_table = None
     results = session.execute(ps, [start_time, end_time] + buckets_we_need)
 
