@@ -4,7 +4,6 @@ import gviz_api
 import uuid
 import urllib2
 import urllib
-import pytz
 import json
 
 from decimal import Decimal
