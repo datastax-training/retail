@@ -6,9 +6,17 @@
 {% block body %}
     <div id="chart_div"></div>
     <script type="text/javascript">
-
-        google.load("visualization", "{{ gcharts_version }}", {packages:["{{ packages }}"]});
+        google.load("visualization", "1", {packages:["corechart"]});
         google.setOnLoadCallback(drawChart);
+
+        chartOptions = {
+{#              width: 800,#}
+{#              height: 400,#}
+{#              animation:{#}
+{#                      duration: 500,#}
+{#                      easing: 'linear'#}
+{#                    }#}
+        };
 
         function drawChart() {
 
@@ -18,16 +26,10 @@
                 async: false
             }).responseJSON;
 
-            var chartOptions = {
-            animation:{
-                    duration: 1000,
-                    easing: 'linear'
-                  }
-            }
+           var data = new google.visualization.DataTable(jsonData);
+           chart = new google.visualization.{{ chart_type }}(document.getElementById('chart_div'));
+           chart.draw(data, chartOptions);
 
-            var chart = new google.{{ chart_type }}(document.getElementById('chart_div'));
-            var data = new google.visualization.DataTable(jsonData);
-            chart.draw(data, chartOptions);
         }
         var intervalId = setInterval(drawChart, 10000)
 

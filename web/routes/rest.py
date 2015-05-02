@@ -83,31 +83,6 @@ def base():
     f = {'status': 'OK'}
     return jsonify(**f)
 
-@rest_api.route('/search')
-def search():
-    # this will search the city field in the retail.zipcodes solr core
-    # the import parameter is 's'
-
-    keyword = request.args.get('s')
-
-    # parameters to solr are rows=30  wt (writer type)=json, and q=city:<keyword> sort=zipcode asc
-    parameters = urllib.urlencode({'sort':'zipcode asc', 'rows':'30', 'wt': 'json', 'q': "city:" + keyword})
-    url='http://localhost:8983/solr/retail.zipcodes/select?' + parameters
-
-    # get the response
-    response = urllib2.urlopen(url)
-
-    # fish out the docs from the solr response
-    parsed_response = json.loads(response.read())
-    docs = parsed_response['response']['docs']
-
-    # build a data table json response.  We use the gviz api which will format
-    # the data correctly for google charts
-    description = {'city':'string', 'zipcode':'string', 'long':'number','state':'string','lat':'number','population':'number'}
-    data_table = gviz_api.DataTable(description)
-    data_table.LoadData(docs)
-    return  data_table.ToJSon()
-
 @rest_api.route('/paging/<keyspace>/<table>/')
 def paging(keyspace=None, table=None):
     """
@@ -228,38 +203,47 @@ def paging(keyspace=None, table=None):
 
     return jsonify(f)
 
-@rest_api.route('/timeslice/<keyspace>/<table>/')
+@rest_api.route('/timeslice/<keyspace>/<table>')
 def timeslice(keyspace=None, table=None, start_time_str=None, end_time_str=None):
+
+    minutes = int(request.args.get('minutes', 5))
     end_time = datetime.datetime.utcnow()
-    start_time = end_time - datetime.timedelta(minutes=5)
-    hours = int ((end_time - start_time).total_seconds() // 3600)
+    start_time = end_time - datetime.timedelta(minutes=minutes)
+    hours = int((end_time - start_time).total_seconds() // 3600) + 1
 
     start_time_bucket = start_time.replace(minute=0,second=0,microsecond=0)
-    buckets_we_need = [ start_time_bucket + datetime.timedelta(hours=x) for x in range(0,hours + 1) ]
+
+    # We generate the buckets in descending order
+    buckets_we_need = [ start_time_bucket + datetime.timedelta(hours=x) for x in reversed(range(0,hours + 1)) ]
 
     statement = "SELECT timewindow, quantities FROM retail.hot_products" \
                 " WHERE timewindow >= ?" \
                 " AND   timewindow <= ?" \
-                " AND   timebucket IN (%s) ORDER BY timewindow ASC LIMIT 60" \
+                " AND   timebucket IN (%s) ORDER BY timewindow DESC LIMIT 60" \
                 % (", ".join(["?"] * (hours + 1)))
 
     ps = session.prepare(statement)
+
+    description = [('timewindow', 'datetime'), ('dummy', 'string')]
+    data_table = None
     results = session.execute(ps, [start_time, end_time] + buckets_we_need)
 
-    # extract reference row
-    products_map = results[0]['quantities']
+    if results:
+        # extract reference row
+        products_map = results[0]['quantities']
 
-    # Convert the map column to look like a series of regular columns to google
-    # Create the schema [ ('timewindow', 'datetime'), ('some product', 'number'), ... ]
-    description = [('timewindow', 'datetime')] + map(lambda product: (product, 'number'), products_map.keys())
+        # Convert the map column to look like a series of regular columns to google
+        # Create the schema [ ('timewindow', 'datetime'), ('some product', 'number'), ... ]
+        description = [('timewindow','datetime')] + map(lambda product: (product, 'number'), products_map.keys())
 
-    # new_list = [ [('timewindow', row['timewindow']) ] + row['quantities'].items() for row in results]
-    new_list = [ [row['timewindow']] + [row['quantities'][item_name] for item_name in products_map] for row in results]
+        data_table = [ [row['timewindow']] + [row['quantities'].get(item_name) for item_name in products_map] for row in results]
 
-    data_table = gviz_api.DataTable(description)
-    data_table.LoadData(new_list)
+    google_table = gviz_api.DataTable(description)
 
-    return data_table.ToJSon()
+    if results:
+        google_table.LoadData(data_table)
+
+    return google_table.ToJSon(order_by="timewindow")
 
 
 

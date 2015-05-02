@@ -224,6 +224,17 @@
               <stringProp name="variableNames">o_product_name,o_category_name</stringProp>
             </CassandraSampler>
             <hashTree/>
+            <CassandraSampler guiclass="TestBeanGUI" testclass="CassandraSampler" testname="Lookup is hot" enabled="true">
+              <stringProp name="batchSize"></stringProp>
+              <stringProp name="consistencyLevel">LOCAL_ONE</stringProp>
+              <stringProp name="query">select is_hot from products_by_category_name where category_name = ?</stringProp>
+              <stringProp name="queryArguments">${o_category_name_1}</stringProp>
+              <stringProp name="queryType">Prepared Statement</stringProp>
+              <stringProp name="resultVariable"></stringProp>
+              <stringProp name="sessionName">cc</stringProp>
+              <stringProp name="variableNames">o_is_hot</stringProp>
+            </CassandraSampler>
+            <hashTree/>
             <CassandraSampler guiclass="TestBeanGUI" testclass="CassandraSampler" testname="Insert Scan" enabled="true">
               <stringProp name="batchSize"></stringProp>
               <stringProp name="consistencyLevel">LOCAL_ONE</stringProp>
@@ -254,7 +265,7 @@
             </DebugPostProcessor>
             <hashTree/>
             <IfController guiclass="IfControllerPanel" testclass="IfController" testname="If it is a hot product (mobile phone case or LED TV)" enabled="true">
-              <stringProp name="IfController.condition">&apos;${o_category_name_1}&apos; == &apos;mobile phone cases&apos;  ||  &apos;${o_category_name_1}&apos; == &apos;LED TVs&apos;   || &apos;${o_category_name_1}&apos; == &apos;nail polishes&apos;</stringProp>
+              <stringProp name="IfController.condition">&apos;${o_is_hot_1}&apos; == &apos;true&apos;</stringProp>
               <boolProp name="IfController.evaluateAll">false</boolProp>
             </IfController>
             <hashTree>
