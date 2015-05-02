@@ -54,7 +54,7 @@ object HotProductsStream {
             .map(arr => (arr(0), arr(1).toInt))    // convert to list of tuples (product, amount)
             .reduceByKeyAndWindow( (total_sales,current_sale) => total_sales + current_sale , Seconds(10))  // same thing, but 1 row per product
             .map{ case (product, amount) => Map(product -> amount)}
-            .reduce( (current_map, new_element) => current_map + new_element.head )  // Make a map of {product -> amount, ...}
+            .reduce( (new_element, current_map) => current_map + new_element.head )  // Make a map of {product -> amount, ...}
             .map( qty_map => (current_time_bucket , current_time, qty_map))          // fill in the row keys
             .saveToCassandra("retail","hot_products",SomeColumns("timebucket","timewindow","quantities"))
 

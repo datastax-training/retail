@@ -231,7 +231,7 @@ def paging(keyspace=None, table=None):
 @rest_api.route('/timeslice/<keyspace>/<table>/')
 def timeslice(keyspace=None, table=None, start_time_str=None, end_time_str=None):
     end_time = datetime.datetime.utcnow()
-    start_time = end_time + datetime.timedelta(minutes=-5)
+    start_time = end_time - datetime.timedelta(minutes=5)
     hours = int ((end_time - start_time).total_seconds() // 3600)
 
     start_time_bucket = start_time.replace(minute=0,second=0,microsecond=0)
@@ -247,14 +247,14 @@ def timeslice(keyspace=None, table=None, start_time_str=None, end_time_str=None)
     results = session.execute(ps, [start_time, end_time] + buckets_we_need)
 
     # extract reference row
-    quantities_map = results[0]['quantities']
+    products_map = results[0]['quantities']
 
-    # map(lambda product: ,quantities_map.items())
-
-    description = [('timewindow', 'datetime'), ('LED TVs','number'), ('mobile phone cases','number')]
+    # Convert the map column to look like a series of regular columns to google
+    # Create the schema [ ('timewindow', 'datetime'), ('some product', 'number'), ... ]
+    description = [('timewindow', 'datetime')] + map(lambda product: (product, 'number'), products_map.keys())
 
     # new_list = [ [('timewindow', row['timewindow']) ] + row['quantities'].items() for row in results]
-    new_list = [ [row['timewindow']] + [row['quantities'][item_name] for item_name in quantities_map] for row in results]
+    new_list = [ [row['timewindow']] + [row['quantities'][item_name] for item_name in products_map] for row in results]
 
     data_table = gviz_api.DataTable(description)
     data_table.LoadData(new_list)
