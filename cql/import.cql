@@ -9,3 +9,8 @@ copy retail.products_by_category_name (supplier_name, supplier_id, title, produc
 
 -- Stores
 copy retail.stores (store_id,address,address_2,address_3,city,state,zip,size_in_sf) FROM '../csv/stores.csv' with delimiter = '|' and header=true;
+
+-- Make some hot products
+update retail.products_by_category_name set is_hot = true where category_name = 'notebooks';
+update retail.products_by_category_name set is_hot = true where category_name = 'servers';
+
