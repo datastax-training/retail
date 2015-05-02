@@ -48,15 +48,15 @@ object HotProductsStream {
 
           // note that we use def here so it gets evaluated in the map
           def current_time = new DateTime()
-          def current_time_bucket = current_time.hourOfDay().roundFloorCopy()
+          val series_name: String = "hotproducts"
 
           lines.map(line => line.split('|'))       // we have a list of arrays - not too useful
             .map(arr => (arr(0), arr(1).toInt))    // convert to list of tuples (product, amount)
             .reduceByKeyAndWindow( (total_sales,current_sale) => total_sales + current_sale , Seconds(10))  // same thing, but 1 row per product
             .map{ case (product, amount) => Map(product -> amount)}
-            .reduce( (new_element, current_map) => current_map ++ new_element )  // Make a map of {product -> amount, ...}
-            .map( qty_map => (current_time_bucket , current_time, qty_map))          // fill in the row keys
-            .saveToCassandra("retail","hot_products",SomeColumns("timebucket","timewindow","quantities"))
+            .reduce( (current_map, new_element) => current_map ++ new_element )  // Make a map of {product -> amount, ...}
+            .map( qty_map => { (series_name, current_time, qty_map)}) // fill in the row keys
+            .saveToCassandra("retail","real_time_analytics",SomeColumns("series","timewindow","quantities"))
 
     ssc.start()
 

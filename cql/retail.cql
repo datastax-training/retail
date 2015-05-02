@@ -151,11 +151,11 @@ CREATE TABLE IF NOT EXISTS retail.sales_by_state (
     PRIMARY KEY (state)
 );
 
-CREATE TABLE IF NOT EXISTS retail.hot_products (
-  timebucket timestamp,
+CREATE TABLE IF NOT EXISTS retail.real_time_analytics (
+  series text,
   timewindow timestamp,
   quantities map<text, int>,
-  PRIMARY KEY ((timebucket), timewindow)
+  PRIMARY KEY ((series), timewindow)
 ) WITH CLUSTERING ORDER BY (timewindow DESC) AND
 gc_grace_seconds=3600 AND
 default_time_to_live=3600

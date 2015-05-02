@@ -227,12 +227,12 @@
             <CassandraSampler guiclass="TestBeanGUI" testclass="CassandraSampler" testname="Lookup is hot" enabled="true">
               <stringProp name="batchSize"></stringProp>
               <stringProp name="consistencyLevel">LOCAL_ONE</stringProp>
-              <stringProp name="query">select is_hot from products_by_category_name where category_name = ?</stringProp>
+              <stringProp name="query">select distinct is_hot,category_name from products_by_category_name where category_name = ?</stringProp>
               <stringProp name="queryArguments">${o_category_name_1}</stringProp>
               <stringProp name="queryType">Prepared Statement</stringProp>
               <stringProp name="resultVariable"></stringProp>
               <stringProp name="sessionName">cc</stringProp>
-              <stringProp name="variableNames">o_is_hot</stringProp>
+              <stringProp name="variableNames">o_is_hot,junk</stringProp>
             </CassandraSampler>
             <hashTree/>
             <CassandraSampler guiclass="TestBeanGUI" testclass="CassandraSampler" testname="Insert Scan" enabled="true">

@@ -202,28 +202,22 @@ def paging(keyspace=None, table=None):
 
     return jsonify(f)
 
-@rest_api.route('/timeslice/<keyspace>/<table>')
-def timeslice(keyspace=None, table=None, start_time_str=None, end_time_str=None):
+@rest_api.route('/realtime/<series>')
+def timeslice(series = None):
 
     minutes = int(request.args.get('minutes', 5))
     end_time = datetime.datetime.utcnow()
     start_time = end_time - datetime.timedelta(minutes=minutes)
-    hours = int((end_time - start_time).total_seconds() // 3600) + 1
 
-    start_time_bucket = start_time.replace(minute=0,second=0,microsecond=0)
-
-    # We generate the buckets in descending order
-    buckets_we_need = [ start_time_bucket + datetime.timedelta(hours=x) for x in reversed(range(0,hours + 1)) ]
-
-    statement = "SELECT timewindow, quantities FROM retail.hot_products" \
-                " WHERE timewindow >= ?" \
+    statement = "SELECT timewindow, quantities FROM retail.real_time_analytics" \
+                " WHERE series = ?" \
+                " AND timewindow >= ?" \
                 " AND   timewindow <= ?" \
-                " AND   timebucket IN (%s) ORDER BY timewindow DESC LIMIT 60" \
-                % (", ".join(["?"] * (hours + 1)))
+                " ORDER BY timewindow DESC LIMIT 60"
 
     ps = session.prepare(statement)
 
-    results = session.execute(ps, [start_time, end_time] + buckets_we_need)
+    results = session.execute(ps, [series, start_time, end_time])
 
     if results:
         # extract the map of product quantities
