@@ -1,8 +1,8 @@
-from collections import OrderedDict
-import datetime
 import decimal
-import gviz_api
-
+import datetime
+from json import dumps
+import uuid
+from cassandra.util import OrderedMap
 
 from flask import Blueprint, request
 from cassandra.cluster import Cluster
@@ -31,6 +31,23 @@ def init_solr(url_base):
     global solr_url_base
 
     solr_url_base = url_base
+
+#
+# Helper function to have json.dump format dates correctly
+#
+
+def fix_json_format(obj):
+    """Default JSON serializer."""
+
+    if isinstance(obj, decimal.Decimal):
+        return float(obj)
+    elif isinstance(obj, uuid.UUID):
+        return str(obj)
+    elif isinstance(obj, datetime.datetime):
+        return str(obj)
+    elif isinstance(obj, OrderedMap):
+        return str(obj)
+    raise TypeError
 
 #
 # Simple type mapper to return the google type given a python type
@@ -86,21 +103,20 @@ def timeslice(series=None):
         # extract the map of product quantities
         products_map = results[0]['quantities']
 
-        # We chose to represent data as a list of tuples
         # Convert the map column to look like a series of regular columns to google
         # Create the schema [ ('timewindow', 'datetime'), ('some product', 'number'), ... ]
-        description = [('timewindow', 'datetime')] + map(lambda product: (product, 'number'), products_map.keys())
+        description = ['timewindow'] + products_map.keys()
+        data = [ [row['timewindow']] + [row['quantities'].get(item_name) for item_name in products_map] for row in results]
 
-        data_table = [ [row['timewindow']] + [row['quantities'].get(item_name) for item_name in products_map] for row in results]
-        google_table = gviz_api.DataTable(description)
-        google_table.LoadData(data_table)
+        # sort the data by timewindow
+        data.sort(key=lambda row: row[0])
+
     else:
         # create an empty (yet valid) one
-        description = [('timewindow', 'datetime'), ('No Products', 'number')]
-        google_table = gviz_api.DataTable(description)
+        description = ['timewindow', 'No Products']
+        data = []
 
-    return google_table.ToJSon(order_by="timewindow")
-
+    return dumps([description] + data, default=fix_json_format)
 
 #
 # This API returns data from the real_time_analytics table
@@ -131,19 +147,20 @@ def simplequery():
         simple_queries[statement] = session.prepare(statement)
 
     results = session.execute(simple_queries[statement])
-    description = OrderedDict()
 
-    # extract types
+    # extract column names from the first row
     first_row = results[0]
 
-    # We chose to represent data as a Dict because that's how we're getting back rows
-    # for each column in the first row, add it to the description
-    i=0
-    for column, value in first_row.iteritems():
-        description["%02d" % i ] = (get_google_type(value), column)
-        i += 1
+    # make a column header
+    description = [column for column in first_row]
 
-    google_table = gviz_api.DataTable(description)
-    google_table.LoadData(results)
+    # Turn the whole thing into an array
+    data = [row.values() for row in results]
 
-    return google_table.ToJSon(order_by=order_col)
+    # sort it if an order column was specified
+    if order_col:
+        posn = description.index(order_col)
+        data.sort(key=lambda row: row[posn] )
+
+    # stick the description row up front, and dump it as json
+    return dumps([description] + data, default=fix_json_format)

@@ -40,18 +40,18 @@
                     Google Charts: Pie of Sales By State
                 </a>
             </li>
-             <li>
-                <a href="/gcharts/barchart/?url=/api/paging/retail/sales_by_date&result_size=100&gcharts_columns=sales_date,receipts_total&gcharts_datatable_order_by=sales_date">
-                    Google Charts: Bar of Sales By Date
+            <li>
+                <a href="/gcharts/ColumnChart/?url=/api/simplequery&q=select sales_date, receipts_total from retail.sales_by_date&order_col=sales_date">
+                    Google Charts: Column Chart of Sales By Date
                 </a>
             </li>
             <li>
-                <a href="/gcharts/areachart/?url=/api/paging/retail/sales_by_date&result_size=100&gcharts_columns=sales_date,receipts_total&gcharts_datatable_order_by=sales_date">
-                    Google Charts: Area of Sales By Date
+                <a href="/gcharts/AreaChart/?url=/api/simplequery&q=select sales_date, receipts_total from retail.sales_by_date&order_col=sales_date">
+                    Google Charts: Area Chart of Sales By Date
                 </a>
             </li>
         <li>
-            <a href="/gcharts/table/?url=/api/paging/retail/receipts_by_credit_card&gcharts_columns=store_id,credit_card_number,receipt_timestamp,receipt_total&result_size=300">
+            <a href="/gcharts/Table/?url=/api/simplequery&q=select * from retail.receipts_by_credit_card limit 100">
                 Google Charts: Table of Receipts Example
             </a>
         </li>
@@ -61,7 +61,8 @@
         <br>
         <ul>
         <li>
-            <a href="/api/paging/retail/receipts_by_credit_card">API: retail.receipts_by_credit_card</a>
+            <a href="/api/simplequery?q=select * from retail.receipts_by_credit_card limit 100">API: retail.receipts_by_credit_card</a>
+            <br>/api/simplequery&q=select * from retail.receipts_by_credit_card limit 100
         </li>
     </ul>
 {% endblock %}

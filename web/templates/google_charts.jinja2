@@ -15,7 +15,7 @@
 
         chartOptions = {
 {#              width: 800,#}
-{#              height: 400,#}
+{#              height: 400#}
 {#              animation:{#}
 {#                      duration: 500,#}
 {#                      easing: 'linear'#}
@@ -38,7 +38,7 @@
                 async: false
             }).responseJSON;
 
-           var data = new google.visualization.DataTable(jsonData);
+           var data = new google.visualization.arrayToDataTable(jsonData);
            chart = new google.visualization.{{ chart_type }}(document.getElementById('chart_div'));
            chart.draw(data, chartOptions);
 
