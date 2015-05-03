@@ -1,53 +1,45 @@
-import blist
+import decimal
 import datetime
-import gviz_api
+from json import dumps
 import uuid
-import urllib2
-import urllib
-import json
-
-from decimal import Decimal
-from flask import Blueprint, jsonify, request
-from json import loads, dumps
-
-from cassandra.cluster import Cluster
-from cassandra.query import ordered_dict_factory
 from cassandra.util import OrderedMap
 
-CASSANDRA_TIME_FORMAT = "%Y-%m-%dT%H:%M:%S"
+from flask import Blueprint, request
+from cassandra.cluster import Cluster
+from cassandra.query import ordered_dict_factory
 
 rest_api = Blueprint('rest_api', __name__)
 
 session = None
-p = None
-solr_url_base = None
+timeslice_query = None
+simple_queries = {}
 
 
-class PreparedStatements:
+def init_cassandra(ip_addresses):
     """
-    Helper class to cache prepared statements
+    Initialize Cassandra connections
+    :param ip_addresses: ip addresses of Cassandra nodes
+    :return:
     """
+    global session
 
-    def __init__(self, session):
-        self.prepared_statements = {}
-        self.session = session
+    cluster = Cluster(ip_addresses)
+    session = cluster.connect()
+    session.row_factory = ordered_dict_factory
 
-    def get(self, query):
-        if query in self.prepared_statements:
-            return self.prepared_statements[query]
+def init_solr(url_base):
+    global solr_url_base
 
-        prepared_statement = self.session.prepare(query)
-        self.prepared_statements[query] = prepared_statement
-        return prepared_statement
+    solr_url_base = url_base
 
+#
+# Helper function to have json.dump format dates correctly
+#
 
-def decimal_default(obj):
-    """
-    Helper class for JSON decoding
-    :param obj: JSON key/value
-    :return: cleansed JSON key/value
-    """
-    if isinstance(obj, Decimal):
+def fix_json_format(obj):
+    """Default JSON serializer."""
+
+    if isinstance(obj, decimal.Decimal):
         return float(obj)
     elif isinstance(obj, uuid.UUID):
         return str(obj)
@@ -57,187 +49,118 @@ def decimal_default(obj):
         return str(obj)
     raise TypeError
 
+#
+# Simple type mapper to return the google type given a python type
+#
 
-def init_cassandra(ip_addresses):
-    """
-    Initialize Cassandra connections
-    :param ip_addresses: ip addresses of Cassandra nodes
-    :return:
-    """
-    global session, p
-
-    cluster = Cluster(ip_addresses)
-    session = cluster.connect()
-    session.row_factory = ordered_dict_factory
-
-    p = PreparedStatements(session)
-
-def init_solr(url_base):
-    global solr_url_base
-
-    solr_url_base = url_base
-
-@rest_api.route('/')
-def base():
-    f = {'status': 'OK'}
-    return jsonify(**f)
-
-@rest_api.route('/paging/<keyspace>/<table>/')
-def paging(keyspace=None, table=None):
-    """
-    Convert REST calls to Cassandra queries
-    :param keyspace: query keyspace
-    :param table: query table
-    :return:
-    """
-
-    # GET variables for Cassandra query
-    result_size = request.args.get('result_size', 1000, type=int)
-    paging_keys = request.args.get('paging_keys', None)
-    paging_values = request.args.get('paging_values', None)
-
-    # GET variables for Google Charts parameters
-    gcharts_columns = request.args.get('gcharts_columns', None)
-
-    # properly format gCharts columns field
-    if gcharts_columns:
-        gcharts_columns = gcharts_columns.split(',')
-
-    # GET variables for Google Charts' DataTable parameters
-    gcharts_datatable_order_by = request.args.get('gcharts_datatable_order_by',
-                                                  None)
-
-    if paging_keys and paging_values:
-        # ensure the number of keys == number of values
-        if len(paging_keys.split(',')) != len(paging_values.split(',')):
-            return jsonify({'error': 'len(paging_keys) != len(paging_values)'})
-
-        # seed query
-        query = 'SELECT * FROM %s.%s WHERE ' % (keyspace, table)
-
-        # create paging logic
-        paging_query = []
-        paging_keys = paging_keys.split(',')
-        for key in paging_keys[:-1]:
-            paging_query.append('token(%s) = token(?)' % key)
-        paging_query.append('token(%s) > token(?)' % paging_keys[-1])
-        query += ' AND '.join(paging_query)
-
-        # create PagedResult
-        try:
-            paging_result = session.execute(p.get(query),
-                                            paging_values.split(','))
-        except Exception as e:
-            return jsonify({'error': e.message})
+def get_google_type(cassandra_type):
+    if type(cassandra_type) in [int, float, long, decimal.Decimal]:
+        key_type = 'number'
+    elif type(cassandra_type) == bool:
+        key_type = 'boolean'
+    elif type(cassandra_type) == datetime.date:
+        key_type = 'date'
     else:
-        # else, process a simple query
-        query = 'SELECT * FROM %s.%s' % (keyspace, table)
-        try:
-            paging_result = session.execute(p.get(query))
-        except Exception as e:
-            return jsonify({'error': e.message})
+        key_type = 'string'
+    return key_type
 
-    # collect results from a Result or PagedResult
-    results = []
-    for result in paging_result:
-        results.append(result)
+#
+# This API returns data from the real_time_analytics table
+# The table is organized as (series, timewindow, quantities map<text, int>)
+# The quantities field allows each row to collect the quantities for several different
+# products
+#
+# URL Format: /realtime/<series>
+#    series - the series name
+# Parameters:
+#    minutes - The number of minutes in a time slice (default 5)
+#
 
-        # stop collecting results once result_size if filled
-        if len(results) == result_size:
-            break
-
-    # sanitize results for JSON
-    results = loads(dumps(results, default=decimal_default))
-    f = {'results': results}
-
-    # create gcharts response
-    if results:
-        # initialize rest json for gcharts
-        f['gcharts'] = {}
-
-        # extract reference row
-        result = results[0]
-
-        # use requested columns or dynamically create column list
-        if gcharts_columns:
-            keys = gcharts_columns
-        else:
-            keys = result.keys()
-
-        # build DataTable column description
-        description = {}
-        for key in keys:
-            formatted_key = key.replace('_', ' ').title()
-            if type(result[key]) in [int, float, long]:
-                key_type = 'number'
-            elif type(result[key]) == bool:
-                key_type = 'boolean'
-            elif type(result[key]) == datetime.date:
-                key_type = 'date'
-            else:
-                key_type = 'string'
-
-            description[key] = (key_type, formatted_key)
-
-        # use gviz to create DataTable response
-        data_table = gviz_api.DataTable(description)
-        data_table.LoadData(results)
-        f['gcharts'][1.1] = data_table.ToJSon(columns_order=keys,
-                                              order_by=gcharts_datatable_order_by)
-
-        # create Charts array
-        charts_table = []
-
-        # create headings
-        charts_table.append(keys)
-
-        for result in results:
-            row = []
-            for key in keys:
-                row.append(result[key])
-
-            charts_table.append(row)
-
-        f['gcharts'][1] = charts_table
-
-    return jsonify(f)
 
 @rest_api.route('/realtime/<series>')
-def timeslice(series = None):
+def timeslice(series=None):
+
+    global timeslice_query
 
     minutes = int(request.args.get('minutes', 5))
     end_time = datetime.datetime.utcnow()
     start_time = end_time - datetime.timedelta(minutes=minutes)
 
-    statement = "SELECT timewindow, quantities FROM retail.real_time_analytics" \
-                " WHERE series = ?" \
-                " AND timewindow >= ?" \
-                " AND   timewindow <= ?" \
-                " ORDER BY timewindow DESC LIMIT 60"
+    if not timeslice_query:
+        statement = "SELECT timewindow, quantities FROM retail.real_time_analytics" \
+                    " WHERE series = ?" \
+                    " AND timewindow >= ?" \
+                    " AND   timewindow <= ?" \
+                    " ORDER BY timewindow DESC LIMIT 60"
 
-    ps = session.prepare(statement)
+        timeslice_query = session.prepare(statement)
 
-    results = session.execute(ps, [series, start_time, end_time])
+    results = session.execute(timeslice_query, [series, start_time, end_time])
 
+    # Build a result table using the gviz_api.
+    # We need to see what keys are in the map and treat them as colums
     if results:
         # extract the map of product quantities
         products_map = results[0]['quantities']
 
         # Convert the map column to look like a series of regular columns to google
         # Create the schema [ ('timewindow', 'datetime'), ('some product', 'number'), ... ]
-        description = [('timewindow', 'datetime')] + map(lambda product: (product, 'number'), products_map.keys())
+        description = ['timewindow'] + products_map.keys()
+        data = [ [row['timewindow']] + [row['quantities'].get(item_name) for item_name in products_map] for row in results]
 
-        data_table = [ [row['timewindow']] + [row['quantities'].get(item_name) for item_name in products_map] for row in results]
-        google_table = gviz_api.DataTable(description)
-        google_table.LoadData(data_table)
+        # sort the data by timewindow
+        data.sort(key=lambda row: row[0])
+
     else:
         # create an empty (yet valid) one
-        description = [('timewindow', 'datetime'), ('No Products', 'number')]
-        google_table = gviz_api.DataTable(description)
+        description = ['timewindow', 'No Products']
+        data = []
 
-    return google_table.ToJSon(order_by="timewindow")
+    return dumps([description] + data, default=fix_json_format)
 
+#
+# This API returns data from the real_time_analytics table
+# The table is organized as (series, timewindow, quantities map<text, int>)
+# The quantities field allows each row to collect the quantities for several different
+# products
+#
+# URL Format: /simplequery
+# Parameters:
+#    q         - The CQL query
+#    parms     - comma separated list of bind values
+#    order_col - column to sort by (after fetching)
+#
 
+@rest_api.route('/simplequery')
+def simplequery():
 
+    global simple_queries
+    statement = request.args.get('q')
+    parms_str = request.args.get('parms')
+    order_col = request.args.get('order_col')
 
+    if not statement:
+        # todo - log something.
+        return ""
 
+    if not statement in simple_queries:
+        simple_queries[statement] = session.prepare(statement)
+
+    results = session.execute(simple_queries[statement])
+
+    # extract column names from the first row
+    first_row = results[0]
+
+    # make a column header
+    description = [column for column in first_row]
+
+    # Turn the whole thing into an array
+    data = [row.values() for row in results]
+
+    # sort it if an order column was specified
+    if order_col:
+        posn = description.index(order_col)
+        data.sort(key=lambda row: row[posn] )
+
+    # stick the description row up front, and dump it as json
+    return dumps([description] + data, default=fix_json_format)

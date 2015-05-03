@@ -3,6 +3,15 @@ from flask import Blueprint, render_template, request
 gcharts_api = Blueprint('gcharts_api', __name__)
 
 
+supported_charts = {
+    'Table': 'table',
+    'BarChart': 'corechart',
+    'ColumnChart': 'corechart',
+    'LineChart': 'corechart',
+    'PieChart': 'corechart',
+    'AreaChart': 'corechart'
+}
+
 def compose_ajax_source():
     """
     grab request GET variables to create new url
@@ -19,91 +28,17 @@ def compose_ajax_source():
 
     return ajax_source
 
+#
+# Render a basic flexible charts page
+#   Parameters:
+#      url=the url to return the chart data
+#
 
-@gcharts_api.route('/annotationchart/')
-def annotationchart():
+@gcharts_api.route('/<type>/')
+def stevebarchart(type='ColumnChart'):
     ajax_source = compose_ajax_source()
 
-    return render_template('google-charts.jinja2',
+    return render_template('google_charts.jinja2',
                            ajax_source=ajax_source,
-                           gcharts_version=1,
-                           packages='annotationchart',
-                           data_method='DataTable(jsonData.gcharts[1.1])',
-                           chart_type='visualization.AnnotationChart',
-                           options='options')
-
-
-@gcharts_api.route('/areachart/')
-def areachart():
-    ajax_source = compose_ajax_source()
-
-    return render_template('google-charts.jinja2',
-                           ajax_source=ajax_source,
-                           gcharts_version=1,
-                           packages='corechart',
-                           data_method='arrayToDataTable('
-                                       'jsonData.gcharts[1])',
-                           chart_type='visualization.AreaChart',
-                           options='options')
-
-
-@gcharts_api.route('/barchart/')
-def barchart():
-    ajax_source = compose_ajax_source()
-
-    return render_template('google-charts.jinja2',
-                           ajax_source=ajax_source,
-                           gcharts_version=1.1,
-                           packages='bar',
-                           data_method='DataTable(jsonData.gcharts[1.1])',
-                           chart_type='charts.Bar',
-                           options='google.charts.Bar.convertOptions(options)')
-
-
-@gcharts_api.route('/linechart/')
-def linechart():
-    ajax_source = compose_ajax_source()
-
-    return render_template('google-charts.jinja2',
-                           ajax_source=ajax_source,
-                           gcharts_version=1.1,
-                           packages='line',
-                           data_method='DataTable(jsonData.gcharts[1.1])',
-                           chart_type='charts.Line',
-                           options='google.charts.Line.convertOptions(options)')
-
-
-@gcharts_api.route('/piechart/')
-def piechart():
-    ajax_source = compose_ajax_source()
-
-    return render_template('google-charts.jinja2',
-                           ajax_source=ajax_source,
-                           gcharts_version=1,
-                           packages='corechart',
-                           data_method='arrayToDataTable('
-                                       'jsonData.gcharts[1])',
-                           chart_type='visualization.PieChart',
-                           options='options')
-
-
-@gcharts_api.route('/table/')
-def table():
-    ajax_source = compose_ajax_source()
-
-    return render_template('google-charts.jinja2',
-                           ajax_source=ajax_source,
-                           gcharts_version=1,
-                           packages='table',
-                           data_method='arrayToDataTable('
-                                       'jsonData.gcharts[1])',
-                           chart_type='visualization.Table',
-                           options='options')
-
-@gcharts_api.route('/stevechart/<type>/')
-def stevebarchart(type = 'BarChart'):
-    ajax_source = compose_ajax_source()
-
-    return render_template('steve-charts.jinja2',
-                           ajax_source=ajax_source,
-                           chart_type=type)
+                           chart_type=type,
+                           package=supported_charts[type])

@@ -4,19 +4,31 @@
 {% endblock %}
 
 {% block body %}
+<div>
+	<input type="checkbox" id="auto-refresh" name="auto-refresh" class="switch" onclick="setautorefresh(this)"/>
+	<label for="auto-refresh">auto-refresh</label>
+</div>
     <div id="chart_div"></div>
     <script type="text/javascript">
-        google.load("visualization", "1", {packages:["corechart"]});
+        google.load("visualization", "1", {packages:["{{ package }}"]});
         google.setOnLoadCallback(drawChart);
 
         chartOptions = {
 {#              width: 800,#}
-{#              height: 400,#}
+{#              height: 400#}
 {#              animation:{#}
 {#                      duration: 500,#}
 {#                      easing: 'linear'#}
 {#                    }#}
         };
+
+        function setautorefresh(checkbox) {
+           if (checkbox.checked) {
+              intervalId = setInterval(drawChart, 10000)
+           } else {
+              clearInterval(intervalId); // cancal foo
+           }
+        }
 
         function drawChart() {
 
@@ -26,13 +38,11 @@
                 async: false
             }).responseJSON;
 
-           var data = new google.visualization.DataTable(jsonData);
+           var data = new google.visualization.arrayToDataTable(jsonData);
            chart = new google.visualization.{{ chart_type }}(document.getElementById('chart_div'));
            chart.draw(data, chartOptions);
 
         }
-        var intervalId = setInterval(drawChart, 10000)
-
     </script>
 {% endblock %}
 
