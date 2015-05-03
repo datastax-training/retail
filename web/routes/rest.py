@@ -50,6 +50,16 @@ def fix_json_format(obj):
     raise TypeError
 
 #
+# Helper function to convert a column name
+# to a beautiful label. Replace "_" with a
+# blank, and capitalize each word.
+#
+
+def column_name_to_label (column_name):
+    return column_name.replace('_', ' ').title()
+
+
+#
 # Simple type mapper to return the google type given a python type
 #
 
@@ -100,14 +110,14 @@ def timeslice(series=None):
     # Build a result table using the gviz_api.
     # We need to see what keys are in the map and treat them as colums
 
-    description = [{'id':'timewindow', 'type':'datetime'}]
+    description = [{'id':'timewindow','label':'Window','type':'datetime'}]
     if results:
         # extract the map of product quantities
         products_map = results[0]['quantities']
 
         # Convert the map column to look like a series of regular columns to google
         # Create the schema [ ('timewindow', 'datetime'), ('some product', 'number'), ... ]
-        description += [ {'id': product, 'type': get_google_type(value)} for product, value in products_map.iteritems()]
+        description += [{'id': product,'label':column_name_to_label(product),'type': get_google_type(value)} for product, value in products_map.iteritems()]
         data = [ [row['timewindow']] + [row['quantities'].get(item_name) for item_name in products_map] for row in results]
 
         # sort the data by timewindow
@@ -115,7 +125,7 @@ def timeslice(series=None):
 
     else:
         # create an empty (yet valid) one
-        description += [{'id':'No Products', 'type':'number'}]
+        description += [{'id':'No Products', 'label':'No Products','type':'number'}]
         data = []
 
     thejson = dumps([description] + data, default=fix_json_format)
@@ -131,7 +141,6 @@ def timeslice(series=None):
 # URL Format: /simplequery
 # Parameters:
 #    q         - The CQL query
-#    parms     - comma separated list of bind values
 #    order_col - column to sort by (after fetching)
 #
 
@@ -140,7 +149,6 @@ def simplequery():
 
     global simple_queries
     statement = request.args.get('q')
-    parms_str = request.args.get('parms')
     order_col = request.args.get('order_col')
 
     if not statement:
@@ -156,8 +164,8 @@ def simplequery():
     first_row = results[0]
 
     # make a column header
-    column_names = [column for column in first_row]
-    description = [{'id':column, 'type': get_google_type(value)} for column, value in first_row.iteritems()]
+    column_names = [column_name for column_name in first_row]
+    description = [{'id':column_name, 'label':column_name_to_label(column_name), 'type': get_google_type(value)} for column_name, value in first_row.iteritems()]
 
     # Turn the whole thing into an array
     data = [row.values() for row in results]
