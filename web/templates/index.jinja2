@@ -26,7 +26,7 @@
   Some Analytics with Google Charts and the Rest API:
             <ul>
             <li>
-                <a href="gcharts/ColumnChart/?url=/api/realtime/hotproducts&minutes=10">
+                <a href="gcharts/ColumnChart/?options={hAxis:{format:'hh:mm:ss'}}&url=/api/realtime/hotproducts&minutes=10">
                     Google Charts: Hot Products Auto-refresh
                 </a>
             </li>
@@ -36,12 +36,12 @@
                 </a>
             </li>
             <li>
-                <a href="/gcharts/PieChart/?url=/api/simplequery&q=select state, receipts_total from retail.sales_by_state">
+                <a href="/gcharts/PieChart/?url=/api/simplequery&options={height:600}&q=select state, receipts_total from retail.sales_by_state">
                     Google Charts: Pie of Sales By State
                 </a>
             </li>
             <li>
-                <a href="/gcharts/ColumnChart/?url=/api/simplequery&q=select sales_date, receipts_total from retail.sales_by_date&order_col=sales_date">
+                <a href="/gcharts/ColumnChart/?url=/api/simplequery&options={hAxis:{format:'MMM-d'}}&q=select sales_date, receipts_total from retail.sales_by_date&order_col=sales_date">
                     Google Charts: Column Chart of Sales By Date
                 </a>
             </li>

@@ -59,7 +59,7 @@ def get_google_type(cassandra_type):
     elif type(cassandra_type) == bool:
         key_type = 'boolean'
     elif type(cassandra_type) == datetime.datetime:
-        key_type = 'date'
+        key_type = 'datetime'
     else:
         key_type = 'string'
     return key_type
@@ -99,13 +99,15 @@ def timeslice(series=None):
 
     # Build a result table using the gviz_api.
     # We need to see what keys are in the map and treat them as colums
+
+    description = [{'id':'timewindow', 'type':'datetime'}]
     if results:
         # extract the map of product quantities
         products_map = results[0]['quantities']
 
         # Convert the map column to look like a series of regular columns to google
         # Create the schema [ ('timewindow', 'datetime'), ('some product', 'number'), ... ]
-        description = ['timewindow'] + products_map.keys()
+        description += [ {'id': product, 'type': get_google_type(value)} for product, value in products_map.iteritems()]
         data = [ [row['timewindow']] + [row['quantities'].get(item_name) for item_name in products_map] for row in results]
 
         # sort the data by timewindow
@@ -113,10 +115,12 @@ def timeslice(series=None):
 
     else:
         # create an empty (yet valid) one
-        description = ['timewindow', 'No Products']
+        description += [{'id':'No Products', 'type':'number'}]
         data = []
 
-    return dumps([description] + data, default=fix_json_format)
+    thejson = dumps([description] + data, default=fix_json_format)
+    print thejson
+    return thejson
 
 #
 # This API returns data from the real_time_analytics table
@@ -152,15 +156,16 @@ def simplequery():
     first_row = results[0]
 
     # make a column header
-    description = [{'id':column, 'type': get_google_type(value) } for column, value in first_row.iteritems()]
+    column_names = [column for column in first_row]
+    description = [{'id':column, 'type': get_google_type(value)} for column, value in first_row.iteritems()]
 
     # Turn the whole thing into an array
     data = [row.values() for row in results]
 
     # sort it if an order column was specified
-    # if order_col:
-    #     posn = description.index(order_col)
-    #     data.sort(key=lambda row: row[posn] )
+    if order_col:
+        posn = column_names.index(order_col)
+        data.sort(key=lambda row: row[posn] )
 
     # stick the description row up front, and dump it as json
     return dumps([description] + data, default=fix_json_format)

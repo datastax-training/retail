@@ -39,7 +39,7 @@ def compose_ajax_source():
 #
 
 @gcharts_api.route('/<type>/')
-def stevebarchart(type='ColumnChart'):
+def googlechart(type='ColumnChart'):
     ajax_source = compose_ajax_source()
     options = request.args.get('options',{})
 
