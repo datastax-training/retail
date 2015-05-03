@@ -1,6 +1,6 @@
 import AssemblyKeys._
 
-name := "spark-retail"
+name := "spark-streaming-retail"
 
 version := "1.0"
 
