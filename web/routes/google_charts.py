@@ -23,7 +23,7 @@ def compose_ajax_source():
     # pass all other parameters to ajax url
     ajax_source = '%s?' % url
     for k, v in request.args.iteritems():
-        if k != 'url':
+        if k not in ['url','options']:
             ajax_source += '&%s=%s' % (k, v)
 
     return ajax_source
@@ -32,13 +32,19 @@ def compose_ajax_source():
 # Render a basic flexible charts page
 #   Parameters:
 #      url=the url to return the chart data
+#      options= google charting options
+#        for more info see "customizing charts":
+#          https://developers.google.com/chart/interactive/docs/customizing_charts
+#          https://developers.google.com/chart/interactive/docs/datesandtimes#axesgridlinesticks
 #
 
 @gcharts_api.route('/<type>/')
 def stevebarchart(type='ColumnChart'):
     ajax_source = compose_ajax_source()
+    options = request.args.get('options',{})
 
     return render_template('google_charts.jinja2',
                            ajax_source=ajax_source,
                            chart_type=type,
-                           package=supported_charts[type])
+                           package=supported_charts[type],
+                           options=options)

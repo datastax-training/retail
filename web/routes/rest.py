@@ -44,7 +44,7 @@ def fix_json_format(obj):
     elif isinstance(obj, uuid.UUID):
         return str(obj)
     elif isinstance(obj, datetime.datetime):
-        return str(obj)
+        return obj.strftime("Date(%Y,%m,%d,%H,%M,%S)")
     elif isinstance(obj, OrderedMap):
         return str(obj)
     raise TypeError
@@ -58,7 +58,7 @@ def get_google_type(cassandra_type):
         key_type = 'number'
     elif type(cassandra_type) == bool:
         key_type = 'boolean'
-    elif type(cassandra_type) == datetime.date:
+    elif type(cassandra_type) == datetime.datetime:
         key_type = 'date'
     else:
         key_type = 'string'
@@ -152,15 +152,15 @@ def simplequery():
     first_row = results[0]
 
     # make a column header
-    description = [column for column in first_row]
+    description = [{'id':column, 'type': get_google_type(value) } for column, value in first_row.iteritems()]
 
     # Turn the whole thing into an array
     data = [row.values() for row in results]
 
     # sort it if an order column was specified
-    if order_col:
-        posn = description.index(order_col)
-        data.sort(key=lambda row: row[posn] )
+    # if order_col:
+    #     posn = description.index(order_col)
+    #     data.sort(key=lambda row: row[posn] )
 
     # stick the description row up front, and dump it as json
     return dumps([description] + data, default=fix_json_format)
