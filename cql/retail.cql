@@ -141,13 +141,13 @@ CREATE TABLE IF NOT EXISTS retail.zipcodes (
 
 CREATE TABLE IF NOT EXISTS retail.sales_by_date (
     sales_date timestamp,
-    receipts_total decimal, 
+    receipts_total float,
     PRIMARY KEY (sales_date)
 ); 
 
 CREATE TABLE IF NOT EXISTS retail.sales_by_state (
     state text,
-    receipts_total decimal,
+    receipts_total float,
     PRIMARY KEY (state)
 );
 
