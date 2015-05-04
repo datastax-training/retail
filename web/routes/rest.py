@@ -63,16 +63,16 @@ def column_name_to_label (column_name):
 # Simple type mapper to return the google type given a python type
 #
 
-def get_google_type(cassandra_type):
-    if type(cassandra_type) in [int, float, long, decimal.Decimal]:
-        key_type = 'number'
-    elif type(cassandra_type) == bool:
-        key_type = 'boolean'
-    elif type(cassandra_type) == datetime.datetime:
-        key_type = 'datetime'
+def get_google_type(cassandra_value):
+    cassandra_type = type(cassandra_value)
+    if cassandra_type in [int, float, long, decimal.Decimal]:
+        return 'number'
+    elif cassandra_type == bool:
+        return 'boolean'
+    elif cassandra_type == datetime.datetime:
+        return 'datetime'
     else:
-        key_type = 'string'
-    return key_type
+        return 'string'
 
 #
 # This API returns data from the real_time_analytics table
