@@ -5,6 +5,7 @@ gcharts_api = Blueprint('gcharts_api', __name__)
 
 supported_charts = {
     'Table': 'table',
+    'GeoChart': 'geochart',
     'BarChart': 'corechart',
     'ColumnChart': 'corechart',
     'LineChart': 'corechart',

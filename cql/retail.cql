@@ -147,6 +147,7 @@ CREATE TABLE IF NOT EXISTS retail.sales_by_date (
 
 CREATE TABLE IF NOT EXISTS retail.sales_by_state (
     state text,
+    region text,
     receipts_total decimal,
     PRIMARY KEY (state)
 );

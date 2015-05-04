@@ -4,6 +4,8 @@ import org.apache.spark.{SparkConf, SparkContext}
 import java.util.UUID
 import org.joda.time.DateTime
 
+import scala.math.BigDecimal.RoundingMode
+
 case class Register(store_id: Int,
                  register_id: Int,
                  receipt_id: UUID,
@@ -50,8 +52,15 @@ object RollupRetail {
 
     // Compute Sales by State
 
-    val total_receipts_by_store = receipts.map(r => (r.getInt("store_id"), r.getDecimal("receipt_total") )  ).reduceByKey(_+_)
-    total_receipts_by_store.join(store_state).map(r => (r._2._2, r._2._1)).reduceByKey(_+_).saveToCassandra("retail","sales_by_state")
+    val total_receipts_by_store =
+      receipts.map(r => (r.getInt("store_id"), r.getDecimal("receipt_total").setScale(2,RoundingMode.HALF_EVEN) )  )
+        .reduceByKey(_+_)   // Add up by store
+
+    total_receipts_by_store.join(store_state)                                 //  (store, (total, state))
+      .map{case (store,(receipts_total, state)) => (state, receipts_total)}   // (state, total)
+      .reduceByKey(_+_)                                                       // (state, total) summed by state
+      .map{ case(state, receipts_total) => (state, "US-" + state, receipts_total)} // (state, US-state, total)
+      .saveToCassandra("retail","sales_by_state",SomeColumns("state","region","receipts_total"))
 
     // Compute Sales by date
 
