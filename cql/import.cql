@@ -1,16 +1,16 @@
 
 -- Suppliers
-copy retail.suppliers (supplier_id, supplier_name) from '../csv/suppliers.csv' with delimiter = '|' AND header = false ;
+COPY retail.suppliers (supplier_id, supplier_name) FROM '../csv/suppliers.csv' WITH delimiter = '|' AND header = false ;
 
 -- Products
-copy retail.products_by_id (supplier_name, supplier_id, title, product_id, release_date, category_name, category_id, long_description, short_description, url, features ) from '../csv/products.csv' with delimiter = '	' AND header = true ;
-copy retail.products_by_supplier (supplier_name, supplier_id, title, product_id, release_date, category_name, category_id, long_description, short_description, url, features ) from '../csv/products.csv' with delimiter = '	' AND header = true ;
-copy retail.products_by_category_name (supplier_name, supplier_id, title, product_id, release_date, category_name, category_id, long_description, short_description, url, features ) from '../csv/products.csv' with delimiter = '	' AND header = true ;
+COPY retail.products_by_id (supplier_name, supplier_id, title, product_id, release_date, category_name, category_id, long_description, short_description, url, features ) from '../csv/products.csv' with delimiter = '	' AND header = true ;
+COPY retail.products_by_supplier (supplier_name, supplier_id, title, product_id, release_date, category_name, category_id, long_description, short_description, url, features ) from '../csv/products.csv' with delimiter = '	' AND header = true ;
+COPY retail.products_by_category_name (supplier_name, supplier_id, title, product_id, release_date, category_name, category_id, long_description, short_description, url, features ) from '../csv/products.csv' with delimiter = '	' AND header = true ;
 
 -- Stores
-copy retail.stores (store_id,address,address_2,address_3,city,state,zip,size_in_sf) FROM '../csv/stores.csv' with delimiter = '|' and header=true;
+COPY retail.stores (store_id,address,address_2,address_3,city,state,zip,size_in_sf) FROM '../csv/stores.csv' WITH delimiter = '|' AND header=true;
 
 -- Make some hot products
-update retail.products_by_category_name set is_hot = true where category_name = 'notebooks';
-update retail.products_by_category_name set is_hot = true where category_name = 'servers';
+UPDATE retail.products_by_category_name SET is_hot = true WHERE category_name = 'notebooks';
+UPDATE retail.products_by_category_name SET is_hot = true WHERE category_name = 'servers';
 

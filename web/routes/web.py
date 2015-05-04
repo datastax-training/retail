@@ -1,6 +1,5 @@
-from flask import Blueprint, jsonify, request, render_template
+from flask import Blueprint, request, render_template
 from urllib import urlencode
-from collections import OrderedDict
 import urllib2
 import json
 

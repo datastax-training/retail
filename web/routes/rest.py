@@ -11,6 +11,7 @@ from cassandra.query import ordered_dict_factory
 rest_api = Blueprint('rest_api', __name__)
 
 session = None
+solr_url_base = None
 timeslice_query = None
 simple_queries = {}
 
