@@ -24,7 +24,6 @@ app.jinja_env.globals.update(urlencode=urlencode)
 
 def start():
     rest.init_cassandra(app.config['DSE_CLUSTER'].split(','))
-    rest.init_solr(app.config['SOLR_URL_BASE'])
     web.init()
 
     app.run(host='0.0.0.0',

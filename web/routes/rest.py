@@ -11,7 +11,6 @@ from cassandra.query import ordered_dict_factory
 rest_api = Blueprint('rest_api', __name__)
 
 session = None
-solr_url_base = None
 timeslice_query = None
 simple_queries = {}
 
@@ -27,11 +26,6 @@ def init_cassandra(ip_addresses):
     cluster = Cluster(ip_addresses)
     session = cluster.connect()
     session.row_factory = ordered_dict_factory
-
-def init_solr(url_base):
-    global solr_url_base
-
-    solr_url_base = url_base
 
 #
 # Helper function to have json.dump format dates correctly

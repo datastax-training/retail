@@ -24,7 +24,7 @@ def compose_ajax_source():
     # pass all other parameters to ajax url
     ajax_source = '%s?' % url
     for k, v in request.args.iteritems():
-        if k not in ['url','options']:
+        if k not in ['url', 'options']:
             ajax_source += '&%s=%s' % (k, v)
 
     return ajax_source
@@ -39,13 +39,13 @@ def compose_ajax_source():
 #          https://developers.google.com/chart/interactive/docs/datesandtimes#axesgridlinesticks
 #
 
-@gcharts_api.route('/<type>/')
-def googlechart(type='ColumnChart'):
+@gcharts_api.route('/<chart_type>/')
+def googlechart(chart_type='ColumnChart'):
     ajax_source = compose_ajax_source()
     options = request.args.get('options',{})
 
     return render_template('google_charts.jinja2',
                            ajax_source=ajax_source,
-                           chart_type=type,
-                           package=supported_charts[type],
+                           chart_type=chart_type,
+                           package=supported_charts[chart_type],
                            options=options)

@@ -1,6 +1,5 @@
+from collections import OrderedDict
 from flask import Blueprint, request, render_template
-from urllib import urlencode
-import urllib2
 import json
 
 # from rest import session
@@ -47,7 +46,6 @@ def search_for_products():
 def find_product_by_id():
 
     global get_product_by_id_stmt
-    results = None
     product = None
     features = None
 
@@ -93,8 +91,6 @@ def search():
     # this will search the city field in the retail.zipcodes solr core
     # the import parameter is 's'
 
-    url = rest.solr_url_base + "/" + "retail.products_by_id"  + "/select?"
-
     search_term = request.args.get('s')
 
     if not search_term:
@@ -104,33 +100,31 @@ def search():
     filter_by = request.args.get('filter_by')
 
     # parameters to solr are rows=30  wt (writer type)=json, and q=city:<keyword> sort=zipcode asc
-    parameters = [('rows','300'),
-                  ('wt','json'),
-                  ('facet','true'),
-                  ('facet.field','supplier_name'),
-                  ('facet.field','category_name'),
-                  ('q',"title:" + search_term.encode('utf-8')) ]
+    solr_query = '"q":"title:%s"' % search_term.encode('utf-8')
 
     if filter_by:
-        parameters.append(('fq',filter_by.encode('utf-8')))
+        solr_query += '"fq":"%s"' % filter_by.encode('utf-8')
+
+    query = "SELECT * FROM retail.products_by_id WHERE solr_query = '{%s}' LIMIT 300" % solr_query
 
     # get the response
-    response = urllib2.urlopen(url + urlencode(parameters))
+    results = rest.session.execute(query)
 
-    # fish out the docs from the solr response
-    read = response.read()
-    readDecoded = read.decode("UTF-8")
-    parsed_response = json.loads(read)
-    docs = parsed_response['response']['docs']
+    facet_query = 'SELECT * FROM retail.products_by_id WHERE solr_query = ' \
+                  '\'{%s,"facet":{"field":["supplier_name","category_name"]}}\' ' % solr_query
 
-    category_facets = process_facets(parsed_response['facet_counts']['facet_fields']['category_name'])
-    supplier_facets = process_facets(parsed_response['facet_counts']['facet_fields']['supplier_name'])
+    facet_results = rest.session.execute(facet_query)
+    facet_string = facet_results[0].get("facet_fields")
+
+    # convert the facet string to an ordered dict because solr sorts them desceding by count, and we like it!
+    facet_map = json.JSONDecoder(object_pairs_hook=OrderedDict).decode(facet_string)
+
 
     return render_template('search_list.jinja2',
                            search_term = search_term,
-                           products = docs,
-                           categories = category_facets,
-                           suppliers = supplier_facets,
+                           categories = filter_facets(facet_map['category_name']),
+                           suppliers = filter_facets(facet_map['supplier_name']),
+                           products = results,
                            filter_by = filter_by)
 
 
@@ -138,10 +132,6 @@ def search():
 # The facets come in a list [ 'value1', 10, 'value2' 5, ...] with numbers in descending order
 # We convert it to a list of [('value1',10), ('value2',5) ... ]
 #
-
-def process_facets(raw_facets):
-
-    new_list = [ (raw_facets[i],raw_facets[i+1]) for i in range(0,len(raw_facets),2)]
-
+def filter_facets(raw_facets):
     # keep only the facets that have > 0 items
-    return filter(lambda e: e[1] > 0, new_list)
+    return [(key,value) for key,value in raw_facets.iteritems() if value > 0]
