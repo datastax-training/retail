@@ -29,6 +29,21 @@ public class ProductDAOTest extends TestCase {
 
   public void testGetProductsByCategoryNameEmpty() throws Exception {
     List<ProductDAO> productDAOList = ProductDAO.getProductsByCategoryName("");
-    assertEquals(0,productDAOList.size());
+      assertEquals(0,productDAOList.size());
   }
+
+    public void testGetProductsSolrQuery() throws Exception {
+        List<ProductDAO> productDAOList = ProductDAO.getProductsSolrQuery("usb",null);
+        assertEquals(138, productDAOList.size());
+    }
+
+    public void testMakeSolrQueryString() throws Exception {
+        String solrQueryString = ProductDAO.makeSolrQueryString("this", "that");
+        assertEquals ("\"q\":\"title:this\"\"fq\":\"that\"", solrQueryString);
+    }
+
+    public void testMakeSolrQueryStringNoFilter() throws Exception {
+        String solrQueryString = ProductDAO.makeSolrQueryString("this",null);
+        assertEquals ("\"q\":\"title:this\"", solrQueryString);
+    }
 }

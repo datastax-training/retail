@@ -91,6 +91,26 @@ public class ProductDAO extends CassandraData {
     return productDAOList;
   }
 
+  public static List<ProductDAO> getProductsSolrQuery(String search_term, String filter_by) {
+
+    String solr_query = makeSolrQueryString(search_term, filter_by);
+
+    Statement statement = new SimpleStatement("SELECT * FROM retail.products_by_id WHERE solr_query = '{" +
+           solr_query + "}' LIMIT 300");
+
+    return getProductsWithStmt(statement);
+  }
+
+  public static String makeSolrQueryString(String search_term, String filter_by) {
+    String solr_query = "\"q\":\"title:"+search_term +"\"";
+
+    if (filter_by != null && !filter_by.isEmpty()) {
+      solr_query += "\"fq\":\""+filter_by+"\"";
+    }
+    return solr_query;
+  }
+
+
   public String getTitle() {
     return title;
   }

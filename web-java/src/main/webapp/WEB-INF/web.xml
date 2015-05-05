@@ -27,6 +27,16 @@
     </servlet-mapping>
 
     <servlet>
+        <servlet-name>ProductSolrServlet</servlet-name>
+        <servlet-class>playlist.controller.ProductSolrServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>ProductSolrServlet</servlet-name>
+        <url-pattern>/web/search</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
         <servlet-name>HomeServlet</servlet-name>
         <servlet-class>playlist.controller.HomeServlet</servlet-class>
     </servlet>

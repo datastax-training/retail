@@ -6,11 +6,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>DataStax Demo</title>
 
-    <link href="{{ url_for('static', filename='img/favicon.ico') }}"
+    <link href="/static/img/favicon.ico"
           rel="shortcut icon">
-    <link href="{{ url_for('static', filename='packages/bootstrap/css/bootstrap.min.css') }}"
+    <link href="/static/packages/bootstrap/css/bootstrap.min.css"
           rel="stylesheet">
-    <link href="{{ url_for('static', filename='css/base.css') }}"
+    <link href="/static/css/base.css"
           rel="stylesheet">
 
     <script type="text/javascript" src="https://www.google.com/jsapi"></script>
@@ -25,7 +25,7 @@
             <div class="navbar-header">
                 <a class="navbar-brand" href="/">
                     <img alt="DataStax"
-                         src="{{ url_for('static', filename='img/datastax.png') }}"
+                         src="/static/img/datastax.png"
                          id="brand-logo">
                 </a>
             </div>
@@ -69,10 +69,8 @@
 
     </div>
 
-{#    <script src="{{ url_for('static', filename='react/react.min.js') }}"></script>#}
-{#    <script src="{{ url_for('static', filename='react/JSXTransformer.js') }}"></script>#}
-    <script src="{{ url_for('static', filename='packages/jquery/jquery.min.js') }}"></script>
-    <script src="{{ url_for('static', filename='packages/bootstrap/js/bootstrap.min.js') }}"></script>
+    <script src="/static/packages/jquery/jquery.min.js"></script>
+    <script src="/static/packages/bootstrap/js/bootstrap.min.js"></script>
 
     {% block tail %}{% endblock %}
 
