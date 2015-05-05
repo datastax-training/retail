@@ -140,17 +140,20 @@ CREATE TABLE IF NOT EXISTS retail.zipcodes (
 );
 
 CREATE TABLE IF NOT EXISTS retail.sales_by_date (
+    dummy text,
     sales_date timestamp,
     receipts_total decimal,
-    PRIMARY KEY (sales_date)
-); 
+    PRIMARY KEY (dummy,sales_date)
+);
 
 CREATE TABLE IF NOT EXISTS retail.sales_by_state (
+    dummy text,
     state text,
     region text,
     receipts_total decimal,
-    PRIMARY KEY (state)
-);
+    PRIMARY KEY (dummy, receipts_total, state))
+    WITH CLUSTERING ORDER BY (receipts_total DESC, state ASC)
+;
 
 CREATE TABLE IF NOT EXISTS retail.real_time_analytics (
   series text,

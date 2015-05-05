@@ -59,14 +59,15 @@ object RollupRetail {
     total_receipts_by_store.join(store_state)                                 //  (store, (total, state))
       .map{case (store,(receipts_total, state)) => (state, receipts_total)}   // (state, total)
       .reduceByKey(_+_)                                                       // (state, total) summed by state
-      .map{ case(state, receipts_total) => (state, "US-" + state, receipts_total)} // (state, US-state, total)
-      .saveToCassandra("retail","sales_by_state",SomeColumns("state","region","receipts_total"))
+      .map{ case(state, receipts_total) => ("dummy", state, "US-" + state, receipts_total)} // (state, US-state, total)
+      .saveToCassandra("retail","sales_by_state",SomeColumns("dummy","state","region","receipts_total"))
 
     // Compute Sales by date
 
     val receipts_by_date = receipts.map(r => (r.getDate("receipt_date"), r.getDecimal("receipt_total")))
-    receipts_by_date.reduceByKey(_+_).saveToCassandra("retail","sales_by_date")
 
-
+    receipts_by_date.reduceByKey(_+_)
+      .map{ case (receipt_date,receipt_total) => ("dummy",receipt_date,receipt_total)}
+      .saveToCassandra("retail","sales_by_date",SomeColumns("dummy","sales_date","receipts_total"))
   }
 }

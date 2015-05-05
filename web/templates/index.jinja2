@@ -31,12 +31,12 @@
                 </a>
             </li>
             <li>
-                <a href="/gcharts/Table/?url=/api/simplequery&q=select * from retail.stores limit 100">
+                <a href="/gcharts/Table/?url=/api/simplequery&q=select * from retail.stores limit 100&order_col=zip">
                     Google Charts: Stores Table
                 </a>
             </li>
             <li>
-                <a href="/gcharts/PieChart/?url=/api/simplequery&options={height:600,sliceVisibilityThreshold:.03}&q=select state, receipts_total from retail.sales_by_state&order_col=receipts_total">
+                <a href="/gcharts/PieChart/?url=/api/simplequery&options={height:600,sliceVisibilityThreshold:.03}&q=select state, receipts_total from retail.sales_by_state">
                     Google Charts: Pie of Sales By State
                 </a>
             </li>
@@ -46,17 +46,17 @@
                 </a>
             </li>
             <li>
-                <a href="/gcharts/ColumnChart/?url=/api/simplequery&options={hAxis:{format:'MMM-d'}}&q=select sales_date, receipts_total from retail.sales_by_date&order_col=sales_date">
+                <a href="/gcharts/ColumnChart/?url=/api/simplequery&options={hAxis:{format:'MMM-d'}}&q=select sales_date, receipts_total from retail.sales_by_date where dummy='dummy' order by sales_date">
                     Google Charts: Column Chart of Sales By Date
                 </a>
             </li>
             <li>
-                <a href="/gcharts/AreaChart/?url=/api/simplequery&q=select sales_date, receipts_total from retail.sales_by_date&order_col=sales_date">
+                <a href="/gcharts/AreaChart/?url=/api/simplequery&q=select sales_date, receipts_total from retail.sales_by_date  where dummy='dummy' order by sales_date">
                     Google Charts: Area Chart of Sales By Date
                 </a>
             </li>
         <li>
-            <a href="/gcharts/Table/?url=/api/simplequery&q=select * from retail.receipts_by_credit_card limit 100">
+            <a href="/gcharts/Table/?url=/api/simplequery&q=select * from retail.receipts_by_credit_card limit 100&order_col=store_id">
                 Google Charts: Table of Receipts Example
             </a>
         </li>
