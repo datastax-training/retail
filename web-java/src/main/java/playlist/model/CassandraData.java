@@ -63,6 +63,6 @@ public class CassandraData {
 
   protected static Session createSession() {
     Cluster cluster = Cluster.builder().addContactPoint("localhost").build();
-    return cluster.connect("playlist");
+    return cluster.connect();
   }
 }

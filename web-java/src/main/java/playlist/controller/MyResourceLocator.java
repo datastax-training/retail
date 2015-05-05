@@ -29,6 +29,7 @@ public class MyResourceLocator implements ResourceLocator {
     public String getString(String fullName, Charset encoding,
                             JinjavaInterpreter interpreter) throws IOException {
         try {
+
             URL resource = servletContext.getResource(fullName);
 
             return Resources.toString(resource, Charsets.UTF_8);

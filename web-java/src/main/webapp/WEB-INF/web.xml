@@ -17,39 +17,14 @@
     </listener>
 
     <servlet>
-        <servlet-name>TrackServlet</servlet-name>
-        <servlet-class>playlist.controller.TrackServlet</servlet-class>
-    </servlet>
-
-    <servlet>
-        <servlet-name>PlaylistsServlet</servlet-name>
-        <servlet-class>playlist.controller.PlaylistsServlet</servlet-class>
-    </servlet>
-
-    <servlet>
-        <servlet-name>PlaylistTracksServlet</servlet-name>
-        <servlet-class>playlist.controller.PlaylistTracksServlet</servlet-class>
-    </servlet>
-
-    <servlet>
-        <servlet-name>StatisticsServlet</servlet-name>
-        <servlet-class>playlist.controller.StatisticsServlet</servlet-class>
+        <servlet-name>ProductQueryServlet</servlet-name>
+        <servlet-class>playlist.controller.ProductQueryServlet</servlet-class>
     </servlet>
 
     <servlet-mapping>
-        <servlet-name>TrackServlet</servlet-name>
-        <url-pattern>/tracks</url-pattern>
+        <servlet-name>ProductQueryServlet</servlet-name>
+        <url-pattern>/web/product_search</url-pattern>
     </servlet-mapping>
-
-    <servlet-mapping>
-        <servlet-name>PlaylistTracksServlet</servlet-name>
-        <url-pattern>/playlist_tracks</url-pattern>
-    </servlet-mapping>
-
-    <servlet>
-        <servlet-name>LoginServlet</servlet-name>
-        <servlet-class>playlist.controller.LoginServlet</servlet-class>
-    </servlet>
 
     <servlet>
         <servlet-name>HomeServlet</servlet-name>
@@ -57,38 +32,13 @@
     </servlet>
 
     <servlet-mapping>
-        <servlet-name>LoginServlet</servlet-name>
-        <url-pattern>/login</url-pattern>
-    </servlet-mapping>
-
-    <servlet-mapping>
-        <servlet-name>PlaylistsServlet</servlet-name>
-        <url-pattern>/playlists</url-pattern>
-    </servlet-mapping>
-
-    <servlet-mapping>
         <servlet-name>HomeServlet</servlet-name>
         <url-pattern>/home</url-pattern>
     </servlet-mapping>
 
-    <servlet-mapping>
-        <servlet-name>StatisticsServlet</servlet-name>
-        <url-pattern>/stats</url-pattern>
-    </servlet-mapping>
-
-    <servlet>
-        <servlet-name>AddTrackServlet</servlet-name>
-        <jsp-file>/add_track.jsp</jsp-file>
-    </servlet>
-
-    <servlet-mapping>
-        <servlet-name>AddTrackServlet</servlet-name>
-        <url-pattern>/add_track</url-pattern>
-    </servlet-mapping>
-
-    <error-page>
-        <error-code>404</error-code>
-        <location>/notfound.jsp</location>
-    </error-page>
+    <!--<error-page>-->
+        <!--<error-code>404</error-code>-->
+        <!--<location>/notfound.jsp</location>-->
+    <!--</error-page>-->
 
 </web-app>
