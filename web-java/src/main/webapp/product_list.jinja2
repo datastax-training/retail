@@ -1,0 +1,39 @@
+{% extends "base.jinja2" %}
+
+{% block head %}
+{% endblock %}
+
+{% block body %}
+    Regular Search:<br>
+    <div id="search_div">
+    <form action="/web/product_search">
+      Brand ID: <input type="text" name="brand_id">
+      <br>
+      Category Name: <input type="text" name="category_name"> <br>
+      <input type="submit" value="Search">
+    </form>
+    </div>
+    <div id="list_div">
+        <br>
+        {{ products.brand_name }}
+        <table border="1">
+        <th>Category</th>
+        <th>Brand</th>
+        <th>Title</th>
+        <th>Details</th>
+        {% if products %}
+            {% for product in products %}
+                <tr>
+                <td><a href="/web/product_search?category_name={{ product.category_name }}">{{ product.category_name }}</a></td>
+                <td><a href="/web/product_search?brand_id={{ product.supplier_id }}">{{ product.supplier_name }}</a></td>
+                <td>{{ product.title }}</td>
+                <td><a href="/web/product?product_id={{ product.product_id }}">details</a></td>
+                </tr>
+            {% endfor %}
+        {% endif %}
+        </table>
+</div>
+{% endblock %}
+
+{% block tail %}
+{% endblock %}

@@ -1,0 +1,76 @@
+{% extends "/base.jinja2" %}
+
+{% block head %}
+{% endblock %}
+
+{% block body %}
+        List of example links to be used to showcase and ingest data on the frontend:
+        <ul>
+            <li>
+                <a href="/web/product_search">Query for Products</a>
+            </li>
+            <li>
+                <a href="/web/search">Solr Search for Products</a>
+            </li>
+            <li>
+                <a href="/web/product">Lookup Product Detail</a>
+            </li>
+            <li>
+                <a href="/web/receipt">Lookup Receipt Detail</a>
+            </li>
+            <li>
+                <a href="/web/credit_card">Lookup Receipts By Credit Card</a>
+            </li>
+            </ul>
+            <br>
+  Some Analytics with Google Charts and the Rest API:
+            <ul>
+            <li>
+                <a href="gcharts/ColumnChart/?options={hAxis:{format:'hh:mm:ss'}}&url=/api/realtime/hotproducts&minutes=10">
+                    Google Charts: Hot Products Auto-refresh
+                </a>
+            </li>
+            <li>
+                <a href="/gcharts/Table/?url=/api/simplequery&q=select * from retail.stores limit 100&order_col=zip">
+                    Google Charts: Stores Table
+                </a>
+            </li>
+            <li>
+                <a href="/gcharts/PieChart/?url=/api/simplequery&options={height:600,sliceVisibilityThreshold:.03}&q=select state, receipts_total from retail.sales_by_state">
+                    Google Charts: Pie of Sales By State
+                </a>
+            </li>
+            <li>
+                <a href="http://localhost:5001/gcharts/GeoChart/?url=/api/simplequery&options={height:600,region:'US',resolution:'provinces'}&q=select region,receipts_total from retail.sales_by_state">
+                    Google Charts: Geo of Sales By State
+                </a>
+            </li>
+            <li>
+                <a href="/gcharts/ColumnChart/?url=/api/simplequery&options={hAxis:{format:'MMM-d'}}&q=select sales_date, receipts_total from retail.sales_by_date where dummy='dummy' order by sales_date">
+                    Google Charts: Column Chart of Sales By Date
+                </a>
+            </li>
+            <li>
+                <a href="/gcharts/AreaChart/?url=/api/simplequery&q=select sales_date, receipts_total from retail.sales_by_date  where dummy='dummy' order by sales_date">
+                    Google Charts: Area Chart of Sales By Date
+                </a>
+            </li>
+        <li>
+            <a href="/gcharts/Table/?url=/api/simplequery&q=select * from retail.receipts_by_credit_card limit 100&order_col=store_id">
+                Google Charts: Table of Receipts Example
+            </a>
+        </li>
+        </ul>
+        <br>
+        Rest API Example
+        <br>
+        <ul>
+        <li>
+            <a href="/api/simplequery?q=select * from retail.receipts_by_credit_card limit 100">API: retail.receipts_by_credit_card</a>
+            <br>/api/simplequery&q=select * from retail.receipts_by_credit_card limit 100
+        </li>
+    </ul>
+{% endblock %}
+
+{% block tail %}
+{% endblock %}

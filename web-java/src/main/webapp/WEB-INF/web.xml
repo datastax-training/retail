@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns="http://java.sun.com/xml/ns/javaee"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://java.sun.com/xml/ns/javaee
+		  http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
+           version="2.5">
+<!--
+
+ DataStax Academy Sample Application
+
+ Copyright 2013 DataStax
+
+-->
+    <listener>
+        <listener-class>
+            MyServletContextListener
+        </listener-class>
+    </listener>
+
+    <servlet>
+        <servlet-name>ProductQueryServlet</servlet-name>
+        <servlet-class>playlist.controller.ProductQueryServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>ProductQueryServlet</servlet-name>
+        <url-pattern>/web/product</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>HomeServlet</servlet-name>
+        <servlet-class>playlist.controller.HomeServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>HomeServlet</servlet-name>
+        <url-pattern>/</url-pattern>
+    </servlet-mapping>
+
+
+    <servlet>
+        <servlet-name>AddTrackServlet</servlet-name>
+        <jsp-file>/add_track.jsp</jsp-file>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>AddTrackServlet</servlet-name>
+        <url-pattern>/add_track</url-pattern>
+    </servlet-mapping>
+
+    <!--<error-page>-->
+        <!--<error-code>404</error-code>-->
+        <!--<location>/notfound.jsp</location>-->
+    <!--</error-page>-->
+
+</web-app>
