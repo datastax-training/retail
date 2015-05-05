@@ -1,12 +1,6 @@
-import com.hubspot.jinjava.Jinjava;
 import org.eclipse.jetty.server.Server;
-import org.eclipse.jetty.server.handler.ContextHandler;
 import org.eclipse.jetty.webapp.WebAppContext;
-import playlist.controller.MyResourceLocator;
 
-import javax.servlet.ServletContext;
-import javax.servlet.ServletContextEvent;
-import javax.servlet.ServletContextListener;
 import java.net.URL;
 
 /**
