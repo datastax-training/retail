@@ -1,6 +1,7 @@
 package playlist.controller;
 
 import com.google.common.collect.Maps;
+import playlist.model.FacetDAO;
 import playlist.model.ProductDAO;
 
 import javax.servlet.ServletException;
@@ -27,9 +28,16 @@ public class ProductSolrServlet extends JinjaServlet {
     String search_term = request.getParameter("s");
     String filter_by = request.getParameter("filter_by");
 
-    List<ProductDAO> products = ProductDAO.getProductsSolrQuery(search_term,filter_by);
+    String solr_query = ProductDAO.makeSolrQueryString(search_term, filter_by);
+
+    List<ProductDAO> products = ProductDAO.getProductsSolrQuery(solr_query);
+
+    Map<String, List<FacetDAO>> facetsMap = FacetDAO.getSolrQueryFacets(solr_query, "category_name", "supplier_name");
+
 
     context.put("products", products);
+    context.put("categories", facetsMap.get("category_name"));
+    context.put("suppliers", facetsMap.get("supplier_name"));
 
     String renderedTemplate = render("/search_list.jinja2", context);
     out.println(renderedTemplate);

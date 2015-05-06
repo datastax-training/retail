@@ -33,7 +33,8 @@ public class ProductDAOTest extends TestCase {
   }
 
     public void testGetProductsSolrQuery() throws Exception {
-        List<ProductDAO> productDAOList = ProductDAO.getProductsSolrQuery("usb",null);
+        String solr_query = ProductDAO.makeSolrQueryString("usb",null);
+        List<ProductDAO> productDAOList = ProductDAO.getProductsSolrQuery(solr_query);
         assertEquals(138, productDAOList.size());
     }
 

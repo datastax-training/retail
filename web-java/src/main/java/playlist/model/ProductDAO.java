@@ -91,9 +91,8 @@ public class ProductDAO extends CassandraData {
     return productDAOList;
   }
 
-  public static List<ProductDAO> getProductsSolrQuery(String search_term, String filter_by) {
+  public static List<ProductDAO> getProductsSolrQuery(String solr_query) {
 
-    String solr_query = makeSolrQueryString(search_term, filter_by);
 
     Statement statement = new SimpleStatement("SELECT * FROM retail.products_by_id WHERE solr_query = '{" +
            solr_query + "}' LIMIT 300");

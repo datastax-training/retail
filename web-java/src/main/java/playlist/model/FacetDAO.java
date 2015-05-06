@@ -1,17 +1,10 @@
 package playlist.model;
 
-import com.datastax.driver.core.PreparedStatement;
 import com.datastax.driver.core.ResultSet;
-import com.datastax.driver.core.Row;
-import com.datastax.driver.core.Statement;
-import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.JSONValue;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * DataStax Academy Sample Application
@@ -24,11 +17,19 @@ import java.util.Map;
 public class FacetDAO extends CassandraData {
 
     private String name;
-    private Long quantity;
+    private Long amount;
 
-    public FacetDAO(String name, Long quantity) {
+    public FacetDAO(String name, Long amount) {
         this.name = name;
-        this.quantity = quantity;
+        this.amount = amount;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public Long getAmount() {
+        return amount;
     }
 
     public static Map<String, List<FacetDAO>> getSolrQueryFacets(String solr_query, String ... facet_columns) {
@@ -66,6 +67,18 @@ public class FacetDAO extends CassandraData {
                     facetList.add(new FacetDAO(j.getKey(), j.getValue()));
                 }
             }
+            facetList.sort(new Comparator<FacetDAO>() {
+                @Override
+                public int compare(FacetDAO o1, FacetDAO o2) {
+                    // Note: opposite of normal for reverse sort
+                    if (o1.amount.equals(o2.amount))
+                        return 0;
+                    else if (o1.amount > o2.amount)
+                        return -1;
+                    else
+                        return 1;
+                }
+            });
             facetMap.put((String) field, facetList);
         }
 
