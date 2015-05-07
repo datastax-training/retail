@@ -129,7 +129,6 @@ def search():
                            products = results,
                            filter_by = filter_by)
 
-
 #
 # The facets come in a list [ 'value1', 10, 'value2' 5, ...] with numbers in descending order
 # We convert it to a list of [('value1',10), ('value2',5) ... ]
@@ -139,4 +138,3 @@ def filter_facets(raw_facets):
 
     FacetValue = namedtuple('FacetValue', ['name', 'amount'])
     return [FacetValue(name,amount) for name,amount in raw_facets.iteritems() if amount > 0]
-    # return [(key,value) for key,value in raw_facets.iteritems() if value > 0]
