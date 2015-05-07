@@ -1,4 +1,4 @@
-package playlist.model;
+package retail.model;
 
 import com.datastax.driver.core.ResultSet;
 import com.datastax.driver.core.Row;

@@ -3,8 +3,8 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>groupId</groupId>
-    <artifactId>playlist</artifactId>
+    <groupId>com.datastax.samples</groupId>
+    <artifactId>retail</artifactId>
     <version>1.0-SNAPSHOT</version>
 
     <!-- Skip tests by default Change this to false or run mvn -DskipTests=false

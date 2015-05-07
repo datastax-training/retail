@@ -1,4 +1,4 @@
-package playlist.versioncheck;
+package retail.versioncheck;
 
 
 import junit.framework.TestCase;

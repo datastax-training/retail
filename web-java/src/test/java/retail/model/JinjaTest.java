@@ -1,10 +1,10 @@
-package playlist.model;
+package retail.model;
 
 import com.google.common.collect.Maps;
 import com.hubspot.jinjava.Jinjava;
 import com.hubspot.jinjava.lib.fn.ELFunctionDefinition;
 import junit.framework.TestCase;
-import playlist.jinjahelper.JinjaHelper;
+import retail.jinjahelper.JinjaHelper;
 
 import java.util.*;
 

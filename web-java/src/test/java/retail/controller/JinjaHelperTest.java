@@ -1,7 +1,7 @@
-package playlist.controller;
+package retail.controller;
 
 import junit.framework.TestCase;
-import playlist.jinjahelper.JinjaHelper;
+import retail.jinjahelper.JinjaHelper;
 
 import java.lang.reflect.Method;
 

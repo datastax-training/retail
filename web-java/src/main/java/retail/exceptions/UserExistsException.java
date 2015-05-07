@@ -1,4 +1,4 @@
-package playlist.exceptions;
+package retail.exceptions;
 
 /**
  * DataStax Academy Sample Application

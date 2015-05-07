@@ -13,12 +13,12 @@
     -->
 
     <listener>
-        <listener-class>playlist.jinjahelper.SetupJinjaServletContextListener</listener-class>
+        <listener-class>retail.jinjahelper.SetupJinjaServletContextListener</listener-class>
     </listener>
 
     <servlet>
         <servlet-name>ProductQueryServlet</servlet-name>
-        <servlet-class>playlist.controller.ProductQueryServlet</servlet-class>
+        <servlet-class>retail.controller.ProductQueryServlet</servlet-class>
     </servlet>
 
     <servlet-mapping>
@@ -28,7 +28,7 @@
 
     <servlet>
         <servlet-name>ProductSolrServlet</servlet-name>
-        <servlet-class>playlist.controller.ProductSolrServlet</servlet-class>
+        <servlet-class>retail.controller.ProductSolrServlet</servlet-class>
     </servlet>
 
     <servlet-mapping>
@@ -38,7 +38,7 @@
 
     <servlet>
         <servlet-name>HomeServlet</servlet-name>
-        <servlet-class>playlist.controller.HomeServlet</servlet-class>
+        <servlet-class>retail.controller.HomeServlet</servlet-class>
     </servlet>
 
     <servlet-mapping>

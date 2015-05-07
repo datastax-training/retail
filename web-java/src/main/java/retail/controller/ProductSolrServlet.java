@@ -1,10 +1,10 @@
-package playlist.controller;
+package retail.controller;
 
 import com.google.common.collect.Maps;
-import playlist.jinjahelper.JinjaServlet;
-import playlist.model.CassandraData;
-import playlist.model.FacetDAO;
-import playlist.model.ProductDAO;
+import retail.jinjahelper.JinjaServlet;
+import retail.model.CassandraData;
+import retail.model.FacetDAO;
+import retail.model.ProductDAO;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;

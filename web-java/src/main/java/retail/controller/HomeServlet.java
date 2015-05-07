@@ -1,7 +1,7 @@
-package playlist.controller;
+package retail.controller;
 
 import com.google.common.collect.Maps;
-import playlist.jinjahelper.JinjaServlet;
+import retail.jinjahelper.JinjaServlet;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;

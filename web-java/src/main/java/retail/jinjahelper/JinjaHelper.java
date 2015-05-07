@@ -1,17 +1,7 @@
-package playlist.jinjahelper;
+package retail.jinjahelper;
 
-import com.google.common.base.Charsets;
-import com.google.common.io.Resources;
-import com.hubspot.jinjava.interpret.JinjavaInterpreter;
-import com.hubspot.jinjava.loader.ResourceLocator;
-import com.hubspot.jinjava.loader.ResourceNotFoundException;
-
-import javax.servlet.ServletContext;
-import java.io.IOException;
 import java.io.UnsupportedEncodingException;
-import java.net.URL;
 import java.net.URLEncoder;
-import java.nio.charset.Charset;
 
 /**
  * DataStax Academy Sample Application

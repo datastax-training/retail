@@ -1,11 +1,9 @@
-package playlist.model;
+package retail.model;
 
 import com.datastax.driver.core.*;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
-import java.util.UUID;
 
 /**
  * DataStax Academy Sample Application

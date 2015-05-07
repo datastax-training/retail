@@ -1,4 +1,4 @@
-package playlist.jinjahelper;
+package retail.jinjahelper;
 
 import com.google.common.base.Charsets;
 import com.google.common.io.Resources;

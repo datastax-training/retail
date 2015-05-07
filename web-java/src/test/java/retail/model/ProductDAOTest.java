@@ -1,4 +1,4 @@
-package playlist.model;
+package retail.model;
 
 import junit.framework.TestCase;
 import java.util.List;
