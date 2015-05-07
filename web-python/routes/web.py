@@ -121,7 +121,6 @@ def search():
     # convert the facet string to an ordered dict because solr sorts them desceding by count, and we like it!
     facet_map = json.JSONDecoder(object_pairs_hook=OrderedDict).decode(facet_string)
 
-
     return render_template('search_list.jinja2',
                            search_term = search_term,
                            categories = filter_facets(facet_map['category_name']),

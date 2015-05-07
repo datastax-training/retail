@@ -1,10 +1,9 @@
 package retail.model;
 
-import com.datastax.driver.core.ResultSet;
-import com.datastax.driver.core.Row;
+import com.datastax.driver.core.*;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * DataStax Academy Sample Application
@@ -15,61 +14,32 @@ import java.util.List;
 
 public class AdHocDAO extends CassandraData {
 
-  //
-  // This class retrieves Artist names from the artist table in Cassandra
-  // It has a single static method which is given the artist's first letter
-  // and returns a list of Artists
-  //
+    public static final Map<String, PreparedStatement> preparedStatements =
+            new HashMap<>();
 
-  // Static finder method
 
-  /**
-   *
-   * Returns a list of artists that begin with the specified letter.  The artist
-   * may be returned in ascending or descending order
-   *
-   * @param first_letter - first letter of the Artists name
-   * @param desc - return the results in ascending or descending order
-   * @return - Return the artists names as list of Strings
-   */
-
-  public static List<String> listArtistByLetter(String first_letter, boolean desc) {
-
+    // Return the results of the given query in a google array format
+    // for compatability with google maps
     //
-    // Build a query. This is an example of executing a simple statement.
+    // [
+    //    [{"id": colname, "label": nice name, "type": google type},... ]
+    //     [ column value, column value, ...],
+    //     ...
+    //  ]
     //
+    public static ResultSet getAdHocQuery (String query, Object ... parameters) {
 
-    String queryText = "SELECT * FROM artists_by_first_letter WHERE first_letter = '" + first_letter + "'"
+        PreparedStatement preparedStatement = preparedStatements.get(query);
+        if (preparedStatement == null) {
+            preparedStatement = getSession().prepare(query);
+            preparedStatements.put(query, preparedStatement);
+        }
 
-    //
-    // Append an ORDER BY clause on to the statement if we want a descending order
-    //
-            + (desc ? " ORDER BY artist DESC" : "");
-    //
-    // Obtain the results in a ResultSet object
-    //
+        BoundStatement boundStatement = preparedStatement.bind(parameters);
 
-    ResultSet results = getSession().execute(queryText);
+        ResultSet resultset = getSession().execute(boundStatement);
 
-    //
-    // Allocate an empty list of strings to return the artists
-    //
-
-    List<String> artists = new ArrayList<>();
-
-    //
-    // Iterate over the results.  For each row, retrieve the "artist" column as a String.
-    // and add it to the list of strings.
-    //
-
-    for (Row row : results) {
-       artists.add(row.getString("artist"));     // Lets use column 0 since there is only one column
+        return resultset;
     }
 
-    //
-    // Return the list of strings.
-    //
-
-    return artists;
-  }
 }

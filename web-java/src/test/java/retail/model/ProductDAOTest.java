@@ -47,4 +47,9 @@ public class ProductDAOTest extends TestCase {
         String solrQueryString = CassandraData.makeSolrQueryString("this", null);
         assertEquals ("\"q\":\"title:this\"", solrQueryString);
     }
+
+    public void testMakeSolrQueryStringEscapesQuotes() throws Exception {
+        String solrQueryString = CassandraData.makeSolrQueryString("\"this\"", null);
+        assertEquals ("\"q\":\"title:\\\"this\\\"\"", solrQueryString);
+    }
 }

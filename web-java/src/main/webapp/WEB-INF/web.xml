@@ -46,9 +46,14 @@
         <url-pattern>/home</url-pattern>
     </servlet-mapping>
 
-    <!--<error-page>-->
-        <!--<error-code>404</error-code>-->
-        <!--<location>/notfound.jsp</location>-->
-    <!--</error-page>-->
+    <servlet>
+        <servlet-name>SimpleQueryServlet</servlet-name>
+        <servlet-class>retail.controller.SimpleQueryServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>SimpleQueryServlet</servlet-name>
+        <url-pattern>/api/simplequery</url-pattern>
+    </servlet-mapping>
 
 </web-app>

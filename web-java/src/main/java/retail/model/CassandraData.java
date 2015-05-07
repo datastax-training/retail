@@ -79,6 +79,6 @@ public class CassandraData {
     if (s == null) {
       return null;
     }
-    return s.replaceAll("\"","\\\\\"");
+    return s.replace("\"","\\\"");
   }
 }
