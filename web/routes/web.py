@@ -4,6 +4,7 @@ import json
 
 # from rest import session
 import rest
+from collections import namedtuple
 
 web_api = Blueprint('web_api', __name__)
 
@@ -135,4 +136,7 @@ def search():
 #
 def filter_facets(raw_facets):
     # keep only the facets that have > 0 items
-    return [(key,value) for key,value in raw_facets.iteritems() if value > 0]
+
+    FacetValue = namedtuple('FacetValue', ['name', 'amount'])
+    return [FacetValue(name,amount) for name,amount in raw_facets.iteritems() if amount > 0]
+    # return [(key,value) for key,value in raw_facets.iteritems() if value > 0]
