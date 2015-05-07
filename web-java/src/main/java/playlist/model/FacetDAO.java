@@ -71,12 +71,7 @@ public class FacetDAO extends CassandraData {
                 @Override
                 public int compare(FacetDAO o1, FacetDAO o2) {
                     // Note: opposite of normal for reverse sort
-                    if (o1.amount.equals(o2.amount))
-                        return 0;
-                    else if (o1.amount > o2.amount)
-                        return -1;
-                    else
-                        return 1;
+                    return -o1.amount.compareTo(o2.amount);
                 }
             });
             facetMap.put((String) field, facetList);

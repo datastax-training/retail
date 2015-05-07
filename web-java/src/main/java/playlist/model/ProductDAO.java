@@ -100,15 +100,6 @@ public class ProductDAO extends CassandraData {
     return getProductsWithStmt(statement);
   }
 
-  public static String makeSolrQueryString(String search_term, String filter_by) {
-    String solr_query = "\"q\":\"title:"+search_term +"\"";
-
-    if (filter_by != null && !filter_by.isEmpty()) {
-      solr_query += "\"fq\":\""+filter_by+"\"";
-    }
-    return solr_query;
-  }
-
 
   public String getTitle() {
     return title;

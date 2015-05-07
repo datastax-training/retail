@@ -1,6 +1,8 @@
 package playlist.controller;
 
 import com.google.common.collect.Maps;
+import playlist.jinjahelper.JinjaServlet;
+import playlist.model.CassandraData;
 import playlist.model.FacetDAO;
 import playlist.model.ProductDAO;
 
@@ -28,13 +30,14 @@ public class ProductSolrServlet extends JinjaServlet {
     String search_term = request.getParameter("s");
     String filter_by = request.getParameter("filter_by");
 
-    String solr_query = ProductDAO.makeSolrQueryString(search_term, filter_by);
+    String solr_query = CassandraData.makeSolrQueryString(search_term, filter_by);
 
     List<ProductDAO> products = ProductDAO.getProductsSolrQuery(solr_query);
 
     Map<String, List<FacetDAO>> facetsMap = FacetDAO.getSolrQueryFacets(solr_query, "category_name", "supplier_name");
 
 
+    context.put("search_term", search_term);
     context.put("products", products);
     context.put("categories", facetsMap.get("category_name"));
     context.put("suppliers", facetsMap.get("supplier_name"));

@@ -20,12 +20,12 @@
   <b>Category:</b><br>
 
   {% for category in categories %}
-  {% set new_filter_by = "category_name:\"%s\"" + category.name %}
+  {% set new_filter_by = "category_name:" + category.name %}
   {% if filter_by %}
     {% set new_filter_by = filter_by + " AND " + new_filter_by %}
   {% endif %}
 
-  <a href="/web/search?">{{ category.name }}:</a>&nbsp;{{ category.amount}}<br>
+  <a href="{{ makeURL("/web/search","s", search_term, "filter_by", new_filter_by) }}">{{ category.name }}:</a>&nbsp;{{ category.amount}}<br>
   {% endfor %}
   <br>
 {% endif %}
@@ -33,7 +33,7 @@
   <b>Supplier:</b><br>
 
   {% for supplier in suppliers %}
-  {% set new_filter_by = "supplier_name:\"%s\"" + supplier %}
+  {% set new_filter_by = "supplier_name:" + supplier %}
   {% if filter_by %}
     {%   set new_filter_by = filter_by + " AND " + new_filter_by %}
   {% endif %}

@@ -40,6 +40,9 @@ public class StartJetty {
 
     Server server = new Server(5002);
 
+    // Set up the application.  Note that some of the application is configured
+    // in SetupJinjaServletContextListener
+
     WebAppContext context = new WebAppContext();
     context.setDescriptor(context + "/WEB-INF/web.xml");
     context.setResourceBase(webdirInJarURI.toExternalForm());

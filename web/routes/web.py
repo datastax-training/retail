@@ -99,11 +99,12 @@ def search():
 
     filter_by = request.args.get('filter_by')
 
-    # parameters to solr are rows=30  wt (writer type)=json, and q=city:<keyword> sort=zipcode asc
-    solr_query = '"q":"title:%s"' % search_term.encode('utf-8')
+    # parameters to solr are rows=300  wt (writer type)=json, and q=city:<keyword> sort=zipcode asc
+    # note: escape quote any quotes that are part of the query / filter query
+    solr_query = '"q":"title:%s"' % search_term.replace('"','\\"').encode('utf-8')
 
     if filter_by:
-        solr_query += '"fq":"%s"' % filter_by.encode('utf-8')
+        solr_query += ',"fq":"%s"' % filter_by.replace('"','\\"').encode('utf-8')
 
     query = "SELECT * FROM retail.products_by_id WHERE solr_query = '{%s}' LIMIT 300" % solr_query
 

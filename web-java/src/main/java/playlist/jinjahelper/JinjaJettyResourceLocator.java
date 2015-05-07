@@ -1,4 +1,4 @@
-package playlist.controller;
+package playlist.jinjahelper;
 
 import com.google.common.base.Charsets;
 import com.google.common.io.Resources;
@@ -17,11 +17,11 @@ import java.nio.charset.Charset;
  * Copyright 2013 DataStax
  */
 
-public class MyResourceLocator implements ResourceLocator {
+public class JinjaJettyResourceLocator implements ResourceLocator {
 
     private ServletContext servletContext;
 
-    public MyResourceLocator(ServletContext servletContext) {
+    public JinjaJettyResourceLocator(ServletContext servletContext) {
         this.servletContext = servletContext;
     }
 

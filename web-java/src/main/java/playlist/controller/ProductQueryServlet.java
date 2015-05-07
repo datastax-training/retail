@@ -1,6 +1,7 @@
 package playlist.controller;
 
 import com.google.common.collect.Maps;
+import playlist.jinjahelper.JinjaServlet;
 import playlist.model.ProductDAO;
 
 import javax.servlet.ServletException;

@@ -1,14 +1,24 @@
-package playlist.controller;
+package playlist.jinjahelper;
 
+import com.google.common.base.Charsets;
+import com.google.common.io.Resources;
+import com.hubspot.jinjava.interpret.JinjavaInterpreter;
+import com.hubspot.jinjava.loader.ResourceLocator;
+import com.hubspot.jinjava.loader.ResourceNotFoundException;
+
+import javax.servlet.ServletContext;
+import java.io.IOException;
 import java.io.UnsupportedEncodingException;
+import java.net.URL;
 import java.net.URLEncoder;
+import java.nio.charset.Charset;
 
 /**
  * DataStax Academy Sample Application
  * <p/>
  * Copyright 2015 DataStax
  */
-public class Utilities {
+public class JinjaHelper {
     // The elements are in pairs ("q","\"title:usb\"","fq","somepredicate")
     public static String makeURL(String url, String ... elements) throws UnsupportedEncodingException {
 
@@ -24,4 +34,5 @@ public class Utilities {
         }
         return s.toString();
     }
+
 }

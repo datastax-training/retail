@@ -33,18 +33,18 @@ public class ProductDAOTest extends TestCase {
   }
 
     public void testGetProductsSolrQuery() throws Exception {
-        String solr_query = ProductDAO.makeSolrQueryString("usb",null);
+        String solr_query = CassandraData.makeSolrQueryString("usb", null);
         List<ProductDAO> productDAOList = ProductDAO.getProductsSolrQuery(solr_query);
         assertEquals(138, productDAOList.size());
     }
 
     public void testMakeSolrQueryString() throws Exception {
-        String solrQueryString = ProductDAO.makeSolrQueryString("this", "that");
-        assertEquals ("\"q\":\"title:this\"\"fq\":\"that\"", solrQueryString);
+        String solrQueryString = CassandraData.makeSolrQueryString("this", "that");
+        assertEquals ("\"q\":\"title:this\",\"fq\":\"that\"", solrQueryString);
     }
 
     public void testMakeSolrQueryStringNoFilter() throws Exception {
-        String solrQueryString = ProductDAO.makeSolrQueryString("this",null);
+        String solrQueryString = CassandraData.makeSolrQueryString("this", null);
         assertEquals ("\"q\":\"title:this\"", solrQueryString);
     }
 }
