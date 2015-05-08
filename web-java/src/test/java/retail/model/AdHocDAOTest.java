@@ -3,7 +3,7 @@ package retail.model;
 import com.datastax.driver.core.ResultSet;
 import com.datastax.driver.core.Row;
 import junit.framework.TestCase;
-import retail.jsonoutput.GoogleJsonArrayView;
+import retail.helpers.jsonoutput.GoogleJsonArrayView;
 
 import java.util.List;
 

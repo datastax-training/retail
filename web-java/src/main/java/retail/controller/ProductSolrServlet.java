@@ -1,8 +1,8 @@
 package retail.controller;
 
 import com.google.common.collect.Maps;
-import retail.jinjahelper.JinjaServlet;
-import retail.model.CassandraData;
+import retail.helpers.jinjahelper.JinjaServlet;
+import retail.helpers.cassandra.CassandraData;
 import retail.model.FacetDAO;
 import retail.model.ProductDAO;
 
@@ -11,7 +11,6 @@ import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.List;
 import java.util.Map;
 

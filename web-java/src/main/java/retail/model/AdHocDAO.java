@@ -1,6 +1,7 @@
 package retail.model;
 
 import com.datastax.driver.core.*;
+import retail.helpers.cassandra.CassandraData;
 
 import java.util.HashMap;
 import java.util.Map;

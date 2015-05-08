@@ -4,7 +4,7 @@ import com.google.common.collect.Maps;
 import com.hubspot.jinjava.Jinjava;
 import com.hubspot.jinjava.lib.fn.ELFunctionDefinition;
 import junit.framework.TestCase;
-import retail.jinjahelper.JinjaHelper;
+import retail.helpers.jinjahelper.JinjaHelper;
 
 import java.util.*;
 

@@ -1,4 +1,4 @@
-package retail.jsonoutput;
+package retail.helpers.jsonoutput;
 
 import com.datastax.driver.core.ResultSet;
 import junit.framework.TestCase;

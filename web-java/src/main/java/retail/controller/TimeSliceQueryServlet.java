@@ -1,9 +1,8 @@
 package retail.controller;
 
 import com.datastax.driver.core.ResultSet;
-import retail.jsonoutput.GoogleJsonArrayView;
-import retail.jsonoutput.GoogleJsonTimesliceView;
-import retail.model.AdHocDAO;
+import retail.helpers.jsonoutput.GoogleJsonArrayView;
+import retail.helpers.jsonoutput.GoogleJsonTimesliceView;
 import retail.model.TimeSliceDAO;
 
 import javax.servlet.ServletException;

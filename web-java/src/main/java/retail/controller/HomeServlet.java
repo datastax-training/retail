@@ -1,14 +1,13 @@
 package retail.controller;
 
 import com.google.common.collect.Maps;
-import retail.jinjahelper.JinjaServlet;
+import retail.helpers.jinjahelper.JinjaServlet;
 
 import javax.servlet.ServletException;
 import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.Map;
 
 /**

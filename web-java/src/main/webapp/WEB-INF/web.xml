@@ -13,7 +13,7 @@
     -->
 
     <listener>
-        <listener-class>retail.jinjahelper.SetupJinjaServletContextListener</listener-class>
+        <listener-class>retail.helpers.jinjahelper.SetupJinjaServletContextListener</listener-class>
     </listener>
 
     <servlet>

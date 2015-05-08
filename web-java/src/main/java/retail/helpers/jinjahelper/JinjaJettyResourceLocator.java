@@ -1,4 +1,4 @@
-package retail.jinjahelper;
+package retail.helpers.jinjahelper;
 
 import com.google.common.base.Charsets;
 import com.google.common.io.Resources;

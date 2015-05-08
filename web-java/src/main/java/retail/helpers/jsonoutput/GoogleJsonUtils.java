@@ -1,11 +1,10 @@
-package retail.jsonoutput;
+package retail.helpers.jsonoutput;
 
-import com.datastax.driver.core.ColumnDefinitions;
 import com.datastax.driver.core.Row;
 import org.apache.commons.lang3.text.WordUtils;
 import org.json.simple.JSONAware;
 import org.json.simple.JSONObject;
-import retail.model.CassandraData;
+import retail.helpers.cassandra.CassandraData;
 
 import java.math.BigDecimal;
 import java.text.DecimalFormat;

@@ -2,6 +2,7 @@ package retail.model;
 
 import com.datastax.driver.core.Session;
 import junit.framework.TestCase;
+import retail.helpers.cassandra.CassandraData;
 
 /**
  * DataStax Academy Sample Application

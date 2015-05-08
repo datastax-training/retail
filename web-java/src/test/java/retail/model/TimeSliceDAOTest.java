@@ -2,7 +2,7 @@ package retail.model;
 
 import com.datastax.driver.core.ResultSet;
 import junit.framework.TestCase;
-import retail.jsonoutput.GoogleJsonTimesliceView;
+import retail.helpers.jsonoutput.GoogleJsonTimesliceView;
 
 /**
  * DataStax Academy Sample Application

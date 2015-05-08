@@ -1,9 +1,8 @@
 package retail.model;
 
 import com.datastax.driver.core.*;
+import retail.helpers.cassandra.CassandraData;
 
-import java.beans.IntrospectionException;
-import java.lang.reflect.InvocationTargetException;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Date;
@@ -25,6 +24,7 @@ public class ProductDAO extends CassandraData {
   private static PreparedStatement get_product_by_id_cc = null;
 
   // Note the CamelCase as jinja2 requires it.
+  // Also - only use the boxed types for loadBeanFromRow
 
   private String productId;
   private Integer categoryId;
@@ -44,6 +44,11 @@ public class ProductDAO extends CassandraData {
 
     // This constructor loads all of the fields of the row using the
     // superclass method loadBeanFromRow.
+
+    // It replaces stuff like
+    //    productId = row.getString("product_id");
+    //    categoryId = row.getInt("category_id");
+
 
     loadBeanFromRow(row);
   }
@@ -96,13 +101,16 @@ public class ProductDAO extends CassandraData {
   }
 
   private static List<ProductDAO> getProductsWithStmt(Statement statement) {
-    final List<ProductDAO> productDAOList = new ArrayList<ProductDAO>();
 
     ResultSet results = null;
+    int initial_result_size = 0;
 
     if (statement != null) {
       results = getSession().execute(statement);
+      initial_result_size = results.getAvailableWithoutFetching();
     }
+
+    final List<ProductDAO> productDAOList = new ArrayList<ProductDAO>(initial_result_size);
 
     if (results != null) {
       for (Row row: results) {

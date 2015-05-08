@@ -1,4 +1,4 @@
-package retail.jinjahelper;
+package retail.helpers.jinjahelper;
 
 import com.hubspot.jinjava.Jinjava;
 import com.hubspot.jinjava.lib.fn.ELFunctionDefinition;

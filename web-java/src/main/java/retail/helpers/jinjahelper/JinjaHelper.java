@@ -1,4 +1,4 @@
-package retail.jinjahelper;
+package retail.helpers.jinjahelper;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;

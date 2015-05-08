@@ -1,6 +1,8 @@
 package retail.model;
 
 import junit.framework.TestCase;
+import retail.helpers.cassandra.CassandraData;
+
 import java.util.List;
 
 /**

@@ -1,4 +1,4 @@
-package retail.model;
+package retail.helpers.cassandra;
 
 import com.datastax.driver.core.*;
 import org.apache.commons.lang3.StringUtils;
@@ -36,7 +36,7 @@ public class CassandraData {
    * Required constructor, but it doesn't need to do anything.
    */
 
-  CassandraData() {
+  public void CassandraData() {
     // Do nothing
   }
 
@@ -67,7 +67,7 @@ public class CassandraData {
    * @return A new Cassandra session
    */
 
-  protected static Session createSession() {
+  public static Session createSession() {
     Cluster cluster = Cluster.builder().addContactPoint("localhost").build();
     return cluster.connect();
   }
@@ -102,6 +102,7 @@ public class CassandraData {
           Object data_object = column_to_object(row, column_def.getName());
           method.invoke(this, data_object);
         } catch (Exception e) {
+          int x = 10;
           // We assume it's a column in the DB with no field, or the setter has the wrong
           // name
         }

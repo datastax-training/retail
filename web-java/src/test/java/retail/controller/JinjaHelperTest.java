@@ -1,7 +1,7 @@
 package retail.controller;
 
 import junit.framework.TestCase;
-import retail.jinjahelper.JinjaHelper;
+import retail.helpers.jinjahelper.JinjaHelper;
 
 import java.lang.reflect.Method;
 

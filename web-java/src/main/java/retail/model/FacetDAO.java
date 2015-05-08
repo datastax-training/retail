@@ -3,6 +3,7 @@ package retail.model;
 import com.datastax.driver.core.ResultSet;
 import org.json.simple.JSONObject;
 import org.json.simple.JSONValue;
+import retail.helpers.cassandra.CassandraData;
 
 import java.util.*;
 
@@ -18,6 +19,8 @@ public class FacetDAO extends CassandraData {
 
     private String name;
     private Long amount;
+
+
 
     public FacetDAO(String name, Long amount) {
         this.name = name;

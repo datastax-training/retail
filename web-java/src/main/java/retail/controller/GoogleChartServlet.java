@@ -1,19 +1,14 @@
 package retail.controller;
 
-import com.datastax.driver.core.ResultSet;
 import com.google.common.collect.Maps;
-import retail.jinjahelper.JinjaHelper;
-import retail.jinjahelper.JinjaServlet;
-import retail.jsonoutput.GoogleJsonArrayView;
-import retail.model.AdHocDAO;
+import retail.helpers.jinjahelper.JinjaHelper;
+import retail.helpers.jinjahelper.JinjaServlet;
 
 import javax.servlet.ServletException;
 import javax.servlet.ServletOutputStream;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;

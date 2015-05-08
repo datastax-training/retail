@@ -4,7 +4,7 @@ import com.datastax.driver.core.BoundStatement;
 import com.datastax.driver.core.PreparedStatement;
 import com.datastax.driver.core.ResultSet;
 import org.apache.commons.lang3.time.DateUtils;
-import retail.jsonoutput.GoogleJsonTimesliceView;
+import retail.helpers.cassandra.CassandraData;
 
 import java.util.Date;
 

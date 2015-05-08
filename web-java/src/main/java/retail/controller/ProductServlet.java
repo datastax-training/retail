@@ -1,7 +1,7 @@
 package retail.controller;
 
 import com.google.common.collect.Maps;
-import retail.jinjahelper.JinjaServlet;
+import retail.helpers.jinjahelper.JinjaServlet;
 import retail.model.ProductDAO;
 
 import javax.servlet.ServletException;
@@ -9,10 +9,6 @@ import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.io.PrintWriter;
-import java.nio.ByteBuffer;
-import java.nio.charset.Charset;
-import java.util.List;
 import java.util.Map;
 
 /**
@@ -30,10 +26,12 @@ public class ProductServlet extends JinjaServlet {
 
     String product_id = request.getParameter("product_id");
 
-    ProductDAO product = ProductDAO.getProductById(product_id);
+    if (product_id != null && !product_id.isEmpty()) {
+      ProductDAO product = ProductDAO.getProductById(product_id);
 
-    context.put("product", product);
-    context.put("features", product.getFeatures());
+      context.put("product", product);
+      context.put("features", product.getFeatures());
+    }
 
     byte[] renderedTemplate = render("/product_detail.jinja2", context);
     out.write(renderedTemplate);

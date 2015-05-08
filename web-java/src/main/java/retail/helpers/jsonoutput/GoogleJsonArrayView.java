@@ -1,13 +1,10 @@
-package retail.jsonoutput;
+package retail.helpers.jsonoutput;
 
 import com.datastax.driver.core.ColumnDefinitions;
 import com.datastax.driver.core.ResultSet;
 import com.datastax.driver.core.Row;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
-
-import java.text.SimpleDateFormat;
-import java.util.TimeZone;
 
 /**
  * DataStax Academy Sample Application

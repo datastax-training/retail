@@ -1,11 +1,8 @@
 package retail.controller;
 
-import com.datastax.driver.core.ColumnDefinitions;
 import com.datastax.driver.core.ResultSet;
-import com.google.common.collect.Maps;
-import org.json.simple.JSONArray;
-import retail.jinjahelper.JinjaServlet;
-import retail.jsonoutput.GoogleJsonArrayView;
+import retail.helpers.jinjahelper.JinjaServlet;
+import retail.helpers.jsonoutput.GoogleJsonArrayView;
 import retail.model.AdHocDAO;
 
 import javax.servlet.ServletException;
@@ -14,7 +11,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.Map;
 
 /**
  * DataStax Academy Sample Application
