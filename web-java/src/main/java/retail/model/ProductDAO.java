@@ -2,8 +2,13 @@ package retail.model;
 
 import com.datastax.driver.core.*;
 
+import java.beans.IntrospectionException;
+import java.lang.reflect.InvocationTargetException;
+import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 /**
  * DataStax Academy Sample Application
@@ -18,29 +23,28 @@ public class ProductDAO extends CassandraData {
   private static PreparedStatement get_product_by_brand_cc = null;
   private static PreparedStatement get_product_by_category_cc = null;
 
-  private String  title;
-  private String product_id;
-  private String  category_name;
-  private Integer category_id;
-  private String  supplier_name;
-  private Integer  supplier_id;
+  // Note the CamelCase as jinja2 requires it.
 
-  public ProductDAO() {
-    title = null;
-    product_id = null;
-    category_name = null;
-    category_id = null;
-    supplier_name = null;
-    supplier_id = null;
-  }
+  private String productId;
+  private Integer categoryId;
+  private String categoryName;
+  private Map<String,String > features;
+  private Boolean isHot;
+  private String longDescription;
+  private BigDecimal price;
+  private Date releaseDate;
+  private String shortDescription;
+  private Integer supplierId;
+  private String supplierName;
+  private String  title;
+  private String  url;
 
   public ProductDAO(Row row) {
-    title = row.getString("title");
-    product_id = row.getString("product_id");
-    category_name = row.getString("category_name");
-    category_id = row.getInt("category_id");
-    supplier_name = row.getString("supplier_name");
-    supplier_id = row.getInt("supplier_id");
+
+    // This constructor loads all of the fields of the row using the
+    // superclass method loadBeanFromRow.
+
+    loadBeanFromRow(row);
   }
 
   public static List<ProductDAO> getProductsByBrand(String brand_id) {
@@ -98,29 +102,107 @@ public class ProductDAO extends CassandraData {
     return getProductsWithStmt(statement);
   }
 
+  public String getProductId() {
+    return productId;
+  }
+
+  public void setProductId(String productId) {
+    this.productId = productId;
+  }
+
+  public Integer getCategoryId() {
+    return categoryId;
+  }
+
+  public void setCategoryId(Integer categoryId) {
+    this.categoryId = categoryId;
+  }
+
+  public String getCategoryName() {
+    return categoryName;
+  }
+
+  public void setCategoryName(String categoryName) {
+    this.categoryName = categoryName;
+  }
+
+  public Map<String, String> getFeatures() {
+    return features;
+  }
+
+  public void setFeatures(Map<String, String> features) {
+    this.features = features;
+  }
+
+  public Boolean getIsHot() {
+    return isHot;
+  }
+
+  public void setIsHot(Boolean isHot) {
+    this.isHot = isHot;
+  }
+
+  public String getLongDescription() {
+    return longDescription;
+  }
+
+  public void setLongDescription(String longDescription) {
+    this.longDescription = longDescription;
+  }
+
+  public BigDecimal getPrice() {
+    return price;
+  }
+
+  public void setPrice(BigDecimal price) {
+    this.price = price;
+  }
+
+  public Date getReleaseDate() {
+    return releaseDate;
+  }
+
+  public void setReleaseDate(Date releaseDate) {
+    this.releaseDate = releaseDate;
+  }
+
+  public String getShortDescription() {
+    return shortDescription;
+  }
+
+  public void setShortDescription(String shortDescription) {
+    this.shortDescription = shortDescription;
+  }
+
+  public Integer getSupplierId() {
+    return supplierId;
+  }
+
+  public void setSupplierId(Integer supplierId) {
+    this.supplierId = supplierId;
+  }
+
+  public String getSupplierName() {
+    return supplierName;
+  }
+
+  public void setSupplierName(String supplierName) {
+    this.supplierName = supplierName;
+  }
 
   public String getTitle() {
     return title;
   }
 
-  public String getProductId() {
-    return product_id;
+  public void setTitle(String title) {
+    this.title = title;
   }
 
-  public String getCategoryName() {
-    return category_name;
+  public String getUrl() {
+    return url;
   }
 
-  public Integer getCategoryId() {
-    return category_id;
+  public void setUrl(String url) {
+    this.url = url;
   }
-
-  public String getSupplierName() {
-    return supplier_name;
-  }
-
-  public Integer getSupplierId() {
-    return supplier_id;
-  }
-
 }

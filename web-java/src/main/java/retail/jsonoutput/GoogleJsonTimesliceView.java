@@ -31,7 +31,7 @@ public class GoogleJsonTimesliceView {
             first_row_keys = row.getMap("quantities", String.class, Integer.class).keySet();
           }
           // add the time window
-          jsonRow.add(GoogleJsonUtils.column_to_object(row,0));
+          jsonRow.add(GoogleJsonUtils.google_column_to_object(row,0));
 
           // Iterate through the map and make the elements look like columns
           Map<String, Integer> quantityMap = row.getMap("quantities", String.class, Integer.class);

@@ -5,7 +5,9 @@ import com.datastax.driver.core.Row;
 import org.apache.commons.lang3.text.WordUtils;
 import org.json.simple.JSONAware;
 import org.json.simple.JSONObject;
+import retail.model.CassandraData;
 
+import java.math.BigDecimal;
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.TimeZone;
@@ -69,38 +71,26 @@ public class GoogleJsonUtils {
         }
 
         // Return the column value as an object of the appropriate type and format for google charts
-        public static Object column_to_object (Row row, int index) {
+        public static Object google_column_to_object (Row row, int index) {
 
             Class cassandra_clazz = row.getColumnDefinitions().getType(index).asJavaClass();
             String type_name = cassandra_clazz.getName();
 
-            if (row.isNull(index)) {
+            Object data_object = CassandraData.column_to_object(row, index);
+            if (data_object == null) {
                 return "";
             }
-
             switch (type_name) {
-                case "java.lang.Integer":
-                    return row.getInt(index);
                 case "java.lang.Double":
-                    return new JsonNoScientificNotation(row.getDouble(index));
+                    return new JsonNoScientificNotation((Double) data_object);
                 case "java.lang.float":
-                    return new JsonNoScientificNotation(row.getFloat(index));
-                case "java.lang.Long":
-                    return row.getLong(index);
+                    return new JsonNoScientificNotation((Double) data_object);
                 case "java.math.BigDecimal":
-                    return new JsonNoScientificNotation(row.getDecimal(index).doubleValue());
-                case "java.math.BigInteger":
-                    return row.getVarint(index);
-                case "java.lang.Boolean":
-                    return row.getBool(index);
+                    return new JsonNoScientificNotation(((BigDecimal)data_object).doubleValue());
                 case "java.util.Date":
                     return GoogleDateFormat.format(row.getDate(index));   // treat as string
-                case "java.lang.String":
-                    return row.getString(index);
-                case "java.util.UUID":
-                    return row.getUUID(index);
                 default:
-                    throw new UnsupportedOperationException(type_name + "is not supported.");
+                    return data_object;
             }
         }
 

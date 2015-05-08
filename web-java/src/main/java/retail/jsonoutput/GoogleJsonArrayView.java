@@ -34,7 +34,7 @@ public class GoogleJsonArrayView {
         for (Row row: resultset) {
             JSONArray resultRowArray = new JSONArray();
             for (int i = 0; i < columnDefinitions.size(); i++) {
-                Object value = GoogleJsonUtils.column_to_object(row, i);
+                Object value = GoogleJsonUtils.google_column_to_object(row, i);
                 resultRowArray.add(value);
             }
             resultsArray.add(resultRowArray);
