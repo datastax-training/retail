@@ -86,4 +86,14 @@
         <url-pattern>/web/product</url-pattern>
     </servlet-mapping>
 
+    <servlet>
+        <servlet-name>ReceiptServlet</servlet-name>
+        <servlet-class>retail.controller.ReceiptServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>ReceiptServlet</servlet-name>
+        <url-pattern>/web/receipt</url-pattern>
+    </servlet-mapping>
+
 </web-app>
