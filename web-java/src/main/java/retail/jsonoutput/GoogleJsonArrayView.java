@@ -5,10 +5,14 @@ import com.datastax.driver.core.ResultSet;
 import com.datastax.driver.core.Row;
 import org.apache.commons.lang3.text.WordUtils;
 import org.json.simple.JSONArray;
+import org.json.simple.JSONAware;
 import org.json.simple.JSONObject;
 import retail.model.AdHocDAO;
 
+import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.TimeZone;
 
 /**
  * DataStax Academy Sample Application
@@ -17,7 +21,11 @@ import java.text.SimpleDateFormat;
  */
 public class GoogleJsonArrayView {
 
-    public static final SimpleDateFormat GoogleDateFormat = new SimpleDateFormat("'Date('y,M,d,H,m,s')'" );
+    public static final SimpleDateFormat GoogleDateFormat;
+    static {
+        GoogleDateFormat = new SimpleDateFormat("'Date('y,M,d,H,m,s')'");
+        GoogleDateFormat.setTimeZone(TimeZone.getTimeZone("UTC"));
+    }
 
     public static String toGoogleVisualizationJsonArray(ResultSet resultset) {
 
@@ -35,7 +43,7 @@ public class GoogleJsonArrayView {
         for (Row row: resultset) {
             JSONArray resultRowArray = new JSONArray();
             for (int i = 0; i < columnDefinitions.size(); i++) {
-                String value = column_to_string(row, i, columnDefinitions.getType(i).asJavaClass());
+                Object value = column_to_object(row, i, columnDefinitions.getType(i).asJavaClass());
                 resultRowArray.add(value);
             }
             resultsArray.add(resultRowArray);
@@ -79,7 +87,7 @@ public class GoogleJsonArrayView {
         }
     }
 
-    public static String column_to_string (Row row, int index, Class cassandra_clazz) {
+    public static Object column_to_object (Row row, int index, Class cassandra_clazz) {
 
         String type_name = cassandra_clazz.getName();
         if (row.isNull(index)) {
@@ -88,31 +96,43 @@ public class GoogleJsonArrayView {
 
         switch (type_name) {
             case "java.lang.Integer":
-                return Integer.toString(row.getInt(index));
+                return row.getInt(index);
             case "java.lang.Double":
-                return Double.toString(row.getDouble(index));
+                return new JsonNoScientificNotation(row.getDouble(index));
             case "java.lang.float":
-                return Float.toString(row.getFloat(index));
+                return new JsonNoScientificNotation(row.getFloat(index));
             case "java.lang.Long":
-                return Long.toString(row.getLong(index));
+                return row.getLong(index);
             case "java.math.BigDecimal":
-                return row.getDecimal(index).toString();
+//                return row.getDecimal(index);
+                return new JsonNoScientificNotation(row.getDecimal(index).doubleValue());
             case "java.math.BigInteger":
-                return row.getVarint(index).toString();
+                return row.getVarint(index);
             case "java.lang.Boolean":
-                return Boolean.toString(row.getBool(index));
+                return row.getBool(index);
             case "java.util.Date":
-                return GoogleDateFormat.format(row.getDate(index));
+                return GoogleDateFormat.format(row.getDate(index));   // treat as string
             case "java.lang.String":
                 return row.getString(index);
             case "java.util.UUID":
-                return row.getUUID(index).toString();
+                return row.getUUID(index);
             default:
                 throw new UnsupportedOperationException(type_name + "is not supported.");
         }
     }
 
+    private static class JsonNoScientificNotation implements JSONAware {
 
+        double number;
+
+        public JsonNoScientificNotation(double number) {
+            this.number = number;
+        }
+
+        public String toJSONString() {
+            return new DecimalFormat("#.#####").format(number);
+        }
+    }
 
     private static String column_name_to_label(String column_name) {
         String string1 = column_name.replace('_',' ');

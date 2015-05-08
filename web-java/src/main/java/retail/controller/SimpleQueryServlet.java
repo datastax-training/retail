@@ -38,6 +38,7 @@ public class SimpleQueryServlet extends HttpServlet {
         // Build the header json
 
         String json = GoogleJsonArrayView.toGoogleVisualizationJsonArray(resultset);
-        out.println(json);
+
+        out.print(json);
     }
 }

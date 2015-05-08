@@ -1,4 +1,5 @@
 from flask import Blueprint, render_template, request
+from utils.JinjaHelper import makeURL
 
 gcharts_api = Blueprint('gcharts_api', __name__)
 
@@ -13,22 +14,6 @@ supported_charts = {
     'AreaChart': 'corechart'
 }
 
-def compose_ajax_source():
-    """
-    grab request GET variables to create new url
-    :return: ajax ready url
-    """
-    # grab url parameter, if available
-    url = request.args.get('url')
-
-    # pass all other parameters to ajax url
-    ajax_source = '%s?' % url
-    for k, v in request.args.iteritems():
-        if k not in ['url', 'options']:
-            ajax_source += '&%s=%s' % (k, v)
-
-    return ajax_source
-
 #
 # Render a basic flexible charts page
 #   Parameters:
@@ -41,7 +26,18 @@ def compose_ajax_source():
 
 @gcharts_api.route('/<chart_type>/')
 def googlechart(chart_type='ColumnChart'):
-    ajax_source = compose_ajax_source()
+
+    # grab url parameter, if available
+    url = request.args.get('url')
+
+    # pass all other parameters to ajax url
+    url_parms = []
+    for k,v in request.args.iteritems():
+        if k not in ['url','options']:
+            url_parms += [k,v]
+
+    ajax_source = makeURL(url, *(url_parms))
+
     options = request.args.get('options',{})
 
     return render_template('google_charts.jinja2',
