@@ -30,7 +30,7 @@
         <br>
         <b>Features:</b>
         {% if features %}
-            {% for key in features %}
+            {% for key in features.keySet() %}
                 <tr>
                 <td>{{ key }}</td>
                 <td>{{ features[key] }}</td>

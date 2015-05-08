@@ -4,6 +4,7 @@ import com.google.common.collect.Maps;
 import retail.jinjahelper.JinjaServlet;
 
 import javax.servlet.ServletException;
+import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
@@ -20,12 +21,12 @@ import java.util.Map;
 public class HomeServlet extends JinjaServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        PrintWriter out = response.getWriter();
+        ServletOutputStream out = response.getOutputStream();
 
         Map<String, Object> context = Maps.newHashMap();
         context.put("name", "Jared");
 
-        String renderedTemplate = render("/index.jinja2", context);
-        out.println(renderedTemplate);
+        byte[] renderedTemplate = render("/index.jinja2", context);
+        out.write(renderedTemplate);
     }
 }

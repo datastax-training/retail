@@ -7,6 +7,7 @@ import retail.model.FacetDAO;
 import retail.model.ProductDAO;
 
 import javax.servlet.ServletException;
+import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
@@ -24,7 +25,7 @@ import java.util.Map;
 public class ProductSolrServlet extends JinjaServlet {
 
   protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-    PrintWriter out = response.getWriter();
+    ServletOutputStream out = response.getOutputStream();
     Map<String, Object> context = Maps.newHashMap();
 
     String search_term = request.getParameter("s");
@@ -42,8 +43,8 @@ public class ProductSolrServlet extends JinjaServlet {
     context.put("categories", facetsMap.get("category_name"));
     context.put("suppliers", facetsMap.get("supplier_name"));
 
-    String renderedTemplate = render("/search_list.jinja2", context);
-    out.println(renderedTemplate);
+    byte[] renderedTemplate = render("/search_list.jinja2", context);
+    out.write(renderedTemplate);
 
   }
 }

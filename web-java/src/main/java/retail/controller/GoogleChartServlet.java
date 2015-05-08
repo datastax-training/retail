@@ -8,6 +8,7 @@ import retail.jsonoutput.GoogleJsonArrayView;
 import retail.model.AdHocDAO;
 
 import javax.servlet.ServletException;
+import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -42,7 +43,7 @@ public class GoogleChartServlet extends JinjaServlet {
 
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        PrintWriter out = response.getWriter();
+        ServletOutputStream out = response.getOutputStream();
         Map<String, Object> context = Maps.newHashMap();
 
         // This posts the result set in the google format
@@ -74,7 +75,7 @@ public class GoogleChartServlet extends JinjaServlet {
         context.put("chart_type", chart_type);
         context.put("package", supported_charts.get(chart_type));
 
-        String renderedTemplate = render("/google_charts.jinja2", context);
-        out.println(renderedTemplate);
+        byte[] renderedTemplate = render("/google_charts.jinja2", context);
+        out.write(renderedTemplate);
     }
 }

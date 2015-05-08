@@ -18,12 +18,12 @@ import java.util.Map;
 
 public class JinjaServlet extends HttpServlet {
 
-    public String render(String resource_name , Map<String,Object> context) throws IOException {
+    // Returns a UTF-8 String
+    public byte[] render(String resource_name , Map<String,Object> context) throws IOException {
         Jinjava jinjava = (Jinjava) getServletContext().getAttribute("jinjava");
         URL resource = getServletContext().getResource(resource_name);
         String template = Resources.toString(resource, Charsets.UTF_8);
 
-        return jinjava.render(template, context);
-
+        return jinjava.render(template, context).getBytes("UTF-8");
     }
 }

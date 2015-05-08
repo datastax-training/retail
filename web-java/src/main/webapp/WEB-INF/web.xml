@@ -76,4 +76,14 @@
         <url-pattern>/api/realtime/*</url-pattern>
     </servlet-mapping>
 
+    <servlet>
+        <servlet-name>ProductServlet</servlet-name>
+        <servlet-class>retail.controller.ProductServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>ProductServlet</servlet-name>
+        <url-pattern>/web/product</url-pattern>
+    </servlet-mapping>
+
 </web-app>
