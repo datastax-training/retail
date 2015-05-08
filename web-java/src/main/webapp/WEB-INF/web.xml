@@ -66,4 +66,14 @@
         <url-pattern>/gcharts/*</url-pattern>
     </servlet-mapping>
 
+    <servlet>
+        <servlet-name>TimeSliceQueryServlet</servlet-name>
+        <servlet-class>retail.controller.TimeSliceQueryServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>TimeSliceQueryServlet</servlet-name>
+        <url-pattern>/api/realtime/*</url-pattern>
+    </servlet-mapping>
+
 </web-app>

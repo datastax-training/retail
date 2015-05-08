@@ -1,12 +1,10 @@
 package retail.jsonoutput;
 
 import com.datastax.driver.core.ResultSet;
-import com.datastax.driver.core.Row;
 import junit.framework.TestCase;
 import retail.model.AdHocDAO;
 
 import java.math.BigDecimal;
-import java.util.List;
 
 /**
  * DataStax Academy Sample Application
@@ -16,8 +14,8 @@ import java.util.List;
 public class GoogleJsonArrayViewTest extends TestCase {
 
     public void testGet_google_type() throws Exception {
-        assertEquals("number", GoogleJsonArrayView.get_google_type(int.class));
-        assertEquals("number", GoogleJsonArrayView.get_google_type(BigDecimal.class));
+        assertEquals("number", GoogleJsonUtils.get_google_type(int.class));
+        assertEquals("number", GoogleJsonUtils.get_google_type(BigDecimal.class));
     }
 
     public void testGetAdHocQueryWithParamters() throws Exception {
