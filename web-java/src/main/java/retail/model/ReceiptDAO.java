@@ -23,6 +23,7 @@ public class ReceiptDAO extends CassandraData {
     // static prepared statements
 
     private static PreparedStatement get_receipt_by_id_ps = null;
+    private static PreparedStatement get_receipt_by_cc_ps = null;
 
     // Note we need to use CamelCase for jinja support
     // Also - only use the boxed types for loadBeanFromRow
@@ -48,13 +49,13 @@ public class ReceiptDAO extends CassandraData {
         loadBeanFromRow(row);
     }
 
-    public static List<ReceiptDAO> getReceiptById(long receiptId) {
+    public static List<ReceiptDAO> getReceiptById(long receipt_id) {
 
         if (get_receipt_by_id_ps == null) {
             get_receipt_by_id_ps = getSession().prepare("select * from retail.receipts where receipt_id = ?");
         }
 
-        BoundStatement boundStatement = get_receipt_by_id_ps.bind(receiptId);
+        BoundStatement boundStatement = get_receipt_by_id_ps.bind(receipt_id);
 
         ResultSet resultSet = getSession().execute(boundStatement);
 
@@ -68,6 +69,30 @@ public class ReceiptDAO extends CassandraData {
         }
 
         return receiptScans;
+    }
+
+    public static List<ReceiptDAO> getReceiptsByCreditCard(long credit_card_number) {
+
+        if (get_receipt_by_cc_ps == null) {
+            get_receipt_by_cc_ps = getSession().prepare("select * from retail.receipts_by_credit_card where credit_card_number = ?");
+        }
+
+        BoundStatement boundStatement = get_receipt_by_cc_ps.bind(credit_card_number);
+
+        ResultSet resultSet = getSession().execute(boundStatement);
+
+        if (resultSet.isExhausted()) {
+            return null;
+        }
+
+        List<ReceiptDAO> receipts = new ArrayList<>(resultSet.getAvailableWithoutFetching());
+        for (Row row: resultSet) {
+            receipts.add(new ReceiptDAO(row));
+        }
+
+        return receipts;
+
+
     }
 
     public Long getReceiptId() {

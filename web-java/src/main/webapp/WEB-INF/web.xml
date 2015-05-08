@@ -96,4 +96,14 @@
         <url-pattern>/web/receipt</url-pattern>
     </servlet-mapping>
 
+    <servlet>
+        <servlet-name>CreditCardServlet</servlet-name>
+        <servlet-class>retail.controller.CreditCardServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>CreditCardServlet</servlet-name>
+        <url-pattern>/web/credit_card</url-pattern>
+    </servlet-mapping>
+
 </web-app>

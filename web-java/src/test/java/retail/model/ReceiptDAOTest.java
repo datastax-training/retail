@@ -23,4 +23,11 @@ public class ReceiptDAOTest extends TestCase {
         assertNotNull(receipt);
         assertEquals(6, receipt.get(0).getStoreId().intValue());
     }
+
+    public void testGetReceiptsByCreditCard() throws Exception {
+        List<ReceiptDAO> receipt = ReceiptDAO.getReceiptsByCreditCard(5584474442969093L);
+        assertNotNull(receipt);
+        assertEquals(6, receipt.get(0).getStoreId().intValue());
+
+    }
 }

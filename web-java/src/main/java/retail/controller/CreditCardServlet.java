@@ -2,7 +2,6 @@ package retail.controller;
 
 import com.google.common.collect.Maps;
 import retail.helpers.jinjahelper.JinjaServlet;
-import retail.model.ProductDAO;
 import retail.model.ReceiptDAO;
 
 import javax.servlet.ServletException;
@@ -20,23 +19,23 @@ import java.util.Map;
  *
  */
 
-public class ReceiptServlet extends JinjaServlet {
+public class CreditCardServlet extends JinjaServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         ServletOutputStream out = response.getOutputStream();
         Map<String, Object> context = Maps.newHashMap();
 
-        String receipt_id_str = request.getParameter("receipt_id");
+        String credit_card_str = request.getParameter("credit_card_number");
 
-        List<ReceiptDAO> scans = null;
-        if (receipt_id_str != null) {
-            long receipt_id = Long.parseLong(receipt_id_str);
+        List<ReceiptDAO> receipts = null;
+        if (credit_card_str != null) {
+            long credit_card_no = Long.parseLong(credit_card_str);
 
-            scans = ReceiptDAO.getReceiptById(receipt_id);
+            receipts = ReceiptDAO.getReceiptsByCreditCard(credit_card_no);
         }
-        context.put("scans", scans);
+        context.put("receipts", receipts);
 
-        byte[] renderedTemplate = render("/receipt_detail.jinja2", context);
+        byte[] renderedTemplate = render("/credit_card_search.jinja2", context);
         out.write(renderedTemplate);
 
     }
