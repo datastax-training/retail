@@ -22,6 +22,7 @@ public class ProductDAO extends CassandraData {
 
   private static PreparedStatement get_product_by_brand_cc = null;
   private static PreparedStatement get_product_by_category_cc = null;
+  private static PreparedStatement get_product_by_id_cc = null;
 
   // Note the CamelCase as jinja2 requires it.
 
@@ -45,6 +46,25 @@ public class ProductDAO extends CassandraData {
     // superclass method loadBeanFromRow.
 
     loadBeanFromRow(row);
+  }
+
+  public static ProductDAO getProductById(String productId) {
+
+    if (get_product_by_id_cc == null) {
+      get_product_by_id_cc = getSession().prepare("SELECT * from retail.products_by_id WHERE product_id = ?");
+    }
+
+    BoundStatement boundStatement = get_product_by_id_cc.bind(productId);
+    ResultSet resultSet = getSession().execute(boundStatement);
+
+    // Return null if it's not found
+    if (resultSet.isExhausted()) {
+      return null;
+    }
+
+    // Return the first row
+    return new ProductDAO(resultSet.one());
+
   }
 
   public static List<ProductDAO> getProductsByBrand(String brand_id) {
@@ -101,6 +121,7 @@ public class ProductDAO extends CassandraData {
 
     return getProductsWithStmt(statement);
   }
+
 
   public String getProductId() {
     return productId;

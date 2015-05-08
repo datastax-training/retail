@@ -52,4 +52,14 @@ public class ProductDAOTest extends TestCase {
         String solrQueryString = CassandraData.makeSolrQueryString("\"this\"", null);
         assertEquals ("\"q\":\"title:\\\"this\\\"\"", solrQueryString);
     }
+
+    public void testGetProductById() throws Exception {
+        ProductDAO product = ProductDAO.getProductById("90-IG1Y002M00-0PA0");
+        assertEquals("ASUS USB-N53", product.getTitle());
+    }
+
+    public void testGetProductByInvalidId() throws Exception {
+        ProductDAO product = ProductDAO.getProductById("XXXXX");
+        assertNull(product);
+    }
 }
