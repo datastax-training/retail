@@ -1,7 +1,6 @@
 package retail.controller;
 
 import com.datastax.driver.core.ResultSet;
-import retail.helpers.jinjahelper.JinjaServlet;
 import retail.helpers.jsonoutput.GoogleJsonArrayView;
 import retail.model.AdHocDAO;
 
@@ -33,7 +32,7 @@ public class SimpleQueryServlet extends HttpServlet {
         // return a json array (list of lists)
         // Build the header json
 
-        String json = GoogleJsonArrayView.toGoogleVisualizationJsonArray(resultset);
+        String json = GoogleJsonArrayView.toGoogleVisualizationJsonArray(resultset, order_col);
 
         out.print(json);
     }

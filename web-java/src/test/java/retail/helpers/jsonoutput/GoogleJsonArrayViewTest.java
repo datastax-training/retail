@@ -24,7 +24,7 @@ public class GoogleJsonArrayViewTest extends TestCase {
                 "select product_id, release_date, title, supplier_id from retail.products_by_category_name where category_name = ? limit 2",
                 "LED TVs");
 
-        String json = GoogleJsonArrayView.toGoogleVisualizationJsonArray(resultSet);
+        String json = GoogleJsonArrayView.toGoogleVisualizationJsonArray(resultSet, null);
         assertEquals("[[{\"id\":\"product_id\",\"label\":\"Product Id\",\"type\":\"string\"},{\"id\":\"release_date\",\"label\":\"Release Date\",\"type\":\"datetime\"},{\"id\":\"title\",\"label\":\"Title\",\"type\":\"string\"},{\"id\":\"supplier_id\",\"label\":\"Supplier Id\",\"type\":\"number\"}],[\"24LB451B\",\"Date(2014,10,20,3,0,0)\",\"LG 24LB451B LED TV\",\"293\"],[\"26LS359S\",\"Date(2012,4,22,3,0,0)\",\"LG 26LS359S LED TV\",\"293\"]]",json);
     }
 }
