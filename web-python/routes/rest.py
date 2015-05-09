@@ -136,7 +136,7 @@ def timeslice(series=None):
 # URL Format: /simplequery
 # Parameters:
 #    q         - The CQL query
-#    order_col - column to sort by (after fetching)
+#    order_col - column to sort by (after fetching) with optional desc
 #
 
 @rest_api.route('/simplequery')
@@ -167,8 +167,10 @@ def simplequery():
 
     # sort it if an order column was specified
     if order_col:
-        posn = column_names.index(order_col)
-        data.sort(key=lambda row: row[posn] )
+        order_col_split = order_col.split(' ')
+        reverse = len(order_col_split) > 1 and order_col_split[1].lower() == 'desc'
+        posn = column_names.index(order_col_split[0])
+        data.sort(key=lambda row: row[posn], reverse=reverse )
 
     # stick the description row up front, and dump it as json
     return dumps([description] + data, default=fix_json_format)
