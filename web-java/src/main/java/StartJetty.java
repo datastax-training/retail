@@ -1,4 +1,8 @@
+import org.eclipse.jetty.server.Handler;
 import org.eclipse.jetty.server.Server;
+import org.eclipse.jetty.server.handler.ContextHandler;
+import org.eclipse.jetty.server.handler.HandlerList;
+import org.eclipse.jetty.server.handler.ResourceHandler;
 import org.eclipse.jetty.webapp.WebAppContext;
 
 import java.net.URL;
@@ -43,14 +47,30 @@ public class StartJetty {
     // Set up the application.  Note that some of the application is configured
     // in SetupJinjaServletContextListener
 
-    WebAppContext context = new WebAppContext();
-    context.setDescriptor(context + "/WEB-INF/web.xml");
-    context.setResourceBase(webdirInJarURI.toExternalForm());
+    ResourceHandler staticResourceHandler = new ResourceHandler();
+    staticResourceHandler.setResourceBase(webdirInJarURI.toExternalForm() + "/static");
+    staticResourceHandler.setDirectoriesListed(false);
 
-    context.setContextPath("/");
-    context.setParentLoaderPriority(true);
+    // Create context handler for static resource handler.
+    ContextHandler staticContextHandler = new ContextHandler();
+    staticContextHandler.setContextPath("/static");
+    staticContextHandler.setHandler(staticResourceHandler);
 
-    server.setHandler(context);
+
+    WebAppContext webAppContext = new WebAppContext();
+    webAppContext.setDescriptor(webAppContext + "/WEB-INF/web.xml");
+    webAppContext.setResourceBase(webdirInJarURI.toExternalForm());
+
+    webAppContext.setContextPath("/");
+    webAppContext.setParentLoaderPriority(true);
+    webAppContext.setInitParameter("dirAllowed", "false");
+
+
+    // Create a handler list to store our static and servlet context handlers.
+    HandlerList handlers = new HandlerList();
+    handlers.setHandlers(new Handler[]{staticContextHandler, webAppContext});
+
+    server.setHandler(handlers);
     server.start();
     server.join();
   }
