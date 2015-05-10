@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="SBT: javax.jms:jms-api:1.1-rev-1:jar">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.ivy2/cache/javax.jms/jms-api/jars/jms-api-1.1-rev-1.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

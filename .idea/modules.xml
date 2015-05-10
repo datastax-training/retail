@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/retail.iml" filepath="$PROJECT_DIR$/.idea/retail.iml" />
+      <module fileurl="file://$PROJECT_DIR$/spark/.idea/modules/spark.iml" filepath="$PROJECT_DIR$/spark/.idea/modules/spark.iml" />
+      <module fileurl="file://$PROJECT_DIR$/spark/.idea/modules/spark-build.iml" filepath="$PROJECT_DIR$/spark/.idea/modules/spark-build.iml" />
+      <module fileurl="file://$PROJECT_DIR$/sparkstreaming/.idea/modules/sparkstreaming.iml" filepath="$PROJECT_DIR$/sparkstreaming/.idea/modules/sparkstreaming.iml" />
+      <module fileurl="file://$PROJECT_DIR$/sparkstreaming/.idea/modules/sparkstreaming-build.iml" filepath="$PROJECT_DIR$/sparkstreaming/.idea/modules/sparkstreaming-build.iml" />
+      <module fileurl="file://$PROJECT_DIR$/web-java/web-java.iml" filepath="$PROJECT_DIR$/web-java/web-java.iml" />
+      <module fileurl="file://$PROJECT_DIR$/web-python/web-python.iml" filepath="$PROJECT_DIR$/web-python/web-python.iml" />
+    </modules>
+  </component>
+</project>
