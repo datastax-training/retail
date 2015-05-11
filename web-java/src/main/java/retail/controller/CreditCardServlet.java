@@ -25,7 +25,7 @@ public class CreditCardServlet extends JinjaServlet {
         ServletOutputStream out = response.getOutputStream();
         Map<String, Object> context = Maps.newHashMap();
 
-        String credit_card_str = request.getParameter("credit_card_number");
+        String credit_card_str = request.getParameter("cc_no");
 
         List<ReceiptDAO> receipts = null;
         if (credit_card_str != null) {
