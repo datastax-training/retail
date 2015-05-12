@@ -3,29 +3,14 @@ import datetime
 from json import dumps
 import uuid
 from cassandra.util import OrderedMap
-
+from helpers import cassandra_helper
 from flask import Blueprint, request
-from cassandra.cluster import Cluster
-from cassandra.query import ordered_dict_factory
 
 rest_api = Blueprint('rest_api', __name__)
 
-session = None
 timeslice_query = None
 simple_queries = {}
 
-
-def init_cassandra(ip_addresses):
-    """
-    Initialize Cassandra connections
-    :param ip_addresses: ip addresses of Cassandra nodes
-    :return:
-    """
-    global session
-
-    cluster = Cluster(ip_addresses)
-    session = cluster.connect()
-    session.row_factory = ordered_dict_factory
 
 #
 # Helper function to have json.dump format dates correctly
@@ -92,15 +77,15 @@ def timeslice(series=None):
     start_time = end_time - datetime.timedelta(minutes=minutes)
 
     if not timeslice_query:
-        statement = "SELECT timewindow, quantities FROM retail.real_time_analytics" \
+        statement = "SELECT timewindow, quantities FROM real_time_analytics" \
                     " WHERE series = ?" \
                     " AND timewindow >= ?" \
                     " AND   timewindow <= ?" \
                     " ORDER BY timewindow DESC LIMIT 60"
 
-        timeslice_query = session.prepare(statement)
+        timeslice_query = cassandra_helper.session.prepare(statement)
 
-    results = session.execute(timeslice_query, [series, start_time, end_time])
+    results = cassandra_helper.session.execute(timeslice_query, [series, start_time, end_time])
 
     # Build a result table using the gviz_api.
     # We need to see what keys are in the map and treat them as colums
@@ -150,9 +135,9 @@ def simplequery():
         return ""
 
     if not statement in simple_queries:
-        simple_queries[statement] = session.prepare(statement)
+        simple_queries[statement] = cassandra_helper.session.prepare(statement)
 
-    results = session.execute(simple_queries[statement])
+    results = cassandra_helper.session.execute(simple_queries[statement])
 
     # extract column names from the first row
     first_row = results[0]

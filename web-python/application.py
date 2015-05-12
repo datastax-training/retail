@@ -1,12 +1,12 @@
 from flask import Flask
 
-from utils.JinjaHelper import makeURL
-from routes import rest
+from helpers.jinjaHelper import makeURL
 from routes import web
 from routes.rest import rest_api
 from routes.google_charts import gcharts_api
 from routes.index import index_api
 from routes.web import web_api
+from helpers.cassandra_helper import init_cassandra
 
 
 app = Flask(__name__)
@@ -22,7 +22,7 @@ app.register_blueprint(web_api, url_prefix='/web')
 app.jinja_env.globals.update(makeURL=makeURL)
 
 def start():
-    rest.init_cassandra(app.config['DSE_CLUSTER'].split(','))
+    init_cassandra(app.config['DSE_CLUSTER'].split(','), app.config['KEYSPACE'])
     web.init()
 
     app.run(host='0.0.0.0',

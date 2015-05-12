@@ -1,5 +1,5 @@
 from flask import Blueprint, render_template, request
-from utils.JinjaHelper import makeURL
+from helpers.jinjaHelper import makeURL
 
 gcharts_api = Blueprint('gcharts_api', __name__)
 
