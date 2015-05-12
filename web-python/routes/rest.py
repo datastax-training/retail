@@ -124,7 +124,6 @@ def timeslice(series=None):
         data = []
 
     thejson = dumps([description] + data, default=fix_json_format)
-    print thejson
     return thejson
 
 #
