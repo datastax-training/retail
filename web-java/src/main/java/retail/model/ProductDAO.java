@@ -56,7 +56,7 @@ public class ProductDAO extends CassandraData {
   public static ProductDAO getProductById(String productId) {
 
     if (get_product_by_id_cc == null) {
-      get_product_by_id_cc = getSession().prepare("SELECT * from retail.products_by_id WHERE product_id = ?");
+      get_product_by_id_cc = getSession().prepare("SELECT * from products_by_id WHERE product_id = ?");
     }
 
     BoundStatement boundStatement = get_product_by_id_cc.bind(productId);
@@ -75,7 +75,7 @@ public class ProductDAO extends CassandraData {
   public static List<ProductDAO> getProductsByBrand(String brand_id) {
 
     if (get_product_by_brand_cc == null) {
-      get_product_by_brand_cc = getSession().prepare("SELECT * from retail.products_by_supplier WHERE supplier_id = ? limit 300");
+      get_product_by_brand_cc = getSession().prepare("SELECT * from products_by_supplier WHERE supplier_id = ? limit 300");
     }
 
     Statement stmt = null;
@@ -89,7 +89,7 @@ public class ProductDAO extends CassandraData {
   public static List<ProductDAO> getProductsByCategoryName(String category_name) {
 
     if (get_product_by_category_cc == null) {
-      get_product_by_category_cc = getSession().prepare("SELECT * from retail.products_by_category_name WHERE category_name = ? limit 300");
+      get_product_by_category_cc = getSession().prepare("SELECT * from products_by_category_name WHERE category_name = ? limit 300");
     }
 
     Statement stmt = null;
@@ -124,7 +124,7 @@ public class ProductDAO extends CassandraData {
   public static List<ProductDAO> getProductsSolrQuery(String solr_query) {
 
 
-    Statement statement = new SimpleStatement("SELECT * FROM retail.products_by_id WHERE solr_query = '{" +
+    Statement statement = new SimpleStatement("SELECT * FROM products_by_id WHERE solr_query = '{" +
            solr_query + "}' LIMIT 300");
 
     return getProductsWithStmt(statement);

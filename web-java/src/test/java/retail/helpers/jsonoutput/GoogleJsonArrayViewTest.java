@@ -21,7 +21,7 @@ public class GoogleJsonArrayViewTest extends TestCase {
     public void testGetAdHocQueryWithParamters() throws Exception {
 
         ResultSet resultSet = AdHocDAO.getAdHocQuery(
-                "select product_id, release_date, title, supplier_id from retail.products_by_category_name where category_name = ? limit 2",
+                "select product_id, release_date, title, supplier_id from products_by_category_name where category_name = ? limit 2",
                 "LED TVs");
 
         String json = GoogleJsonArrayView.toGoogleVisualizationJsonArray(resultSet, null);

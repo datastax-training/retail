@@ -30,7 +30,7 @@ public class TimeSliceDAO extends CassandraData {
     Date start_time = DateUtils.addMinutes(end_time, -minutes);
 
     if (timeslice_query == null) {
-      String statement = "SELECT timewindow, quantities FROM retail.real_time_analytics" +
+      String statement = "SELECT timewindow, quantities FROM real_time_analytics" +
               " WHERE series = ?" +
               " AND timewindow >= ?" +
               " AND   timewindow <= ?" +
@@ -42,9 +42,7 @@ public class TimeSliceDAO extends CassandraData {
 
     BoundStatement boundStatement = timeslice_query.bind(series, start_time, end_time);
 
-    ResultSet resultSet = getSession().execute(boundStatement);
-
-    return resultSet;
+      return getSession().execute(boundStatement);
   }
 
 

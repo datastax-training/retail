@@ -1,14 +1,8 @@
 package retail.helpers.cassandra;
 
 import com.datastax.driver.core.*;
-import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.text.WordUtils;
 
-import java.beans.BeanInfo;
-import java.beans.IntrospectionException;
-import java.beans.Introspector;
-import java.beans.PropertyDescriptor;
-import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
 /**
@@ -36,7 +30,7 @@ public class CassandraData {
    * Required constructor, but it doesn't need to do anything.
    */
 
-  public void CassandraData() {
+  public CassandraData() {
     // Do nothing
   }
 
@@ -51,11 +45,14 @@ public class CassandraData {
    * @return - a valid cassandra session
    */
 
-  public static Session getSession() {
 
-    if (cassandraSession == null) {
-      cassandraSession = createSession();
-    }
+  public static void init(String keyspace, String ... contactpoints) {
+
+    Cluster cluster = Cluster.builder().addContactPoints(contactpoints).build();
+    cassandraSession = cluster.connect(keyspace);
+  }
+
+  public static Session getSession() {
 
     return cassandraSession;
 
@@ -66,11 +63,6 @@ public class CassandraData {
    *
    * @return A new Cassandra session
    */
-
-  public static Session createSession() {
-    Cluster cluster = Cluster.builder().addContactPoint("localhost").build();
-    return cluster.connect();
-  }
 
   public static String makeSolrQueryString(String search_term, String filter_by) {
     String solr_query = "\"q\":\"title:" + escapeQuotes(search_term) + "\"";
@@ -102,7 +94,6 @@ public class CassandraData {
           Object data_object = column_to_object(row, column_def.getName());
           method.invoke(this, data_object);
         } catch (Exception e) {
-          int x = 10;
           // We assume it's a column in the DB with no field, or the setter has the wrong
           // name
         }

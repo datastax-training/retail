@@ -16,7 +16,7 @@ public class AdHocDAOTest extends TestCase {
 
     public void testGetAdHocQuery() throws Exception {
 
-        ResultSet resultSet = AdHocDAO.getAdHocQuery("select * from retail.suppliers");
+        ResultSet resultSet = AdHocDAO.getAdHocQuery("select * from suppliers");
         List<Row> resultSetList = resultSet.all();
         assertEquals(419, resultSetList.size());
     }
@@ -24,7 +24,7 @@ public class AdHocDAOTest extends TestCase {
     public void testGetAdHocQueryWithParamters() throws Exception {
 
         ResultSet resultSet = AdHocDAO.getAdHocQuery(
-                "select * from retail.products_by_category_name where category_name = ?",
+                "select * from products_by_category_name where category_name = ?",
                 "LED TVs");
 
         List<Row> resultSetList = resultSet.all();

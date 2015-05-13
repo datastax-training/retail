@@ -2,7 +2,6 @@ package retail.controller;
 
 import com.google.common.collect.Maps;
 import retail.helpers.jinjahelper.JinjaServlet;
-import retail.model.ProductDAO;
 import retail.model.ReceiptDAO;
 
 import javax.servlet.ServletException;

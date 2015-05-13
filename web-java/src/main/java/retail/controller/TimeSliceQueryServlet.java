@@ -1,7 +1,6 @@
 package retail.controller;
 
 import com.datastax.driver.core.ResultSet;
-import retail.helpers.jsonoutput.GoogleJsonArrayView;
 import retail.helpers.jsonoutput.GoogleJsonTimesliceView;
 import retail.model.TimeSliceDAO;
 

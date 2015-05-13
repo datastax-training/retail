@@ -4,6 +4,7 @@ import org.eclipse.jetty.server.handler.ContextHandler;
 import org.eclipse.jetty.server.handler.HandlerList;
 import org.eclipse.jetty.server.handler.ResourceHandler;
 import org.eclipse.jetty.webapp.WebAppContext;
+import retail.helpers.cassandra.CassandraData;
 
 import java.net.URL;
 
@@ -41,6 +42,10 @@ public class StartJetty {
     }
 
     logger.info("Web Resources Directory: " + webdirInJarURI.toExternalForm());
+
+
+    // Connect to Cassandra
+    CassandraData.init("retail","localhost");
 
     Server server = new Server(5002);
 

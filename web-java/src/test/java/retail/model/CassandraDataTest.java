@@ -18,7 +18,9 @@ public class CassandraDataTest extends TestCase {
 
     // create a session and validate it's not null
 
-    Session session = CassandraData.createSession();
+    CassandraData.init("", "localhost");
+
+    Session session = CassandraData.getSession();
     assertNotNull("session is null",session);
 
   }

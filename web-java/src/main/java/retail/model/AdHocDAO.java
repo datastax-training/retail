@@ -38,9 +38,7 @@ public class AdHocDAO extends CassandraData {
 
         BoundStatement boundStatement = preparedStatement.bind(parameters);
 
-        ResultSet resultset = getSession().execute(boundStatement);
-
-        return resultset;
+        return getSession().execute(boundStatement);
     }
 
 }

@@ -52,7 +52,7 @@ public class ReceiptDAO extends CassandraData {
     public static List<ReceiptDAO> getReceiptById(long receipt_id) {
 
         if (get_receipt_by_id_ps == null) {
-            get_receipt_by_id_ps = getSession().prepare("select * from retail.receipts where receipt_id = ?");
+            get_receipt_by_id_ps = getSession().prepare("select * from receipts where receipt_id = ?");
         }
 
         BoundStatement boundStatement = get_receipt_by_id_ps.bind(receipt_id);
@@ -74,7 +74,7 @@ public class ReceiptDAO extends CassandraData {
     public static List<ReceiptDAO> getReceiptsByCreditCard(long credit_card_number) {
 
         if (get_receipt_by_cc_ps == null) {
-            get_receipt_by_cc_ps = getSession().prepare("select * from retail.receipts_by_credit_card where credit_card_number = ?");
+            get_receipt_by_cc_ps = getSession().prepare("select * from receipts_by_credit_card where credit_card_number = ?");
         }
 
         BoundStatement boundStatement = get_receipt_by_cc_ps.bind(credit_card_number);

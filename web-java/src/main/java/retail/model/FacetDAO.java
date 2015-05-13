@@ -39,7 +39,7 @@ public class FacetDAO extends CassandraData {
         final Map<String, List<FacetDAO>> facetMap = new HashMap<>();
 
         StringBuilder statement = new StringBuilder()
-                .append("SELECT * FROM retail.products_by_id WHERE solr_query = '{")
+                .append("SELECT * FROM products_by_id WHERE solr_query = '{")
                 .append(solr_query)
                 .append(",\"facet\":{\"field\":[");
 

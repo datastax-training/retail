@@ -30,7 +30,9 @@ public class ProductServlet extends JinjaServlet {
       ProductDAO product = ProductDAO.getProductById(product_id);
 
       context.put("product", product);
-      context.put("features", product.getFeatures());
+      if (product != null) {
+        context.put("features", product.getFeatures());
+      }
     }
 
     byte[] renderedTemplate = render("/product_detail.jinja2", context);
