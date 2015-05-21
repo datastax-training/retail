@@ -1,4 +1,6 @@
+import logging
 from flask import Flask
+import sys
 
 from helpers.jinjaHelper import makeURL
 from routes import web
@@ -11,6 +13,16 @@ from helpers.cassandra_helper import init_cassandra
 
 app = Flask(__name__)
 app.config.from_pyfile('application.cfg')
+
+# Set up logging
+app.logger.setLevel(logging.INFO)  # use the native logger of flask
+app.logger.disabled = False
+handler = logging.StreamHandler(sys.stdout)
+
+formatter = logging.Formatter( \
+    "%(asctime)s - %(levelname)s - %(name)s: \t%(message)s")
+handler.setFormatter(formatter)
+app.logger.addHandler(handler)
 
 # Register the routes
 app.register_blueprint(index_api)
