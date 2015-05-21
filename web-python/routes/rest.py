@@ -140,7 +140,10 @@ def simplequery():
     results = cassandra_helper.session.execute(simple_queries[statement])
 
     # extract column names from the first row
-    first_row = results[0]
+    if results:
+        first_row = results[0]
+    else:
+        first_row = {}
 
     # make a column header
     column_names = [column_name for column_name in first_row]

@@ -43,7 +43,6 @@ object HotProductsStream {
 
     val ssc = new StreamingContext(conf, Seconds(10))
 
-//    val lines = ssc.socketTextStream("localhost", 5002)
     val lines = ssc.receiverStream(new JMSReceiver("HotProducts","tcp://localhost:61616"))
 
           // note that we use def here so it gets evaluated in the map

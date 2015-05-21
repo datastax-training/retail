@@ -63,9 +63,6 @@ class JMSReceiver(topic_name: String, connection_url: String) extends Receiver[S
 
   override def onStop(): Unit = {
 
-//    consumer.close()
-//    session.close()
-//    connection.close()
   }
 
 }
