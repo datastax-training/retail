@@ -9,6 +9,5 @@ Note: The install target is used to pull all of the dependent libs
 
 To run:
 
-Navigate to the target directory
 
-    java -cp "retail-1.0.jar:lib/*" StartJetty
+    java -cp "target/retail-1.0.jar:target/lib/*" StartJetty
