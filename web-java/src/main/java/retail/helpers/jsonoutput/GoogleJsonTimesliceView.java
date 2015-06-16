@@ -5,9 +5,7 @@ import com.datastax.driver.core.Row;
 import org.json.simple.JSONArray;
 
 import java.math.BigDecimal;
-import java.util.Date;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 /**
  * DataStax Academy Sample Application
@@ -19,23 +17,27 @@ public class GoogleJsonTimesliceView {
       JSONArray description = new JSONArray();
       description.add(GoogleJsonUtils.getJsonColumnDef("time_window", Date.class));
 
+
+      // Find all of the products in the results set - those are the map keys
+      // Coalesce all of the keys
       // Turn the map into result columns and data
       JSONArray resultsArray = new JSONArray();
       if (!resultSet.isExhausted()) {
-        Set<String> first_row_keys = null;
-        for (Row row: resultSet) {
+        List<Row> resultList = resultSet.all();
+        Set<String> row_keys = new HashSet<>();
+        for (Row row : resultList) {
+          row_keys.addAll(row.getMap("quantities", String.class, Integer.class).keySet());
+        }
+
+        for (Row row: resultList) {
           JSONArray jsonRow = new JSONArray();
 
-          // Save the first row to build the description
-          if (first_row_keys == null) {
-            first_row_keys = row.getMap("quantities", String.class, Integer.class).keySet();
-          }
           // add the time window
           jsonRow.add(GoogleJsonUtils.google_column_to_object(row, 0));
 
           // Iterate through the map and make the elements look like columns
           Map<String, Integer> quantityMap = row.getMap("quantities", String.class, Integer.class);
-          for (String key: first_row_keys) {
+          for (String key: row_keys) {
             jsonRow.add(quantityMap.get(key));
           }
           resultsArray.add(jsonRow);
@@ -43,8 +45,8 @@ public class GoogleJsonTimesliceView {
 
         // Build the rest of the description off the first row
 
-        if (first_row_keys != null) {
-          for (String key: first_row_keys) {
+        if (row_keys != null) {
+          for (String key: row_keys) {
             description.add(GoogleJsonUtils.getJsonColumnDef(key,Integer.class));
           }
         }
