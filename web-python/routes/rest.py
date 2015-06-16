@@ -93,12 +93,16 @@ def timeslice(series=None):
     description = [{'id':'timewindow','label':'Window','type':'datetime'}]
     if results:
         # extract the map of product quantities
-        products_map = results[0]['quantities']
+
+        #Coalesce all of the product maps to create a set of names
+        products_names = set()
+        for row in results:
+            products_names |= set(row['quantities'].keys())
 
         # Convert the map column to look like a series of regular columns to google
         # Create the schema [ ('timewindow', 'datetime'), ('some product', 'number'), ... ]
-        description += [{'id': product,'label':column_name_to_label(product),'type': get_google_type(value)} for product, value in products_map.iteritems()]
-        data = [ [row['timewindow']] + [row['quantities'].get(item_name) for item_name in products_map] for row in results]
+        description += [{'id': product,'label':column_name_to_label(product),'type': 'number'} for product in products_names]
+        data = [ [row['timewindow']] + [row['quantities'].get(item_name) for item_name in products_names] for row in results]
 
         # sort the data by timewindow
         data.sort(key=lambda row: row[0])
