@@ -4,7 +4,7 @@ name := "spark-streaming-retail"
 
 version := "1.0"
 
-val sparkVersion = "1.1.0"
+val sparkVersion = "1.2.1"
 
 libraryDependencies += "com.datastax.spark" %% "spark-cassandra-connector" % sparkVersion % "provided"
 

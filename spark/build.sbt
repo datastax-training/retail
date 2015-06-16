@@ -3,7 +3,11 @@ name := "spark-retail"
 
 version := "1.0"
 
-libraryDependencies += "com.datastax.spark" %% "spark-cassandra-connector" % "1.1.0" % "provided"
+val sparkVersion = "1.2.1"
+
+libraryDependencies += "org.apache.spark" % "spark-core_2.10" % sparkVersion % "provided"
+
+libraryDependencies += "com.datastax.spark" %% "spark-cassandra-connector" % sparkVersion % "provided"
 
 resolvers += Resolver.sonatypeRepo("public")
 
