@@ -5,5 +5,8 @@ sbt assembly
 
 To Execute:
 
-dse spark-submit --class RollupRetail target/scala-2.10/spark-retail-assembly-1.0.jar
+Note: in some cases, the --master may be omitted.   <master> is the listen address of the spark master, which may be a real 
+IP address or 127.0.0.1, depending upon the configuration 
+
+dse spark-submit --class RollupRetail target/scala-2.10/spark-retail-assembly-1.0.jar --master spark://<master>:7077
 

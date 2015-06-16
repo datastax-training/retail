@@ -34,11 +34,10 @@ object RollupRetail {
   def main(args: Array[String]) {
 
 //    Create Spark Context
+    val conf = new SparkConf(true).setAppName("RollupRetail")
 
-    val conf = new SparkConf(true)
-      .set("spark.cassandra.connection.host", "127.0.0.1")
-
-    val sc = new SparkContext("spark://127.0.0.1:7077", "test", conf)
+// We set master on the command line for flexibility
+    val sc = new SparkContext(conf)
 
     // Create some general RDDs
 
