@@ -6,19 +6,6 @@ import org.joda.time.DateTime
 
 import scala.math.BigDecimal.RoundingMode
 
-case class Register(store_id: Int,
-                 register_id: Int,
-                 receipt_id: UUID,
-                 scan_time: DateTime,
-                 brand: String,
-                 msrp: BigDecimal,
-                 price: BigDecimal,
-                 product: String,
-                 product_id: String,
-                 quantity: BigDecimal,
-                 savings: BigDecimal,
-                 scan_duration: Int)
-
 case class Store(
                   store_id: Int,
                   address: String,
