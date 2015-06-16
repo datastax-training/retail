@@ -6,7 +6,11 @@ import org.eclipse.jetty.server.handler.ResourceHandler;
 import org.eclipse.jetty.webapp.WebAppContext;
 import retail.helpers.cassandra.CassandraData;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileReader;
 import java.net.URL;
+import java.util.Properties;
 
 /**
  * DataStax Academy Sample Application
@@ -19,6 +23,7 @@ public class StartJetty {
 
   private final static org.slf4j.Logger logger = org.slf4j.LoggerFactory.getLogger(StartJetty.class);
   private static final String WEBAPP_DIR = "webapp" ;
+  private static final String APPLICATION_CFG = "application.cfg";
 
   public static void main(String[] args) throws Exception
   {
@@ -43,11 +48,13 @@ public class StartJetty {
 
     logger.info("Web Resources Directory: " + webdirInJarURI.toExternalForm());
 
+    Properties cfgProperties = new Properties();
+    cfgProperties.load(new FileReader(APPLICATION_CFG));
 
     // Connect to Cassandra
-    CassandraData.init("retail","localhost");
+    CassandraData.init(cfgProperties.getProperty("KEYSPACE"), cfgProperties.getProperty("DSE_CLUSTER"));
 
-    Server server = new Server(5002);
+    Server server = new Server(Integer.parseInt(cfgProperties.getProperty("APPLICATION_PORT")));
 
     // Set up the application.  Note that some of the application is configured
     // in SetupJinjaServletContextListener
