@@ -24,6 +24,11 @@ formatter = logging.Formatter( \
 handler.setFormatter(formatter)
 app.logger.addHandler(handler)
 
+# And the werkzeuglog
+werkzeuglog = logging.getLogger('werkzeug')
+werkzeuglog.setLevel(logging.INFO)
+werkzeuglog.addHandler(handler)
+
 # Register the routes
 app.register_blueprint(index_api)
 app.register_blueprint(rest_api, url_prefix='/api')
