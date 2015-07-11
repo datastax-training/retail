@@ -82,7 +82,7 @@ public class GoogleJsonUtils {
             switch (type_name) {
                 case "java.lang.Double":
                     return new JsonNoScientificNotation((Double) data_object);
-                case "java.lang.float":
+                case "java.lang.Float":
                     return new JsonNoScientificNotation((Double) data_object);
                 case "java.math.BigDecimal":
                     return new JsonNoScientificNotation(((BigDecimal)data_object).doubleValue());
