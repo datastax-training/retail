@@ -68,7 +68,6 @@ public class StartJetty {
     staticContextHandler.setContextPath("/static");
     staticContextHandler.setHandler(staticResourceHandler);
 
-
     WebAppContext webAppContext = new WebAppContext();
     webAppContext.setDescriptor(webAppContext + "/WEB-INF/web.xml");
     webAppContext.setResourceBase(webdirInJarURI.toExternalForm());
