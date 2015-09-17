@@ -42,7 +42,7 @@ object RollupRetail {
       receipts.map(r => (r.getInt("store_id"), r.getDecimal("receipt_total").setScale(2,RoundingMode.HALF_EVEN) )  )
         .reduceByKey(_+_)   // Add up by store
 
-    total_receipts_by_store.join(store_state)                                 //  (store, (total, state))
+    total_receipts_by_store.join(store_state)                                 // (store_id, (receipt_total, store_state))                               //  (store, (total, state))
       .map{case (store,(receipts_total, state)) => (state, receipts_total)}   // (state, total)
       .reduceByKey(_+_)                                                       // (state, total) summed by state
       .map{ case(state, receipts_total) => ("dummy", state, "US-" + state, receipts_total)} // (state, US-state, total)
