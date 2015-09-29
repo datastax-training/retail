@@ -5,11 +5,23 @@
       <SbtProjectSettings>
         <option name="externalProjectPath" value="$PROJECT_DIR$/spark" />
         <option name="jdk" value="1.7" />
+        <option name="modules">
+          <set>
+            <option value="$PROJECT_DIR$/spark" />
+            <option value="$PROJECT_DIR$/spark/project" />
+          </set>
+        </option>
         <option name="sbtVersion" value="0.13.5" />
       </SbtProjectSettings>
       <SbtProjectSettings>
         <option name="externalProjectPath" value="$PROJECT_DIR$/sparkstreaming" />
         <option name="jdk" value="1.7" />
+        <option name="modules">
+          <set>
+            <option value="$PROJECT_DIR$/sparkstreaming" />
+            <option value="$PROJECT_DIR$/sparkstreaming/project" />
+          </set>
+        </option>
         <option name="sbtVersion" value="0.13.5" />
       </SbtProjectSettings>
     </option>
