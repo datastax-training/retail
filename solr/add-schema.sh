@@ -1,23 +1,28 @@
 #!/bin/bash
-set -v
 KEYSPACE=retail
 
 if [ "$1" == "-r" ] ; then
-    ACTION=RELOAD
+    ACTION=Reload
     shift
 else
-    ACTION=CREATE
+    ACTION=Create
 fi
 
-TABLE=$1
-   
-echo "Posting solrconfig ..."
-curl --data-binary @solrconfig.xml -H 'Content-type:text/xml; charset=utf-8' "http://localhost:8983/solr/resource/$KEYSPACE.$TABLE/solrconfig.xml"
+if [ "$1" == "" ]; then
+   echo "Usage: add-schema [-r] <table name> "
+   exit 1
+fi
 
-echo "Posting schema ..."
-curl --data-binary @$TABLE.xml -H 'Content-type:text/xml; charset=utf-8' "http://localhost:8983/solr/resource/$KEYSPACE.$TABLE/schema.xml" 
+#Strip of the .xml if it exists
+TABLE=${1%%.xml}
 
-echo "Creating index..."
-curl  -H 'Content-type:text/xml; charset=utf-8' -X POST "http://localhost:8983/solr/admin/cores?action=$ACTION&name=$KEYSPACE.$TABLE"
-echo "Created index."
+echo
+echo "$ACTION core for table $KEYSPACE.$TABLE"
+echo
+
+if [ "$ACTION" == "Create" ] ; then
+  dsetool create_core $KEYSPACE.$TABLE schema=$TABLE.xml solrconfig=solrconfig.xml
+else
+  dsetool reload_core $KEYSPACE.$TABLE schema=$TABLE.xml solrconfig=solrconfig.xml
+fi
 
