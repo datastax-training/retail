@@ -23,6 +23,6 @@ echo
 if [ "$ACTION" == "Create" ] ; then
   dsetool create_core $KEYSPACE.$TABLE schema=$TABLE.xml solrconfig=solrconfig.xml
 else
-  dsetool reload_core $KEYSPACE.$TABLE schema=$TABLE.xml solrconfig=solrconfig.xml
+  dsetool reload_core $KEYSPACE.$TABLE schema=$TABLE.xml solrconfig=solrconfig.xml reindex=true
 fi
 
