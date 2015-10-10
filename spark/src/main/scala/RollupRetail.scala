@@ -1,8 +1,5 @@
 import com.datastax.spark.connector._
-import org.apache.spark.SparkContext._
 import org.apache.spark.{SparkConf, SparkContext}
-import java.util.UUID
-import org.joda.time.DateTime
 
 import scala.math.BigDecimal.RoundingMode
 

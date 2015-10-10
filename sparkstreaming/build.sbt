@@ -2,19 +2,20 @@ import AssemblyKeys._
 
 name := "spark-streaming-retail"
 
-version := "1.0"
+version := "1.1"
 
-val sparkVersion = "1.2.1"
+val sparkVersion = "1.4.1"
+val sparkCassandraVersion = "1.4.0"
 
-libraryDependencies += "com.datastax.spark" %% "spark-cassandra-connector" % sparkVersion % "provided"
+libraryDependencies += "com.datastax.spark" %% "spark-cassandra-connector" % sparkCassandraVersion % "provided"
 
-libraryDependencies += "org.apache.spark" % "spark-core_2.10" % sparkVersion % "provided"
+libraryDependencies += "org.apache.spark" %% "spark-core" % sparkVersion % "provided"
 
-libraryDependencies += "org.apache.spark" % "spark-streaming_2.10" % sparkVersion % "provided"
+libraryDependencies += "org.apache.spark" %% "spark-streaming" % sparkVersion % "provided"
 
-libraryDependencies += "org.apache.spark" % "spark-sql_2.10" % sparkVersion % "provided"
+libraryDependencies += "org.apache.spark" %% "spark-sql" % sparkVersion % "provided"
 
-libraryDependencies += "org.apache.spark" % "spark-streaming-kafka_2.10" % sparkVersion % "provided"
+libraryDependencies += "org.apache.spark" %% "spark-streaming-kafka" % sparkVersion % "provided"
 
 // We get some duplicates here, so don't include some of the libraries
 libraryDependencies += "org.apache.activemq" % "activemq-core" %
