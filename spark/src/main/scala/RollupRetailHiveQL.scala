@@ -1,3 +1,4 @@
+import org.apache.spark.sql.SaveMode
 import org.apache.spark.sql.hive.HiveContext
 import org.apache.spark.{SparkConf, SparkContext}
 
@@ -50,15 +51,15 @@ object RollupRetailHiveQL {
       .format("org.apache.spark.sql.cassandra")
       .options(Map("keyspace" -> "retail",
                   "table" -> "sales_by_state"))
+      .mode(SaveMode.Overwrite)
       .save()
-
 
     // Compute Sales by date
 
     val sales_by_date_df = hc.sql("""select
         'dummy' AS dummy,
          receipt_date as sales_date,
-         SUM(receipt_total) as receipts_total
+         ROUND(SUM(receipt_total),2) as receipts_total
        FROM hc_receipts_by_store_date
        GROUP BY receipt_date""")   // Create a dataframe from statement
 
@@ -66,6 +67,7 @@ object RollupRetailHiveQL {
       .format("org.apache.spark.sql.cassandra")
       .options(Map("keyspace" -> "retail",
       "table" -> "sales_by_date"))
+      .mode(SaveMode.Overwrite)
       .save()
 
   }

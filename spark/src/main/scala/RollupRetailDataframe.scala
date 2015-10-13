@@ -1,4 +1,4 @@
-import org.apache.spark.sql.SQLContext
+import org.apache.spark.sql.{SaveMode, SQLContext}
 import org.apache.spark.sql.functions._
 import org.apache.spark.sql.types._
 import org.apache.spark.{SparkConf, SparkContext}
@@ -23,8 +23,6 @@ object RollupRetailDataframe {
       .options(Map("keyspace"-> ks, "table" -> table))
       .load()
 
-
-
     val receipts_by_store_date_df = cassandra_df("retail","receipts_by_store_date")
     val stores_df = cassandra_df("retail","stores")
 
@@ -44,6 +42,7 @@ object RollupRetailDataframe {
       .format("org.apache.spark.sql.cassandra")
       .options(Map("keyspace" -> "retail",
                   "table" -> "sales_by_state"))
+      .mode(SaveMode.Overwrite)
       .save()
 
 
@@ -58,6 +57,7 @@ object RollupRetailDataframe {
       .format("org.apache.spark.sql.cassandra")
       .options(Map("keyspace" -> "retail",
       "table" -> "sales_by_date"))
+      .mode(SaveMode.Overwrite)
       .save()
 
   }

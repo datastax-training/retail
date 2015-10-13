@@ -47,9 +47,9 @@ sales_by_state_df = receipts_by_store_date_df\
 sales_by_state_df\
     .write\
     .format("org.apache.spark.sql.cassandra") \
-    .options(keyspace = "retail", table = "sales_by_state")\
+    .options(keyspace = "retail", table = "sales_by_state") \
+    .mode('overwrite') \
     .save()
-
 
 # Compute Sales by date
 
@@ -61,7 +61,8 @@ sales_by_date_df = receipts_by_store_date_df\
 # Save the dataframe
 sales_by_date_df.write\
     .format("org.apache.spark.sql.cassandra")\
-    .options(keyspace = "retail", table = "sales_by_date")\
+    .options(keyspace = "retail", table = "sales_by_date") \
+    .mode('overwrite') \
     .save()
 
 
