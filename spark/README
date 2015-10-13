@@ -14,3 +14,6 @@ To run the HiveQL (Dataframe) version of it ...
 
 dse spark-submit --class RollupRetailHiveQL target/scala-2.10/spark-retail-assembly-1.1.jar
 
+To run the regular Dataframe version of it ...
+
+dse spark-submit --class RollupRetailDataframe target/scala-2.10/spark-retail-assembly-1.1.jar
