@@ -1,4 +1,6 @@
 import org.apache.spark.sql.SQLContext
+import org.apache.spark.sql.functions._
+import org.apache.spark.sql.types._
 import org.apache.spark.{SparkConf, SparkContext}
 
 
@@ -29,22 +31,13 @@ object RollupRetailDataFrame {
 
     // Create Dataframe to get sales by state
 
+    val concat = udf((s1:String, s2:String) => s1 + s2)
+
     val sales_by_state_df = receipts_by_store_date_df
       .join(stores_df, stores_df("store_id") === receipts_by_store_date_df("store_id"))
       .groupBy(stores_df("state"))
       .sum("receipt_total")
-      .select("state", "US-")
-
-    val sales_by_state_sql = """select
-        'dummy' AS dummy,
-         s.state AS state,
-         CONCAT('US-', s.state) AS region,
-         ROUND(SUM(r.receipt_total),2) AS receipts_total
-       FROM hc_receipts_by_store_date r
-       JOIN hc_stores s ON r.store_id = s.store_id
-       GROUP BY s.state"""
-
-    val sales_by_state_df = hc.sql(sales_by_state_sql)   // Create a dataframe from statement
+      .select(lit("dummy") alias "dummy", col("state"), concat( lit("US-"), col("state")) alias "region", col("SUM(receipt_total)") alias ("receipts_total"))
 
     sales_by_state_df.write                         // Save the dataframe.
       .format("org.apache.spark.sql.cassandra")
@@ -55,12 +48,10 @@ object RollupRetailDataFrame {
 
     // Compute Sales by date
 
-    val sales_by_date_df = hc.sql("""select
-        'dummy' AS dummy,
-         receipt_date as sales_date,
-         SUM(receipt_total) as receipts_total
-       FROM hc_receipts_by_store_date
-       GROUP BY receipt_date""")   // Create a dataframe from statement
+    val sales_by_date_df = receipts_by_store_date_df
+     .groupBy("receipt_date")
+      .sum("receipt_total")
+      .select(lit("dummy") alias "dummy", col("receipt_date"), col("SUM(receipt_total)") alias ("receipts_total"))
 
     sales_by_date_df.write                         // Save the dataframe.
       .format("org.apache.spark.sql.cassandra")
