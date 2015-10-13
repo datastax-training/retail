@@ -3,9 +3,6 @@ import org.apache.spark.sql.functions._
 import org.apache.spark.sql.types._
 import org.apache.spark.{SparkConf, SparkContext}
 
-import scala.math.BigDecimal.RoundingMode
-
-
 object RollupRetailDataframe {
 
   def main(args: Array[String]) {
@@ -34,7 +31,6 @@ object RollupRetailDataframe {
     // Create some handy UDF's
 
     val concat = udf((s1:String, s2:String) => s1 + s2)
-    val round = udf((f1:java.math.BigDecimal, places:Int) => f1.setScale(places,RoundingMode.HALF_EVEN))
 
     // Create Dataframe to get sales by state
 
@@ -42,7 +38,7 @@ object RollupRetailDataframe {
       .join(stores_df, stores_df("store_id") === receipts_by_store_date_df("store_id"))
       .groupBy(stores_df("state"))
       .sum("receipt_total")
-      .select(lit("dummy") alias "dummy", col("state"), concat( lit("US-"), col("state")) alias "region", round(col("SUM(receipt_total)"), lit(2)) alias ("receipts_total"))
+      .select(lit("dummy") alias "dummy", col("state"), concat( lit("US-"), col("state")) alias "region", col("SUM(receipt_total)") cast "Decimal(10,2)" alias ("receipts_total"))
 
     sales_by_state_df.write                         // Save the dataframe.
       .format("org.apache.spark.sql.cassandra")
@@ -56,7 +52,7 @@ object RollupRetailDataframe {
     val sales_by_date_df = receipts_by_store_date_df
      .groupBy("receipt_date")
       .sum("receipt_total")
-      .select(lit("dummy") alias "dummy", col("receipt_date") as "sales_date", round(col("SUM(receipt_total)"),lit(2)) alias "receipts_total")
+      .select(lit("dummy") alias "dummy", col("receipt_date") as "sales_date", col("SUM(receipt_total)") cast "Decimal(10,2)" alias "receipts_total")
 
     sales_by_date_df.write                         // Save the dataframe.
       .format("org.apache.spark.sql.cassandra")
