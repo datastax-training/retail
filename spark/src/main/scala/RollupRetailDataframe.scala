@@ -6,7 +6,7 @@ import org.apache.spark.{SparkConf, SparkContext}
 import scala.math.BigDecimal.RoundingMode
 
 
-object RollupRetailDataFrame {
+object RollupRetailDataframe {
 
   def main(args: Array[String]) {
 
@@ -56,7 +56,7 @@ object RollupRetailDataFrame {
     val sales_by_date_df = receipts_by_store_date_df
      .groupBy("receipt_date")
       .sum("receipt_total")
-      .select(lit("dummy") alias "dummy", col("receipt_date"), round(col("SUM(receipt_total)"),lit(2)) alias "receipts_total")
+      .select(lit("dummy") alias "dummy", col("receipt_date") as "sales_date", round(col("SUM(receipt_total)"),lit(2)) alias "receipts_total")
 
     sales_by_date_df.write                         // Save the dataframe.
       .format("org.apache.spark.sql.cassandra")
