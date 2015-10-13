@@ -1,0 +1,5 @@
+To Run this ...
+
+dse spark-submit RollupRetailDataframe.py
+
+Yes!  It's really that easy!
