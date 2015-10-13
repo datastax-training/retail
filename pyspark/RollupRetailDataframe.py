@@ -1,4 +1,5 @@
 from pyspark import SparkContext
+from pyspark import SparkConf
 from pyspark.sql import SQLContext
 from pyspark.sql import functions as F
 from pyspark.sql.functions import udf
@@ -6,7 +7,8 @@ import pyspark.sql.types as T
 
 # Create SQL Context
 
-sc = SparkContext("", "RollupRetail")
+conf = SparkConf().setAppName("RollupRetail")
+sc = SparkContext(conf=conf)
 
 sqlContext = SQLContext(sc)
 
