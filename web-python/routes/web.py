@@ -114,8 +114,9 @@ def search():
     # get the response
     results = cassandra_helper.session.execute(query)
 
+    # The mincount parameter limits the facets the the ones that have at least one result
     facet_query = 'SELECT * FROM products_by_id WHERE solr_query = ' \
-                  '\'{%s,"facet":{"field":["supplier_name","category_name"]}}\' ' % solr_query
+                  '\'{%s,"facet":{"field":["supplier_name","category_name"],"mincount":1}}\' ' % solr_query
 
     facet_results = cassandra_helper.session.execute(facet_query)
     facet_string = facet_results[0].get("facet_fields")
@@ -125,8 +126,8 @@ def search():
 
     return render_template('search_list.jinja2',
                            search_term = search_term,
-                           categories = filter_facets(facet_map['category_name']),
-                           suppliers = filter_facets(facet_map['supplier_name']),
+                           categories = facets_to_list(facet_map['category_name']),
+                           suppliers = facets_to_list(facet_map['supplier_name']),
                            products = results,
                            filter_by = filter_by)
 
@@ -134,8 +135,5 @@ def search():
 # The facets come in a list [ 'value1', 10, 'value2' 5, ...] with numbers in descending order
 # We convert it to a list of [('value1',10), ('value2',5) ... ]
 #
-def filter_facets(raw_facets):
-    # keep only the facets that have > 0 items
-
-    FacetValue = namedtuple('FacetValue', ['name', 'amount'])
-    return [FacetValue(name,amount) for name,amount in raw_facets.iteritems() if amount > 0]
+def facets_to_list(raw_facets):
+    return [{'name': name, 'amount': amount} for name,amount in raw_facets.iteritems()]

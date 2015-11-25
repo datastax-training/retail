@@ -43,6 +43,7 @@ public class FacetDAO extends CassandraData {
                 .append(solr_query)
                 .append(",\"facet\":{\"field\":[");
 
+        // The mincount parameter limits the facets the the ones that have at least one result
         String comma = "";
         for (String column: facet_columns) {
             statement.append(comma)
@@ -51,7 +52,7 @@ public class FacetDAO extends CassandraData {
                     .append("\"");
             comma=",";
         }
-        statement.append("]}}'");
+        statement.append("],\"mincount\":1}}'");
 
         ResultSet resultSet = getSession().execute(statement.toString());
 
@@ -66,9 +67,7 @@ public class FacetDAO extends CassandraData {
 
             for (Object entry: facets.entrySet()) {
                 Map.Entry<String,Long> j = (Map.Entry<String,Long>) entry;
-                if (j.getValue() > 0) {
-                    facetList.add(new FacetDAO(j.getKey(), j.getValue()));
-                }
+                facetList.add(new FacetDAO(j.getKey(), j.getValue()));
             }
             facetList.sort(new Comparator<FacetDAO>() {
                 @Override
