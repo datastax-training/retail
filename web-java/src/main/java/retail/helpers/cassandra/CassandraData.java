@@ -1,6 +1,8 @@
 package retail.helpers.cassandra;
 
 import com.datastax.driver.core.*;
+import com.datastax.driver.mapping.Mapper;
+import com.datastax.driver.mapping.MappingManager;
 import org.apache.commons.lang3.text.WordUtils;
 
 import java.lang.reflect.Method;
@@ -25,6 +27,8 @@ public class CassandraData {
   //
 
   private static Session cassandraSession = null;
+  private static MappingManager mappingManager = null;
+
 
   /**
    * Required constructor, but it doesn't need to do anything.
@@ -50,6 +54,8 @@ public class CassandraData {
 
     Cluster cluster = Cluster.builder().addContactPoints(contactpoints).build();
     cassandraSession = cluster.connect(keyspace);
+    mappingManager = new MappingManager(cassandraSession);
+
   }
 
   public static Session getSession() {
@@ -57,6 +63,12 @@ public class CassandraData {
     return cassandraSession;
 
   }
+
+  // Get an object mapper for a particular type
+  public static <T> Mapper<T> getMappingManager(Class<T> clazz) {
+    return mappingManager.mapper(clazz);
+  }
+
 
   /**
    * Create a new cassandra Cluster() and Session().  Returns the Session.

@@ -1,7 +1,11 @@
 package retail.model;
 
 import com.datastax.driver.core.*;
+import com.datastax.driver.mapping.Mapper;
+import com.datastax.driver.mapping.Result;
+import com.datastax.driver.mapping.annotations.*;
 import retail.helpers.cassandra.CassandraData;
+import retail.model.ProductAccessor;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -17,119 +21,63 @@ import java.util.Map;
  */
 
 
+@Table(name = "products_by_id",
+        readConsistency = "LOCAL_ONE",
+        writeConsistency = "LOCAL_QUORUM")
+
 public class ProductDAO extends CassandraData {
 
   private static PreparedStatement get_product_by_brand_cc = null;
-  private static PreparedStatement get_product_by_category_cc = null;
-  private static PreparedStatement get_product_by_id_cc = null;
+  private static Mapper<ProductDAO> mapper = getMappingManager(ProductDAO.class);
+  private static ProductAccessor accessor = mapper.getManager().createAccessor(ProductAccessor.class);
 
   // Note the CamelCase as jinja2 requires it.
   // Also - only use the boxed types for loadBeanFromRow
 
+  @PartitionKey
+  @Column(name = "product_id")
   private String productId;
+  @Column(name = "category_id")
   private Integer categoryId;
+  @Column(name = "category_name")
   private String categoryName;
+  @Column
   private Map<String,String > features;
+  @Column(name = "is_hot")
   private Boolean isHot;
+  @Column(name = "long_description")
   private String longDescription;
+  @Column
   private BigDecimal price;
+  @Column(name = "release_date")
   private Date releaseDate;
+  @Column(name = "short_description")
   private String shortDescription;
+  @Column(name = "supplier_id")
   private Integer supplierId;
+  @Column(name = "supplier_name")
   private String supplierName;
-  private String  title;
-  private String  url;
-
-  public ProductDAO(Row row) {
-
-    // This constructor loads all of the fields of the row using the
-    // superclass method loadBeanFromRow.
-
-    // It replaces stuff like
-    //    productId = row.getString("product_id");
-    //    categoryId = row.getInt("category_id");
-
-
-    loadBeanFromRow(row);
-  }
+  @Column
+  private String title;
+  @Column
+  private String url;
 
   public static ProductDAO getProductById(String productId) {
-
-    if (get_product_by_id_cc == null) {
-      get_product_by_id_cc = getSession().prepare("SELECT * from products_by_id WHERE product_id = ?");
-    }
-
-    BoundStatement boundStatement = get_product_by_id_cc.bind(productId);
-    ResultSet resultSet = getSession().execute(boundStatement);
-
-    // Return null if it's not found
-    if (resultSet.isExhausted()) {
-      return null;
-    }
-
     // Return the first row
-    return new ProductDAO(resultSet.one());
-
+    return mapper.get(productId);
   }
 
   public static List<ProductDAO> getProductsByBrand(String brand_id) {
-
-    if (get_product_by_brand_cc == null) {
-      get_product_by_brand_cc = getSession().prepare("SELECT * from products_by_supplier WHERE supplier_id = ? limit 300");
-    }
-
-    Statement stmt = null;
-    if (brand_id != null && !brand_id.isEmpty()) {
-      stmt = get_product_by_brand_cc.bind(Integer.parseInt(brand_id));
-    }
-
-    return getProductsWithStmt(stmt);
+     return accessor.getProductsByBrand(Integer.parseInt(brand_id)).all();
   }
 
   public static List<ProductDAO> getProductsByCategoryName(String category_name) {
-
-    if (get_product_by_category_cc == null) {
-      get_product_by_category_cc = getSession().prepare("SELECT * from products_by_category_name WHERE category_name = ? limit 300");
-    }
-
-    Statement stmt = null;
-    if (category_name != null && !category_name.isEmpty()) {
-      stmt = get_product_by_category_cc.bind(category_name);
-    }
-
-    return getProductsWithStmt(stmt);
-  }
-
-  private static List<ProductDAO> getProductsWithStmt(Statement statement) {
-
-    ResultSet results = null;
-    int initial_result_size = 0;
-
-    if (statement != null) {
-      results = getSession().execute(statement);
-      initial_result_size = results.getAvailableWithoutFetching();
-    }
-
-    final List<ProductDAO> productDAOList = new ArrayList<ProductDAO>(initial_result_size);
-
-    if (results != null) {
-      for (Row row: results) {
-        productDAOList.add(new ProductDAO(row));
-      }
-    }
-
-    return productDAOList;
+     return accessor.getProductsByCategoryName(category_name).all();
   }
 
   public static List<ProductDAO> getProductsSolrQuery(String solr_query) {
-
-
-    Statement statement = new SimpleStatement("SELECT * FROM products_by_id WHERE solr_query = '{" +
-           solr_query + "}' LIMIT 300");
-
-    return getProductsWithStmt(statement);
+    return accessor.getProductsSolrQuery("{" + solr_query + "}").all();
   }
-
 
   public String getProductId() {
     return productId;
