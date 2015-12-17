@@ -2,13 +2,10 @@ package retail.model;
 
 import com.datastax.driver.core.*;
 import com.datastax.driver.mapping.Mapper;
-import com.datastax.driver.mapping.Result;
 import com.datastax.driver.mapping.annotations.*;
 import retail.helpers.cassandra.CassandraData;
-import retail.model.ProductAccessor;
 
 import java.math.BigDecimal;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -27,7 +24,6 @@ import java.util.Map;
 
 public class ProductDAO extends CassandraData {
 
-  private static PreparedStatement get_product_by_brand_cc = null;
   private static Mapper<ProductDAO> mapper = getMappingManager(ProductDAO.class);
   private static ProductAccessor accessor = mapper.getManager().createAccessor(ProductAccessor.class);
 

@@ -70,15 +70,13 @@ public class GoogleJsonUtils {
         }
 
         // Return the column value as an object of the appropriate type and format for google charts
-        public static Object google_column_to_object (Row row, int index) {
+        public static Object google_column_to_object (Object data_object) {
 
-            Class cassandra_clazz = row.getColumnDefinitions().getType(index).asJavaClass();
-            String type_name = cassandra_clazz.getName();
-
-            Object data_object = CassandraData.column_to_object(row, index);
             if (data_object == null) {
                 return "";
             }
+
+            String type_name = data_object.getClass().getTypeName();
             switch (type_name) {
                 case "java.lang.Double":
                     return new JsonNoScientificNotation((Double) data_object);
@@ -87,7 +85,7 @@ public class GoogleJsonUtils {
                 case "java.math.BigDecimal":
                     return new JsonNoScientificNotation(((BigDecimal)data_object).doubleValue());
                 case "java.util.Date":
-                    return GoogleDateFormat.format(row.getDate(index));   // treat as string
+                    return GoogleDateFormat.format(data_object);   // treat as string
                 default:
                     return data_object;
             }

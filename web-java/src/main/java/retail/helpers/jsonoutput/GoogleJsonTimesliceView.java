@@ -33,7 +33,7 @@ public class GoogleJsonTimesliceView {
           JSONArray jsonRow = new JSONArray();
 
           // add the time window
-          jsonRow.add(GoogleJsonUtils.google_column_to_object(row, 0));
+          jsonRow.add(GoogleJsonUtils.google_column_to_object(row.getObject(0)));
 
           // Iterate through the map and make the elements look like columns
           Map<String, Integer> quantityMap = row.getMap("quantities", String.class, Integer.class);
