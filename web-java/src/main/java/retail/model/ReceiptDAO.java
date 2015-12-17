@@ -1,13 +1,15 @@
 package retail.model;
 
-import com.datastax.driver.core.BoundStatement;
-import com.datastax.driver.core.PreparedStatement;
-import com.datastax.driver.core.ResultSet;
+
 import com.datastax.driver.core.Row;
+import com.datastax.driver.mapping.Mapper;
+import com.datastax.driver.mapping.annotations.ClusteringColumn;
+import com.datastax.driver.mapping.annotations.Column;
+import com.datastax.driver.mapping.annotations.PartitionKey;
+import com.datastax.driver.mapping.annotations.Table;
 import retail.helpers.cassandra.CassandraData;
 
 import java.math.BigDecimal;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.UUID;
@@ -18,81 +20,50 @@ import java.util.UUID;
  * Copyright 2015 DataStax
  */
 
+@Table(name = "receipts",
+        readConsistency = "LOCAL_ONE",
+        writeConsistency = "LOCAL_QUORUM")
+
 public class ReceiptDAO extends CassandraData {
 
-    // static prepared statements
+    private static Mapper<ReceiptDAO> mapper = getMappingManager(ReceiptDAO.class);
+    private static ReceiptAccessor accessor = mapper.getManager().createAccessor(ReceiptAccessor.class);
 
-    private static PreparedStatement get_receipt_by_id_ps = null;
-    private static PreparedStatement get_receipt_by_cc_ps = null;
-
-    // Note we need to use CamelCase for jinja support
-    // Also - only use the boxed types for loadBeanFromRow
-
+    @PartitionKey
+    @Column(name = "receipt_id")
     private Long receiptId;
+    @ClusteringColumn(0)
+    @Column(name = "scan_id")
     private UUID scanId;
+    @Column(name = "credit_card_number")
     private Long creditCardNumber;
+    @Column(name = "credit_card_type")
     private String creditCardType;
+    @Column(name = "product_id")
     private String productId;
+    @Column(name = "product_name")
     private String productName;
+    @Column
     private Integer quantity;
+    @Column(name = "receipt_timestamp")
     private Date receiptTimestamp;
+    @Column(name = "receipt_total")
     private BigDecimal receiptTotal;
+    @Column(name = "register_id")
     private Integer registerId;
+    @Column(name = "store_id")
     private Integer storeId;
+    @Column
     private BigDecimal total;
+    @Column(name = "unit_price")
     private BigDecimal unitPrice;
 
-    private ReceiptDAO(Row row) {
-        // This constructor loads all of the fields of the row using the
-        // superclass method loadBeanFromRow.
-
-        loadBeanFromRow(row);
-    }
-
     public static List<ReceiptDAO> getReceiptById(long receipt_id) {
-
-        if (get_receipt_by_id_ps == null) {
-            get_receipt_by_id_ps = getSession().prepare("select * from receipts where receipt_id = ?");
-        }
-
-        BoundStatement boundStatement = get_receipt_by_id_ps.bind(receipt_id);
-
-        ResultSet resultSet = getSession().execute(boundStatement);
-
-        if (resultSet.isExhausted()) {
-            return null;
-        }
-
-        List<ReceiptDAO> receiptScans = new ArrayList<>(resultSet.getAvailableWithoutFetching());
-        for (Row row: resultSet) {
-            receiptScans.add(new ReceiptDAO(row));
-        }
-
-        return receiptScans;
+        return accessor.getReceiptById(receipt_id).all();
     }
 
     public static List<ReceiptDAO> getReceiptsByCreditCard(long credit_card_number) {
-
-        if (get_receipt_by_cc_ps == null) {
-            get_receipt_by_cc_ps = getSession().prepare("select * from receipts_by_credit_card where credit_card_number = ?");
-        }
-
-        BoundStatement boundStatement = get_receipt_by_cc_ps.bind(credit_card_number);
-
-        ResultSet resultSet = getSession().execute(boundStatement);
-
-        if (resultSet.isExhausted()) {
-            return null;
-        }
-
-        List<ReceiptDAO> receipts = new ArrayList<>(resultSet.getAvailableWithoutFetching());
-        for (Row row: resultSet) {
-            receipts.add(new ReceiptDAO(row));
-        }
-
-        return receipts;
-
-
+        return accessor.getReceiptsByCreditCard(credit_card_number).all();
     }
 
     public Long getReceiptId() {
