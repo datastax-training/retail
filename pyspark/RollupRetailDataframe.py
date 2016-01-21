@@ -7,7 +7,7 @@ import pyspark.sql.types as T
 
 # Create SQL Context
 
-conf = SparkConf().setAppName("RollupRetail")
+conf = SparkConf().setAppName("RollupRetailPyDataframe")
 sc = SparkContext(conf=conf)
 
 sqlContext = SQLContext(sc)
@@ -56,7 +56,7 @@ sales_by_state_df\
 sales_by_date_df = receipts_by_store_date_df\
     .groupBy("receipt_date")\
     .sum("receipt_total")\
-    .select(F.lit("dummy").alias("dummy"), F.col("receipt_date").alias("sales_date"), F.col("SUM(receipt_total)").cast("Decimal(10,2)").alias("receipts_total"))
+    .select(F.lit("dummy").alias("dummy"), F.col("receipt_date").alias("sales_date"), F.col("SUM(receipt_total)").cast("Decimal(12,2)").alias("receipts_total"))
 
 # Save the dataframe
 sales_by_date_df.write\

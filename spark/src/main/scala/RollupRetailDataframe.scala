@@ -8,7 +8,7 @@ object RollupRetailDataframe {
   def main(args: Array[String]) {
 
 //    Create Spark Context
-    val conf = new SparkConf(true).setAppName("RollupRetailHiveQL")
+    val conf = new SparkConf(true).setAppName("RollupRetailDataframe")
 
 // We set master on the command line for flexibility
 
@@ -51,7 +51,7 @@ object RollupRetailDataframe {
     val sales_by_date_df = receipts_by_store_date_df
      .groupBy("receipt_date")
       .sum("receipt_total")
-      .select(lit("dummy") alias "dummy", col("receipt_date") as "sales_date", col("SUM(receipt_total)") cast "Decimal(10,2)" alias "receipts_total")
+      .select(lit("dummy") alias "dummy", col("receipt_date") as "sales_date", col("SUM(receipt_total)") cast "Decimal(12,2)" alias "receipts_total")
 
     sales_by_date_df.write                         // Save the dataframe.
       .format("org.apache.spark.sql.cassandra")

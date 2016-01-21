@@ -4,7 +4,7 @@ from pyspark.sql import HiveContext
 
 # Create SQL Context
 
-conf = SparkConf().setAppName("RollupRetail")
+conf = SparkConf().setAppName("RollupRetailPyHiveQL")
 sc = SparkContext(conf=conf)
 
 hc = HiveContext(sc)
