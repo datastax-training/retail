@@ -1,4 +1,4 @@
-The Black Friday project contains 4 major parts.
+The Black Friday project contains 5 major parts.
 
 The first is in the cql directory that sets up the database schema for the entire project.
 
